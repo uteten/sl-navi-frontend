@@ -6,11 +6,11 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
             <ul id="topmenu" class="navbar-nav mr-auto">
-                <li class="nav-item" ><router-link to="/"      class="nav-link"><span :class="selected['/']"><b-icon-house scale="0.8"></b-icon-house>一般施設</span></router-link></li>
-                <li class="nav-item" ><router-link to="/adult" class="nav-link"><span :class="selected['/adult']"><b-icon-heart-fill scale="0.8"></b-icon-heart-fill>アダルト施設</span></router-link></li>
-                <li class="nav-item" ><router-link to="/all"   class="nav-link"><span :class="selected['/all']"><b-icon-building scale="0.8"></b-icon-building>全施設</span></router-link></li>
-                <li class="nav-item" ><router-link to="/event" class="nav-link"><span :class="selected['/event']"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベントカレンダー</span></router-link></li>
-                <li class="nav-item" ><router-link to="/about" class="nav-link"><span :class="selected['/about']"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill> お知らせ＆センサ配布場所</span></router-link></li>
+                <li class="nav-item" ><router-link to="/"      class="nav-link"><b-icon-house scale="0.8"></b-icon-house>一般施設</router-link></li>
+                <li class="nav-item" ><router-link to="/adult" class="nav-link"><b-icon-heart-fill scale="0.8"></b-icon-heart-fill>アダルト施設</router-link></li>
+                <li class="nav-item" ><router-link to="/all"   class="nav-link"><b-icon-building scale="0.8"></b-icon-building>全施設</router-link></li>
+                <li class="nav-item" ><router-link to="/event" class="nav-link"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベントカレンダー</router-link></li>
+                <li class="nav-item" ><router-link to="/about" class="nav-link"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill> お知らせ＆センサ配布場所</router-link></li>
             </ul>
             <form class="search form-inline">
                 <input type="search" v-model="searchword" @keydown.enter="goSearch($event.keyCode)"
@@ -95,41 +95,30 @@ export default {
 </script>
 
 <style>
-  .view{
-    width: 100%
-  }
-  #sitetitle {
-    color: #ffaa00;
-    font-family: 'arial black';
-  }
-  #app {
-    text-align: left;
-  }
   /* -- 全体的な設定 -- */
   body{
     padding-top: 4.5rem;
     background-color: #ffffff;
   }
+  #app {
+    text-align: left;
+  }
+  #sitetitle {
+    color: #ffaa00;
+    font-family: 'arial black';
+  }
+  .view{
+    width: 100%
+  }
   .bi-heart-fill{
     color: crimson;
   }
-
   .bi-calendar-week{
     color: blue;
   }
-
-  .selected{
+  a.router-link-exact-active {
     background-color: #ffaa00;
     border-radius: 5px;
     cursor: pointer;
   }
-
-  /* 使ってない */
-  /* popoverの中(削除済み) */
-  .testp {
-    font-size:small;
-  }
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
