@@ -32,3 +32,8 @@ module.exports = {
 ## build
 npm run build
 distを好きなところへ持って行く
+
+
+## fullcalendar
+npm install --save @fullcalendar/vue @fullcalendar/daygrid
+npm install --save @fullcalendar/timegrid

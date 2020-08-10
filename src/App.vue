@@ -9,7 +9,7 @@
                 <li class="nav-item" ><router-link to="/"      class="nav-link"><span :class="selected['/']"><b-icon-house scale="0.8"></b-icon-house>一般施設</span></router-link></li>
                 <li class="nav-item" ><router-link to="/adult" class="nav-link"><span :class="selected['/adult']"><b-icon-heart-fill scale="0.8"></b-icon-heart-fill>アダルト施設</span></router-link></li>
                 <li class="nav-item" ><router-link to="/all"   class="nav-link"><span :class="selected['/all']"><b-icon-building scale="0.8"></b-icon-building>全施設</span></router-link></li>
-                <li class="nav-item" ><a class="nav-link" href="/event"><span :class="selected['/event']"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベントカレンダー</span></a></li>
+                <li class="nav-item" ><router-link to="/event" class="nav-link"><span :class="selected['/event']"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベントカレンダー</span></router-link></li>
                 <li class="nav-item" ><router-link to="/about" class="nav-link"><span :class="selected['/about']"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill> お知らせ＆センサ配布場所</span></router-link></li>
             </ul>
             <form class="search form-inline">

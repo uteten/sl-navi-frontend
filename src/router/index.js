@@ -7,6 +7,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import viewAbout from '@/views/ViewAbout'
 import viewSlnavi from '@/views/ViewSlnavi'
+// import viewEvent from '@/views/ViewEvent'
 
 Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
@@ -37,6 +38,12 @@ const routes = [
     name: 'viewSlnavi-all',
     component: viewSlnavi,
     props: { mode: 'c' }
+  },
+  {
+    path: '/event',
+    name: 'viewEvent',
+    component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue')
+    // component: viewEvent,
   },
   {
     path: '/search/:searchword',
