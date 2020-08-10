@@ -14,6 +14,11 @@
       <li><a href="https://maps.secondlife.com/secondlife/Andretti/28/24/27">https://maps.secondlife.com/secondlife/Andretti/28/24/27</a></li>
   </ul>
 
+  <h4>■最近のおしらせ</h4>
+  <ul>
+    <li>2020/08/10 特にないです</li>
+  </ul>
+
   <h4>■FAQ</h4>
   よくあるご質問（他の質問やご要望はSL内のuten residentへ）
   <p>
@@ -69,19 +74,8 @@
 
       </table>
   </p>
-  <h4>■更新履歴</h4>
-  <ul>
-    <li>jQuery->Vue.jsに変更</li>
-  </ul>
 
   <hr>
-  <!--
-  <h4>■追加予定の機能</h4>
-  <ul>
-      <li>イベント告知</li>
-      <li>タグクリック時に、施設のアイコンと紹介文を一覧表示＆オートペイジング（無限スクロール）</li>
-  </ul>
-  -->
 </div>
 
 </template>

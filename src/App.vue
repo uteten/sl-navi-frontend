@@ -13,7 +13,7 @@
                 <li class="nav-item" ><router-link to="/about" class="nav-link"><span :class="selected['/about']"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill> お知らせ＆センサ配布場所</span></router-link></li>
             </ul>
             <form class="search form-inline">
-                <input type="search" v-model="searchword" @keydown.enter="goSearch"
+                <input type="search" v-model="searchword" @keydown.enter="goSearch($event.keyCode)"
                       name="search" value="" class="form-control mr-sm-2" placeholder="キーワードで探す" aria-label="Search">
                 <input type="text" name="dummy" style="display:none;">
                 <button v-on:click="goSearch" class="btn btn-warning my-2 my-sm-0" type="button">
@@ -53,11 +53,12 @@ export default {
         // ... 
     ],
     link: [
-      { rel: 'icon', href: 'static/favicon.ico' }
+      { rel: 'icon', href: '/static/favicon.ico' }
     ]
   },
   methods: {
-    goSearch () {
+    goSearch (keyCode) {
+      if (keyCode !== 13) return;
       // 検索ワードが異なるときはPathを変える。同じ時は単に検索する
       if (this.searchword && this.$route.params.searchword !== this.searchword) {
         this.$router.push('/search/' + this.searchword)
