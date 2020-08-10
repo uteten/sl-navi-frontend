@@ -1,0 +1,127 @@
+<template>
+  <div id="tag_menu_group" class="col col-lg-2 leftmenu">
+      <ul id="special_tags" class="tag_menu">
+          <li v-for = "tag in special_tags"
+              :key ="tag.id"
+              :value = "tag.id" v-on:click="changeStatus('', tag.id, 'active')" :class = "tag.selected">
+              {{ tag.n }}({{ tag.count }})
+          </li>
+      </ul>
+      <ul id="normal_tags" class="tag_menu">
+        <template v-for="tag in tags">
+          <li v-if ="tag.count>=2" :key="tag.id"
+              :value="tag.id" v-on:click = "changeStatus('', tag.id, 'active')" :class = "tag.selected">
+              {{ tag.n }}({{ tag.count }})
+          </li>
+        </template>
+      </ul>
+  </div>
+</template>
+
+
+<script>
+import Vue from 'vue'
+import axios from 'axios'
+
+Vue.prototype.$axios = axios
+
+const TAG_SOURCE = '//sl-navi.com/api/tag'
+export default{
+  name: 'TagList',
+  props: ['mode'],
+  data: function () {
+    return {
+      tags: [],
+      special_tags: []
+    }
+  },
+  methods: {
+    _sort_by: function (field, reverse, primer) {
+      reverse = (reverse) ? -1 : 1
+      return function (a, b) {
+        a = a[field]
+        b = b[field]
+        if (typeof (primer) !== 'undefined') {
+          a = primer(a)
+          b = primer(b)
+        }
+        if (a < b) return reverse * -1
+        if (a > b) return reverse * 1
+        return 0
+      }
+    },
+    async getTags (tagid) {
+      await axios.get(TAG_SOURCE).then(res => {
+        let m = this.mode // k=健全 e=アダルト c=全部
+        for (var z of res.data) {
+          z.count = z[m]
+          if (z.id > 0) {
+            this.tags.push(z)
+          } else {
+            this.special_tags.push(z)
+          }
+        }
+        this.tags.sort(this._sort_by(m, true, parseInt))
+        if (tagid) {
+          this.changeStatus('', tagid)
+        }
+      })
+    },
+    changeStatus (m, tagid, active) {
+      if (m) {
+        // console.log(['TagList:changeStatus', m, tagid])
+        for (let z of this.tags) {
+          this.$set(z, 'count', z[m])
+        }
+        for (let z of this.special_tags) {
+          this.$set(z, 'count', z[m])
+        }
+      }
+      if (tagid) {
+        scrollTo(0, 0)
+        for (let z of this.tags) {
+          this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
+        }
+        for (let z of this.special_tags) {
+          this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
+        }
+      }
+      if (active) {
+        // コンポーネント内のタグをクリックしたステータス変化は親に伝えて、親で何か処理(shopの再読込など)をする
+        this.$emit('selected_tag', tagid)
+      }
+    }
+  }
+}
+</script>
+<style scoped>
+ul {
+  background: #fffde8;
+  box-shadow: 0px 0px 0px 10px #fffde8;
+  border: dashed 2px #ffb03f;
+  border-radius: 9px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+li {
+  font-size: small;
+  line-height: 1.0;
+  padding: 0.5em 0 0.5em 0.7em;
+  list-style: none;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #ffcc77;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.selected{
+  background-color: #ffaa00;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+</style>

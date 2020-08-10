@@ -1,0 +1,34 @@
+# sl-navi開発環境作成手順(
+
+## npmのバージョンアップ
+npm --version
+npm install -g npm
+
+## vue-cliインストール
+cd pj-folder
+npm uninstall -g @vue/cli
+npm   install -g @vue/cli
+
+## sl-naviのテンプレ作成
+vue create sl-navi
+cd sl-navi
+vue add router
+npm install vue bootstrap-vue bootstrap
+npm install  axios vue-axios
+npm install vue-head --save
+いったん確認
+npm run serve
+
+## gitのファイルをここへ持ってくる(必要なファイルは以下のみ)
+cp save/src/* sl-navi/src
+
+## distが相対パスで動くように
+# 相対パスのbuild作成(PJフォルダで)
+cat > sl-navi/vue.config.js
+module.exports = {
+  publicPath: './'
+}
+
+## build
+npm run build
+distを好きなところへ持って行く
