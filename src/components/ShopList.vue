@@ -12,8 +12,11 @@
                 </div>
                 <!-- ポップアップの中身 -->
                 <b-popover triggers="click blur" placement="bottom" style="display:none"
-                            :target="z|shop_id" :title="z|shop_name"
+                            :target="z|shop_id"
                 >
+                    <template v-slot:title>
+                        <a :href="z|search_url">{{ z|shop_name }}</a>
+                    </template>
 
                     <span v-html="shop_description(z)"></span><br>
                     <span v-if="isAdultShop(z)" class="badge badge-danger">アダルト施設</span>
@@ -62,6 +65,9 @@ export default {
     // shopの中身(z)はz.staffsとz.tags以外は直接使わず全部フィルタで表示
     'shop_id': function (z) {
       return z.flag
+    },
+    'search_url': function (z) {
+      return "#/search/"+z.flag
     },
     'shop_name': function (z) {
       return z.name
@@ -114,7 +120,7 @@ export default {
       return '<a class="f" title="<a href=&quot;?search=' + z.flag + '&quot;>' + z.name + '</a>'
     },
     shop_description (z) {
-      return z.info.replace('\n', '<br>')
+      return z.info.replace(/\n/g, '<br>')
     },
     existBlog (z) {
       return (z.blog !== 'http://www.google.com' && z.blog.indexOf('http') === 0)
