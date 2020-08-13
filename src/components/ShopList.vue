@@ -4,7 +4,7 @@
         <div id="shops" class="col">
             <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
                 <!-- 看板と人数 -->
-                <img class="flag" :src="z|flag_img">
+                <img class="flag" :src="z|flag_img"  :class="z|event_class" >
                 <div class="memo">
                     <span v-if="existStaff(z)" class="sn">{{ z|staff_num }}</span>
                     <span v-if="existGuest(z)" class="cn">{{ z|guest_num }}</span>
@@ -16,6 +16,9 @@
                 >
                     <template v-slot:title>
                         <a :href="z|search_url">{{ z|shop_name }}</a>
+                        <b-badge v-if="isEvent(z)" variant="danger">
+                            イベント中
+                        </b-badge>
                     </template>
 
                     <span v-html="shop_description(z)"></span><br>
@@ -66,6 +69,20 @@ export default {
     'shop_id': function (z) {
       return z.flag
     },
+    'event_class': function (z) {
+      if(z.event) {
+        return 'now_event'
+      }else {
+        return
+      }
+    },
+    'event_variant': function (z) {
+      if(z.event) {
+        return 'danger'
+      }else {
+        return
+      }
+    },
     'search_url': function (z) {
       return "#/search/"+z.flag
     },
@@ -101,6 +118,9 @@ export default {
     }
   },
   methods: {
+    isEvent (z) {
+      return z.event
+    },
     existStaff (z) {
       return (z.sn > 0)
     },
@@ -152,10 +172,11 @@ export default {
   }
   /* 看板 */
   .f{
-    margin:2px;
+    margin:4px;
     position: relative;
     display: inline-block;
     width: 150px;
+    height: 150px;
 
   }
   /* 看板の上にcn snを並べて乗せるdiv */
@@ -213,7 +234,6 @@ export default {
     border-radius: 50%;
     cursor: pointer;
   }
-
   /* ポップオーバー系 */
   .popover {
     max-width: 700px;
@@ -232,6 +252,9 @@ export default {
   .flag {
     width: 150px;
     height: 150px;
+  }
+  .now_event{
+    border: solid 3px #ff0000;
   }
 
   .heatmap {
