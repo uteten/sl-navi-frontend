@@ -2,12 +2,20 @@
 // mountedなし
 <template>
         <div id="shops" class="col">
+            <span class="badge badge-danger">08/21 21:15 ほぼ全センサの同期が切れる障害が発生しました。センサ設置者は「センサを編集⇒スクリプトリセット」を実施して復旧させてください。すみません。</span><br>
             <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
                 <!-- 看板と人数 -->
                 <img class="flag" :src="z|flag_img"  :class="z|event_class" >
                 <div class="memo">
                     <span v-if="existStaff(z)" class="sn">{{ z|staff_num }}</span>
                     <span v-if="existGuest(z)" class="cn">{{ z|guest_num }}</span>
+                    <span v-if="z.female>0" class="female">
+                        ♀×{{ z.female }}
+                    </span>
+                    <span v-if="z.male>0" class="male">
+                        ♂×{{ z.male }}
+                    </span>
+
                     <span v-if="isShopClose(z)" class="badge badge-secondary">閉店中</span>
                 </div>
                 <!-- ポップアップの中身 -->
@@ -26,25 +34,36 @@
                     <span v-if="isKenzenShop(z)" class="badge badge-primary">一般施設</span>
                     <span v-for="tag in z.tags" :key="tag.id" class="badge badge-light">{{ tag }}</span><br>
                     <span class="n2">
-                        今いるスタッフ<span class="sn2">{{ z.sn }}</span>人
+                        スタッフ<span class="sn2">{{ z.sn }}</span>人
                         <span v-if="z.staffs.length!=0">
                             (<a v-for="staff in z.staffs" :href="staff|staff_url" :key="staff"
-                                target=_blank class="badge badge-warning">
-                                {{ staff }}
+                                target=_blank  :class="staff|staff_sex">
+                                <template v-if="staff!=''">
+                                    {{ staff|staff_name }}
+                                </template>
                             </a>)
                         </span>
                         / 訪問者<span class="cn2">{{ z|guest_num }}</span>人
+                      <template v-if="z.female+z.male>0">
+                        / 男女内訳
+                        <span v-if="z.female>0">
+                            ♀{{ z.female }}人 
+                        </span>
+                        <span v-if="z.male>0">
+                            ♂{{ z.male }}人
+                        </span>
+                      </template>
                     </span><br>
                     <a target=_blank v-bind:href="z|map_url">
-                        <i class="fas fa-map-marker-alt"></i>ここに移動({{ z|sim }})
+                        <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z|sim }})
                     </a>
                     <span v-if="existBlog(z)">
-                        <a target="_blank" v-bind:href="z|blog_url">
-                            <i class="fas fa-link"></i>Web( {{ z|blog_url_short }} )
+                        / <a target="_blank" v-bind:href="z|blog_url">
+                            <b-icon-link scale="0.8"></b-icon-link>Web( {{ z|blog_url_short }} )
                         </a>
                     </span>
                     <br>
-                    <img class="heatmap" v-bind:src="z|heatmap">;
+                    <img class="heatmap" v-bind:src="z|heatmap">
                 </b-popover>
           </div>
       </div>
@@ -114,7 +133,19 @@ export default {
       return z.blog.replace(/^http(|s):\/\//, '')
     },
     'staff_url': function (value) {
-      return '/d2p/' + value
+      return '/d2p/' + value[0]
+    },
+    'staff_name': function (value) {
+      return value[0]
+    },
+    'staff_sex': function (value) {
+      if (value[1] == 0){
+        return "female"
+      }else if(value[1] == 1){
+        return "male"
+      }else{
+        return
+      }
     }
   },
   methods: {
@@ -177,10 +208,12 @@ export default {
     display: inline-block;
     width: 150px;
     height: 150px;
+    cursor: pointer;
 
   }
   /* 看板の上にcn snを並べて乗せるdiv */
   .memo{
+    align-items: flex-end;
     position: absolute;
     left: 0px;
     bottom: 0px;
@@ -207,32 +240,49 @@ export default {
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
-
   }
+  .male{
+    height: fit-content;
+    font-size: 60%;
+    color: #ffffff;
+    border-radius: 25%;
+    cursor: pointer;
+    background-color: #00aaaa;
+  }
+  .female{
+    height: fit-content;
+    font-size: 60%;
+    color: #ffffff;
+    border-radius: 25%;
+    cursor: pointer;
+    background-color: #ff8070;
+  }
+
 
   .n2{
     font-size: 75%;
     font-weight: 700;
+
   }
   .cn2{
     width: 25px;
     height: 25px;
+    padding: 0px 4px;
     color: #ffffff;
     background-color: #2779bd;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    cursor: pointer;
   }
   .sn2{
     width: 25px;
     height: 25px;
+    padding: 0px 4px;
     color: #ffffff;
     background-color: #ffaa00;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    cursor: pointer;
   }
   /* ポップオーバー系 */
   .popover {

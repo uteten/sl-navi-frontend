@@ -76,6 +76,7 @@ export default{
         for (let z of this.special_tags) {
           this.$set(z, 'count', z[m])
         }
+        this.tags.sort(this._sort_by(m, true, parseInt))
       }
       if (tagid) {
         scrollTo(0, 0)
