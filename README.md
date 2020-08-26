@@ -1,5 +1,7 @@
 # sl-navi
 
+utenさんのコードに、Non Vanillaがデザイン編集する用のレポジトリです。
+
 ## Project setup
 ```
 npm install
