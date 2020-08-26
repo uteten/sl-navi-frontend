@@ -1,6 +1,6 @@
 # sl-navi
 
-utenさんのコードに、Non Vanillaがデザイン編集する用のレポジトリです。
+utenさんのコードに、Non Vanillaがデザイン編集する用のレポジトリです
 
 ## Project setup
 ```
