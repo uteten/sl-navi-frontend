@@ -2,7 +2,7 @@
   <div class="container-fluid" >
     <div id="app" class="row" >
         <b-nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a id="sitetitle" class="navbar-brand" href="/">SL-Navi</a>
+        <a id="sitetitle" class="navbar-brand" href="./">SL-Navi</a>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
             <ul id="topmenu" class="navbar-nav mr-auto">
@@ -117,8 +117,12 @@ export default {
     color: blue;
   }
   a.router-link-exact-active {
-    background-color: #ffaa00;
-    border-radius: 5px;
+    background-color: #ffffff;
+    border-left: solid 1px #dddddd;/*左側の線*/
+    border-right: solid 1px #dddddd;/*右側の線*/
+    border-bottom: solid 3px #ffc107;/*下側の線*/
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
     cursor: pointer;
   }
 </style>

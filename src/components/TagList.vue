@@ -1,5 +1,7 @@
 <template>
   <div id="tag_menu_group" class="col col-lg-2 leftmenu">
+    <div id="tag_special_group" class="menu_group">
+      <div class="menu_top">メニュー</div>
       <ul id="special_tags" class="tag_menu">
           <li v-for = "tag in special_tags"
               :key ="tag.id"
@@ -7,6 +9,9 @@
               {{ tag.n }}({{ tag.count }})
           </li>
       </ul>
+    </div>
+    <div id="tag_normal_group" class="menu_group">
+      <div class="menu_top">タグ</div>
       <ul id="normal_tags" class="tag_menu">
         <template v-for="tag in tags">
           <li v-if ="tag.count>=2" :key="tag.id"
@@ -15,6 +20,7 @@
           </li>
         </template>
       </ul>
+    </div>
   </div>
 </template>
 
@@ -96,17 +102,13 @@ export default{
 }
 </script>
 <style scoped>
-ul {
-  background: #fffde8;
-  box-shadow: 0px 0px 0px 10px #fffde8;
-  border: dashed 2px #ffb03f;
-  border-radius: 9px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 0.5em 0.5em 0.5em 0.5em;
+.tag_menu {
+  padding: 0.2em 0 0.2em 0;
+  margin: 0;
 }
 
-li {
+.tag_menu li {
+  color:#333333;
   font-size: small;
   line-height: 1.0;
   padding: 0.5em 0 0.5em 0.7em;
@@ -114,15 +116,34 @@ li {
   cursor: pointer;
 }
 
-li:hover {
+.tag_menu li:hover {
   background-color: #ffcc77;
-  border-radius: 5px;
+  color:#333333;
   cursor: pointer;
 }
 .selected{
-  background-color: #ffaa00;
-  border-radius: 5px;
+  background-color: #ffe3b3;
+  color: #666666;
+  font-weight: bold;
   cursor: pointer;
+}
+.menu_top{
+  font-size: medium;
+  background: #ffc107;
+  color:#666666;
+  font-weight: bold;
+  padding: 0 0 0.2em 0.7em;
+  list-style-type: none!important;
+  position: relative;
+}
+
+.menu_group{
+  background: #fdfcec;
+  border: 1px solid #ffb03f;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
 }
 
 </style>

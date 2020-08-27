@@ -1,7 +1,8 @@
 // emitなし
 // mountedなし
 <template>
-        <div id="shops" class="col">
+  <div id="shops" class="col shops">
+    <div class="shop_top">施設</div>
             <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
                 <!-- 看板と人数 -->
                 <img class="flag" :src="z|flag_img"  :class="z|event_class" >
@@ -303,5 +304,21 @@ export default {
   .heatmap {
     height: 150px;
     width: 400px;
+  }
+  .shops{
+    background: #fdfcec;
+    border: 1px solid #ffb03f;
+    border-radius: 5px;
+    padding: 0;
+    margin-left: 15px;
+    margin-bottom: 15px;
+  }
+  .shop_top{
+    font-size: medium;
+    background: #ffc107;
+    color:#666666;
+    font-weight: bold;
+    padding: 0 0 0.2em 0.7em;
+    list-style-type: none!important;
   }
 </style>

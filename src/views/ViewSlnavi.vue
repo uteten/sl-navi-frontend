@@ -2,13 +2,19 @@
   <div class="view row">
     <tag-list ref="appTagList" :mode="mode"
               v-on:selected_tag="actionSelectedTag"></tag-list>
-    <shop-list ref="appShopList"></shop-list>
+    <div class="view col">
+      <shop-list ref="appShopList"></shop-list>
+      <event-list ref="appEventList"></event-list>
+      <news ref="appNews"></news>
+    </div>
   </div>
 </template>
 
 <script>
 import TagList from '@/components/TagList'
+import News from '@/components/News'
 import ShopList from '@/components/ShopList'
+import EventList from '@/components/EventList'
 // import '@/css/slnavi-vue.css'
 const ACTIVE_SHOP_TAGID = -3
 // const OPEN_SHOP_TAGID = -2
@@ -25,7 +31,9 @@ export default {
   },
   components: {
     TagList,
-    ShopList
+    News,
+    ShopList,
+    EventList
   },
   methods: {
     actionSelectedTag: function (e) {
@@ -77,6 +85,7 @@ export default {
       // this.tagid = OPEN_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
       this.$refs.appShopList.getShops(this.mode, this.tagid)
+      this.$refs.appEventList.getEvents()
     }
   }
 }
