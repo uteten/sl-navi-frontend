@@ -23,7 +23,7 @@
                             :target="z|shop_id"
                 >
                     <template v-slot:title>
-                        <a :href="z|search_url">{{ z|shop_name }}</a>
+                        <a :href="z|search_url" v-html="z.name"></a>
                         <b-badge v-if="isEvent(z)" variant="danger">
                             イベント中
                         </b-badge>
@@ -105,9 +105,6 @@ export default {
     'search_url': function (z) {
       return "#/search/"+z.flag
     },
-    'shop_name': function (z) {
-      return z.name
-    },
     'flag_img': function (z) {
       return 'https://secondlife.com/app/image/' + z.flag + '/1'
     },
@@ -166,9 +163,6 @@ export default {
     },
     isKenzenShop (z) {
       return (z.h === 2)
-    },
-    shop_name (z) {
-      return '<a class="f" title="<a href=&quot;?search=' + z.flag + '&quot;>' + z.name + '</a>'
     },
     shop_description (z) {
       return z.info.replace(/\n/g, '<br>')

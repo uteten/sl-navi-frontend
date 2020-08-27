@@ -1,6 +1,5 @@
 <template>
 <div class="view">
-
   <img class="sl-navi-kanban" src="/static/sl-navi-kanban.png">
   <br><br>
 
@@ -9,20 +8,26 @@
       <li>アダルト、一般施設問わず、<a href="https://www.secondlife.com/?lang=ja">セカンドライフ</a>内の日本人がいる施設や遊び場を見つけやすくします</li>
       <li>施設オーナー・運営者は、登録申請不要でセンサを置くだけで気軽に利用できます</li>
   </ol>
+  <h4>■作成者/連絡先</h4>
+  <ol>
+    <li>SL内の<a href="secondlife:///app/agent/7bc5bae0-bf2d-44da-a79f-66cdef64c321/about">uten resident</a></li>
+    <li>Twitterの<a href="https://twitter.com/sl_uten">@sl_uten</a></li>
+  </ol>
+
   <h4>■センサ配布場所</h4>
   <ul>
-      <li><a href="https://maps.secondlife.com/secondlife/Andretti/28/24/27">https://maps.secondlife.com/secondlife/Andretti/28/24/27</a></li>
+    <li><a href="https://maps.secondlife.com/secondlife/Andretti/28/24/27">https://maps.secondlife.com/secondlife/Andretti/28/24/27</a></li>
   </ul>
 
   <h4>■最近のおしらせ</h4>
-  <ul>
+    <ul>    
     <li>2020/08/22 <span class="badge badge-primary">機能追加</span>v3.00 訪問者の男女人数内訳(女性○人、男性○人）をWebに表示する設定を追加(GENDER_PUBLIC=on/off)</li>
     <li>2020/08/21 <span class="badge badge-danger">障害</span>ほぼ全センサの同期が切れる障害が発生しました。「センサを編集⇒スクリプトリセット」で復旧します（しないと復旧しません）。もうしわけありません。</li>
     <li>2020/08/21 <span class="badge badge-primary">機能追加</span>v2.95 指定したスタッフの出勤状況だけWebに公開する設定(STAFF_PUBLIC=specific)を追加</li>
   </ul>
 
   <h4>■FAQ</h4>
-  よくあるご質問（他の質問やご要望はSL内のuten residentへ）
+  よくあるご質問
   <p>
       <table class="table table-striped">
           <tr>
@@ -36,8 +41,7 @@
           <tr>
               <td>お店がWebに表示されなくなった/更新されなくなった</td>
               <td>
-                  センサが古いか。サーバとの同期が切れています。<br>
-                  IMでご連絡いただくか、新しいセンサを配布場所から入手して試してください<br>
+                  センサが古いか。サーバとの同期が切れています。新しいセンサを配布場所から入手して試してください<br>
                   ※utenが店舗情報を意図的に消すことはこれまで一度もないです。
               </td>
           </tr>
@@ -73,10 +77,8 @@
               <td>土地管理者じゃないがセンサを置くことは可能か？（土地レンタルなど）</td>
               <td>Rez権限があれば可能。ただし土地管理者と揉めないように気をつけてください。</td>
           </tr>
-
       </table>
   </p>
-
   <hr>
 </div>
 
