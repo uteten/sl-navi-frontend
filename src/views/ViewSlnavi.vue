@@ -46,7 +46,9 @@ export default {
       // 検索モードは$route.params.searchwordの監視でハンドリングするので無視する
       if (!this.$route.params.searchword) {
         console.log(['viewSlnavi:watch:mode', to, from])
+        // mode変更時の初期値
         this.tagid = ACTIVE_SHOP_TAGID
+        // this.tagid = OPEN_SHOP_TAGID
         this.$refs.appTagList.changeStatus(this.mode, this.tagid)
         this.$refs.appShopList.getShops(this.mode, this.tagid)
       }
@@ -70,7 +72,9 @@ export default {
       this.$refs.appTagList.getTags(this.tagid)
       this.actionSearch(this.searchword)
     } else {
+      // 初期値
       this.tagid = ACTIVE_SHOP_TAGID
+      // this.tagid = OPEN_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
       this.$refs.appShopList.getShops(this.mode, this.tagid)
     }

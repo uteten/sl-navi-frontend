@@ -2,7 +2,6 @@
 // mountedなし
 <template>
         <div id="shops" class="col">
-            <span class="badge badge-danger">08/21 21:15 ほぼ全センサの同期が切れる障害が発生しました。センサ設置者は「センサを編集⇒スクリプトリセット」を実施して復旧させてください。すみません。</span><br>
             <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
                 <!-- 看板と人数 -->
                 <img class="flag" :src="z|flag_img"  :class="z|event_class" >
