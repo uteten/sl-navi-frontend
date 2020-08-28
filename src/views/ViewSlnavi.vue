@@ -50,10 +50,10 @@ export default {
     }
   },
   watch: {
-    mode: function (to, from) {
+    mode: function () {
       // 検索モードは$route.params.searchwordの監視でハンドリングするので無視する
       if (!this.$route.params.searchword) {
-        console.log(['viewSlnavi:watch:mode', to, from])
+        // console.log(['viewSlnavi:watch:mode', to, from])
         // mode変更時の初期値
         this.tagid = ACTIVE_SHOP_TAGID
         // this.tagid = OPEN_SHOP_TAGID
@@ -61,8 +61,8 @@ export default {
         this.$refs.appShopList.getShops(this.mode, this.tagid)
       }
     },
-    '$route.params.searchword': function (to, from) {
-      console.log(['viewSlnavi:watch:searchword', to, from])
+    '$route.params.searchword': function () {
+      // onsole.log(['viewSlnavi:watch:searchword', to, from])
       this.searchword = this.$route.params.searchword
       if (this.searchword) {
         this.actionSearch(this.searchword)
@@ -73,9 +73,9 @@ export default {
   //   console.log(['viewSlnavi:befoUpdate', this])
   // },
   mounted () {
-    console.log(['viewSlnavi:mounted!!', this])
+    // console.log(['viewSlnavi:mounted!!', this])
     if (this.searchword) {
-      console.log(['viewSlnavi:mounted-search', this.searchword])
+      // console.log(['viewSlnavi:mounted-search', this.searchword])
       this.tagid = ALL_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
       this.actionSearch(this.searchword)

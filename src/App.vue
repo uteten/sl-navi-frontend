@@ -67,7 +67,7 @@ export default {
       }
     },
     syncSearchFormFromPath () {
-      console.log(['syncTopMenuFromPath', this.$route.path])
+      // console.log(['syncTopMenuFromPath', this.$route.path])
       // 検索パスがある場合は/allを選択、それ以外はパスに合わせて選択かつ検索フォームをクリア
       let word = this.$route.path.match(/^\/search\/(.*)/)
       if (word && word[1] !== '') {
