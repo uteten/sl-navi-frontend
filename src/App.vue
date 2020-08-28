@@ -8,7 +8,7 @@
             <ul id="topmenu" class="navbar-nav mr-auto">
                 <li class="nav-item" ><router-link to="/"      class="nav-link"><b-icon-house scale="0.8"></b-icon-house>一般施設</router-link></li>
                 <li class="nav-item" ><router-link to="/adult" class="nav-link"><b-icon-heart-fill scale="0.8"></b-icon-heart-fill>アダルト施設</router-link></li>
-                <li class="nav-item" ><router-link to="/all"   class="nav-link"><b-icon-building scale="0.8"></b-icon-building>全施設</router-link></li>
+                <li class="nav-item" ><router-link to="/all"   class="nav-link" :class="this.searchword ? 'router-link-exact-active' : '' "><b-icon-building scale="0.8"></b-icon-building>全施設</router-link></li>
                 <li class="nav-item" ><router-link to="/event" class="nav-link"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベントカレンダー</router-link></li>
                 <li class="nav-item" ><router-link to="/about" class="nav-link"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill> お知らせ＆センサ配布場所</router-link></li>
             </ul>
@@ -37,7 +37,7 @@ export default {
     return {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
       searchword: '',
-      selected: {}
+      search_active: ''
     }
   },
   head: {
@@ -65,6 +65,23 @@ export default {
       } else {
         this.$refs.view.actionSearch(this.searchword)
       }
+    },
+    syncSearchFormFromPath () {
+      console.log(['syncTopMenuFromPath', this.$route.path])
+      // 検索パスがある場合は/allを選択、それ以外はパスに合わせて選択かつ検索フォームをクリア
+      let word = this.$route.path.match(/^\/search\/(.*)/)
+      if (word && word[1] !== '') {
+        this.searchword = word[1]
+      } else {
+        this.searchword = ''
+      }
+    }
+  },mounted () {
+    this.syncSearchFormFromPath() // 検索フォームをPathにあわせて入力した状態にする（初期状態）
+  },
+  watch: {
+    '$route.path': function () {
+      this.syncSearchFormFromPath() // 同上(店のタイトルをクリックしてPathが変わったとき)
     }
   }
 }
