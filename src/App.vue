@@ -16,7 +16,7 @@
                 <input type="search" v-model="searchword" @keydown.enter="goSearch($event.keyCode)"
                       name="search" value="" class="form-control mr-sm-2" placeholder="キーワードで探す" aria-label="Search">
                 <input type="text" name="dummy" style="display:none;">
-                <button v-on:click="goSearch" class="btn btn-warning my-2 my-sm-0" type="button">
+                <button v-on:click="goSearch(13)" class="btn btn-warning my-2 my-sm-0" type="button">
                   <b-icon-search scale="0.8"></b-icon-search>
                 </button>
             </form>
@@ -65,8 +65,8 @@ export default {
       } else {
         this.$refs.view.actionSearch(this.searchword)
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

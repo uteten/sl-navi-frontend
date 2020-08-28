@@ -165,9 +165,4 @@ h5{
 	border-radius: 10px;
 	border: solid 2px #ffb03f;
 }
-dt{
-	background: #fdf0e0;
-	border-bottom: dashed 2px #ffb03f;
-	padding: 0.3em 0.5em 0.3em 0.5em;
-}
 </style>
