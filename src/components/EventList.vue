@@ -7,14 +7,15 @@
             :key ="event.id"
             :value = "event.id"
             :id="event.id"
-            class = "event_item">
+            class = "event_item"
+            tabindex="0">
             <div class="event_data_top">{{event.genre.name}}</div>
             <ul class="event_data">
               <li><img :src="event.img_url" class="event_image" ></li>
               <li>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</li>
             </ul>
             <!-- ポップアップの中身 -->
-            <b-popover triggers="click blur" placement="bottom" style="display:none"
+            <b-popover triggers="click blur" placement="left" style="display:none"
                         :target="String(event.id)"
             >
                 <img class="event_info_image" :src="event.img_url">
@@ -38,7 +39,7 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 
-var EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
+var EVENT_SOURCE = '//sl-navi.com/event/api/slevent?active=1'
 export default {
   name: 'EventList',
   props: ['mode'],
@@ -84,7 +85,7 @@ export default {
 
   /* ポップオーバー系 */
   .popover {
-    max-width: 700px;
+    max-width: 650px;
   }
 
   .popover-header{
@@ -155,7 +156,7 @@ export default {
   }
   .event_info_image{
     padding: 0;
-    max-width: 650px;
+    max-width: 600px;
   }
 
 </style>

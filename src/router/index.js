@@ -46,7 +46,7 @@ const routes = [
     // component: viewEvent,
   },
   {
-    path: '/search/:searchword',
+    path: '/all/:searchword',
     name: 'viewSlnavi-search',
     component: viewSlnavi,
     props: { mode: 'c' }

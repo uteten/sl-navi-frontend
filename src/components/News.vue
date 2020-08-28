@@ -2,8 +2,11 @@
   <div id="news" class="col news">
     <div class="news_top">最近のおしらせ</div>
     <ul class="news_menu">
+      <li class="news_item">2020/08/22<span class="badge badge-primary">機能追加v3.00</span> 訪問者の男女人数内訳(女性○人、男性○人）をWebに表示する設定を追加(GENDER_PUBLIC=on/off)</li>
       <li class="news_item">2020/08/21 <span class="badge badge-danger">障害</span>ほぼ全センサの同期が切れる障害が発生しました。センサ設置者は「センサを編集⇒スクリプトリセット」を実施して復旧させてください。すみません。</li>
     </ul>
+    <!--
+    <hr>
     <ul class="news_menu">
       <li class="news_item">2020/08/28 <span class="badge badge-primary">新規施設</span>(新しい施設順で5個出したい)</li>
       <li class="news_item">2020/08/27 <span class="badge badge-primary">新規施設</span>(クリックで施設情報が見れるともっといいと思います)</li>
@@ -11,6 +14,7 @@
       <li class="news_item">2020/08/25 <span class="badge badge-primary">新規施設</span>バー〇〇を追加</li>
       <li class="news_item">2020/08/24 <span class="badge badge-primary">新規施設</span>バー〇〇を追加</li>
     </ul>
+    -->
   </div>
 </template>
 

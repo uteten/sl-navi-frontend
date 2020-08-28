@@ -66,31 +66,7 @@ export default {
         this.$refs.view.actionSearch(this.searchword)
       }
     },
-    syncTopMenuFromPath () {
-      console.log(['syncTopMenuFromPath', this.$route.path])
-      // いったんTopメニューの選択を全クリア
-      for (let x of ['/', '/adult', '/all', '/event', '/about']) {
-        this.$set(this.selected, x, '')
-      }
-      // 検索パスがある場合は/allを選択、それ以外はパスに合わせて選択かつ検索フォームをクリア
-      let word = this.$route.path.match(/^\/search\/(.*)/)
-      if (word && word[1] !== '') {
-        this.$set(this.selected, '/all', 'selected')
-        this.searchword = word[1]
-      } else {
-        this.$set(this.selected, this.$route.path, 'selected')
-        this.searchword = ''
-      }
-    }
   },
-  mounted () {
-    this.syncTopMenuFromPath() // TopメニューをPathに合わせて選択した状態にする（初期状態）
-  },
-  watch: {
-    '$route.path': function () {
-      this.syncTopMenuFromPath() // TopメニューをPathに合わせて選択した状態にする(変化したとき）
-    }
-  }
 }
 </script>
 
