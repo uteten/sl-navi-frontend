@@ -3,7 +3,7 @@
 <template>
   <div id="shops" class="col shops">
     <div class="shop_top">施設</div>
-            <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
+          <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
                 <!-- 看板と人数 -->
                 <img class="flag" :src="z|flag_img"  :class="z|event_class" >
                 <div class="memo">
@@ -36,7 +36,7 @@
                     <span class="n2">
                         スタッフ<span class="sn2">{{ z.sn }}</span>人
                         <span v-if="z.staffs.length!=0">
-                            (<a v-for="staff in z.staffs" :href="staff|staff_url" :key="staff"
+                            (<a v-for="staff in z.staffs" :href="staff|staff_url" :key="staff.id"
                                 target=_blank  :class="staff|staff_sex">
                                 <template v-if="staff!=''">
                                     {{ staff|staff_name }}
@@ -171,7 +171,7 @@ export default {
       return (z.blog !== 'http://www.google.com' && z.blog.indexOf('http') === 0)
     },
     async getShops (m, tagid, search) {
-      console.log(['shoplist:getShop:axios', tagid, m, search])
+      // console.log(['shoplist:getShop:axios', tagid, m, search])
       await axios.get(SHOP_SOURCE, {
         params: {
           tagid: tagid,
@@ -180,7 +180,7 @@ export default {
         }
       }).then(res => {
         this.shops = res.data
-        console.log(['shoplist:getShop:then', this.shops])
+        // console.log(['shoplist:getShop:then', this.shops])
       })
     }
   }
@@ -305,7 +305,7 @@ export default {
     height: 150px;
     width: 400px;
   }
-  .shops{
+    .shops{
     background: #fdfcec;
     border: 1px solid #ffb03f;
     border-radius: 5px;
