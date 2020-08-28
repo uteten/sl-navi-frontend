@@ -59,6 +59,7 @@ export default {
         // this.tagid = OPEN_SHOP_TAGID
         this.$refs.appTagList.changeStatus(this.mode, this.tagid)
         this.$refs.appShopList.getShops(this.mode, this.tagid)
+        this.$refs.appList.getEvents()
       }
     },
     '$route.params.searchword': function () {
@@ -79,6 +80,7 @@ export default {
       this.tagid = ALL_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
       this.actionSearch(this.searchword)
+      this.$refs.appEventList.getEvents()
     } else {
       // 初期値
       this.tagid = ACTIVE_SHOP_TAGID
