@@ -80,6 +80,7 @@ export default {
       this.$refs.appTagList.getTags(this.tagid)
       this.actionSearch(this.searchword)
       this.$refs.appEventList.getEvents()
+      this.$refs.appNews.getShops()
     } else {
       // 初期値
       this.tagid = ACTIVE_SHOP_TAGID
@@ -87,6 +88,7 @@ export default {
       this.$refs.appTagList.getTags(this.tagid)
       this.$refs.appShopList.getShops(this.mode, this.tagid)
       this.$refs.appEventList.getEvents()
+      this.$refs.appNews.getShops()
     }
   }
 }
