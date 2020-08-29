@@ -20,7 +20,7 @@
                 <!-- ポップアップの中身 -->
                 <b-popover triggers="click blur" placement="bottom" style="display:none"
                             :target="z|shop_id"
-                            :show="shops.length===1"
+                            :show="shops.length===1 && this.search!==''"
                 >
                     <template v-slot:title>
                         <a :href="z|search_url" v-html="z.name"></a>
