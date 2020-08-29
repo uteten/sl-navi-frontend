@@ -15,12 +15,12 @@
                     <span v-if="z.male>0" class="male">
                         ♂×{{ z.male }}
                     </span>
-
                     <span v-if="isShopClose(z)" class="badge badge-secondary">閉店中</span>
                 </div>
                 <!-- ポップアップの中身 -->
                 <b-popover triggers="click blur" placement="bottom" style="display:none"
                             :target="z|shop_id"
+                            :show="shops.length===1"
                 >
                     <template v-slot:title>
                         <a :href="z|search_url" v-html="z.name"></a>
