@@ -165,7 +165,9 @@ export default {
       return (z.h === 2)
     },
     shop_description (z) {
-      return z.info.replace(/\n/g, '<br>')
+      let text=z.info
+      const url_pattern=/(https?:\/\/[^ \r\n]+)/g
+      return text.replace(url_pattern,'<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
     },
     existBlog (z) {
       return (z.blog !== 'http://www.google.com' && z.blog.indexOf('http') === 0)

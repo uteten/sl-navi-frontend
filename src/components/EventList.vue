@@ -65,7 +65,8 @@ export default {
           '>': '&gt;',
         }[match]
       });
-      return tmp.replace(/\n/g,"<br>");
+      const url_pattern=/(https?:\/\/[^ \r\n]+)/g
+      return tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
     },
     nitiji: function (str) {
       return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
