@@ -9,7 +9,10 @@
             :id="event.id"
             class = "event_item"
             tabindex="0">
-            <div class="event_data_top">{{event.genre.name}}</div>
+            <div class="event_data_top" v-html="event.genre.name+
+            (nowOpen(event.start_time,event.end_time) ? '<span class=\'badge badge-primary\'>開催中<span>':'')"></div>
+
+            
             <ul class="event_data">
               <li><img :src="event.img_url" class="event_image" ></li>
               <li>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</li>
@@ -70,6 +73,25 @@ export default {
     },
     nitiji: function (str) {
       return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
+    },
+    _formatDate:function (date, format) {
+      format = format.replace(/YYYY/g, date.getFullYear());
+      format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+      format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
+      format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+      format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+      format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+      format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3));
+      return format;
+    },
+    nowOpen: function (start,end){
+      let now=new Date()
+      now=this._formatDate(now,'YYYY-MM-DDThh:mm:ss')
+      if(start<now && now<end ){
+        return 1
+      }else{
+        return 0
+      }
     },
     async getEvents (){
       await axios.get(EVENT_SOURCE).then(res => {

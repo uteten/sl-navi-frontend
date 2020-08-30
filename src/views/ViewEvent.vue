@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       calendarOptions: {
-        locale: 'ja',
+        locale: 'en',
         firstDay: 1,
         plugins: [ dayGridPlugin, timeGridPlugin ],
         initialView: 'dayGridMonth',
