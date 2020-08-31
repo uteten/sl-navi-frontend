@@ -9,7 +9,9 @@
     <h6>新店舗情報</h6>
     <ul class="news_menu">
       <li class="news_item" v-for="z in shops" :id="z.flag" :key="z.flag">
-        {{ nitiji(z.created_at) }} <span class="badge badge-primary">新規施設</span>[<a :href="'#/search/'+z.flag" v-html="z.name"></a>]を追加
+        {{ nitiji(z.created_at) }} <span class="badge badge-primary">新規施設</span>
+        {{ (z.h===1 ? "アダルト施設" : "一般施設") }}
+        [<a :href="'#/search/'+z.flag" v-html="z.name"></a>]を追加
       </li>
     </ul>
   </div>

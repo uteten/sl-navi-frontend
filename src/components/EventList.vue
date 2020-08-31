@@ -3,6 +3,7 @@
   <div id="events" class="col events">
     <div class="events_top">最近のイベント</div>
     <ul id="events" class="event_list">
+      {{ message_no_event }}
         <li v-for = "event in events"
             :key ="event.id"
             :value = "event.id"
@@ -49,7 +50,8 @@ export default {
   props: ['mode'],
   data: function () {
     return {
-      events: []
+      events: [],
+      message_no_event: ""
     }
   },
   methods: {
@@ -97,6 +99,10 @@ export default {
       await axios.get(EVENT_SOURCE).then(res => {
         for (var z of res.data) {
           this.events.push(z)
+        }
+
+      if(!this.events[0]){
+          this.message_no_event="一週間以内のイベント情報はありません（みんな登録してねっ）"
         }
       })
     }
