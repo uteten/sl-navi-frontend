@@ -37,3 +37,6 @@ distを好きなところへ持って行く
 ## fullcalendar
 npm install --save @fullcalendar/vue @fullcalendar/daygrid
 npm install --save @fullcalendar/timegrid
+
+## イベント登録
+npm install --save vue-ctk-date-time-picker

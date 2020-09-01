@@ -34,7 +34,9 @@
             </b-popover>
         </li>
     </ul>
-    <div align="right"><a href="/event/create"><span class="badge badge-danger">イベント登録はここをクリック</span></a></div>
+    <div align="right">
+      <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
+    </div>
   </div>
 </template>
 

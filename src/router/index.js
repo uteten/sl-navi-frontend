@@ -7,19 +7,18 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import viewAbout from '@/views/ViewAbout'
 import viewSlnavi from '@/views/ViewSlnavi'
-// import viewEvent from '@/views/ViewEvent'
+// import viewCreateEvent from '@/views/ViewCreateEvent'
+// viewEventは負荷軽減のためクリック時に呼び出す
 
 Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
-
-
 Vue.use(VueRouter)
 
 const routes = [
   {
-     path: '/about',
-     name: 'viewAbout',
-     component: viewAbout
+    path: '/about',
+    name: 'viewAbout',
+    component: viewAbout
   },
   {
     path: '/',
@@ -44,6 +43,12 @@ const routes = [
     name: 'viewEvent',
     component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue')
     // component: viewEvent,
+  },
+  {
+    path: '/createEvent',
+    name: 'viewCreateEvent',
+    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
+    //component: viewCreateEvent
   },
   {
     path: '/search/:searchword',

@@ -1,6 +1,8 @@
 <template>
 <div class="view">
-    <div align="right"><a href="/event/create"><span class="badge badge-danger">イベント登録はここをクリック</span></a></div>
+    <div align="right">
+      <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
+    </div>
     <ul>
         <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
     </ul>
@@ -18,7 +20,9 @@
             <dt>投稿</dt><dd>Posted by <a target=_blank :href="ed_by|twitter">@{{ ed_by }}</a></dd>
         </dl>
     </b-modal>
-    <div align="right"><a href="/event/create"><span class="badge badge-danger">イベント登録はここをクリック</span></a></div>
+    <div align="right">
+      <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
+    </div>
 </div>
 </template>
 
