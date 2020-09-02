@@ -3,6 +3,7 @@
     <div class="news_top">最近のおしらせ</div>
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
+      <li class="news_item">2020/09/02<span class="badge badge-primary">機能追加(WebGUI)</span> Webページを開きっぱなしでも最新状態が表示されるようにしました</li>
       <li class="news_item">2020/08/22<span class="badge badge-primary">機能追加v3.00</span> 訪問者の男女人数内訳(女性○人、男性○人）をWebに表示する設定を追加(GENDER_PUBLIC=on/off)</li>
       <li class="news_item">2020/08/21 <span class="badge badge-danger">障害</span>ほぼ全センサの同期が切れる障害が発生しました。センサ設置者は「センサを編集⇒スクリプトリセット」を実施して復旧させてください。すみません。</li>
     </ul>

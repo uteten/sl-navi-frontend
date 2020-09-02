@@ -80,7 +80,10 @@ export default {
   props: ['mode'],
   data: function () {
     return {
-      shops: []
+      shops: [],
+      cache_tagid: "",
+      cache_mode: "",
+      cache_search: ""
     }
   },
   filters: {
@@ -174,6 +177,9 @@ export default {
     },
     async getShops (m, tagid, search) {
       // console.log(['shoplist:getShop:axios', tagid, m, search])
+      this.cache_mode=m
+      this.cache_tagid=tagid
+      this.cache_search=search
       await axios.get(SHOP_SOURCE, {
         params: {
           tagid: tagid,
@@ -185,6 +191,13 @@ export default {
         // console.log(['shoplist:getShop:then', this.shops])
       })
     }
+  },
+  mounted () {
+      var that=this
+      this.intervalId = setInterval(function () {
+        // console.log([that.cache_mode, that.cache_tagid, that.cache_search])
+        that.getShops(that.cache_mode, that.cache_tagid, that.cache_search)
+      }, 1000*60)
   }
 }
 </script>
