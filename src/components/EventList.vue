@@ -46,7 +46,7 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 
-var EVENT_SOURCE = '//sl-navi.com/event/api/slevent?active=1'
+var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/2'
 export default {
   name: 'EventList',
   props: ['mode'],
@@ -57,7 +57,6 @@ export default {
     }
   },
   methods: {
-
     escape_html: function (tmp) {
       if(typeof tmp !== 'string') {
         return tmp;
@@ -104,7 +103,7 @@ export default {
         }
 
       if(!this.events[0]){
-          this.message_no_event="一週間以内のイベント情報はありません（みんな登録してねっ）"
+          this.message_no_event="直近のイベント情報はありません（みんな登録してねっ）"
         }
       })
     }

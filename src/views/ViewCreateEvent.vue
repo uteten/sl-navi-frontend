@@ -104,7 +104,7 @@ import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css'
 Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker)
 
 var LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
-var LOGOUT_URL = '//sl-navi.com/event/api/user?logout=1'
+var LOGOUT_URL = '//sl-navi.com/event/api/user/logout'
 var EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
 var BLANK_IMG="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
 export default {

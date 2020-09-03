@@ -6,7 +6,7 @@
     <ul>
         <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
     </ul>
-    <FullCalendar :options="calendarOptions" />
+    <FullCalendar ref="fullCalendar" :options="calendarOptions" />
     <ul>
         <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
     </ul>
@@ -19,6 +19,7 @@
             <dt>詳細</dt><dd v-html="ed_desc"></dd>
             <dt>投稿</dt><dd>Posted by <a target=_blank :href="ed_by|twitter">@{{ ed_by }}</a></dd>
         </dl>
+        <button v-if="username==ed_by" @click="deleteEvent(ed_id)" class="form-control">削除</button>
     </b-modal>
     <div align="right">
       <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
@@ -41,8 +42,9 @@ Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 
 
+var LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
 var GENRE_SOURCE = '//sl-navi.com/event/api/genre'
-var EVENT_SOURCES = ['//sl-navi.com/event/api/slevent?format=json']
+var EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
 export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
@@ -59,7 +61,7 @@ export default {
         firstDay: 1,
         plugins: [ dayGridPlugin, timeGridPlugin ],
         initialView: 'dayGridMonth',
-        eventSources: EVENT_SOURCES,
+        eventSources: [EVENT_SOURCE],
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -75,6 +77,9 @@ export default {
         }.bind(this)
       },
       legend: [],
+      username: '',
+      csrftoken: '',
+      ed_id: '',
       ed_title: '',
       ed_img: '',
       ed_genre: '',
@@ -87,6 +92,7 @@ export default {
   methods: {
     popup: function (e){
       let ee=e.event;
+      this.ed_id=ee.id
       this.ed_title=ee.title
       this.ed_img=ee.extendedProps.img_url
       this.ed_genre=ee.extendedProps.genre.name
@@ -96,6 +102,46 @@ export default {
       this.ed_by=ee.extendedProps.created_by.name
       this.$refs['my-modal'].show()
     },
+		getCookie: function (name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+					const cookies = document.cookie.split(';');
+					for (let i = 0; i < cookies.length; i++) {
+							const cookie = cookies[i].trim();
+							// Does this cookie string begin with the name we want?
+							if (cookie.substring(0, name.length + 1) === (name + '=')) {
+									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+									break;
+							}
+					}
+			}
+			return cookieValue;
+		},
+    deleteEvent: function (event_id){
+			const headers ={
+				'X-CSRFTOKEN': this.csrftoken
+			}
+      axios.delete(EVENT_SOURCE+"/"+event_id, {headers: headers}
+			).then(res =>{
+				alert("削除に成功しました")
+        this.$refs['my-modal'].hide()
+        let calendarApi = this.$refs.fullCalendar.getApi()
+        calendarApi.refetchEvents()
+				console.log(res)
+      }).catch(err=>{
+				console.log(["error",err])
+				if(err.response.status==401){
+          alert("削除に失敗しました。認証情報が確認できないのでログインしてから再実行してください")
+				}else if(err.response.status==403){
+          alert("削除に失敗しました。投稿者した記事しか削除できません")
+				}else{
+					alert("削除に失敗しました。すでに削除済みかも？")
+        }
+        this.$refs['my-modal'].hide()
+        let calendarApi = this.$refs.fullCalendar.getApi()
+        calendarApi.refetchEvents()
+			})
+},
     escape_html: function (tmp) {
       if(typeof tmp !== 'string') {
         return tmp;
@@ -116,13 +162,24 @@ export default {
     },
     nitiji: function (str) {
       return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
+    },
+    async getUsername () {
+			await axios.get(LOGIN_STATUS_URL).then(res => {
+				this.username=res.data[0].name
+				// console.log(["username=",this.username])
+      }).catch(err=>{
+				console.log(err)
+				this.username=""
+      })
     }
   },
   async mounted(){
-   // genreの凡例
-      await axios.get(GENRE_SOURCE).then(res => {
-        this.legend=res.data
-      })
+    // genreの凡例
+    await axios.get(GENRE_SOURCE).then(res => {
+      this.legend=res.data
+    })
+    this.getUsername()
+    this.csrftoken = this.getCookie('csrftoken')
   }
 }
 </script>
