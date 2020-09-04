@@ -44,7 +44,7 @@
 		<select v-model="genre" name="genre" class="form-control" required id="id_genre">
 			<option value="">---------</option>
 			<option value="3">ライブ</option>
-			<option value="5">ゲーム/トレハン</option>
+			<option value="5">ゲーム</option>
 			<option value="6">セール</option>
 			<option value="7">祭り</option>
 			<option value="1">ラジオ</option>
@@ -90,6 +90,8 @@
 				<button type="button" class='form-control' @click="postEvent()">投稿</button>
 			</div>
 		</div>
+		<hr>
+		※投稿したデータを削除する際は、ログインした状態でイベントカレンダーからイベントを選択し画面下の[削除]ボタンを押してください
 	</div>
 	</form>
 </div>

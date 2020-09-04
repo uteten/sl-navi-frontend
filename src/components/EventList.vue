@@ -1,4 +1,5 @@
 // 48時間以内に開始 もしくは開催中
+// 10分に1回自動更新
 <template>
   <div id="events" class="col events">
     <div class="events_top">最近のイベント</div>
@@ -98,16 +99,25 @@ export default {
     },
     async getEvents (){
       await axios.get(EVENT_SOURCE).then(res => {
+        this.events=[]
         for (var z of res.data) {
           this.events.push(z)
         }
+        console.log("hoge")
 
       if(!this.events[0]){
           this.message_no_event="直近のイベント情報はありません（みんな登録してねっ）"
         }
       })
     }
+  },
+  mounted () {
+      var that=this
+      this.intervalId = setInterval(function () {
+        that.getEvents()
+      }, 1000*600)
   }
+
 }
 </script>
 

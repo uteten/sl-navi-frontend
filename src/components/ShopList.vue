@@ -1,11 +1,11 @@
-// emitなし
-// mountedなし
+// 1分に1回自動更新
 <template>
   <div id="shops" class="col shops">
     <div class="shop_top">施設</div>
           <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
                 <!-- 看板と人数 -->
                 <img class="flag" :src="z|flag_img"  :class="z|event_class" >
+                <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
                 <div class="memo">
                     <span v-if="existStaff(z)" class="sn">{{ z|staff_num }}</span>
                     <span v-if="existGuest(z)" class="cn">{{ z|guest_num }}</span>
@@ -167,6 +167,27 @@ export default {
     isKenzenShop (z) {
       return (z.h === 2)
     },
+    _formatDate:function (date, format) {
+      format = format.replace(/YYYY/g, date.getFullYear());
+      format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+      format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
+      format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+      format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+      format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+      format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3));
+      return format;
+    },
+    isNewShop (z) {
+      let now=new Date()
+      now.setDate(now.getDate() - 7);
+      let one_week=this._formatDate(now,'YYYY-MM-DDThh:mm:ss')
+      console.log([z.created_at,one_week])
+      if(z.created_at>one_week){
+        return 1
+      }else{
+        return 0
+      }
+    },
     shop_description (z) {
       let text=z.info
       const url_pattern=/(https?:\/\/[^ \r\n]+)/g
@@ -226,6 +247,13 @@ export default {
     position: absolute;
     left: 0px;
     bottom: 0px;
+    display: flex;
+  }
+  .new_shop{
+    align-items: flex-start;
+    position: absolute;
+    left: 0px;
+    top: 0px;
     display: flex;
   }
   .cn {
@@ -320,7 +348,7 @@ export default {
     height: 150px;
     width: 400px;
   }
-    .shops{
+  .shops{
     background: #fdfcec;
     border: 1px solid #ffb03f;
     border-radius: 5px;
