@@ -1,29 +1,26 @@
 <template>
 <div class="view">
-    <div align="right">
-      <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
-    </div>
-    <ul>
-        <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
-    </ul>
-    <FullCalendar ref="fullCalendar" :options="calendarOptions" />
-    <ul>
-        <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
-    </ul>
-    <b-modal ref="my-modal" :title=ed_title class="modal fade" size="lg" hide-footer>
-        <img class="flag" :src="ed_img">
-        <dl class="dl-horizontal">
-            <dt>形式</dt><dd>{{ ed_genre }}</dd>
-            <dt>期間</dt><dd>{{ ed_span}}</dd>
-            <dt>場所</dt><dd><a target=_blank :href="ed_map">{{ ed_map }}</a></dd>
-            <dt>詳細</dt><dd v-html="ed_desc"></dd>
-            <dt>投稿</dt><dd>Posted by <a target=_blank :href="ed_by|twitter">@{{ ed_by }}</a></dd>
-        </dl>
-        <button v-if="username==ed_by" @click="deleteEvent(ed_id)" class="form-control">削除</button>
-    </b-modal>
-    <div align="right">
-      <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
-    </div>
+  <div align="right">
+    <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
+  </div>
+  <FullCalendar ref="fullCalendar" :options="calendarOptions" />
+  <ul>
+      <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
+  </ul>
+  <b-modal ref="my-modal" :title=ed_title class="modal fade" size="lg" hide-footer>
+      <img class="flag" :src="ed_img">
+      <dl class="dl-horizontal">
+          <dt>形式</dt><dd>{{ ed_genre }}</dd>
+          <dt>期間</dt><dd>{{ ed_span}}</dd>
+          <dt>場所</dt><dd><a target=_blank :href="ed_map">{{ ed_map }}</a></dd>
+          <dt>詳細</dt><dd v-html="ed_desc"></dd>
+          <dt>投稿</dt><dd>Posted by <a target=_blank :href="ed_by|twitter">@{{ ed_by }}</a></dd>
+      </dl>
+      <button v-if="username==ed_by" @click="deleteEvent(ed_id)" class="form-control">削除</button>
+  </b-modal>
+  <div align="right">
+    <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
+  </div>
 </div>
 </template>
 
@@ -31,6 +28,8 @@
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid';
+//import listPlugin from '@fullcalendar/list';
+
 //import interactionPlugin from '@fullcalendar/interaction'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -187,7 +186,6 @@ export default {
     .textarea{
 	grid-row:20;
 }
-
 .fc-day-sat {
     background-color: #eaf4ff;
 }
@@ -205,10 +203,16 @@ h5{
 	background: #fdf0e0;
 }
 .modal-content{
-
+	border-radius: 10px;
+	border: solid 2px #ffb03f;
 }
-    /*
+.fc a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
 .fc-toolbar-title {
+    font-weight:900;
     color: #ffaa00;
 }
 .fc .fc-button-primary:not(:disabled).fc-button-active{
@@ -216,6 +220,7 @@ h5{
     border-color: var(--fc-button-border-color,#ff8800);
 }
 .fc .fc-button-primary{
+    font-weight:900;
     background-color: #ffcc44;
     border-color: var(--fc-button-border-color,#ff8800);
 }
@@ -223,9 +228,7 @@ h5{
     background-color: #ffaa00;
     border-color: var(--fc-button-border-color,#ff8800);
 }
-*/
-.modal-content{
-	border-radius: 10px;
-	border: solid 2px #ffb03f;
+.fc-daygrid-dot-event .fc-event-title {
+  font-weight: normal;
 }
 </style>
