@@ -231,4 +231,7 @@ h5{
 .fc-daygrid-dot-event .fc-event-title {
   font-weight: normal;
 }
-</style>
+.fc-h-event .fc-event-main {
+    color: #000;
+    color: var(--fc-event-text-color,#000);
+}</style>
