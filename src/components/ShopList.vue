@@ -2,71 +2,61 @@
 <template>
   <div id="shops" class="col shops">
     <div class="shop_top">施設</div>
-          <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
-                <!-- 看板と人数 -->
-                <img class="flag" :src="z|flag_img"  :class="z|event_class" >
-                <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
-                <div class="memo">
-                    <span v-if="existStaff(z)" class="sn">{{ z|staff_num }}</span>
-                    <span v-if="existGuest(z)" class="cn">{{ z|guest_num }}</span>
-                    <span v-if="z.female>0" class="female">
-                        ♀×{{ z.female }}
-                    </span>
-                    <span v-if="z.male>0" class="male">
-                        ♂×{{ z.male }}
-                    </span>
-                    <span v-if="isShopClose(z)" class="badge badge-secondary">閉店中</span>
-                </div>
-                <!-- ポップアップの中身 -->
-                <b-popover triggers="click blur" placement="bottom" style="display:none"
-                            :target="z|shop_id"
-                            :show="shops.length===1"
-                >
-                    <template v-slot:title>
-                        <a :href="z|search_url" v-html="z.name"></a>
-                        <b-badge v-if="isEvent(z)" variant="danger">
-                            イベント中
-                        </b-badge>
-                    </template>
-
-                    <span v-html="shop_description(z)"></span><br>
-                    <span v-if="isAdultShop(z)" class="badge badge-danger">アダルト施設</span>
-                    <span v-if="isKenzenShop(z)" class="badge badge-primary">一般施設</span>
-                    <span v-for="tag in z.tags" :key="tag.id" class="badge badge-light">{{ tag }}</span><br>
-                    <span class="n2">
-                        スタッフ<span class="sn2">{{ z.sn }}</span>人
-                        <span v-if="z.staffs.length!=0">
-                            (<a v-for="staff in z.staffs" :href="staff|staff_url" :key="staff.id"
-                                target=_blank  :class="staff|staff_sex">
-                                <template v-if="staff!=''">
-                                    {{ staff|staff_name }}
-                                </template>
-                            </a>)
-                        </span>
-                        / 訪問者<span class="cn2">{{ z|guest_num }}</span>人
-                      <template v-if="z.female+z.male>0">
-                        / 男女内訳
-                        <span v-if="z.female>0">
-                            ♀{{ z.female }}人 
-                        </span>
-                        <span v-if="z.male>0">
-                            ♂{{ z.male }}人
-                        </span>
-                      </template>
-                    </span><br>
-                    <a target=_blank v-bind:href="z|map_url">
-                        <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z|sim }})
-                    </a>
-                    <span v-if="existBlog(z)">
-                        / <a target="_blank" v-bind:href="z|blog_url">
-                            <b-icon-link scale="0.8"></b-icon-link>Web( {{ z|blog_url_short }} )
-                        </a>
-                    </span>
-                    <br>
-                    <img class="heatmap" v-bind:src="z|heatmap">
-                </b-popover>
-          </div>
+    <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
+      <!-- 看板と人数 -->
+      <img class="flag" :src="z|flag_img"  :class="z|event_class" >
+      <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
+      <div class="memo">
+        <span v-if="existStaff(z)" class="sn">{{ z|staff_num }}</span>
+        <span v-if="existGuest(z)" class="cn">{{ z|guest_num }}</span>
+        <span v-if="z.female>0" class="female">♀×{{ z.female }}</span>
+        <span v-if="z.male>0" class="male">♂×{{ z.male }}</span>
+        <span v-if="isShopClose(z)" class="badge badge-secondary">閉店中</span>
       </div>
+      <!-- ポップアップの中身 -->
+      <b-popover triggers="click blur" placement="bottom" style="display:none"
+        :target="z|shop_id" :show="shops.length===1"
+      >
+        <template v-slot:title>
+          <a :href="z|search_url" v-html="z.name"></a>
+          <b-badge v-if="isEvent(z)" variant="danger">イベント中</b-badge>
+        </template>
+        <span v-html="shop_description(z)"></span><br>
+        <span v-if="isAdultShop(z)" class="badge badge-danger">アダルト施設</span>
+        <span v-if="isKenzenShop(z)" class="badge badge-primary">一般施設</span>
+        <span v-for="tag in z.tags" :key="tag.id" class="badge badge-light">{{ tag }}</span><br>
+        <span class="n2">
+          スタッフ<span class="sn2">{{ z.sn }}</span>人
+          <span v-if="z.staffs.length!=0">
+            (<a v-for="staff in z.staffs" :href="staff|staff_url" :key="staff.id"
+              target=_blank  :class="staff|staff_sex">
+              <template v-if="staff!=''">{{ staff|staff_name }}</template>
+            </a>)
+          </span>
+          / 訪問者<span class="cn2">{{ z|guest_num }}</span>人
+          <template v-if="z.female+z.male>0">
+            / 男女内訳
+            <span v-if="z.female>0">
+                ♀{{ z.female }}人 
+            </span>
+            <span v-if="z.male>0">
+                ♂{{ z.male }}人
+            </span>
+          </template>
+        </span><br>
+        <a target=_blank v-bind:href="z|map_url">
+            <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z|sim }})
+        </a>
+        <span v-if="existBlog(z)">
+          / <a target="_blank" v-bind:href="z|blog_url">
+            <b-icon-link scale="0.8"></b-icon-link>Web( {{ z|blog_url_short }} )
+            </a>
+        </span>
+        <br>
+        <img class="heatmap" v-bind:src="z|heatmap">
+      </b-popover>
+    </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue'
@@ -208,7 +198,7 @@ export default {
           search: search
         }
       }).then(res => {
-        this.shops = res.data
+        this.shops=res.data
         // console.log(['shoplist:getShop:then', this.shops])
       })
     }
@@ -225,7 +215,17 @@ export default {
 
 <style scoped>
   /* ====  ShopList.vue ==== */
-
+/*アニメーションはウザいので辞める
+.v-enter-active, .v-leave-active, .v-move{
+  transition: transform 1s;
+}
+.v-enter, .v-leave-to{
+  transform: translateX(80%);
+}
+.v-leave-active{
+  position: absolute;
+}
+*/
   /* 開店中のお店を全部表示リンク（この機能は消えたので使っていない） */
   .view_open_shop{
     color: #ffaa00;

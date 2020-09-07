@@ -58,6 +58,7 @@
 		<VueCtkDateTimePicker 
 					v-model="start_time"
           format="YYYY-MM-DD HH:mm"
+					:first-day-of-week=1
 					noLabel
 					noHeader
 				/>
@@ -67,9 +68,11 @@
 		<VueCtkDateTimePicker 
 					v-model="end_time"
           format="YYYY-MM-DD HH:mm"
+					:first-day-of-week=1
 					:minDate="start_time"
 					noLabel
 					noHeader
+					v-on:click="input_end_time_flag=1"
 				/>
 		<p class="alert alert-danger" v-if="errors.end_time" v-html="errors.end_time"></p>
 		
@@ -248,6 +251,13 @@ export default {
 		// this.csrftoken="testabc"
 		// console.log(["csrftoken=",this.csrftoken])
 	}
+	,watch: {
+    start_time: function (val) {
+			if(!this.end_time){
+				this.end_time = val;
+			}
+    }
+  }
 }
 </script>
 
