@@ -1,3 +1,5 @@
+// INTERVAL_RELOAD_EVENT(600秒)毎に EVENT_SOURCE を取得
+
 // 48時間以内に開始 もしくは開催中
 // 10分に1回自動更新
 <template>
@@ -46,7 +48,7 @@ import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-
+var INTERVAL_RELOAD_EVENT= 600
 var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/2'
 export default {
   name: 'EventList',
@@ -103,8 +105,6 @@ export default {
         for (var z of res.data) {
           this.events.push(z)
         }
-        console.log("hoge")
-
       if(!this.events[0]){
           this.message_no_event="直近のイベント情報はありません（みんな登録してねっ）"
         }
@@ -113,10 +113,11 @@ export default {
   },
   mounted () {
       var that=this
-      this.intervalId = setInterval(function () {
+      this.$setInterval(() => {
         that.getEvents()
-      }, 1000*600)
-  }
+      }, 1000*INTERVAL_RELOAD_EVENT)
+
+}
 
 }
 </script>

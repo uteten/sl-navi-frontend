@@ -238,8 +238,12 @@ export default {
 		},
     async getUsername () {
 			await axios.get(LOGIN_STATUS_URL).then(res => {
-				this.username=res.data[0].name
-				console.log(["username=",this.username])
+				if(res.data[0]){
+					this.username=res.data[0].name
+				}else{
+					this.username=""
+				}
+				// console.log(["username=",this.username])
       }).catch(err=>{
 				console.log(err)
 				this.username=""

@@ -3,6 +3,7 @@
     <tag-list ref="appTagList" :mode="mode"
               v-on:selected_tag="actionSelectedTag"></tag-list>
     <div class="view col">
+      <messages ref="appMessages"></messages>
       <shop-list ref="appShopList"></shop-list>
       <event-list ref="appEventList"></event-list>
       <news ref="appNews"></news>
@@ -12,6 +13,7 @@
 
 <script>
 import TagList from '@/components/TagList'
+import Messages from '@/components/Messages'
 import News from '@/components/News'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
@@ -32,6 +34,7 @@ export default {
   components: {
     TagList,
     News,
+    Messages,
     ShopList,
     EventList
   },
@@ -59,6 +62,7 @@ export default {
         // this.tagid = OPEN_SHOP_TAGID
         this.$refs.appTagList.changeStatus(this.mode, this.tagid)
         this.$refs.appShopList.getShops(this.mode, this.tagid)
+        this.$refs.appMessages.getMessages(this.mode)
       }
     },
     '$route.params.searchword': function () {
@@ -81,6 +85,7 @@ export default {
       this.actionSearch(this.searchword)
       this.$refs.appEventList.getEvents()
       this.$refs.appNews.getShops()
+      this.$refs.appMessages.getMessages(this.mode)
     } else {
       // 初期値
       this.tagid = ACTIVE_SHOP_TAGID
@@ -89,6 +94,7 @@ export default {
       this.$refs.appShopList.getShops(this.mode, this.tagid)
       this.$refs.appEventList.getEvents()
       this.$refs.appNews.getShops()
+      this.$refs.appMessages.getMessages(this.mode)
     }
   }
 }

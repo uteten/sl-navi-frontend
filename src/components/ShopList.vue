@@ -2,23 +2,23 @@
 <template>
   <div id="shops" class="col shops">
     <div class="shop_top">施設</div>
-    <div v-for="z in shops" :id="z|shop_id" :key="z.flag" class="f" tabindex="0">
+    <div v-for="z in shops" :id="z.flag" :key="z.flag" class="f" tabindex="0">
       <!-- 看板と人数 -->
-      <img class="flag" :src="z|flag_img"  :class="z|event_class" >
+      <img class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''">
       <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
       <div class="memo">
-        <span v-if="existStaff(z)" class="sn">{{ z|staff_num }}</span>
-        <span v-if="existGuest(z)" class="cn">{{ z|guest_num }}</span>
+        <span v-if="existStaff(z)" class="sn">{{ z.sn }}</span>
+        <span v-if="existGuest(z)" class="cn">{{ z.cn }}</span>
         <span v-if="z.female>0" class="female">♀×{{ z.female }}</span>
         <span v-if="z.male>0" class="male">♂×{{ z.male }}</span>
         <span v-if="isShopClose(z)" class="badge badge-secondary">閉店中</span>
       </div>
       <!-- ポップアップの中身 -->
       <b-popover triggers="click blur" placement="bottom" style="display:none"
-        :target="z|shop_id" :show="shops.length===1"
+        :target="z.flag" :show="shops.length===1"
       >
         <template v-slot:title>
-          <a :href="z|search_url" v-html="z.name"></a>
+          <a :href="'#/search/'+z.flag" v-html="z.name"></a>
           <b-badge v-if="isEvent(z)" variant="danger">イベント中</b-badge>
         </template>
         <span v-html="shop_description(z)"></span><br>
@@ -33,7 +33,7 @@
               <template v-if="staff!=''">{{ staff|staff_name }}</template>
             </a>)
           </span>
-          / 訪問者<span class="cn2">{{ z|guest_num }}</span>人
+          / 訪問者<span class="cn2">{{ z.cn }}</span>人
           <template v-if="z.female+z.male>0">
             / 男女内訳
             <span v-if="z.female>0">
@@ -44,16 +44,16 @@
             </span>
           </template>
         </span><br>
-        <a target=_blank v-bind:href="z|map_url">
-            <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z|sim }})
+        <a target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
+            <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z.sim }})
         </a>
         <span v-if="existBlog(z)">
-          / <a target="_blank" v-bind:href="z|blog_url">
-            <b-icon-link scale="0.8"></b-icon-link>Web( {{ z|blog_url_short }} )
+          / <a target="_blank" v-bind:href="z.blog">
+            <b-icon-link scale="0.8"></b-icon-link>Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
             </a>
         </span>
         <br>
-        <img class="heatmap" v-bind:src="z|heatmap">
+        <img class="heatmap" v-bind:src="'/static/heatmap/' + z.flag + '.png?'">
       </b-popover>
     </div>
   </div>
@@ -63,7 +63,7 @@ import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-
+var INTERVAL_RELOAD_SHOP = 60
 var SHOP_SOURCE = '//sl-navi.com/api/shop'
 export default {
   name: 'ShopList',
@@ -77,51 +77,6 @@ export default {
     }
   },
   filters: {
-    // shopの中身(z)はz.staffsとz.tags以外は直接使わず全部フィルタで表示
-    'shop_id': function (z) {
-      return z.flag
-    },
-    'event_class': function (z) {
-      if(z.event) {
-        return 'now_event'
-      }else {
-        return
-      }
-    },
-    'event_variant': function (z) {
-      if(z.event) {
-        return 'danger'
-      }else {
-        return
-      }
-    },
-    'search_url': function (z) {
-      return "#/search/"+z.flag
-    },
-    'flag_img': function (z) {
-      return 'https://secondlife.com/app/image/' + z.flag + '/1'
-    },
-    'staff_num': function (z) {
-      return z.sn
-    },
-    'guest_num': function (z) {
-      return z.cn
-    },
-    'map_url': function (z) {
-      return 'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z
-    },
-    'sim': function (z) {
-      return z.sim
-    },
-    'blog_url': function (z) {
-      return z.blog
-    },
-    'heatmap': function (z) {
-      return '/static/heatmap/' + z.flag + '.png?'
-    },
-    'blog_url_short': function (z) {
-      return z.blog.replace(/^http(|s):\/\//, '')
-    },
     'staff_url': function (value) {
       return '/d2p/' + value[0]
     },
@@ -171,7 +126,7 @@ export default {
       let now=new Date()
       now.setDate(now.getDate() - 7);
       let one_week=this._formatDate(now,'YYYY-MM-DDThh:mm:ss')
-      console.log([z.created_at,one_week])
+      // console.log([z.created_at,one_week])
       if(z.created_at>one_week){
         return 1
       }else{
@@ -205,32 +160,15 @@ export default {
   },
   mounted () {
       var that=this
-      this.intervalId = setInterval(function () {
-        // console.log([that.cache_mode, that.cache_tagid, that.cache_search])
+      this.$setInterval(() => {
         that.getShops(that.cache_mode, that.cache_tagid, that.cache_search)
-      }, 1000*60)
+      }, 1000*INTERVAL_RELOAD_SHOP)
+
   }
 }
 </script>
 
 <style scoped>
-  /* ====  ShopList.vue ==== */
-/*アニメーションはウザいので辞める
-.v-enter-active, .v-leave-active, .v-move{
-  transition: transform 1s;
-}
-.v-enter, .v-leave-to{
-  transform: translateX(80%);
-}
-.v-leave-active{
-  position: absolute;
-}
-*/
-  /* 開店中のお店を全部表示リンク（この機能は消えたので使っていない） */
-  .view_open_shop{
-    color: #ffaa00;
-    border-bottom: outset 1px #ffaa00;
-  }
   /* 看板 */
   .f{
     margin:4px;
