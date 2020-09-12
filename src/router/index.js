@@ -6,10 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import VueAnalytics from 'vue-analytics'
-Vue.use(VueAnalytics, {
-  id: 'UA-177594854-1',
-  router
-})
+
 import viewSlnavi from '@/views/ViewSlnavi'
 // import viewAbout from '@/views/ViewAbout'
 // import viewCreateEvent from '@/views/ViewCreateEvent'
@@ -67,5 +64,9 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
+Vue.use(VueAnalytics, {
+  id: 'UA-177594854-1',
+  router
+})
 export default router
+

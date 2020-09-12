@@ -29,8 +29,6 @@
 <script>
 import Vue from 'vue'
 import VueHead from 'vue-head'
-import SetInterval from '@/plugins/SetInterval'
-Vue.use(SetInterval)
 
 
 Vue.use(VueHead)
@@ -49,8 +47,8 @@ export default {
       complement: 'セカンドライフ内の遊び場紹介'
     },
     meta: [
-        { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設をぱっと見つけることができます。また施設オーナーは簡単に即座に施設を紹介できます。' },
-        { name: 'keywords', content: 'セカンドライフ カフェ,セカンドライフ 店,セカンドライフ,SecondLife,ファーリー,sl-navi,アダルト' },
+        { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設を見つけることができます。施設オーナーは、すりんくと異なり審査不要、アダルト可で即座に施設紹介ができます。' },
+        { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
         { charset: 'utf-8' },
         // ... 

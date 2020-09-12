@@ -1,7 +1,6 @@
 // INTERVAL_RELOAD_EVENT(600秒)毎に EVENT_SOURCE を取得
 
 // 48時間以内に開始 もしくは開催中
-// 10分に1回自動更新
 <template>
   <div id="events" class="col events">
     <div class="events_top">最近のイベント</div>
@@ -18,7 +17,7 @@
 
             
             <ul class="event_data">
-              <li><img :src="event.img_url" class="event_image" ></li>
+              <li><img @click="$ga.event('event', 'click_eventflag', event.title)" :src="event.img_url" class="event_image" ></li>
               <li>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</li>
             </ul>
             <!-- ポップアップの中身 -->
@@ -30,7 +29,7 @@
                     <dt>タイトル</dt><dd>{{ event.title }}</dd>
                     <dt>形式</dt><dd>{{ event.genre.name }}</dd>
                     <dt>期間</dt><dd>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</dd>
-                    <dt>場所</dt><dd><a target=_blank :href="event.map_url">{{ event.map_url }}</a></dd>
+                    <dt>場所</dt><dd><a @click="$ga.event('event', 'click_mapurl', event.title)"  target=_blank :href="event.map_url">{{ event.map_url }}</a></dd>
                     <dt>詳細</dt><dd v-html="escape_html(event.description)"></dd>
                     <dt>投稿</dt><dd>Posted by <a target=_blank :href="'https://twitter.com/'+event.created_by.name">@{{ event.created_by.name }}</a></dd>
                 </dl>
@@ -74,8 +73,11 @@ export default {
           '>': '&gt;',
         }[match]
       });
-      const url_pattern=/(https?:\/\/[^ \r\n]+)/g
-      return tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
+      const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
+      tmp=tmp.replace(img_pattern,'<img width="400" src="$1">')
+      const url_pattern=/[^"](https?:\/\/[^ \r\n]+)/g
+      tmp=tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>')
+      return tmp.replace(/\n/g, '<br>')
     },
     nitiji: function (str) {
       return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");

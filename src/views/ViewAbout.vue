@@ -11,7 +11,7 @@
  
   <h4>■センサ配布場所</h4>
   <ul>
-    <li><a href="https://maps.secondlife.com/secondlife/Andretti/28/24/27">https://maps.secondlife.com/secondlife/Andretti/28/24/27</a></li>
+    <li><a @click="$ga.event('about', 'click_mapurl', 'センサ配布場所')" target=_blank href="https://maps.secondlife.com/secondlife/Andretti/28/24/27">https://maps.secondlife.com/secondlife/Andretti/28/24/27</a></li>
   </ul>
 
   <h4>■FAQ</h4>

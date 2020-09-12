@@ -1,10 +1,11 @@
-// 1分に1回自動更新
+// INTERVAL_RELOAD_SHOP(秒)毎に SHOP_SOURCE を取得
+
 <template>
   <div id="shops" class="col shops">
     <div class="shop_top">施設</div>
     <div v-for="z in shops" :id="z.flag" :key="z.flag" class="f" tabindex="0">
       <!-- 看板と人数 -->
-      <img class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''">
+      <img @click="$ga.event('shop', 'click_shopflag', z.name)" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''">
       <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
       <div class="memo">
         <span v-if="existStaff(z)" class="sn">{{ z.sn }}</span>
@@ -44,7 +45,7 @@
             </span>
           </template>
         </span><br>
-        <a target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
+        <a @click="$ga.event('shop', 'click_mapurl', z.name)" target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
             <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z.sim }})
         </a>
         <span v-if="existBlog(z)">
