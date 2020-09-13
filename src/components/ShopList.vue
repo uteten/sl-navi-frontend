@@ -29,10 +29,12 @@
         <span class="n2">
           スタッフ<span class="sn2">{{ z.sn }}</span>人
           <span v-if="z.staffs.length!=0">
-            (<a v-for="staff in z.staffs" :href="staff|staff_url" :key="staff.id"
-              target=_blank  :class="staff|staff_sex">
+            (<span v-for="staff in z.staffs" :key="staff[0]">
+              <a :href="staff|staff_url" target=_blank  :class="staff|staff_sex">
               <template v-if="staff!=''">{{ staff|staff_name }}</template>
-            </a>)
+              </a>
+              <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
+            </span>)
           </span>
           / 訪問者<span class="cn2">{{ z.cn }}</span>人
           <template v-if="z.female+z.male>0">

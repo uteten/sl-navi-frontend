@@ -3,7 +3,7 @@
 // 48時間以内に開始 もしくは開催中
 <template>
   <div id="events" class="col events">
-    <div class="events_top">最近のイベント</div>
+    <div class="events_top">今日のイベント</div>
     <ul id="events" class="event_list">
       {{ message_no_event }}
         <li v-for = "event in events"
@@ -12,8 +12,9 @@
             :id="event.id"
             class = "event_item"
             tabindex="0">
-            <div class="event_data_top" v-html="event.genre.name+
-            (nowOpen(event.start_time,event.end_time) ? '<span class=\'badge badge-primary\'>開催中<span>':'')"></div>
+            <div class="event_data_top" v-html="event.genre.name+nowOpen2(event)">
+
+            </div>
 
             
             <ul class="event_data">
@@ -48,7 +49,7 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 var INTERVAL_RELOAD_EVENT= 600
-var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/2'
+var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/1'
 export default {
   name: 'EventList',
   props: ['mode'],
@@ -92,7 +93,7 @@ export default {
       format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3));
       return format;
     },
-    nowOpen: function (start,end){
+    _nowOpen: function (start,end){
       let now=new Date()
       now=this._formatDate(now,'YYYY-MM-DDThh:mm:ss')
       if(start<now && now<end ){
@@ -101,12 +102,31 @@ export default {
         return 0
       }
     },
+    nowOpen2: function (event){
+      if(this._nowOpen(event.start_time,event.end_time)){
+        if(event.long_duration){
+          return '<span class=\'badge badge-info\'>長期開催中<span>'
+        }else{
+          return '<span class=\'badge badge-primary\'>開催中<span>'
+        }
+      }else{
+        return ''
+      }
+    },
     async getEvents (){
       await axios.get(EVENT_SOURCE).then(res => {
         this.events=[]
-        for (var z of res.data) {
-          this.events.push(z)
+        for (let z of res.data) {
+          if(!z["long_duration"]){
+            this.events.push(z)
+          }
         }
+        for (let z of res.data) {
+          if(z["long_duration"]){
+            this.events.push(z)
+          }
+        }
+
       if(!this.events[0]){
           this.message_no_event="直近のイベント情報はありません（みんな登録してねっ）"
         }
