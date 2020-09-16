@@ -32,6 +32,7 @@
                     <dt>期間</dt><dd>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</dd>
                     <dt>場所</dt><dd><a @click="$ga.event('event', 'click_mapurl', event.title)"  target=_blank :href="event.map_url">{{ event.map_url }}</a></dd>
                     <dt>詳細</dt><dd v-html="escape_html(event.description)"></dd>
+                    <dt>この画面への直リンク</dt><dd><a target=_blank :href="'https://sl-navi.com/#/eid/'+event.id" v-html="'https://sl-navi.com/#/eid/'+event.id"></a></dd>
                     <dt>投稿</dt><dd>Posted by <a target=_blank :href="'https://twitter.com/'+event.created_by.name">@{{ event.created_by.name }}</a></dd>
                 </dl>
             </b-popover>

@@ -3,7 +3,7 @@
     <div class="news_top">最近のおしらせ</div>
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
-      <li class="news_item">2020/09/13<span class="badge badge-primary">微調整 v4.03</span> 一言メッセージに送信者名(by xxx)を追加。メッセージが残る時間を1時間→24時間に変更。</li>
+      <li class="news_item">2020/09/13<span class="badge badge-primary">微調整 v4.03</span> 一言メッセージに送信者名(by xxx)を追加。メッセージが残る時間を1時間→6時間に変更。</li>
       <li class="news_item">2020/09/09<span class="badge badge-primary">機能追加v4.00</span> センサから一言をTopページに表示する機能を追加</li>
       <li class="news_item">2020/09/02<span class="badge badge-primary">機能追加(WebGUI)</span> Webページを開きっぱなしでも最新状態が表示されるようにしました</li>
       <li class="news_item">2020/08/22<span class="badge badge-primary">機能追加v3.00</span> 訪問者の男女人数内訳(女性○人、男性○人）をWebに表示する設定を追加(GENDER_PUBLIC=on/off)</li>

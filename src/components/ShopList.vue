@@ -5,7 +5,7 @@
     <div class="shop_top">施設</div>
     <div v-for="z in shops" :id="z.flag" :key="z.flag" class="f" tabindex="0">
       <!-- 看板と人数 -->
-      <img @click="$ga.event('shop', 'click_shopflag', z.name)" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''">
+      <img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''">
       <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
       <div class="memo">
         <span v-if="existStaff(z)" class="sn">{{ z.sn }}</span>
@@ -16,8 +16,9 @@
       </div>
       <!-- ポップアップの中身 -->
       <b-popover triggers="click blur" placement="bottom" style="display:none"
-        :target="z.flag" :show="shops.length===1"
+        :target="z.flag"
       >
+        <!-- :show="shops.length===1" -->
         <template v-slot:title>
           <a :href="'#/search/'+z.flag" v-html="z.name"></a>
           <b-badge v-if="isEvent(z)" variant="danger">イベント中</b-badge>
@@ -47,7 +48,7 @@
             </span>
           </template>
         </span><br>
-        <a @click="$ga.event('shop', 'click_mapurl', z.name)" target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
+        <a @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')" target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
             <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z.sim }})
         </a>
         <span v-if="existBlog(z)">
@@ -68,6 +69,7 @@ Vue.prototype.$axios = axios
 
 var INTERVAL_RELOAD_SHOP = 60
 var SHOP_SOURCE = '//sl-navi.com/api/shop'
+var ALOG_SOURCE = '//sl-navi.com/api/alog'
 export default {
   name: 'ShopList',
   props: ['mode'],
@@ -97,6 +99,12 @@ export default {
     }
   },
   methods: {
+    async alog(flag, event){
+      await axios.post(ALOG_SOURCE, {
+        flag: flag,
+        event: event
+      })
+    },
     isEvent (z) {
       return z.event
     },

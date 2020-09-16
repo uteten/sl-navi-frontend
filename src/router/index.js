@@ -24,6 +24,12 @@ const routes = [
     props: { mode: 'k' }
   },
   {
+    path: '/eid/:eid',
+    name: 'viewSlnavi-event',
+    component: viewSlnavi,
+    props: { mode: 'k' }
+  },
+  {
     path: '/adult',
     name: 'viewSlnavi-adult',
     component: viewSlnavi,

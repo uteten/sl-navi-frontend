@@ -47,7 +47,7 @@ export default {
       complement: 'セカンドライフ内の遊び場紹介'
     },
     meta: [
-        { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設を見つけることができます。施設オーナーは、すりんくと異なり審査不要、アダルト可で即座に施設紹介ができます。' },
+        { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設を見つけることができます。施設オーナーは、すりんくと異なり審査不要、即座に施設紹介ができます。' },
         { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
         { charset: 'utf-8' },
@@ -62,7 +62,7 @@ export default {
       if (keyCode !== 13) return;
       // 検索ワードが異なるときはPathを変える。同じ時は単に検索する
       if (this.searchword && this.$route.params.searchword !== this.searchword) {
-        this.$router.push('/search/' + this.searchword)
+        this.$router.push('/search/' + this.searchword.replace('/','%2F'))
       } else {
         this.$refs.view.actionSearch(this.searchword)
       }
@@ -72,7 +72,7 @@ export default {
       // 検索パスがある場合は/allを選択、それ以外はパスに合わせて選択かつ検索フォームをクリア
       let word = this.$route.path.match(/^\/search\/(.*)/)
       if (word && word[1] !== '') {
-        this.searchword = word[1]
+        this.searchword = word[1].replace('%2F','/')
       } else {
         this.searchword = ''
       }

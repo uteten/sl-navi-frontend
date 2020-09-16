@@ -14,6 +14,7 @@
           <dt>期間</dt><dd>{{ ed_span}}</dd>
           <dt>場所</dt><dd><a target=_blank :href="ed_map">{{ ed_map }}</a></dd>
           <dt>詳細</dt><dd v-html="ed_desc"></dd>
+          <dt>この画面のリンク</dt><dd><a target=_blank :href="'https://sl-navi.com/#/eid/'+ed_id" v-html="'https://sl-navi.com/#/eid/'+ed_id"></a></dd>
           <dt>投稿</dt><dd>Posted by <a target=_blank :href="ed_by|twitter">@{{ ed_by }}</a></dd>
       </dl>
       <button v-if="username==ed_by" @click="deleteEvent(ed_id)" class="form-control">削除</button>
