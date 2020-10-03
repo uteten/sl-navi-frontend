@@ -7,28 +7,11 @@
       <shop-list ref="appShopList"></shop-list>
       <event-list ref="appEventList"></event-list>
       <news ref="appNews"></news>
-      <!-- イベント直リンク表示 -->
-      <b-modal v-if="event_data.id" v-model="showModal" class="modal fade" :title="event_data.title" size="lg" hide-footer>
-        <img class="event_info_image" :src="event_data.img_url">
-        <dl class="dl-horizontal">
-            <dt>形式</dt><dd>{{ event_data.genre.name }}</dd>
-            <dt>期間</dt><dd>{{ nitiji(event_data.start_time)+" 〜 "+nitiji(event_data.end_time) }}</dd>
-            <dt>場所</dt><dd><a @click="$ga.event('event', 'click_mapurl', event_data.title)"  target=_blank :href="event_data.map_url">{{ event_data.map_url }}</a></dd>
-            <dt>詳細</dt><dd v-html="escape_html(event_data.description)"></dd>
-            <dt>この画面のリンク</dt><dd><a target=_blank :href="'https://sl-navi.com/#/eid/'+event_data.id" v-html="'https://sl-navi.com/#/eid/'+event_data.id"></a></dd>
-            <dt>投稿</dt><dd>Posted by <a target=_blank :href="'https://twitter.com/'+event_data.created_by.name">@{{ event_data.created_by.name }}</a></dd>
-        </dl>
-      </b-modal>
-
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-Vue.prototype.$axios = axios
-
 import TagList from '@/components/TagList'
 import Messages from '@/components/Messages'
 import News from '@/components/News'
@@ -47,7 +30,6 @@ export default {
       tagid: ACTIVE_SHOP_TAGID,
       searchword: this.$route.params.searchword,
       event_data:{},
-      showModal:false
     }
   },
   components: {
@@ -58,13 +40,6 @@ export default {
     EventList
   },
   methods: {
-    async getEvent (){
-      var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/'
-      await axios.get(EVENT_SOURCE+this.$route.params.eid).then(res => {
-        this.event_data=res.data
-        this.showModal=true
-      })
-    },
     actionSelectedTag: function (e) {
       this.tagid = e
       this.$refs.appShopList.getShops(this.mode, e)
@@ -145,11 +120,6 @@ export default {
       this.$refs.appNews.getShops()
       this.$refs.appMessages.getMessages(this.mode)
     }
-    // イベントダイレクト表示
-    if(this.$route.params.eid){
-      this.getEvent()
-    }
-
   }
 }
 </script>

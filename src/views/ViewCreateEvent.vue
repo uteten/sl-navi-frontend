@@ -11,7 +11,12 @@
 				<a href="javascript:void(0)" v-on:click="logout()">{{ username }}(ログアウトする場合はクリックしてください)</a>
 			</template>
 			<template v-else>
-				<a href="//sl-navi.com/user/login/twitter/?next=/%23/createEvent">未ログイン(イベント登録にはTwitter認証が必要です。ここをクリックして認証してね)</a>
+				未ログイン(以下のいずれかで認証してください。)<br>
+				<span class="badge badge-info">いずれの認証もSL-Naviでアカウント情報を管理しないため安全です</span><br>
+				<ul>
+				<li>Twitter認証(<a href="//sl-navi.com/user/login/twitter/?next=/createEvent">ここをクリック</a>)</li>
+				<li>SL認証(<a target=_blank href="http://maps.secondlife.com/secondlife/japan%20canvas/102/172/2002">SL内の認証用オブジェクト</a>にタッチし、表示されるURLにこのブラウザでアクセス)</li>
+				</ul>
 			</template>
 		<br>
 		<p class="alert alert-danger" v-if="errors.username" v-html="errors.username"></p>
@@ -76,7 +81,7 @@
 				/>
 		<p class="alert alert-danger" v-if="errors.end_time" v-html="errors.end_time"></p>
 		
-		<label for="id_description">詳細（必須）（タグとか使えないです。単なるテキストでお願いします）:</label>
+		<label for="id_description">詳細（必須）（タグとか使えないです。単なるテキストでお願いします。画像のURLを張ると自動で画像になります）:</label>
 		<textarea v-model="description" name="description" cols="20" rows="20" class="form-control" required id="id_description"></textarea>
 		<p class="alert alert-danger" v-if="errors.description" v-html="errors.description"></p>
 
@@ -128,7 +133,8 @@ export default {
 			end_time:"",
 			description:"",
 			map_url:"",
-			shop_flag:""
+			shop_flag:"",
+			sl_auth:0
     }
   },
   methods: {
@@ -206,7 +212,7 @@ export default {
 			}
 			axios.post(EVENT_SOURCE, params,{headers: headers}
 			).then(res =>{
-				alert("投稿に成功しました")
+				alert("投稿に成功しました(投稿がWeb反映されるのに1分程度かかります)")
 				console.log(res)
 				this.title=""
 				this.img_url=""
@@ -237,9 +243,13 @@ export default {
 			})
 		},
     async getUsername () {
-			await axios.get(LOGIN_STATUS_URL).then(res => {
+			let logincode=""
+			if(this.$route.params.logincode){
+				logincode="/login/"+this.$route.params.logincode
+			}
+			await axios.get(LOGIN_STATUS_URL+logincode).then(res => {
 				if(res.data[0]){
-					this.username=res.data[0].name
+					this.username=res.data[0].username
 				}else{
 					this.username=""
 				}

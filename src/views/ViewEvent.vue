@@ -7,15 +7,31 @@
   <ul>
       <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
   </ul>
-  <b-modal ref="my-modal" :title=ed_title class="modal fade" size="lg" hide-footer>
+  <b-modal ref="my-modal"  v-model="showModal"  :title=ed_title class="modal fade" size="lg" hide-footer>
       <img class="flag" :src="ed_img">
       <dl class="dl-horizontal">
           <dt>形式</dt><dd>{{ ed_genre }}</dd>
           <dt>期間</dt><dd>{{ ed_span}}</dd>
           <dt>場所</dt><dd><a target=_blank :href="ed_map">{{ ed_map }}</a></dd>
           <dt>詳細</dt><dd v-html="ed_desc"></dd>
-          <dt>この画面のリンク</dt><dd><a target=_blank :href="'https://sl-navi.com/#/eid/'+ed_id" v-html="'https://sl-navi.com/#/eid/'+ed_id"></a></dd>
-          <dt>投稿</dt><dd>Posted by <a target=_blank :href="ed_by|twitter">@{{ ed_by }}</a></dd>
+          <dt>SNS共有</dt>
+          <dd>
+            <ShareNetwork network="Twitter" :url="'https://sl-navi.com/event/'+ed_id"
+              :title="ed_title " :description="ed_desc"
+              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
+                <img class="sns_icon" src="https://sl-navi.com/static/twitter.png">
+            </ShareNetwork>
+            <ShareNetwork network="Facebook" :url="'https://sl-navi.com/event/'+ed_id"
+              :title="ed_title " :description="ed_desc"
+              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
+                <img class="sns_icon" src="https://sl-navi.com/static/facebook.png">
+            </ShareNetwork>
+          </dd>
+          <dt>投稿</dt>
+          <dd>Posted by 
+              <a v-if="ed_by.indexOf('.')==-1" target=_blank :href="'https://twitter.com/'+ed_by">@{{ ed_by }}</a>
+              <span v-else>{{ ed_by }}</span>
+          </dd>
       </dl>
       <button v-if="username==ed_by" @click="deleteEvent(ed_id)" class="form-control">削除</button>
   </b-modal>
@@ -37,9 +53,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from 'vue'
 import axios from 'axios'
+import VueSocialSharing from 'vue-social-sharing'
+
 Vue.prototype.$axios = axios
 Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
+Vue.use(VueSocialSharing)
 
 
 var LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
@@ -50,8 +69,12 @@ export default {
     FullCalendar // make the <FullCalendar> tag available
   },
   filters: {
-    'twitter': function (z) {
-      return 'https://twitter.com/'+z
+    'twitter_or_sl': function (z) {
+      if(z.indexOf(".")>0){
+        return ''
+      }else{
+        return 'https://twitter.com/'+z
+      }
     }
   },
   data () {
@@ -77,6 +100,7 @@ export default {
         }.bind(this)
       },
       legend: [],
+      showModal:false,
       username: '',
       csrftoken: '',
       ed_id: '',
@@ -90,6 +114,11 @@ export default {
     }
   },
   methods: {
+    twitterUrl: function(id,title) {
+      var url = encodeURIComponent('https://sl-navi.com/event/'+id)
+      var txt = encodeURIComponent(title)
+      return  'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url='+url
+    },
     popup: function (e){
       let ee=e.event;
       this.ed_id=ee.id
@@ -101,6 +130,7 @@ export default {
       this.ed_desc=this.escape_html(ee.extendedProps.description)
       this.ed_by=ee.extendedProps.created_by.name
       this.$refs['my-modal'].show()
+      this.$router.push('/event/' + ee.id).catch(err => {console.log(err)})
     },
 		getCookie: function (name) {
 			let cookieValue = null;
@@ -156,9 +186,13 @@ export default {
           '>': '&gt;',
         }[match]
       });
-      const url_pattern=/(https?:\/\/[^ \r\n]+)/g
-      return tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
-      // return tmp.replace(/\n/g,"<br>");
+      //const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
+      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]+)/gi
+      tmp=tmp.replace(img_pattern,'<img width="400" src="$1$2$3">')
+      const url_pattern=/[^"](https?:\/\/[^ \r\n]+)/g
+      tmp=tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>')
+      return tmp.replace(/\n/g, '<br>')
+
     },
     nitiji: function (str) {
       return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
@@ -166,11 +200,11 @@ export default {
     async getUsername () {
 			await axios.get(LOGIN_STATUS_URL).then(res => {
         if(res.data[0]){
-          this.username=res.data[0].name
+          this.username=res.data[0].username
         }else{
           this.username=""
         }
-				// console.log(["username=",this.username])
+				console.log(["username=",this.username,res.data])
       }).catch(err=>{
 				console.log(err)
 				this.username=""
@@ -184,7 +218,27 @@ export default {
     })
     this.getUsername()
     this.csrftoken = this.getCookie('csrftoken')
-  }
+   // イベントダイレクト表示
+    if(this.$route.params.eid){
+      console.log("nya")
+      var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/'
+      await axios.get(EVENT_SOURCE+this.$route.params.eid).then(res => {
+        let ee=res.data;
+        this.ed_id=ee.id
+        this.ed_title=ee.title
+        this.ed_img=ee.img_url
+        this.ed_genre=ee.genre.name
+        this.ed_span=this.nitiji(ee.start_time)+" 〜 "+this.nitiji(ee.end_time)
+        this.ed_map=ee.map_url
+        this.ed_desc=this.escape_html(ee.description)
+        this.ed_by=ee.created_by.name
+        this.$refs['my-modal'].show()
+        this.showModal=true
+      })
+    }
+
+
+}
 }
 </script>
 <style scorped>
@@ -239,4 +293,23 @@ h5{
 .fc-h-event .fc-event-main {
     color: #000;
     color: var(--fc-event-text-color,#000);
-}</style>
+}
+
+.tweet{
+  color:#ffffff;
+  background-color: #1e97ee;
+  padding: 2px 7px 5px 7px;
+  margin: 0px;
+  border-radius: 5px;
+}
+.tweeticon{
+  width:14px;
+  height:14px
+}
+.sns_icon{
+  width:20px;
+  height:20px;
+  margin: 5px;
+}
+
+</style>

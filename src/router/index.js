@@ -24,12 +24,6 @@ const routes = [
     props: { mode: 'k' }
   },
   {
-    path: '/eid/:eid',
-    name: 'viewSlnavi-event',
-    component: viewSlnavi,
-    props: { mode: 'k' }
-  },
-  {
     path: '/adult',
     name: 'viewSlnavi-adult',
     component: viewSlnavi,
@@ -48,6 +42,12 @@ const routes = [
     props: { mode: 'c' }
   },
   {
+    path: '/event/:eid',
+    name: 'viewEventDirect',
+    component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue')
+    // component: viewEvent,
+  },
+  {
     path: '/event',
     name: 'viewEvent',
     component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue')
@@ -60,14 +60,27 @@ const routes = [
     //component: viewCreateEvent
   },
   {
+    path: '/createEvent/:logincode',
+    name: 'viewCreateEventLogin',
+    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
+    //component: viewCreateEvent
+  },
+  {
     path: '/about',
     name: 'viewAbout',
     component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue')
     // component: viewAbout
   },
+  {
+    path: '/analytics/:flag',
+    name: 'viewAnalytics',
+    component: () => import(/* webpackChunkName: "viewAnalytics" */ '@/views/ViewAnalytics.vue')
+  },
 ]
 
 const router = new VueRouter({
+  mode: 'history',
+  //base: process.env.BASE_URL,
   routes
 })
 Vue.use(VueAnalytics, {

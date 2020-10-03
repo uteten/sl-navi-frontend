@@ -2,15 +2,15 @@
   <div class="container-fluid" >
     <div id="app" class="row" >
         <b-nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a id="sitetitle" class="navbar-brand" href="./">SL-Navi</a>
+        <a id="sitetitle" class="navbar-brand" href="/">SL-Navi</a>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
             <ul id="topmenu" class="navbar-nav mr-auto">
                 <li class="nav-item" ><router-link to="/"      class="nav-link"><b-icon-house scale="0.8"></b-icon-house>一般施設</router-link></li>
                 <li class="nav-item" ><router-link to="/adult" class="nav-link"><b-icon-heart-fill scale="0.8"></b-icon-heart-fill>アダルト施設</router-link></li>
-                <li class="nav-item" ><router-link to="/all"   class="nav-link" :class="this.searchword ? 'router-link-exact-active' : '' "><b-icon-building scale="0.8"></b-icon-building>全施設</router-link></li>
-                <li class="nav-item" ><router-link to="/event" class="nav-link"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベントカレンダー</router-link></li>
-                <li class="nav-item" ><router-link to="/about" class="nav-link"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill> お知らせ＆センサ配布場所</router-link></li>
+                <li class="nav-item" ><router-link to="/all"   class="nav-link" :class="this.searchword ? 'router-link-exact-active' : '' "><b-icon-building scale="0.8"></b-icon-building>両方</router-link></li>
+                <li class="nav-item" ><router-link to="/event" class="nav-link"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベント</router-link></li>
+                <li class="nav-item" ><router-link to="/about" class="nav-link"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill>センサ配布場所</router-link></li>
             </ul>
             <form class="search form-inline">
                 <input type="search" v-model="searchword" @keydown.enter="goSearch($event.keyCode)"
@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style>
+.nav-item{
+  font-size: 90%;
+}
   /* -- 全体的な設定 -- */
   body{
     padding-top: 4.5rem;

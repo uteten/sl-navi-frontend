@@ -20,8 +20,21 @@
       >
         <!-- :show="shops.length===1" -->
         <template v-slot:title>
-          <a :href="'#/search/'+z.flag" v-html="z.name"></a>
+          <a :href="'/search/'+z.flag" v-html="z.name"></a>
           <b-badge v-if="isEvent(z)" variant="danger">イベント中</b-badge>
+          <span class="popover_title_right">
+            <ShareNetwork network="Twitter" 
+              :url="'https://sl-navi.com/search/'+z.flag" :title="z.name " :description="z.description"
+              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
+                <img class="sns_icon" src="https://sl-navi.com/static/twitter.png">
+            </ShareNetwork>
+            <ShareNetwork network="Facebook"
+              :url="'https://sl-navi.com/search/'+z.flag" :title="z.name " :description="z.description"
+              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
+                <img class="sns_icon" src="https://sl-navi.com/static/facebook.png">
+            </ShareNetwork>
+
+          </span>
         </template>
         <span v-html="shop_description(z)"></span><br>
         <span v-if="isAdultShop(z)" class="badge badge-danger">アダルト施設</span>
@@ -205,6 +218,12 @@ export default {
     top: 0px;
     display: flex;
   }
+  .popover_title_right{
+    align-items: flex-start;
+    position: absolute;
+    right: 0px;
+    top: 3px;
+  }
   .cn {
     width: 25px;
     height: 25px;
@@ -312,5 +331,10 @@ export default {
     font-weight: bold;
     padding: 0 0 0.2em 0.7em;
     list-style-type: none!important;
+  }
+  .sns_icon{
+    width:20px;
+    height:20px;
+    margin: 5px;
   }
 </style>

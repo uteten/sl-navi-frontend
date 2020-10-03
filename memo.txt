@@ -40,3 +40,26 @@ npm install --save @fullcalendar/timegrid
 
 ## イベント登録
 npm install --save vue-ctk-date-time-picker
+
+
+
+
+vue-headではogpは機能しないが、
+数年後に機能するかもしれないのでメモ
+  /*　機能しない
+  head: {
+    meta: [
+        { property:"og:url", content:"http://www.google.com" },
+        { property:"og:type", content:"article" },
+        { property:"og:title", content:"ページの タイトル"},
+        { property:"og:description", content:"ページのディスクリプション"},
+        { property:"og:site_name", content:"サイト名"},
+        { property:"og:image", content:"https://sl-navi.com/static/sl-navi-kanban.png" },
+        { name:    "twitter:card", content:"summary" },
+        { name:    "twitter:site", content:"@uten"},
+        { name:    "twitter:description", content:"nya"},
+        { name:    "twitter:image", content:"https://sl-navi.com/static/sl-navi-kanban.png"}
+    ],
+  },
+  */
+

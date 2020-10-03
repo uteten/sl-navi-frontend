@@ -3,10 +3,8 @@
     <div class="news_top">最近のおしらせ</div>
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
-      <li class="news_item">2020/09/13<span class="badge badge-primary">微調整 v4.03</span> 一言メッセージに送信者名(by xxx)を追加。メッセージが残る時間を1時間→6時間に変更。</li>
-      <li class="news_item">2020/09/09<span class="badge badge-primary">機能追加v4.00</span> センサから一言をTopページに表示する機能を追加</li>
-      <li class="news_item">2020/09/02<span class="badge badge-primary">機能追加(WebGUI)</span> Webページを開きっぱなしでも最新状態が表示されるようにしました</li>
-      <li class="news_item">2020/08/22<span class="badge badge-primary">機能追加v3.00</span> 訪問者の男女人数内訳(女性○人、男性○人）をWebに表示する設定を追加(GENDER_PUBLIC=on/off)</li>
+      <li class="news_item">2020/09/24<span class="badge badge-primary">微調整 v4.06</span> 開店/閉店/Auto状況をフローティングテキストで表示可能にしました</li>
+      <li class="news_item">2020/09/17<span class="badge badge-primary">微調整(WebGUI)</span> 一言メッセージは「閉店で即座に消え、開店のままで12時間表示。１人が複数投稿すると最新投稿のみ表示」に変更</li>
       <li class="news_item">2020/08/21 <span class="badge badge-danger">障害</span>ほぼ全センサの同期が切れる障害が発生しました。センサ設置者は「センサを編集⇒スクリプトリセット」を実施して復旧させてください。すみません。</li>
     </ul>
     <h6>新店舗情報</h6>
@@ -14,7 +12,7 @@
       <li class="news_item" v-for="z in shops" :id="z.flag" :key="z.flag">
         {{ nitiji(z.created_at) }} <span class="badge badge-primary">新規施設</span>
         {{ (z.h===1 ? "アダルト施設" : "一般施設") }}
-        [<a :href="'#/search/'+z.flag" v-html="z.name"></a>]を追加
+        [<a :href="'/search/'+z.flag" v-html="z.name"></a>]を追加
       </li>
     </ul>
   </div>

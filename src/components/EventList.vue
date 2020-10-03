@@ -13,10 +13,7 @@
             class = "event_item"
             tabindex="0">
             <div class="event_data_top" v-html="event.genre.name+nowOpen2(event)">
-
             </div>
-
-            
             <ul class="event_data">
               <li><img @click="$ga.event('event', 'click_eventflag', event.title)" :src="event.img_url" class="event_image" ></li>
               <li>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</li>
@@ -32,8 +29,26 @@
                     <dt>期間</dt><dd>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</dd>
                     <dt>場所</dt><dd><a @click="$ga.event('event', 'click_mapurl', event.title)"  target=_blank :href="event.map_url">{{ event.map_url }}</a></dd>
                     <dt>詳細</dt><dd v-html="escape_html(event.description)"></dd>
-                    <dt>この画面への直リンク</dt><dd><a target=_blank :href="'https://sl-navi.com/#/eid/'+event.id" v-html="'https://sl-navi.com/#/eid/'+event.id"></a></dd>
-                    <dt>投稿</dt><dd>Posted by <a target=_blank :href="'https://twitter.com/'+event.created_by.name">@{{ event.created_by.name }}</a></dd>
+                    <dt>投稿</dt>
+                    <dd>Posted by 
+                        <a v-if="event.created_by.name.indexOf('.')==-1" target=_blank :href="'https://twitter.com/'+event.created_by.name">@{{ event.created_by.name }}</a>
+                        <span v-else>{{ event.created_by.name }}</span>
+                    </dd>
+
+
+                    <dt>SNS共有</dt>
+                    <dd>
+                      <ShareNetwork network="Twitter" :url="'https://sl-navi.com/event/'+event.id"
+                        :title="event.title " :description="event.description"
+                        hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
+                          <img class="sns_icon" src="https://sl-navi.com/static/twitter.png">
+                      </ShareNetwork>
+                      <ShareNetwork network="Facebook" :url="'https://sl-navi.com/event/'+event.id"
+                        :title="event.title " :description="event.description"
+                        hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
+                          <img class="sns_icon" src="https://sl-navi.com/static/facebook.png">
+                      </ShareNetwork>
+                    </dd>
                 </dl>
             </b-popover>
         </li>
@@ -47,6 +62,9 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
+import VueSocialSharing from 'vue-social-sharing'
+Vue.use(VueSocialSharing)
+
 Vue.prototype.$axios = axios
 
 var INTERVAL_RELOAD_EVENT= 600
@@ -61,6 +79,11 @@ export default {
     }
   },
   methods: {
+    twitterUrl: function(event) {
+      var url = encodeURIComponent('https://sl-navi.com/event/'+event.id)
+      var txt = encodeURIComponent(event.title)
+      return  'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url='+url
+    },
     escape_html: function (tmp) {
       if(typeof tmp !== 'string') {
         return tmp;
@@ -75,8 +98,9 @@ export default {
           '>': '&gt;',
         }[match]
       });
-      const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
-      tmp=tmp.replace(img_pattern,'<img width="400" src="$1">')
+      //const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
+      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]+)/gi
+      tmp=tmp.replace(img_pattern,'<img width="400" src="$1$2$3">')
       const url_pattern=/[^"](https?:\/\/[^ \r\n]+)/g
       tmp=tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>')
       return tmp.replace(/\n/g, '<br>')
@@ -222,6 +246,22 @@ export default {
   .event_info_image{
     padding: 0;
     max-width: 600px;
+  }
+  .tweet{
+    color:#ffffff;
+    background-color: #1e97ee;
+    padding: 2px 7px 5px 7px;
+    margin: 0px;
+    border-radius: 5px;
+  }
+  .tweeticon{
+    width:14px;
+    height:14px;
+  }
+  .sns_icon{
+    width:20px;
+    height:20px;
+    margin: 5px;
   }
 
 </style>

@@ -15,7 +15,7 @@
       <ul id="normal_tags" class="tag_menu">
         <template v-for="tag in tags">
           <li v-if ="tag.count>=2" :key="tag.id"
-              :value="tag.id" v-on:click = "changeStatus('', tag.id, 'active')" :class = "tag.selected">
+              :value="tag.id" v-on:click ="changeStatus('', tag.id, 'active')" :class = "tag.selected">
               {{ tag.n }}({{ tag.count }})
           </li>
         </template>
