@@ -44,15 +44,18 @@ export default{
   methods: {
     _sort_by: function (field, reverse, primer) {
       reverse = (reverse) ? -1 : 1
+      // ボイスOK/NGだけ上位に持ってくる
       return function (a, b) {
-        a = a[field]
-        b = b[field]
+        var aa = a[field]
+        var bb = b[field]
+        if(a.n=='ボイスOK'||a.n=='ボイスNG') aa=60
+        if(b.n=='ボイスOK'||b.n=='ボイスNG') bb=60
         if (typeof (primer) !== 'undefined') {
-          a = primer(a)
-          b = primer(b)
+          aa = primer(aa)
+          bb = primer(bb)
         }
-        if (a < b) return reverse * -1
-        if (a > b) return reverse * 1
+        if (aa < bb) return reverse * -1
+        if (aa > bb) return reverse * 1
         return 0
       }
     },

@@ -3,7 +3,7 @@
     <div class="news_top">最近のおしらせ</div>
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
-      <li class="news_item">2020/09/24<span class="badge badge-primary">微調整 v4.06</span> 開店/閉店/Auto状況をフローティングテキストで表示可能にしました</li>
+      <li class="news_item">2020/10/09<span class="badge badge-primary">微調整 v4.07</span> 開店/閉店/Auto状況を看板の下に表示するようにしました（フローティングテキストは廃止)</li>
       <li class="news_item">2020/09/17<span class="badge badge-primary">微調整(WebGUI)</span> 一言メッセージは「閉店で即座に消え、開店のままで12時間表示。１人が複数投稿すると最新投稿のみ表示」に変更</li>
       <li class="news_item">2020/08/21 <span class="badge badge-danger">障害</span>ほぼ全センサの同期が切れる障害が発生しました。センサ設置者は「センサを編集⇒スクリプトリセット」を実施して復旧させてください。すみません。</li>
     </ul>

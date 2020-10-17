@@ -33,7 +33,7 @@
               <span v-else>{{ ed_by }}</span>
           </dd>
       </dl>
-      <button v-if="username==ed_by" @click="deleteEvent(ed_id)" class="form-control">削除</button>
+      <button v-if="username==ed_by||username=='SL_Uten'||username=='uten'" @click="deleteEvent(ed_id)" class="form-control">削除</button>
   </b-modal>
   <div align="right">
     <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
@@ -187,7 +187,7 @@ export default {
         }[match]
       });
       //const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
-      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]+)/gi
+      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
       tmp=tmp.replace(img_pattern,'<img width="400" src="$1$2$3">')
       const url_pattern=/[^"](https?:\/\/[^ \r\n]+)/g
       tmp=tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>')

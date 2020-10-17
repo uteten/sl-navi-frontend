@@ -99,7 +99,7 @@ export default {
         }[match]
       });
       //const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
-      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]+)/gi
+      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
       tmp=tmp.replace(img_pattern,'<img width="400" src="$1$2$3">')
       const url_pattern=/[^"](https?:\/\/[^ \r\n]+)/g
       tmp=tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>')
