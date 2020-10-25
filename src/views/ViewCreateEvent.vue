@@ -250,6 +250,8 @@ export default {
 			await axios.get(LOGIN_STATUS_URL+logincode).then(res => {
 				if(res.data[0]){
 					this.username=res.data[0].username
+					this.csrftoken = this.getCookie('csrftoken')
+					console.log(["csrftoken=",this.csrftoken])
 				}else{
 					this.username=""
 				}
@@ -263,7 +265,7 @@ export default {
 		this.getUsername()
 		this.csrftoken = this.getCookie('csrftoken')
 		// this.csrftoken="testabc"
-		// console.log(["csrftoken=",this.csrftoken])
+		console.log(["csrftoken=",this.csrftoken])
 	}
 	,watch: {
     start_time: function (val) {
