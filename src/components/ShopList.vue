@@ -5,8 +5,12 @@
     <div class="shop_top">施設</div>
     <div v-for="z in shops" :id="z.flag" :key="z.flag" class="f" tabindex="0">
       <!-- 看板と人数 -->
-      <img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''">
+      <!--img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''"-->
+      <img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"  :class="z.event ? 'ow_event':''">
       <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
+      <span v-if="nowOpen(z)==1"   class="event_shop badge badge-danger">イベント中</span>
+      <span v-if="nowOpen(z)==2"   class="event_shop badge badge-info">イベント予定</span>
+ 
       <div class="memo">
         <span v-if="existStaff(z)" class="sn">{{ z.sn }}</span>
         <span v-if="existGuest(z)" class="cn">{{ z.cn }}</span>
@@ -21,7 +25,7 @@
         <!-- :show="shops.length===1" -->
         <template v-slot:title>
           <a :href="'/search/'+z.flag" v-html="z.name"></a>
-          <b-badge v-if="isEvent(z)" variant="danger">イベント中</b-badge>
+          <b-badge v-if="nowOpen(z)==1" variant="danger">イベント中</b-badge>
           <span class="popover_title_right">
             <ShareNetwork network="Twitter" 
               :url="'https://sl-navi.com/search/'+z.flag" :title="z.name " :description="z.description"
@@ -37,6 +41,10 @@
           </span>
         </template>
         <span v-html="shop_description(z)"></span><br>
+        <span class="event_info" v-if="z.event">
+          <span class="badge badge-success">直近のイベント</span> 
+          <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8"></b-icon-calendar2-week>{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title}}</a><br>
+        </span>
         <span v-if="isAdultShop(z)" class="badge badge-danger">アダルト施設</span>
         <span v-if="isKenzenShop(z)" class="badge badge-primary">一般施設</span>
         <span v-for="tag in z.tags" :key="tag.id" class="badge badge-light">{{ tag }}</span><br>
@@ -61,6 +69,12 @@
             </span>
           </template>
         </span><br>
+        <span class="n2" v-if="z.owner_key != z.parcel_owner_key">
+          センサ設置者:
+          <a :href='"http://world.secondlife.com/resident/"+z.owner_key' target='_blank'>
+            {{ z.owner_name}}
+          </a><br>
+        </span>
         <a @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')" target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
             <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z.sim }})
         </a>
@@ -70,14 +84,42 @@
             </a>
         </span>
         <br>
+        <a v-if="z.radio!=''" target="_blank" :href="'http://uten.jp/radio.cgi?'+z.radio" @click="playRadio(z.radio)">
+          <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
+        </a>
+        <!--
+        <a v-if="z.radio!=''" HREF="javaScript:void(0)" @click="playRadio(z.radio)">
+            <b-icon-music-player-fill scale="0.8" v-if="play_flag==1" ></b-icon-music-player-fill>
+            <b-icon-music-note-beamed scale="0.8" v-if="play_flag==1" ></b-icon-music-note-beamed>
+            <b-icon-music-player scale="0.8" v-else ></b-icon-music-player>
+            土地設定のラジオを聞く(一部shoutcast未対応)
+          <br>
+        </a>
+        -->
         <img class="heatmap" v-bind:src="'/static/heatmap/' + z.flag + '.png?'">
       </b-popover>
     </div>
+    <div v-if="!shops[0]">
+      なし
+    </div>
+    <!--
+    <div v-if="shops" class="f" id="ac" tabindex="0">
+      <Adsense 
+        data-ad-client="ca-pub-7267369281211974"
+        data-ad-slot="3986041962"
+        ins-style="width:150px;height:150px;"
+        data-ad-format=""
+        data-full-width-responsive="no">
+      </Adsense>
+    </div>
+    -->
+
   </div>
 </template>
 <script>
 import Vue from 'vue'
 import axios from 'axios'
+
 Vue.prototype.$axios = axios
 
 var INTERVAL_RELOAD_SHOP = 60
@@ -91,7 +133,9 @@ export default {
       shops: [],
       cache_tagid: "",
       cache_mode: "",
-      cache_search: ""
+      cache_search: "",
+      play_flag:0,
+      play_url:""
     }
   },
   filters: {
@@ -117,6 +161,39 @@ export default {
         flag: flag,
         event: event
       })
+    },
+    nitiji: function (str) {
+      return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
+    },
+    nowOpen: function (z){
+      if(!z.event){
+        return 0
+      }
+      let start=z.event.start
+      let end=z.event.end
+      // let now=this._formatDate(new Date(),'YYYY-MM-DDThh:mm:ss')
+      let now=new Date()
+      start=new Date(start)
+      end=new Date(end)
+      if(start<now && now<end ){
+        return 1
+      }else if(now<start){
+        return 2
+      }else{
+        return 0
+      }
+    },
+    playRadio(url){
+      if(url==this.play_url && this.play_flag==1){
+        // 同じurlをクリックすると止まる
+        this.play_flag=0
+        this.play_url=''
+      }else{
+        // 異なるurlは再生
+        this.play_flag=1
+        this.play_url=url
+      }
+      this.$emit('radio',this.play_url)
     },
     isEvent (z) {
       return z.event
@@ -178,7 +255,7 @@ export default {
         }
       }).then(res => {
         this.shops=res.data
-        // console.log(['shoplist:getShop:then', this.shops])
+         // console.log(['shoplist:getShop:then', this.shops])
       })
     }
   },
@@ -215,6 +292,13 @@ export default {
     align-items: flex-start;
     position: absolute;
     left: 0px;
+    top: 0px;
+    display: flex;
+  }
+  .event_shop{
+    align-items: flex-start;
+    position: absolute;
+    right: 0px;
     top: 0px;
     display: flex;
   }
@@ -313,8 +397,8 @@ export default {
   }
 
   .heatmap {
-    height: 150px;
-    width: 400px;
+    height: 120px;
+    width: 320px;
   }
   .shops{
     background: #fdfcec;
@@ -337,4 +421,18 @@ export default {
     height:20px;
     margin: 5px;
   }
+  .event_info{
+    font-size: 75%;
+    font-weight: 700;
+  }
+
+  hr{
+    border:none;
+    border-bottom: dashed 2px #ffb03f;
+  }
+  h4{
+    color: #ffaa00;
+    border-bottom: dashed 2px #ffb03f;
+  }
+
 </style>

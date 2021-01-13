@@ -5,8 +5,124 @@
     <div class="view col">
       <messages ref="appMessages"></messages>
       <shop-list ref="appShopList"></shop-list>
+      <div class="col ad" v-if="$cookies.get('dev')!=1">
+        <!--
+          <Adsense 
+            data-ad-client="ca-pub-7267369281211974" 
+            data-ad-slot="4854478492"
+            data-ad-format="auto"
+            data-full-width-responsive="yes">
+          </Adsense>
+        -->
+        <!--
+        <Adsense 
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="5623461223"
+          ins-style="width:728px;height:90px;"
+          data-ad-format=""
+          data-full-width-responsive="no">
+        </Adsense>
+        -->
+        <!--
+        <Adsense 
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="2039245917"
+          ins-style="width:728px;height:150px;"
+          data-ad-format=""
+          data-full-width-responsive="no">
+        </Adsense>
+        -->
+        <!--
+        <Adsense 
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="5610007024"
+          ins-style="width:728px;height:120px;"
+          data-ad-format=""
+          data-full-width-responsive="no">
+        </Adsense>
+        -->
+        <!--
+        <Adsense 
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="3156886463"
+          ins-style="width:800px;height:120px;"
+          data-ad-format=""
+          data-full-width-responsive="no">
+        </Adsense>
+        -->
+        <!--
+        <table>
+          <tr><td >
+          <Adsense
+            data-ad-client="ca-pub-7267369281211974" 
+            data-ad-slot="4854478492"
+            ins-style="display:inline-block;width:100%;height:120px;"
+            data-ad-format=""
+            data-full-width-responsive="">
+          </Adsense>
+          </td>
+          <td>
+          <Adsense
+            data-ad-client="ca-pub-7267369281211974" 
+            data-ad-slot="4854478492"
+            ins-style="display:inline-block;width:100%;height:120px;"
+            data-ad-format=""
+            data-full-width-responsive="">
+          </Adsense>
+          </td></tr>
+          </table>
+        -->
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974" 
+          data-ad-slot="4854478492"
+          ins-style="display:inline-block;width:80%;height:120px;"
+          data-ad-format=""
+          data-full-width-responsive="">
+        </Adsense>
+        <!--
+        <template v-if="mode=='e'">
+            <Adsense
+              data-ad-client="ca-pub-7267369281211974" 
+              data-ad-slot="4854478492"
+              ins-style="display:inline-block;width:80%;height:120px;"
+              data-ad-format=""
+              data-full-width-responsive="">
+            </Adsense>
+        </template>
+        <template v-else-if="mode=='c'">
+          <Adsense
+            data-ad-client="ca-pub-7267369281211974" 
+            data-ad-slot="1881928276"
+            ins-style="display:inline-block;width:80%;height:120px;"
+            data-ad-format=""
+            data-full-width-responsive="">
+          </Adsense>
+        </template>
+        <template v-else>
+          <span>
+          <Adsense
+            data-ad-client="ca-pub-7267369281211974" 
+            data-ad-slot="4351011658"
+            ins-style="display:inline-block;width:80%;height:120px;"
+            data-ad-format=""
+            data-full-width-responsive="">
+          </Adsense>
+          </span>
+        </template>
+        -->
+
+      </div>
+
       <event-list ref="appEventList"></event-list>
       <news ref="appNews"></news>
+      <!--
+        <audio id="audio" :src="stream_url" :autoplay="stream_play" type="audio/mpeg">      
+        Your browser does not support the audio element.
+        </audio>
+        <audio id="audioc" :src="stream_url+'/;'" :autoplay="stream_play" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+      -->
     </div>
   </div>
 </template>
@@ -17,6 +133,7 @@ import Messages from '@/components/Messages'
 import News from '@/components/News'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
+
 // import '@/css/slnavi-vue.css'
 const ACTIVE_SHOP_TAGID = -3
 // const OPEN_SHOP_TAGID = -2
@@ -30,6 +147,8 @@ export default {
       tagid: ACTIVE_SHOP_TAGID,
       searchword: this.$route.params.searchword,
       event_data:{},
+      stream_url: '',
+      stream_play: 'autoplay'
     }
   },
   components: {
@@ -37,7 +156,7 @@ export default {
     News,
     Messages,
     ShopList,
-    EventList
+    EventList,
   },
   methods: {
     actionSelectedTag: function (e) {
@@ -124,6 +243,26 @@ export default {
 }
 </script>
 <style>
+table {
+  margin-left:auto;margin-right:auto;
+  width:80%;
+}
+td{
+  width:50%;
+}
+.ad{
+  text-align: center;
+  /*
+  max-height: 200px;
+  background: #fdfcec;
+  border: 1px solid #ffb03f;
+  border-radius: 5px;
+  */
+  padding: 0;
+  margin-left: 15px;
+  margin-bottom: 15px;
+
+}
 .event_info_image{
   width: 100%;
 }
@@ -138,5 +277,7 @@ h5{
 	border-radius: 10px;
 	border: solid 2px #ffb03f;
 }
-
+#google-center-div {
+  vertical-align: middle;
+}
 </style>

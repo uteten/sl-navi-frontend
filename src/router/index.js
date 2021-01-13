@@ -66,6 +66,12 @@ const routes = [
     //component: viewCreateEvent
   },
   {
+    path: '/updateEvent/:eid',
+    name: 'updateEvent',
+    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
+    //component: viewCreateEvent
+  },
+  {
     path: '/about',
     name: 'viewAbout',
     component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue')

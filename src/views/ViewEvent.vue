@@ -33,7 +33,11 @@
               <span v-else>{{ ed_by }}</span>
           </dd>
       </dl>
-      <button v-if="username==ed_by||username=='SL_Uten'||username=='uten'" @click="deleteEvent(ed_id)" class="form-control">削除</button>
+      <template v-if="username==ed_by||username=='SL_Uten'||username=='uten'">変更する
+        <router-link :to="'/updateEvent/'+ed_id"><button class="badge badge-warning">登録内容の更新</button></router-link>
+        <button class="badge badge-danger" @click="deleteEvent(ed_id)" >登録内容の削除</button>
+      </template>
+
   </b-modal>
   <div align="right">
     <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
@@ -146,7 +150,7 @@ export default {
 					}
 			}
 			return cookieValue;
-		},
+    },
     deleteEvent: function (event_id){
 			const headers ={
 				'X-CSRFTOKEN': this.csrftoken

@@ -1,3 +1,24 @@
+# リリース方法
+
+
+vi vue.config.js
+npm run build  (※)
+# スクリプトをサーバにアップロード
+scp -P 51022 -rp dist sl-navi.com:/var/www/sl-navi.com/static/
+# スクリプトをblobにアップロード
+ssh sl-navi
+   /usr/local/bin/azcopy login --identity
+   /usr/local/bin/azcopy 'sync' --recursive '/var/www/static/' 'https://slnaviblobstrage.blob.core.windows.net/static/'
+   sudo service gunicorn restart
+
+※ package.jsonにbuildはvue.config.js、serveはvue.config-serv.jsを使うように記載してある
+    "serve": "VUE_CLI_SERVICE_CONFIG_PATH=$PWD/vue.config-serve.js vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+
+
+
+
 # sl-navi開発環境作成手順(
 
 ## npmのバージョンアップ

@@ -1,6 +1,7 @@
 <template>
 <div class="view">
- <h4>イベント登録画面</h4>
+<h4 v-if="eid==0">イベント登録画面</h4>
+<h4 v-else>イベント更新画面</h4>
 
 <div class="card-body">
 	<form>
@@ -22,7 +23,7 @@
 		<p class="alert alert-danger" v-if="errors.username" v-html="errors.username"></p>
 
 		<label for="id_title">イベント名（必須）:</label>
-		<input v-model="title" name="title" type="text"  maxlength="64" class="form-control" required id="id_title">
+		<input @change="checkLogin" v-model="title" name="title" type="text"  maxlength="64" class="form-control" required id="id_title">
 		<p class="alert alert-danger" v-if="errors.title" v-html="errors.title"></p>
 
 		<label for="id_img_url">画像（必須）（UID or URL）:</label>
@@ -89,13 +90,18 @@
 		<input v-model="map_url" name="map_url" type="text" placeholder="https://maps.secondlife.com/secondlife/SIM-NAME/XXX/YYY/ZZZ" maxlength="200" class="form-control" required id="id_map_url">
 		<p class="alert alert-danger" v-if="errors.map_url" v-html="errors.map_url"></p>
 
-		<label for="id_shop_flag">SL-Naviの関連施設の画像UID（任意）（イベント期間中の看板が目立つようになります）:</label>
+		<label for="id_shop_flag">主催する施設がSL-naviにある場合、その画像UID（任意）:</label>
 		<input v-model="shop_flag" name="shop_flag" type="text" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" maxlength="37" class="form-control" id="id_shop_flag">
+		※入力すると、施設の看板画像をクリックしたときに、イベント情報のリンクも追加表示します。<br>
+		（ただ、イベント開催場所が主催する施設のTPポイントと近い場合は、自動で関連付くので入力不要です)
 		<p class="alert alert-danger" v-if="errors.shop_flag" v-html="errors.shop_flag"></p>
-		<br>
+		<br><br>
 		<div class="form-row">
 			<div class="col-sm-2">
-				<button type="button" class='form-control' @click="postEvent()">投稿</button>
+				<button type="button" class='form-control' @click="postEvent()">
+					<template v-if="eid==0">投稿</template>
+					<template v-else>更新</template>
+				</button>
 			</div>
 		</div>
 		<hr>
@@ -134,10 +140,17 @@ export default {
 			description:"",
 			map_url:"",
 			shop_flag:"",
+			eid:0,
 			sl_auth:0
     }
   },
   methods: {
+		checkLogin: function() {
+			if(!this.username){
+				alert("先にログイン認証してください")
+				this.title=""
+			}
+		},
 		loadImgUrl: function () {
 			this.$delete(this.errors,"img_url")
 			// URLチェックしたあと<img>に表示
@@ -149,6 +162,8 @@ export default {
 				tmp_url=this.img_url;
 			}else if(this.img_url.match("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}")){
 				tmp_url="https://secondlife.com/app/image/"+this.img_url+"/2";
+			}else if(this.img_url.match("^/static/event_img/")){
+				tmp_url=this.img_url;
 			}else{
 				tmp_url=""
 			}
@@ -196,7 +211,7 @@ export default {
 				alert("投稿に失敗しました。投稿内容を確認してください。")
 				return
 			}
-			const params = {
+			let params = {
 				title: this.title,
 				img_url: this.img_url,
 				mode: this.mode,
@@ -206,6 +221,9 @@ export default {
 				description: this.description,
 				map_url: this.map_url,
 				shop_flag: this.shop_flag
+			}
+			if(this.eid){
+				params["eid"]=this.eid
 			}
 			const headers ={
 				'X-CSRFTOKEN': this.csrftoken
@@ -261,11 +279,34 @@ export default {
 				this.username=""
 			})
 		}
-	},mounted () {
+	},
+	async mounted () {
 		this.getUsername()
 		this.csrftoken = this.getCookie('csrftoken')
 		// this.csrftoken="testabc"
 		console.log(["csrftoken=",this.csrftoken])
+
+    if(this.$route.params.eid){
+      await axios.get(EVENT_SOURCE+"/"+this.$route.params.eid).then(res => {
+        let ee=res.data;
+
+				this.eid=ee.id
+        this.title=ee.title
+        this.img_url=ee.img_url
+				this.load_img_url=ee.img_url
+        this.genre=ee.genre.id
+				this.mode=ee.mode
+        this.map_url=ee.map_url
+        // this.ed_desc=this.escape_html(ee.description)
+				this.ed_by=ee.created_by.name
+				this.start_time=ee.start_time
+				this.end_time=ee.end_time
+				this.description=ee.description
+				this.shop_flag=ee.shop_flag
+      })
+    }
+
+
 	}
 	,watch: {
     start_time: function (val) {

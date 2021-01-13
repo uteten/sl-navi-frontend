@@ -10,6 +10,18 @@
           </li>
       </ul>
     </div>
+    <!--
+    <div class="ad_tag">
+      <Adsense 
+        data-ad-client="ca-pub-7267369281211974"
+        data-ad-slot="3806078567"
+        ins-style="display:inline-block;width:150px;height:200px"
+        data-ad-format=""
+        data-full-width-responsive="no">
+      </Adsense>
+    </div>
+    -->
+    
     <div id="tag_normal_group" class="menu_group">
       <div class="menu_top">タグ</div>
       <ul id="normal_tags" class="tag_menu">
@@ -20,7 +32,18 @@
           </li>
         </template>
       </ul>
+    </div>    
+    <!--
+    <div class="ad_tag">
+      <Adsense 
+        data-ad-client="ca-pub-7267369281211974"
+        data-ad-slot="3044016459"
+            ins-style="display:inline-block;width:150px;height:600px"
+            data-ad-format=""
+            data-full-width-responsive="">
+      </Adsense>
     </div>
+    -->
   </div>
 </template>
 
@@ -105,9 +128,16 @@ export default{
 }
 </script>
 <style scoped>
+#tag_menu_group {
+  max-width: 250px;
+}
+
 .tag_menu {
   padding: 0.2em 0 0.2em 0;
   margin: 0;
+}
+.ad_tag{
+  text-align:center;
 }
 
 .tag_menu li {

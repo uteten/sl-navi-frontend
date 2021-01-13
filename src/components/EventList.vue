@@ -3,7 +3,7 @@
 // 48時間以内に開始 もしくは開催中
 <template>
   <div id="events" class="col events">
-    <div class="events_top">今日のイベント</div>
+    <div class="events_top">２４時間以内のイベント</div>
     <ul id="events" class="event_list">
       {{ message_no_event }}
         <li v-for = "event in events"
@@ -12,9 +12,11 @@
             :id="event.id"
             class = "event_item"
             tabindex="0">
-            <div class="event_data_top" v-html="event.genre.name+nowOpen2(event)">
+            <div class="event_data_top" v-html="event.genre.name+nowOpen2(event)"
+            :style="'background:'+event.color">
             </div>
-            <ul class="event_data">
+            <ul class="event_data"
+            :style="'border: 2px solid '+event.color+';'">
               <li><img @click="$ga.event('event', 'click_eventflag', event.title)" :src="event.img_url" class="event_image" ></li>
               <li>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</li>
             </ul>
@@ -24,7 +26,7 @@
             >
                 <img class="event_info_image" :src="event.img_url">
                 <dl class="dl-horizontal">
-                    <dt>タイトル</dt><dd>{{ event.title }}</dd>
+                    <dt>タイトル</dt><dd><a :href="'/event/'+event.id">{{ event.title }}</a></dd>
                     <dt>形式</dt><dd>{{ event.genre.name }}</dd>
                     <dt>期間</dt><dd>{{ nitiji(event.start_time)+" 〜 "+nitiji(event.end_time) }}</dd>
                     <dt>場所</dt><dd><a @click="$ga.event('event', 'click_mapurl', event.title)"  target=_blank :href="event.map_url">{{ event.map_url }}</a></dd>
@@ -119,22 +121,33 @@ export default {
       return format;
     },
     _nowOpen: function (start,end){
+      // let now=this._formatDate(new Date(),'YYYY-MM-DDThh:mm:ss')
       let now=new Date()
-      now=this._formatDate(now,'YYYY-MM-DDThh:mm:ss')
+      start=new Date(start)
+      end=new Date(end)
       if(start<now && now<end ){
-        return 1
+        now.setHours(now.getHours()+24)
+        if(now>end){
+          return 2 // 24時間以内に終了
+        }else{
+          return 1 // 長期開催
+        }
       }else{
-        return 0
+        return start-now
       }
     },
     nowOpen2: function (event){
-      if(this._nowOpen(event.start_time,event.end_time)){
-        if(event.long_duration){
+      let now_open=this._nowOpen(event.start_time,event.end_time)
+      if(now_open<=2){
+        if(event.long_duration && now_open==2){
+          return '<span class=\'badge badge-info\'>長期開催中</span><span class=\'badge badge-danger\'>最終日<span>'
+        }else if(event.long_duration){
           return '<span class=\'badge badge-info\'>長期開催中<span>'
         }else{
           return '<span class=\'badge badge-primary\'>開催中<span>'
         }
       }else{
+        // return '('+Math.round(now_open/60/60/1000)+'時間後に開催)'
         return ''
       }
     },
@@ -203,6 +216,7 @@ export default {
     padding: 0 0 0.2em 0.7em;
     list-style-type: none!important;
   }
+
   .event_list{
     padding: 0.2em 0 0.2em 0;
     margin: 0;
@@ -229,6 +243,11 @@ export default {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
+  .event_data_top_memo{
+    font-size: xx-small;
+    color: #aa0000;
+  }
+
   .event_data{
     padding: 0;
     background-color: #ffe3b3;
@@ -239,7 +258,7 @@ export default {
     padding: 0;
     margin: 0 5px 0 5px;
     color:#666666;
-    font-size: small;
+    font-size:x-small;
     list-style: none;
     font-weight: bold;
   }

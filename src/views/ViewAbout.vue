@@ -1,6 +1,6 @@
 <template>
 <div class="view">
-  <img class="sl-navi-kanban" src="/static/sl-navi-kanban.png">
+  <img class="sl-navi-kanban" src="https://sl-navi.azureedge.net/static/sl-navi-kanban.png">
   <br><br>
 
   <h4>■このサイトの目的</h4>
@@ -32,10 +32,15 @@
       <tr>
           <td>TOP(人がいる施設)に表示される施設の条件は？</td>
           <td>
-              以下のいずれかを満たす施設(2020/08/21時点）<br>
-              ・開店中でスタッフがいる<br>
-              ・開店中でSENSOR_RANGE_XY=150以下で誰かいる<br>
+              以下のいずれかを満たす施設(2020/12/13時点）<br>
+              ・開店中で人がいる<br>
+              <s>・開店中でスタッフがいる</s><br>
+              <s>・開店中でSENSOR_RANGE_XY=150以下で誰かいる</s><br>
           </td>
+      </tr>
+      <tr>
+          <td>センサをon/offしてもすぐにWebに反映されない？</td>
+          <td>Webに結果が反映されるのに最大30秒時間差があります</td>
       </tr>
       <tr>
           <td>センサ更新時などに同じ看板を使い回せるか？</td>
