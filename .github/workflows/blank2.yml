@@ -31,7 +31,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: scp and ssh
+    - name: scp dist.tgz to Az
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
@@ -41,8 +41,17 @@ jobs:
       run: |
         echo "${SECRET_KEY}" > secret_key
         chmod 600 secret_key
-        tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cat > /tmp/dist.tgz && cd ${DIST} && tar xfvz dist.tgz"
+        tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cat > /tmp/dist.tgz"
 
+    - name: unpack dist.tgz and snc cdn
+      env:
+        SECRET_KEY: ${{ secrets.ID_RSA }}
+        USER: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        HOST: ${{ secrets.HOST }}
+        DIST: ${{ secrets.PATH_DIST }}
+      run: |
+        tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ${DIST} && tar xfvz dist.tgz"
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}' 'https://slnaviblobstrage.blob.core.windows.net/static/' && sudo service gunicorn restart"
 
         #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
