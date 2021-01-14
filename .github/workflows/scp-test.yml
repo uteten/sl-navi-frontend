@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: test
+    - name: env
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
@@ -17,12 +17,13 @@ jobs:
         echo ${PORT}
         echo ${HOST}
         echo ${USERNAME}
-    - name: test
+    - name: ssh
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         HOST: ${{ secrets.HOST }}
+      run:
         echo "$SECRET_KEY" > secret_key
         chmod 600 secret_key
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
