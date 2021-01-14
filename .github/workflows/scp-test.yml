@@ -15,5 +15,8 @@ jobs:
         HOST: ${{ secrets.HOST }}
       run: 
         echo "$SECRET_KEY" > secret_key
+        echo ${PORT}
+        echo ${HOST}
+        echo ${USERNAME}
         chmod 600 secret_key
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
