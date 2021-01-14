@@ -6,7 +6,10 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@master
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v1
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
