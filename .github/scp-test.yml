@@ -1,0 +1,24 @@
+name: scp test
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: stdout
+      env:
+        USER: ${{ secrets.USERNAME }}
+      run:
+        python3 -c "print('::error file=.github/workflows/test.yml,line=1::from stdout')"
+    - name: ssh
+      env:
+        SECRET_KEY: ${{ secrets.ID_RSA }}
+        USER: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        HOST: ${{ secrets.HOST }}
+      run:
+        echo "$SECRET_KEY" > secret_key
+        chmod 600 secret_key
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
