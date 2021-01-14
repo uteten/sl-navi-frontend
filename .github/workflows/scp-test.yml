@@ -20,8 +20,8 @@ jobs:
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
-        username: dmy
         port: ${{ secrets.PORT }}
-        key: ${{ secrets.ID_RSA }}
-        source: "*"
+        username: dmy
+        password: invalidpass
+        source: "x.py"
         target: "tmp2"
