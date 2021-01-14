@@ -4,7 +4,7 @@
 vi vue.config.js
 npm run build  (※)
 # スクリプトをサーバにアップロード
-scp -P 51022 -rp dist sl-navi.com:/var/www/sl-navi.com/static/
+scp
 # スクリプトをblobにアップロード
 ssh sl-navi
    /usr/local/bin/azcopy login --identity
