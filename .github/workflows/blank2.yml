@@ -51,7 +51,7 @@ jobs:
         HOST: ${{ secrets.HOST }}
         DIST: ${{ secrets.PATH_DIST }}
       run: |
-        tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ${DIST} && tar xfvz dist.tgz"
+        tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ${DIST} && tar xfvz /tmp/dist.tgz"
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}' 'https://slnaviblobstrage.blob.core.windows.net/static/' && sudo service gunicorn restart"
 
         #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
