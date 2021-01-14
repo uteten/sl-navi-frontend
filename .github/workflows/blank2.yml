@@ -22,32 +22,24 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
 
-      # Runs a single command using the runners shell
-      - name: python
-        run: python -c "print(1+1)"
-        
-      - name: Run a one-line scriptenv
-        env:
-          TEST: aaaa
-        run: |
-          pwd
-          ls
-          echo Hello, world!${TEST}
-
-
-
-      - name: scp and ssh
-        env:
-          SECRET_KEY: ${{ secrets.ID_RSA }}
-          USER: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          HOST: ${{ secrets.HOST }}
-        run: |
-          echo "${SECRET_KEY}" > secret_key
-          chmod 600 secret_key
-          ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cat > /tmp/nya" < secret_key
-          #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
-          #scp -P ${PORT} -o StrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:~/
+    - name: scp and ssh
+      env:
+        SECRET_KEY: ${{ secrets.ID_RSA }}
+        USER: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        HOST: ${{ secrets.HOST }}
+      run: |
+        echo "${SECRET_KEY}" > secret_key
+        chmod 600 secret_key
+        tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cat > /tmp/dist.tgz && cd /tmp && tar xfvz dist.tgz"
+        #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
+        #scp -P ${PORT} -o StrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:~/
