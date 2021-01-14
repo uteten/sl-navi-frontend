@@ -38,7 +38,8 @@ jobs:
           echo Hello, world!${TEST}
 
 
-      - name: Run a multi-line script2
+
+      - name: scp and ssh
         env:
           SECRET_KEY: ${{ secrets.ID_RSA }}
           USER: ${{ secrets.USERNAME }}
@@ -47,4 +48,5 @@ jobs:
         run: |
           echo "${SECRET_KEY}" > secret_key
           chmod 600 secret_key
+          scp -P ${PORT} -rp x.py -i secret_key ${USER}@${HOST}:/tmp/
           ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
