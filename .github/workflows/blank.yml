@@ -30,7 +30,13 @@ jobs:
         run: python -c "print(1+1)"
         
       - name: Run a one-line scriptenv
-        run: echo Hello, world!${{secrets.HOST}}
+        env:
+          TEST: aaaa
+        run:|
+          echo Hello, world!${{secrets.HOST}}
+          echo Hello, world!$TEST
+          echo Hello, world!${TEST}
+          echo Hello, world!${{TEST}}
 
 
       # Runs a set of commands using the runners shell
@@ -38,3 +44,14 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Run a multi-line script
+        env:
+          SECRET_KEY: ${{ secrets.ID_RSA }}
+          USER: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          HOST: ${{ secrets.HOST }}
+        run: |
+        echo "$SECRET_KEY" > secret_key
+        chmod 600 secret_key
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
