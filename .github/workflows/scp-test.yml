@@ -1,21 +1,19 @@
-name: scp files
-on: [push]
-jobs:
+name: scp test
+on:
+  push:
+    branches: [ master ]
 
+jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
-
-    - uses: actions/checkout@master
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v1
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.ID_RSA }}
-        port: ${{ secrets.PORT }}
-        source: "tests/a.txt,tests/b.txt"
-        target: "test"
+    - name: test
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      USER: ${{ secrets.USERNAME }}
+      PORT: ${{ secrets.PORT }}
+      HOST: ${{ secrets.HOST }}
+      run: 
+        echo "$SECRET_KEY" > secret_key
+        chmod 600 secret_key
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
