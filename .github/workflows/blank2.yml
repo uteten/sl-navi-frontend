@@ -52,4 +52,4 @@ jobs:
           which ssh
           echo end
           scp -P ${PORT} -oStrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:/tmp
-          ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
+          #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
