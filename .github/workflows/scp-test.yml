@@ -25,3 +25,13 @@ jobs:
         password: invalidpass
         source: "x.py"
         target: "tmp2"
+
+
+     - uses: betanzos/scp-upload@v1
+       with:
+         source: "x.py"
+         host: ${{ secrets.HOST }}
+         port: ${{ secrets.PORT }}
+         username: ${{ secrets.USERNAME }}
+         key: ${{ secrets.ID_RSA }}
+         remote_dir: '~'
