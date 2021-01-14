@@ -13,7 +13,7 @@ jobs:
       USER: ${{ secrets.USERNAME }}
       PORT: ${{ secrets.PORT }}
       HOST: ${{ secrets.HOST }}
-      run: 
-        echo "$SECRET_KEY" > secret_key
-        chmod 600 secret_key
-        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
+    run: 
+      echo "$SECRET_KEY" > secret_key
+      chmod 600 secret_key
+      ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
