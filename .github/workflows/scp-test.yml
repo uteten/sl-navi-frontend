@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: test
       env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         HOST: ${{ secrets.HOST }}
