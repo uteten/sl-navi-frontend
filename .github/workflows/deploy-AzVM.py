@@ -18,27 +18,15 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@master
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.ID_RSA }}
-        port: ${{ secrets.PORT }}
-        source: "x.py"
-        target: "/tmp"
-
-
-    #- name: scp and ssh
-      #env:
-        #SECRET_KEY: ${{ secrets.ID_RSA }}
-        #USER: ${{ secrets.USERNAME }}
-        #PORT: ${{ secrets.PORT }}
-        #HOST: ${{ secrets.HOST }}
-      #run: |
-        #echo "${SECRET_KEY}" > secret_key
-        #chmod 600 secret_key
-        #scp -P ${PORT} -rp x.py -i secret_key ${USER}@${HOST}:/tmp/
-        #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
+    - name: scp and ssh
+      env:
+        SECRET_KEY: ${{ secrets.ID_RSA }}
+        USER: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        HOST: ${{ secrets.HOST }}
+      run: |
+        echo "${SECRET_KEY}" > secret_key
+        chmod 600 secret_key
+        scp -P ${PORT} -oStrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:/tmp/
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
 
