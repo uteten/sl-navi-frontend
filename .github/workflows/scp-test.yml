@@ -12,7 +12,6 @@ jobs:
         USER: ${{ secrets.USERNAME }}
       run:
         python3 -c "print('::error file=.github/workflows/test.yml,line=1::from stdout')"
-        python3 -c "print('${USER}')"
     - name: ssh
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
