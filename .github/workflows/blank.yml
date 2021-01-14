@@ -50,5 +50,6 @@ jobs:
           chmod 600 secret_key
           which scp
           which ssh
+          echo end
           #scp -P ${PORT} -rp x.py -i secret_key ${USER}@${HOST}:/tmp/
           ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
