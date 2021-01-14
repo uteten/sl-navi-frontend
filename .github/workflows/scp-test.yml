@@ -1,35 +1,18 @@
-
-name: Node.js CI
-
-on:
-  push:
-    branches: [ master ]
-
+name: scp files
+on: [push]
 jobs:
+
   build:
-
+    name: Build
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - name: Operations
-      uses: alinz/ssh-scp-action@master
-      env:
-        HELLO: cool
-        MESSAGE: hello world
+    - uses: actions/checkout@master
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
-        port: ${{ secrets.PORT }}
-        user: ${{ secrets.USERNAME }}
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.ID_RSA }}
-        # runs this on remove server
-        ssh_before: |
-          touch hoge
-          echo $HELLO
-          echo $MESSAGE
-          echo hoge
-          ls -lath
+        port: ${{ secrets.PORT }}
+        source: "tests/a.txt,tests/b.txt"
+        target: "test"
