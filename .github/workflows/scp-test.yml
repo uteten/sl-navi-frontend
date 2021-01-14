@@ -23,5 +23,5 @@ jobs:
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
         key: ${{ secrets.ID_RSA }}
-        source: "x.py"
+        source: "p"
         target: "/tmp"
