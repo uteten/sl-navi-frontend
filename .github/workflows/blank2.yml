@@ -43,7 +43,7 @@ jobs:
         chmod 600 secret_key
         tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cat > /tmp/dist.tgz"
 
-    - name: unpack dist.tgz and snc cdn
+    - name: unpack dist.tgz and sync blob
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
@@ -52,7 +52,7 @@ jobs:
         DIST: ${{ secrets.PATH_DIST }}
       run: |
         tar zcvf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ${DIST} && tar xfvz /tmp/dist.tgz"
-        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}' 'https://slnaviblobstrage.blob.core.windows.net/static/' && sudo service gunicorn restart"
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
 
         #ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
         #scp -P ${PORT} -o StrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:~/
