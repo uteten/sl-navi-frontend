@@ -19,9 +19,9 @@ jobs:
     - name: copy file via ssh key
       uses: betanzos/scp-upload@v1
       with:
-        source: "p"
+        source: "*"
         host: ${{ secrets.HOST }}
         port: ${{ secrets.PORT }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.ID_RSA }}
-        remote_dir: '~'
+        remote_dir: '~/test'
