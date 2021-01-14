@@ -36,7 +36,6 @@ jobs:
           echo Hello, world!${{secrets.HOST}}
           echo Hello, world!$TEST
           echo Hello, world!${TEST}
-          echo Hello, world!${{TEST}}
 
       - name: Run a multi-line script
         run: |
