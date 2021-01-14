@@ -32,17 +32,17 @@ jobs:
       - name: Run a one-line scriptenv
         env:
           TEST: aaaa
-        run:|
+        run: |
           echo Hello, world!${{secrets.HOST}}
           echo Hello, world!$TEST
           echo Hello, world!${TEST}
 
-      - name: Run a multi-line script
+      - name: Run a multi-line script1
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Run a multi-line script
+      - name: Run a multi-line script2
         env:
           SECRET_KEY: ${{ secrets.ID_RSA }}
           USER: ${{ secrets.USERNAME }}
