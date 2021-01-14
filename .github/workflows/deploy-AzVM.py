@@ -27,6 +27,8 @@ jobs:
       run: |
         echo "${SECRET_KEY}" > secret_key
         chmod 600 secret_key
-        scp -P ${PORT} -oStrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:/tmp/
+        which ssh
+        which scp
+        #scp -P ${PORT} -oStrictHostKeyChecking=no -rp x.py -i secret_key ${USER}@${HOST}:/tmp/
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "cd ~/ && touch hoge"
 
