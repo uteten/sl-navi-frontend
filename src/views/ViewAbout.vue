@@ -1,6 +1,6 @@
 <template>
 <div class="view">
-  <img class="sl-navi-kanban" src="https://sl-navi.azureedge.net/static/sl-navi-kanban.png">
+  <img class="sl-navi-kanban" src="/static/sl-navi-kanban.png">
   <br><br>
 
   <h4>■このサイトの目的</h4>
