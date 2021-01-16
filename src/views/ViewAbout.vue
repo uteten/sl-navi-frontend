@@ -83,11 +83,11 @@ Vue.use(VueSocialSharing)
 export default {
   data: function () {
     return {
-      sns_url: 'https://sl-navi.com',
-      sns_title: '// SL-Navi',
-      sns_description: 'セカンドライフ内で日本人がいるお店や遊び場、新施設を見つけよう',
-      sns_hashtags: 'secondlife,sljp',
-      sns_twitter_user: 'SL_Uten'
+      'sns_url': 'https://sl-navi.com',
+      'sns_title': '// SL-Navi',
+      'sns_description': 'セカンドライフ内で日本人がいるお店や遊び場、新施設を見つけよう',
+      'sns_hashtags': 'secondlife,sljp',
+      'sns_twitter_user': 'SL_Uten'
     }
   }
 }

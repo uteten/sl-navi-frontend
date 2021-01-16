@@ -70,7 +70,7 @@ export const store = new Vuex.Store({
         .then(res => res.data)
         .then(payload => {
           commit('setSongInfo', payload)
-          if (state.loading == true) {
+          if (state.loading === true) {
             commit('setLoading', false)
           }
         })
@@ -105,7 +105,7 @@ export const store = new Vuex.Store({
       clearInterval(state.timerInterval)
     },
     muteToggle ({ state, commit }) {
-      if (state.volume == 0) {
+      if (state.volume === 0) {
         commit('updateVolume', state.previousVolume)
       } else {
         commit('setPreviousVolume', state.volume)

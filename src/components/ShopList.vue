@@ -107,7 +107,7 @@
 
           </span>
         </template>
-        <span v-html="shop_description(z)" /><br>
+        <span v-html="shopDescription(z)" /><br>
         <span
           v-if="z.event"
           class="event_info"
@@ -162,7 +162,7 @@
         >
           センサ設置者:
           <a
-            :href="&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
+            :href= "&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
             target="_blank"
           >
             {{ z.owner_name }}
@@ -194,8 +194,8 @@
         </a>
         <!--
         <a v-if="z.radio!=''" HREF="javaScript:void(0)" @click="playRadio(z.radio)">
-            <b-icon-music-player-fill scale="0.8" v-if="play_flag==1" ></b-icon-music-player-fill>
-            <b-icon-music-note-beamed scale="0.8" v-if="play_flag==1" ></b-icon-music-note-beamed>
+            <b-icon-music-player-fill scale="0.8" v-if="playFlag==1" ></b-icon-music-player-fill>
+            <b-icon-music-note-beamed scale="0.8" v-if="playFlag==1" ></b-icon-music-note-beamed>
             <b-icon-music-player scale="0.8" v-else ></b-icon-music-player>
             土地設定のラジオを聞く(一部shoutcast未対応)
           <br>
@@ -242,30 +242,35 @@ export default {
       return value[0]
     },
     'staff_sex': function (value) {
-      if (value[1] == 0) {
+      if (value[1] === 0) {
         return 'female'
-      } else if (value[1] == 1) {
+      } else if (value[1] === 1) {
         return 'male'
       } else {
         return
       }
     }
   },
-  props: ['mode'],
+  props: {
+    'mode': {
+      type: String,
+      default: 'k'
+    }
+  },
   data: function () {
     return {
       shops: [],
-      cache_tagid: '',
-      cache_mode: '',
-      cache_search: '',
-      play_flag: 0,
-      play_url: ''
+      cacheTagid: '',
+      cacheMode: '',
+      cacheSearch: '',
+      playFlag: 0,
+      playUrl: ''
     }
   },
   mounted () {
     var that = this
     this.$setInterval(() => {
-      that.getShops(that.cache_mode, that.cache_tagid, that.cache_search)
+      that.getShops(that.cacheMode, that.cacheTagid, that.cacheSearch)
     }, 1000 * INTERVAL_RELOAD_SHOP)
   },
   methods: {
@@ -297,16 +302,16 @@ export default {
       }
     },
     playRadio (url) {
-      if (url == this.play_url && this.play_flag == 1) {
+      if (url === this.playUrl && this.playFlag === 1) {
         // 同じurlをクリックすると止まる
-        this.play_flag = 0
-        this.play_url = ''
+        this.playFlag = 0
+        this.playUrl = ''
       } else {
         // 異なるurlは再生
-        this.play_flag = 1
-        this.play_url = url
+        this.playFlag = 1
+        this.playUrl = url
       }
-      this.$emit('radio', this.play_url)
+      this.$emit('radio', this.playUrl)
     },
     isEvent (z) {
       return z.event
@@ -339,27 +344,27 @@ export default {
     isNewShop (z) {
       const now = new Date()
       now.setDate(now.getDate() - 7)
-      const one_week = this._formatDate(now, 'YYYY-MM-DDThh:mm:ss')
+      const oneWeek = this._formatDate(now, 'YYYY-MM-DDThh:mm:ss')
       // console.log([z.created_at,one_week])
-      if (z.created_at > one_week) {
+      if (z.created_at > oneWeek) {
         return 1
       } else {
         return 0
       }
     },
-    shop_description (z) {
+    shopDescription (z) {
       const text = z.info
-      const url_pattern = /(https?:\/\/[^ \r\n]+)/g
-      return text.replace(url_pattern, '<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
+      const urlPattern = /(https?:\/\/[^ \r\n]+)/g
+      return text.replace(urlPattern, '<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
     },
     existBlog (z) {
       return (z.blog !== 'http://www.google.com' && z.blog.indexOf('http') === 0)
     },
     async getShops (m, tagid, search) {
       // console.log(['shoplist:getShop:axios', tagid, m, search])
-      this.cache_mode = m
-      this.cache_tagid = tagid
-      this.cache_search = search
+      this.cacheMode = m
+      this.cacheTagid = tagid
+      this.cacheSearch = search
       await axios.get(SHOP_SOURCE, {
         params: {
           tagid: tagid,

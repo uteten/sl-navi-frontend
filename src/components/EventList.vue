@@ -13,7 +13,7 @@
       id="events"
       class="event_list"
     >
-      {{ message_no_event }}
+      {{ messageNoEvent }}
       <li
         v-for="event in events"
         :id="event.id"
@@ -62,7 +62,7 @@
                 @click="$ga.event('event', 'click_mapurl', event.title)"
               >{{ event.map_url }}</a>
             </dd>
-            <dt>詳細</dt><dd v-html="escape_html(event.description)" />
+            <dt>詳細</dt><dd v-html="escapeHtml(event.description)" />
             <dt>投稿</dt>
             <dd>
               Posted by
@@ -114,7 +114,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
 import axios from 'axios'
@@ -127,11 +126,16 @@ var INTERVAL_RELOAD_EVENT = 600
 var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/1'
 export default {
   name: 'EventList',
-  props: ['mode'],
+  props: {
+    'mode': {
+      type: String,
+      default: 'k'
+    }
+  },
   data: function () {
     return {
       events: [],
-      message_no_event: ''
+      messageNoEvent: ''
     }
   },
   mounted () {
@@ -146,7 +150,7 @@ export default {
       var txt = encodeURIComponent(event.title)
       return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
     },
-    escape_html: function (tmp) {
+    escapeHtml: function (tmp) {
       if (typeof tmp !== 'string') {
         return tmp
       }
@@ -160,11 +164,10 @@ export default {
           '>': '&gt;'
         }[match]
       })
-      // const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
-      const img_pattern = /(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
-      tmp = tmp.replace(img_pattern, '<img width="400" src="$1$2$3">')
-      const url_pattern = /([^"])(https?:\/\/[^ )\r\n]+)/g
-      tmp = tmp.replace(url_pattern, '$1<a target="_blank" href="$2">$2</a>')
+      const imgPattern = /(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
+      const urlPattern = /([^"])(https?:\/\/[^ )\r\n]+)/g
+      tmp = tmp.replace(imgPattern, '<img width="400" src="$1$2$3">')
+      tmp = tmp.replace(urlPattern, '$1<a target="_blank" href="$2">$2</a>')
       return tmp.replace(/\n/g, '<br>')
     },
     nitiji: function (str) {
@@ -197,9 +200,9 @@ export default {
       }
     },
     nowOpen2: function (event) {
-      const now_open = this._nowOpen(event.start_time, event.end_time)
-      if (now_open <= 2) {
-        if (event.long_duration && now_open == 2) {
+      const nowOpen = this._nowOpen(event.start_time, event.end_time)
+      if (nowOpen <= 2) {
+        if (event.long_duration && nowOpen === 2) {
           return '<span class=\'badge badge-info\'>長期開催中</span><span class=\'badge badge-danger\'>最終日<span>'
         } else if (event.long_duration) {
           return '<span class=\'badge badge-info\'>長期開催中<span>'
@@ -207,7 +210,7 @@ export default {
           return '<span class=\'badge badge-primary\'>開催中<span>'
         }
       } else {
-        // return '('+Math.round(now_open/60/60/1000)+'時間後に開催)'
+        // return '('+Math.round(nowOpen/60/60/1000)+'時間後に開催)'
         return ''
       }
     },
@@ -226,7 +229,7 @@ export default {
         }
 
         if (!this.events[0]) {
-          this.message_no_event = '直近のイベント情報はありません（みんな登録してねっ）'
+          this.messageNoEvent = '直近のイベント情報はありません（みんな登録してねっ）'
         }
       })
     }

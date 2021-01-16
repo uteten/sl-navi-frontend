@@ -66,12 +66,11 @@ export default {
   },
   data: function () {
     return {
-      last_message_id: 0,
-      first_get: 1,
+      lastMessageId: 0,
+      firstGet: 1,
       messages: [],
-      messages_adult: [],
-      mode_cache: 0,
-      interval_id: 0
+      messagesAdult: [],
+      modeCache: 0
     }
   },
   created: function () {
@@ -81,7 +80,7 @@ export default {
   mounted () {
     var that = this
     this.$setInterval(() => {
-      that.getMessages(that.mode_cache)
+      that.getMessages(that.modeCache)
     }, 1000 * INTERVAL_GET_MESSAGE)
   },
   methods: {
@@ -105,26 +104,26 @@ export default {
     },
     async getMessages (mode) {
       // console.log("call getMessages:"+mode)
-      this.mode_cache = mode
-      if (mode != 'k' && this.messages_adult[0]) {
+      this.modeCache = mode
+      if (mode !== 'k' && this.messagesAdult[0]) {
         // メニュー一般以外でアダルト施設のメッセージキューがあるならマージ
-        this.messages = this.messages.concat(this.messages_adult)
-        this.messages_adult = []
+        this.messages = this.messages.concat(this.messagesAdult)
+        this.messagesAdult = []
       }
-      // console.log(MESSAGE_SOURCE+'/newer/'+this.last_message_id)
-      await axios.get(MESSAGE_SOURCE + '/newer/' + this.last_message_id).then(res => {
+      // console.log(MESSAGE_SOURCE+'/newer/'+this.lastMessageId)
+      await axios.get(MESSAGE_SOURCE + '/newer/' + this.lastMessageId).then(res => {
         for (var z of res.data) {
-          if (mode == 'k' && z.shop.h == 1) { // メニュー健全でアダルト施設のメッセージ
-            this.messages_adult.push([false, z])
+          if (mode === 'k' && z.shop.h === 1) { // メニュー健全でアダルト施設のメッセージ
+            this.messagesAdult.push([false, z])
           } else {
             this.messages.push([false, z])
-            this.last_message_id = z.id
+            this.lastMessageId = z.id
           }
         }
         // 初めてデータが追加された時は先頭を表示対象にする
-        if (this.first_get == 1 && this.messages[0]) {
+        if (this.firstGet === 1 && this.messages[0]) {
           this.messages[0][0] = true
-          this.first_get = 0
+          this.firstGet = 0
         }
         // console.log(["message_data=",this.messages])
       })

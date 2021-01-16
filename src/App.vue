@@ -39,7 +39,7 @@
               <router-link
                 to="/all"
                 class="nav-link"
-                :class="this.searchword ? 'router-link-exact-active' : '' "
+                :class="searchword ? 'router-link-exact-active' : '' "
               >
                 <b-icon-building scale="0.8" />両方
               </router-link>
@@ -113,8 +113,7 @@ export default {
   data: function () {
     return {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
-      searchword: '',
-      search_active: ''
+      searchword: ''
     }
   },
   head: {
