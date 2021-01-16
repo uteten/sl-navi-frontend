@@ -25,7 +25,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: CD(local dist -> remote dist)
+    - name: CD
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
@@ -36,7 +36,4 @@ jobs:
         echo "${SECRET_KEY}" > secret_key
         chmod 600 secret_key
         tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${DIST}"
-
-    - name: CD(sync blob and gunicorn restart)
-      run: |
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
