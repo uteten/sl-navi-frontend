@@ -1,23 +1,18 @@
-name: CI/CD
+name: CI/CD pipeline
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Build (Use Node.js ${{ matrix.node-version }})
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
@@ -25,7 +20,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: CD
+    - name: Deploy
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
@@ -36,4 +31,4 @@ jobs:
         echo "${SECRET_KEY}" > secret_key
         chmod 600 secret_key
         tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${DIST}"
-        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
+      run: ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
