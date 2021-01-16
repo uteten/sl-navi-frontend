@@ -9,7 +9,7 @@
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
       <div
-        v-if="!isDevMode()"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost()"
         class="col ad"
       >
         <Adsense
@@ -113,8 +113,8 @@ export default {
       this.$refs.appTagList.changeStatus('c', this.tagid)
       this.$refs.appShopList.getShops('c', this.tagid, e)
     },
-    isDevMode: function (e) {
-      if (this.$cookies.get('dev') === 1 || location.origin === 'http://localhost:8080') {
+    isLocalhost: function (e) {
+      if (location.origin === 'http://localhost:8080') {
         return 1
       } else {
         return 0
