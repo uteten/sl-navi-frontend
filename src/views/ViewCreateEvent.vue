@@ -335,7 +335,7 @@ export default {
       } else if (this.imgUrl.match('^(http://|https://)')) {
         tmpUrl = this.imgUrl
       } else if (this.imgUrl.match('[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}')) {
-        tmpUrl = 'https://secondlife.com/app/image/' + this.img_url + '/2'
+        tmpUrl = 'https://secondlife.com/app/image/' + this.imgUrl + '/2'
       } else if (this.imgUrl.match('^/static/event_img/')) {
         tmpUrl = this.imgUrl
       } else {
