@@ -11,11 +11,11 @@
         メニュー
       </div>
       <ul
-        id="special_tags"
+        id="specialTags"
         class="tag_menu"
       >
         <li
-          v-for="tag in special_tags"
+          v-for="tag in specialTags"
           :key="tag.id"
           :value="tag.id"
           :class="tag.selected"
@@ -78,28 +78,32 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
-
 Vue.prototype.$axios = axios
 
 const TAG_SOURCE = '//sl-navi.com/api/tag'
 export default {
   name: 'TagList',
-  props: ['mode'],
+  props: {
+    'mode': {
+      type: String,
+      default: 'k'
+    }
+  },
   data: function () {
     return {
       tags: [],
-      special_tags: []
+      specialTags: []
     }
   },
   methods: {
-    _sort_by: function (field, reverse, primer) {
+    _sortBy: function (field, reverse, primer) {
       reverse = (reverse) ? -1 : 1
       // ボイスOK/NGだけ上位に持ってくる
       return function (a, b) {
         var aa = a[field]
         var bb = b[field]
-        if (a.n == 'ボイスOK' || a.n == 'ボイスNG') aa = 60
-        if (b.n == 'ボイスOK' || b.n == 'ボイスNG') bb = 60
+        if (a.n === 'ボイスOK' || a.n === 'ボイスNG') aa = 60
+        if (b.n === 'ボイスOK' || b.n === 'ボイスNG') bb = 60
         if (typeof (primer) !== 'undefined') {
           aa = primer(aa)
           bb = primer(bb)
@@ -117,10 +121,10 @@ export default {
           if (z.id > 0) {
             this.tags.push(z)
           } else {
-            this.special_tags.push(z)
+            this.specialTags.push(z)
           }
         }
-        this.tags.sort(this._sort_by(m, true, parseInt))
+        this.tags.sort(this._sortBy(m, true, parseInt))
         if (tagid) {
           this.changeStatus('', tagid)
         }
@@ -132,23 +136,23 @@ export default {
         for (const z of this.tags) {
           this.$set(z, 'count', z[m])
         }
-        for (const z of this.special_tags) {
+        for (const z of this.specialTags) {
           this.$set(z, 'count', z[m])
         }
-        this.tags.sort(this._sort_by(m, true, parseInt))
+        this.tags.sort(this._sortBy(m, true, parseInt))
       }
       if (tagid) {
         scrollTo(0, 0)
         for (const z of this.tags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
         }
-        for (const z of this.special_tags) {
+        for (const z of this.specialTags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
         }
       }
       if (active) {
         // コンポーネント内のタグをクリックしたステータス変化は親に伝えて、親で何か処理(shopの再読込など)をする
-        this.$emit('selected_tag', tagid)
+        this.$emit('selected-tag', tagid)
       }
     }
   }

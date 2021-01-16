@@ -3,7 +3,7 @@
     <tag-list
       ref="appTagList"
       :mode="mode"
-      @selected_tag="actionSelectedTag"
+      @selected-tag="actionSelectedTag"
     />
     <div class="view col">
       <messages ref="appMessages" />
