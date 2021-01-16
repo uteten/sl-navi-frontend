@@ -247,29 +247,6 @@ export default {
         this.$refs.fullCalendar.getApi().refetchEvents()
       })
     },
-    escapeHtml: function (tmp) {
-      if (typeof tmp !== 'string') {
-        return tmp
-      }
-      tmp = tmp.replace(/[&'`"<>]/g, function (match) {
-        return {
-          '&': '&amp;',
-          "'": '&#x27;',
-          '`': '&#x60;',
-          '"': '&quot;',
-          '<': '&lt;',
-          '>': '&gt;'
-        }[match]
-      })
-      const imgPattern = /(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
-      const urlPattern = /([^"])(https?:\/\/[^ )\r\n]+)/g
-      tmp = tmp.replace(imgPattern, '<img width="400" src="$1$2$3">')
-      tmp = tmp.replace(urlPattern, '$1<a target="_blank" href="$2">$2</a>')
-      return tmp.replace(/\n/g, '<br>')
-    },
-    nitiji: function (str) {
-      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
-    },
     async getUsername () {
       await axios.get(LOGIN_STATUS_URL).then(res => {
         if (res.data[0]) {

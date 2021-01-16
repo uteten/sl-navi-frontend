@@ -32,7 +32,7 @@
         :key="z.flag"
         class="news_item"
       >
-        {{ nitiji(z.created_at) }} <span class="badge badge-primary">新規施設</span>
+        {{ tukihi(z.created_at) }} <span class="badge badge-primary">新規施設</span>
         {{ (z.h===1 ? "アダルト施設" : "一般施設") }}
         [<a
           :href="'/search/'+z.flag"
@@ -57,9 +57,6 @@ export default {
     }
   },
   methods: {
-    nitiji: function (str) {
-      return str.replace(/T.*/, '').replace(/-/g, '/')
-    },
     async getShops () {
       await axios.get(NEW_SHOP_SOURCE).then(res => {
         for (var z of res.data) {

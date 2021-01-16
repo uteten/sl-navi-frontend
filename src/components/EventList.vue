@@ -150,41 +150,7 @@ export default {
       var txt = encodeURIComponent(event.title)
       return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
     },
-    escapeHtml: function (tmp) {
-      if (typeof tmp !== 'string') {
-        return tmp
-      }
-      tmp = tmp.replace(/[&'`"<>]/g, function (match) {
-        return {
-          '&': '&amp;',
-          "'": '&#x27;',
-          '`': '&#x60;',
-          '"': '&quot;',
-          '<': '&lt;',
-          '>': '&gt;'
-        }[match]
-      })
-      const imgPattern = /(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
-      const urlPattern = /([^"])(https?:\/\/[^ )\r\n]+)/g
-      tmp = tmp.replace(imgPattern, '<img width="400" src="$1$2$3">')
-      tmp = tmp.replace(urlPattern, '$1<a target="_blank" href="$2">$2</a>')
-      return tmp.replace(/\n/g, '<br>')
-    },
-    nitiji: function (str) {
-      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
-    },
-    _formatDate: function (date, format) {
-      format = format.replace(/YYYY/g, date.getFullYear())
-      format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2))
-      format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2))
-      format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2))
-      format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2))
-      format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2))
-      format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3))
-      return format
-    },
     _nowOpen: function (start, end) {
-      // let now=this._formatDate(new Date(),'YYYY-MM-DDThh:mm:ss')
       const now = new Date()
       start = new Date(start)
       end = new Date(end)
@@ -227,14 +193,12 @@ export default {
             this.events.push(z)
           }
         }
-
         if (!this.events[0]) {
           this.messageNoEvent = '直近のイベント情報はありません（みんな登録してねっ）'
         }
       })
     }
   }
-
 }
 </script>
 

@@ -35,14 +35,13 @@
         v-if="nowOpen(z)==2"
         class="event_shop badge badge-info"
       >イベント予定</span>
-
       <div class="memo">
         <span
-          v-if="existStaff(z)"
+          v-if="z.sn > 0"
           class="sn"
         >{{ z.sn }}</span>
         <span
-          v-if="existGuest(z)"
+          v-if="z.cn > 0"
           class="cn"
         >{{ z.cn }}</span>
         <span
@@ -54,7 +53,7 @@
           class="male"
         >♂×{{ z.male }}</span>
         <span
-          v-if="isShopClose(z)"
+          v-if="z.status===0"
           class="badge badge-secondary"
         >閉店中</span>
       </div>
@@ -116,11 +115,11 @@
           <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
         </span>
         <span
-          v-if="isAdultShop(z)"
+          v-if="z.h===1"
           class="badge badge-danger"
         >アダルト施設</span>
         <span
-          v-if="isKenzenShop(z)"
+          v-if="z.h===2"
           class="badge badge-primary"
         >一般施設</span>
         <span
@@ -192,15 +191,6 @@
         >
           <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
         </a>
-        <!--
-        <a v-if="z.radio!=''" HREF="javaScript:void(0)" @click="playRadio(z.radio)">
-            <b-icon-music-player-fill scale="0.8" v-if="playFlag==1" ></b-icon-music-player-fill>
-            <b-icon-music-note-beamed scale="0.8" v-if="playFlag==1" ></b-icon-music-note-beamed>
-            <b-icon-music-player scale="0.8" v-else ></b-icon-music-player>
-            土地設定のラジオを聞く(一部shoutcast未対応)
-          <br>
-        </a>
-        -->
         <img
           class="heatmap"
           :src="'/static/heatmap/' + z.flag + '.png?'"
@@ -280,9 +270,6 @@ export default {
         event: event
       })
     },
-    nitiji: function (str) {
-      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
-    },
     nowOpen: function (z) {
       if (!z.event) {
         return 0
@@ -312,24 +299,6 @@ export default {
         this.playUrl = url
       }
       this.$emit('radio', this.playUrl)
-    },
-    isEvent (z) {
-      return z.event
-    },
-    existStaff (z) {
-      return (z.sn > 0)
-    },
-    existGuest (z) {
-      return (z.cn > 0)
-    },
-    isShopClose (z) {
-      return (z.status === 0)
-    },
-    isAdultShop (z) {
-      return (z.h === 1)
-    },
-    isKenzenShop (z) {
-      return (z.h === 2)
     },
     _formatDate: function (date, format) {
       format = format.replace(/YYYY/g, date.getFullYear())

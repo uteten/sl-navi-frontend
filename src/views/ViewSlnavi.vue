@@ -112,9 +112,6 @@ export default {
       this.tagid = ALL_SHOP_TAGID
       this.$refs.appTagList.changeStatus('c', this.tagid)
       this.$refs.appShopList.getShops('c', this.tagid, e)
-    },
-    nitiji: function (str) {
-      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
     }
   }
 }

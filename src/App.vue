@@ -105,7 +105,9 @@
 import Vue from 'vue'
 import VueHead from 'vue-head'
 import VueCookies from 'vue-cookies'
+import gv from './mixins/globalValiables'
 
+Vue.mixin(gv)
 Vue.use(VueCookies)
 Vue.use(VueHead)
 export default {
