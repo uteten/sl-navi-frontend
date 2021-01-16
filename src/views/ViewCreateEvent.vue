@@ -368,7 +368,7 @@ export default {
       if (!this.username) {
         this.$set(this.errors, 'username', '↑まずログインしてください')
       }
-      if (this.loadImgUrl === BLANK_IMG || this.loadImgUrl !== this.img_url) {
+      if (this.loadImgUrl === BLANK_IMG || this.loadImgUrl !== this.imgUrl) {
         this.$set(this.errors, 'img_url', 'URLもしくはUIDを入力した後、画像読込ボタンを押してください')
       }
       if (!this.mapUrl.match('^(http://|https://)maps.secondlife.com/secondlife/')) {
