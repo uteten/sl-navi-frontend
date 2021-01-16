@@ -1,59 +1,146 @@
 // INTERVAL_RELOAD_SHOP(秒)毎に SHOP_SOURCE を取得
 
 <template>
-  <div id="shops" class="col shops">
-    <div class="shop_top">施設</div>
-    <div v-for="z in shops" :id="z.flag" :key="z.flag" class="f" tabindex="0">
+  <div
+    id="shops"
+    class="col shops"
+  >
+    <div class="shop_top">
+      施設
+    </div>
+    <div
+      v-for="z in shops"
+      :id="z.flag"
+      :key="z.flag"
+      class="f"
+      tabindex="0"
+    >
       <!-- 看板と人数 -->
       <!--img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''"-->
-      <img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"  :class="z.event ? 'ow_event':''">
-      <span v-if="isNewShop(z)" class="new_shop badge badge-primary">新施設</span>
-      <span v-if="nowOpen(z)==1"   class="event_shop badge badge-danger">イベント中</span>
-      <span v-if="nowOpen(z)==2"   class="event_shop badge badge-info">イベント予定</span>
- 
+      <img
+        class="flag"
+        :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
+        :class="z.event ? 'ow_event':''"
+        @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')"
+      >
+      <span
+        v-if="isNewShop(z)"
+        class="new_shop badge badge-primary"
+      >新施設</span>
+      <span
+        v-if="nowOpen(z)==1"
+        class="event_shop badge badge-danger"
+      >イベント中</span>
+      <span
+        v-if="nowOpen(z)==2"
+        class="event_shop badge badge-info"
+      >イベント予定</span>
+
       <div class="memo">
-        <span v-if="existStaff(z)" class="sn">{{ z.sn }}</span>
-        <span v-if="existGuest(z)" class="cn">{{ z.cn }}</span>
-        <span v-if="z.female>0" class="female">♀×{{ z.female }}</span>
-        <span v-if="z.male>0" class="male">♂×{{ z.male }}</span>
-        <span v-if="isShopClose(z)" class="badge badge-secondary">閉店中</span>
+        <span
+          v-if="existStaff(z)"
+          class="sn"
+        >{{ z.sn }}</span>
+        <span
+          v-if="existGuest(z)"
+          class="cn"
+        >{{ z.cn }}</span>
+        <span
+          v-if="z.female>0"
+          class="female"
+        >♀×{{ z.female }}</span>
+        <span
+          v-if="z.male>0"
+          class="male"
+        >♂×{{ z.male }}</span>
+        <span
+          v-if="isShopClose(z)"
+          class="badge badge-secondary"
+        >閉店中</span>
       </div>
       <!-- ポップアップの中身 -->
-      <b-popover triggers="click blur" placement="bottom" style="display:none"
+      <b-popover
+        triggers="click blur"
+        placement="bottom"
+        style="display:none"
         :target="z.flag"
       >
         <!-- :show="shops.length===1" -->
-        <template v-slot:title>
-          <a :href="'/search/'+z.flag" v-html="z.name"></a>
-          <b-badge v-if="nowOpen(z)==1" variant="danger">イベント中</b-badge>
+        <template #title>
+          <a
+            :href="'/search/'+z.flag"
+            v-html="z.name"
+          />
+          <b-badge
+            v-if="nowOpen(z)==1"
+            variant="danger"
+          >
+            イベント中
+          </b-badge>
           <span class="popover_title_right">
-            <ShareNetwork network="Twitter" 
-              :url="'https://sl-navi.com/search/'+z.flag" :title="z.name " :description="z.description"
-              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
-                <img class="sns_icon" src="https://sl-navi.com/static/twitter.png">
+            <ShareNetwork
+              network="Twitter"
+              :url="'https://sl-navi.com/search/'+z.flag"
+              :title="z.name "
+              :description="z.description"
+              hashtags="secondlife,sljp"
+              sns_twitter_user="SL_uten"
+            >
+              <img
+                class="sns_icon"
+                src="https://sl-navi.com/static/twitter.png"
+              >
             </ShareNetwork>
-            <ShareNetwork network="Facebook"
-              :url="'https://sl-navi.com/search/'+z.flag" :title="z.name " :description="z.description"
-              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
-                <img class="sns_icon" src="https://sl-navi.com/static/facebook.png">
+            <ShareNetwork
+              network="Facebook"
+              :url="'https://sl-navi.com/search/'+z.flag"
+              :title="z.name "
+              :description="z.description"
+              hashtags="secondlife,sljp"
+              sns_twitter_user="SL_uten"
+            >
+              <img
+                class="sns_icon"
+                src="https://sl-navi.com/static/facebook.png"
+              >
             </ShareNetwork>
 
           </span>
         </template>
-        <span v-html="shop_description(z)"></span><br>
-        <span class="event_info" v-if="z.event">
-          <span class="badge badge-success">直近のイベント</span> 
-          <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8"></b-icon-calendar2-week>{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title}}</a><br>
+        <span v-html="shop_description(z)" /><br>
+        <span
+          v-if="z.event"
+          class="event_info"
+        >
+          <span class="badge badge-success">直近のイベント</span>
+          <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
         </span>
-        <span v-if="isAdultShop(z)" class="badge badge-danger">アダルト施設</span>
-        <span v-if="isKenzenShop(z)" class="badge badge-primary">一般施設</span>
-        <span v-for="tag in z.tags" :key="tag.id" class="badge badge-light">{{ tag }}</span><br>
+        <span
+          v-if="isAdultShop(z)"
+          class="badge badge-danger"
+        >アダルト施設</span>
+        <span
+          v-if="isKenzenShop(z)"
+          class="badge badge-primary"
+        >一般施設</span>
+        <span
+          v-for="tag in z.tags"
+          :key="tag.id"
+          class="badge badge-light"
+        >{{ tag }}</span><br>
         <span class="n2">
           スタッフ<span class="sn2">{{ z.sn }}</span>人
           <span v-if="z.staffs.length!=0">
-            (<span v-for="staff in z.staffs" :key="staff[0]">
-              <a :href="staff|staff_url" target=_blank  :class="staff|staff_sex">
-              <template v-if="staff!=''">{{ staff|staff_name }}</template>
+            (<span
+              v-for="staff in z.staffs"
+              :key="staff[0]"
+            >
+              <a
+                :href="staff|staff_url"
+                target="_blank"
+                :class="staff|staff_sex"
+              >
+                <template v-if="staff!=''">{{ staff|staff_name }}</template>
               </a>
               <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
             </span>)
@@ -62,29 +149,47 @@
           <template v-if="z.female+z.male>0">
             / 男女内訳
             <span v-if="z.female>0">
-                ♀{{ z.female }}人 
+              ♀{{ z.female }}人
             </span>
             <span v-if="z.male>0">
-                ♂{{ z.male }}人
+              ♂{{ z.male }}人
             </span>
           </template>
         </span><br>
-        <span class="n2" v-if="z.owner_key != z.parcel_owner_key">
+        <span
+          v-if="z.owner_key != z.parcel_owner_key"
+          class="n2"
+        >
           センサ設置者:
-          <a :href='"http://world.secondlife.com/resident/"+z.owner_key' target='_blank'>
-            {{ z.owner_name}}
+          <a
+            :href="&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
+            target="_blank"
+          >
+            {{ z.owner_name }}
           </a><br>
         </span>
-        <a @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')" target=_blank v-bind:href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z">
-            <b-icon-map scale="0.8"></b-icon-map>ここに移動({{ z.sim }})
+        <a
+          target="_blank"
+          :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
+          @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')"
+        >
+          <b-icon-map scale="0.8" />ここに移動({{ z.sim }})
         </a>
         <span v-if="existBlog(z)">
-          / <a target="_blank" v-bind:href="z.blog">
-            <b-icon-link scale="0.8"></b-icon-link>Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
-            </a>
+          / <a
+            target="_blank"
+            :href="z.blog"
+          >
+            <b-icon-link scale="0.8" />Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
+          </a>
         </span>
         <br>
-        <a v-if="z.radio!=''" target="_blank" :href="'http://uten.jp/radio.cgi?'+z.radio" @click="playRadio(z.radio)">
+        <a
+          v-if="z.radio!=''"
+          target="_blank"
+          :href="'http://uten.jp/radio.cgi?'+z.radio"
+          @click="playRadio(z.radio)"
+        >
           <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
         </a>
         <!--
@@ -96,7 +201,10 @@
           <br>
         </a>
         -->
-        <img class="heatmap" v-bind:src="'/static/heatmap/' + z.flag + '.png?'">
+        <img
+          class="heatmap"
+          :src="'/static/heatmap/' + z.flag + '.png?'"
+        >
       </b-popover>
     </div>
     <div v-if="!shops[0]">
@@ -104,7 +212,7 @@
     </div>
     <!--
     <div v-if="shops" class="f" id="ac" tabindex="0">
-      <Adsense 
+      <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
         ins-style="width:150px;height:150px;"
@@ -113,7 +221,6 @@
       </Adsense>
     </div>
     -->
-
   </div>
 </template>
 <script>
@@ -127,17 +234,6 @@ var SHOP_SOURCE = '//sl-navi.com/api/shop'
 var ALOG_SOURCE = '//sl-navi.com/api/alog'
 export default {
   name: 'ShopList',
-  props: ['mode'],
-  data: function () {
-    return {
-      shops: [],
-      cache_tagid: "",
-      cache_mode: "",
-      cache_search: "",
-      play_flag:0,
-      play_url:""
-    }
-  },
   filters: {
     'staff_url': function (value) {
       return '/d2p/' + value[0]
@@ -146,54 +242,71 @@ export default {
       return value[0]
     },
     'staff_sex': function (value) {
-      if (value[1] == 0){
-        return "female"
-      }else if(value[1] == 1){
-        return "male"
-      }else{
+      if (value[1] == 0) {
+        return 'female'
+      } else if (value[1] == 1) {
+        return 'male'
+      } else {
         return
       }
     }
   },
+  props: ['mode'],
+  data: function () {
+    return {
+      shops: [],
+      cache_tagid: '',
+      cache_mode: '',
+      cache_search: '',
+      play_flag: 0,
+      play_url: ''
+    }
+  },
+  mounted () {
+    var that = this
+    this.$setInterval(() => {
+      that.getShops(that.cache_mode, that.cache_tagid, that.cache_search)
+    }, 1000 * INTERVAL_RELOAD_SHOP)
+  },
   methods: {
-    async alog(flag, event){
+    async alog (flag, event) {
       await axios.post(ALOG_SOURCE, {
         flag: flag,
         event: event
       })
     },
     nitiji: function (str) {
-      return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
+      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
     },
-    nowOpen: function (z){
-      if(!z.event){
+    nowOpen: function (z) {
+      if (!z.event) {
         return 0
       }
-      let start=z.event.start
-      let end=z.event.end
+      let start = z.event.start
+      let end = z.event.end
       // let now=this._formatDate(new Date(),'YYYY-MM-DDThh:mm:ss')
-      let now=new Date()
-      start=new Date(start)
-      end=new Date(end)
-      if(start<now && now<end ){
+      const now = new Date()
+      start = new Date(start)
+      end = new Date(end)
+      if (start < now && now < end) {
         return 1
-      }else if(now<start){
+      } else if (now < start) {
         return 2
-      }else{
+      } else {
         return 0
       }
     },
-    playRadio(url){
-      if(url==this.play_url && this.play_flag==1){
+    playRadio (url) {
+      if (url == this.play_url && this.play_flag == 1) {
         // 同じurlをクリックすると止まる
-        this.play_flag=0
-        this.play_url=''
-      }else{
+        this.play_flag = 0
+        this.play_url = ''
+      } else {
         // 異なるurlは再生
-        this.play_flag=1
-        this.play_url=url
+        this.play_flag = 1
+        this.play_url = url
       }
-      this.$emit('radio',this.play_url)
+      this.$emit('radio', this.play_url)
     },
     isEvent (z) {
       return z.event
@@ -213,40 +326,40 @@ export default {
     isKenzenShop (z) {
       return (z.h === 2)
     },
-    _formatDate:function (date, format) {
-      format = format.replace(/YYYY/g, date.getFullYear());
-      format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
-      format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
-      format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
-      format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
-      format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
-      format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3));
-      return format;
+    _formatDate: function (date, format) {
+      format = format.replace(/YYYY/g, date.getFullYear())
+      format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2))
+      format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2))
+      format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2))
+      format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2))
+      format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2))
+      format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3))
+      return format
     },
     isNewShop (z) {
-      let now=new Date()
-      now.setDate(now.getDate() - 7);
-      let one_week=this._formatDate(now,'YYYY-MM-DDThh:mm:ss')
+      const now = new Date()
+      now.setDate(now.getDate() - 7)
+      const one_week = this._formatDate(now, 'YYYY-MM-DDThh:mm:ss')
       // console.log([z.created_at,one_week])
-      if(z.created_at>one_week){
+      if (z.created_at > one_week) {
         return 1
-      }else{
+      } else {
         return 0
       }
     },
     shop_description (z) {
-      let text=z.info
-      const url_pattern=/(https?:\/\/[^ \r\n]+)/g
-      return text.replace(url_pattern,'<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
+      const text = z.info
+      const url_pattern = /(https?:\/\/[^ \r\n]+)/g
+      return text.replace(url_pattern, '<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
     },
     existBlog (z) {
       return (z.blog !== 'http://www.google.com' && z.blog.indexOf('http') === 0)
     },
     async getShops (m, tagid, search) {
       // console.log(['shoplist:getShop:axios', tagid, m, search])
-      this.cache_mode=m
-      this.cache_tagid=tagid
-      this.cache_search=search
+      this.cache_mode = m
+      this.cache_tagid = tagid
+      this.cache_search = search
       await axios.get(SHOP_SOURCE, {
         params: {
           tagid: tagid,
@@ -254,17 +367,10 @@ export default {
           search: search
         }
       }).then(res => {
-        this.shops=res.data
-         // console.log(['shoplist:getShop:then', this.shops])
+        this.shops = res.data
+        // console.log(['shoplist:getShop:then', this.shops])
       })
     }
-  },
-  mounted () {
-      var that=this
-      this.$setInterval(() => {
-        that.getShops(that.cache_mode, that.cache_tagid, that.cache_search)
-      }, 1000*INTERVAL_RELOAD_SHOP)
-
   }
 }
 </script>
@@ -346,7 +452,6 @@ export default {
     cursor: pointer;
     background-color: #ff8070;
   }
-
 
   .n2{
     font-size: 75%;

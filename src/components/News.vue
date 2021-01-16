@@ -1,20 +1,43 @@
 <template>
-  <div id="news" class="col news">
-    <div class="news_top">最近のおしらせ</div>
+  <div
+    id="news"
+    class="col news"
+  >
+    <div class="news_top">
+      最近のおしらせ
+    </div>
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
-      <li class="news_item">2021/01/01 <span class="badge badge-primary">微調整(WebGUI)</span> イベント予定のある施設は緑のバッジを表示</li>
-      <li class="news_item">2020/12/27 <span class="badge badge-primary">微調整(WebGUI)</span> 登録したイベントを修正する機能の追加</li>
-      <li class="news_item">2020/12/13 <span class="badge badge-primary">微調整(WebGUI)</span> TOPに表示する施設条件を緩和(詳細はメニューのセンサ配布場所⇒FAQ)</li>
-      <li class="news_item">2020/12/12 <span class="badge badge-primary">機能追加 v4.1</span> 土地音楽をブラウザで再生できるようにしました(センサ設置者＝土地所有者のときのみ可能)</li>
-      <li class="news_item">2020/10/09 <span class="badge badge-primary">微調整 v4.07</span> 開店/閉店/Auto状況を看板の下に表示するようにしました(フローティングテキストは廃止)</li>
+      <li class="news_item">
+        2021/01/01 <span class="badge badge-primary">微調整(WebGUI)</span> イベント予定のある施設は緑のバッジを表示
+      </li>
+      <li class="news_item">
+        2020/12/27 <span class="badge badge-primary">微調整(WebGUI)</span> 登録したイベントを修正する機能の追加
+      </li>
+      <li class="news_item">
+        2020/12/13 <span class="badge badge-primary">微調整(WebGUI)</span> TOPに表示する施設条件を緩和(詳細はメニューのセンサ配布場所⇒FAQ)
+      </li>
+      <li class="news_item">
+        2020/12/12 <span class="badge badge-primary">機能追加 v4.1</span> 土地音楽をブラウザで再生できるようにしました(センサ設置者＝土地所有者のときのみ可能)
+      </li>
+      <li class="news_item">
+        2020/10/09 <span class="badge badge-primary">微調整 v4.07</span> 開店/閉店/Auto状況を看板の下に表示するようにしました(フローティングテキストは廃止)
+      </li>
     </ul>
     <h6>新店舗情報</h6>
     <ul class="news_menu">
-      <li class="news_item" v-for="z in shops" :id="z.flag" :key="z.flag">
+      <li
+        v-for="z in shops"
+        :id="z.flag"
+        :key="z.flag"
+        class="news_item"
+      >
         {{ nitiji(z.created_at) }} <span class="badge badge-primary">新規施設</span>
         {{ (z.h===1 ? "アダルト施設" : "一般施設") }}
-        [<a :href="'/search/'+z.flag" v-html="z.name"></a>]を追加
+        [<a
+          :href="'/search/'+z.flag"
+          v-html="z.name"
+        />]を追加
       </li>
     </ul>
   </div>
@@ -24,7 +47,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
-
 
 var NEW_SHOP_SOURCE = '//sl-navi.com/api/shop?new=5'
 export default {
@@ -36,7 +58,7 @@ export default {
   },
   methods: {
     nitiji: function (str) {
-      return str.replace(/T.*/, "").replace(/-/g, "/")
+      return str.replace(/T.*/, '').replace(/-/g, '/')
     },
     async getShops () {
       await axios.get(NEW_SHOP_SOURCE).then(res => {

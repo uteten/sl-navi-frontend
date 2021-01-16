@@ -57,19 +57,19 @@ const routes = [
     path: '/createEvent',
     name: 'viewCreateEvent',
     component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
-    //component: viewCreateEvent
+    // component: viewCreateEvent
   },
   {
     path: '/createEvent/:logincode',
     name: 'viewCreateEventLogin',
     component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
-    //component: viewCreateEvent
+    // component: viewCreateEvent
   },
   {
     path: '/updateEvent/:eid',
     name: 'updateEvent',
     component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
-    //component: viewCreateEvent
+    // component: viewCreateEvent
   },
   {
     path: '/about',
@@ -81,12 +81,12 @@ const routes = [
     path: '/analytics/:flag',
     name: 'viewAnalytics',
     component: () => import(/* webpackChunkName: "viewAnalytics" */ '@/views/ViewAnalytics.vue')
-  },
+  }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  //base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes
 })
 Vue.use(VueAnalytics, {

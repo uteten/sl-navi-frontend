@@ -1,18 +1,33 @@
 <template>
-  <div id="tag_menu_group" class="col col-lg-2 leftmenu">
-    <div id="tag_special_group" class="menu_group">
-      <div class="menu_top">メニュー</div>
-      <ul id="special_tags" class="tag_menu">
-          <li v-for = "tag in special_tags"
-              :key ="tag.id"
-              :value = "tag.id" v-on:click="changeStatus('', tag.id, 'active')" :class = "tag.selected">
-              {{ tag.n }}({{ tag.count }})
-          </li>
+  <div
+    id="tag_menu_group"
+    class="col col-lg-2 leftmenu"
+  >
+    <div
+      id="tag_special_group"
+      class="menu_group"
+    >
+      <div class="menu_top">
+        メニュー
+      </div>
+      <ul
+        id="special_tags"
+        class="tag_menu"
+      >
+        <li
+          v-for="tag in special_tags"
+          :key="tag.id"
+          :value="tag.id"
+          :class="tag.selected"
+          @click="changeStatus('', tag.id, 'active')"
+        >
+          {{ tag.n }}({{ tag.count }})
+        </li>
       </ul>
     </div>
     <!--
     <div class="ad_tag">
-      <Adsense 
+      <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3806078567"
         ins-style="display:inline-block;width:150px;height:200px"
@@ -21,21 +36,34 @@
       </Adsense>
     </div>
     -->
-    
-    <div id="tag_normal_group" class="menu_group">
-      <div class="menu_top">タグ</div>
-      <ul id="normal_tags" class="tag_menu">
+
+    <div
+      id="tag_normal_group"
+      class="menu_group"
+    >
+      <div class="menu_top">
+        タグ
+      </div>
+      <ul
+        id="normal_tags"
+        class="tag_menu"
+      >
         <template v-for="tag in tags">
-          <li v-if ="tag.count>=2" :key="tag.id"
-              :value="tag.id" v-on:click ="changeStatus('', tag.id, 'active')" :class = "tag.selected">
-              {{ tag.n }}({{ tag.count }})
+          <li
+            v-if="tag.count>=2"
+            :key="tag.id"
+            :value="tag.id"
+            :class="tag.selected"
+            @click="changeStatus('', tag.id, 'active')"
+          >
+            {{ tag.n }}({{ tag.count }})
           </li>
         </template>
       </ul>
-    </div>    
+    </div>
     <!--
     <div class="ad_tag">
-      <Adsense 
+      <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3044016459"
             ins-style="display:inline-block;width:150px;height:600px"
@@ -47,7 +75,6 @@
   </div>
 </template>
 
-
 <script>
 import Vue from 'vue'
 import axios from 'axios'
@@ -55,7 +82,7 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 const TAG_SOURCE = '//sl-navi.com/api/tag'
-export default{
+export default {
   name: 'TagList',
   props: ['mode'],
   data: function () {
@@ -71,8 +98,8 @@ export default{
       return function (a, b) {
         var aa = a[field]
         var bb = b[field]
-        if(a.n=='ボイスOK'||a.n=='ボイスNG') aa=60
-        if(b.n=='ボイスOK'||b.n=='ボイスNG') bb=60
+        if (a.n == 'ボイスOK' || a.n == 'ボイスNG') aa = 60
+        if (b.n == 'ボイスOK' || b.n == 'ボイスNG') bb = 60
         if (typeof (primer) !== 'undefined') {
           aa = primer(aa)
           bb = primer(bb)
@@ -84,7 +111,7 @@ export default{
     },
     async getTags (tagid) {
       await axios.get(TAG_SOURCE).then(res => {
-        let m = this.mode // k=健全 e=アダルト c=全部
+        const m = this.mode // k=健全 e=アダルト c=全部
         for (var z of res.data) {
           z.count = z[m]
           if (z.id > 0) {
@@ -102,20 +129,20 @@ export default{
     changeStatus (m, tagid, active) {
       if (m) {
         // console.log(['TagList:changeStatus', m, tagid])
-        for (let z of this.tags) {
+        for (const z of this.tags) {
           this.$set(z, 'count', z[m])
         }
-        for (let z of this.special_tags) {
+        for (const z of this.special_tags) {
           this.$set(z, 'count', z[m])
         }
         this.tags.sort(this._sort_by(m, true, parseInt))
       }
       if (tagid) {
         scrollTo(0, 0)
-        for (let z of this.tags) {
+        for (const z of this.tags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
         }
-        for (let z of this.special_tags) {
+        for (const z of this.special_tags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
         }
       }

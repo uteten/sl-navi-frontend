@@ -1,128 +1,27 @@
 <template>
   <div class="view row">
-    <tag-list ref="appTagList" :mode="mode"
-              v-on:selected_tag="actionSelectedTag"></tag-list>
+    <tag-list
+      ref="appTagList"
+      :mode="mode"
+      @selected_tag="actionSelectedTag"
+    />
     <div class="view col">
-      <messages ref="appMessages"></messages>
-      <shop-list ref="appShopList"></shop-list>
-      <div class="col ad" v-if="$cookies.get('dev')!=1">
-        <!--
-          <Adsense 
-            data-ad-client="ca-pub-7267369281211974" 
-            data-ad-slot="4854478492"
-            data-ad-format="auto"
-            data-full-width-responsive="yes">
-          </Adsense>
-        -->
-        <!--
-        <Adsense 
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="5623461223"
-          ins-style="width:728px;height:90px;"
-          data-ad-format=""
-          data-full-width-responsive="no">
-        </Adsense>
-        -->
-        <!--
-        <Adsense 
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="2039245917"
-          ins-style="width:728px;height:150px;"
-          data-ad-format=""
-          data-full-width-responsive="no">
-        </Adsense>
-        -->
-        <!--
-        <Adsense 
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="5610007024"
-          ins-style="width:728px;height:120px;"
-          data-ad-format=""
-          data-full-width-responsive="no">
-        </Adsense>
-        -->
-        <!--
-        <Adsense 
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="3156886463"
-          ins-style="width:800px;height:120px;"
-          data-ad-format=""
-          data-full-width-responsive="no">
-        </Adsense>
-        -->
-        <!--
-        <table>
-          <tr><td >
-          <Adsense
-            data-ad-client="ca-pub-7267369281211974" 
-            data-ad-slot="4854478492"
-            ins-style="display:inline-block;width:100%;height:120px;"
-            data-ad-format=""
-            data-full-width-responsive="">
-          </Adsense>
-          </td>
-          <td>
-          <Adsense
-            data-ad-client="ca-pub-7267369281211974" 
-            data-ad-slot="4854478492"
-            ins-style="display:inline-block;width:100%;height:120px;"
-            data-ad-format=""
-            data-full-width-responsive="">
-          </Adsense>
-          </td></tr>
-          </table>
-        -->
+      <messages ref="appMessages" />
+      <shop-list ref="appShopList" />
+      <div
+        v-if="$cookies.get('dev')!=1"
+        class="col ad"
+      >
         <Adsense
-          data-ad-client="ca-pub-7267369281211974" 
+          data-ad-client="ca-pub-7267369281211974"
           data-ad-slot="4854478492"
           ins-style="display:inline-block;width:80%;height:120px;"
           data-ad-format=""
-          data-full-width-responsive="">
-        </Adsense>
-        <!--
-        <template v-if="mode=='e'">
-            <Adsense
-              data-ad-client="ca-pub-7267369281211974" 
-              data-ad-slot="4854478492"
-              ins-style="display:inline-block;width:80%;height:120px;"
-              data-ad-format=""
-              data-full-width-responsive="">
-            </Adsense>
-        </template>
-        <template v-else-if="mode=='c'">
-          <Adsense
-            data-ad-client="ca-pub-7267369281211974" 
-            data-ad-slot="1881928276"
-            ins-style="display:inline-block;width:80%;height:120px;"
-            data-ad-format=""
-            data-full-width-responsive="">
-          </Adsense>
-        </template>
-        <template v-else>
-          <span>
-          <Adsense
-            data-ad-client="ca-pub-7267369281211974" 
-            data-ad-slot="4351011658"
-            ins-style="display:inline-block;width:80%;height:120px;"
-            data-ad-format=""
-            data-full-width-responsive="">
-          </Adsense>
-          </span>
-        </template>
-        -->
-
+          data-full-width-responsive=""
+        />
       </div>
-
-      <event-list ref="appEventList"></event-list>
-      <news ref="appNews"></news>
-      <!--
-        <audio id="audio" :src="stream_url" :autoplay="stream_play" type="audio/mpeg">      
-        Your browser does not support the audio element.
-        </audio>
-        <audio id="audioc" :src="stream_url+'/;'" :autoplay="stream_play" type="audio/mpeg">
-        Your browser does not support the audio element.
-        </audio>
-      -->
+      <event-list ref="appEventList" />
+      <news ref="appNews" />
     </div>
   </div>
 </template>
@@ -141,58 +40,23 @@ const ALL_SHOP_TAGID = -1
 
 export default {
   name: 'ViewSlnavi',
-  props: ['mode'],
-  data: function () {
-    return {
-      tagid: ACTIVE_SHOP_TAGID,
-      searchword: this.$route.params.searchword,
-      event_data:{},
-      stream_url: '',
-      stream_play: 'autoplay'
-    }
-  },
   components: {
     TagList,
     News,
     Messages,
     ShopList,
-    EventList,
+    EventList
   },
-  methods: {
-    actionSelectedTag: function (e) {
-      this.tagid = e
-      this.$refs.appShopList.getShops(this.mode, e)
-      this.$emit('selected_tag', e)
-    },
-    actionSearch: function (e) {
-      console.log(['view:actionSearch', e])
-      this.mode = 'c'
-      this.tagid = ALL_SHOP_TAGID
-      this.$refs.appTagList.changeStatus(this.mode, this.tagid)
-      this.$refs.appShopList.getShops(this.mode, this.tagid, e)
-    },
-    escape_html: function (tmp) {
-      if(typeof tmp !== 'string') {
-        return tmp;
-      }
-      tmp= tmp.replace(/[&'`"<>]/g, function(match) {
-        return {
-          '&': '&amp;',
-          "'": '&#x27;',
-          '`': '&#x60;',
-          '"': '&quot;',
-          '<': '&lt;',
-          '>': '&gt;',
-        }[match]
-      });
-      const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
-      tmp=tmp.replace(img_pattern,'<img width="400" src="$1">')
-      const url_pattern=/[^"](https?:\/\/[^ \r\n]+)/g
-      tmp=tmp.replace(url_pattern,'<a target="_blank" href="$1">$1</a>')
-      return tmp.replace(/\n/g, '<br>')
-    },
-    nitiji: function (str) {
-      return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
+  props: {
+    'mode': {
+      type: String,
+      default: 'k'
+    }
+  },
+  data: function () {
+    return {
+      tagid: ACTIVE_SHOP_TAGID,
+      searchword: this.$route.params.searchword
     }
   },
   watch: {
@@ -216,9 +80,6 @@ export default {
       }
     }
   },
-  // beforeUpdate () {
-  //   console.log(['viewSlnavi:befoUpdate', this])
-  // },
   mounted () {
     // console.log(['viewSlnavi:mounted!!', this])
     if (this.searchword) {
@@ -238,6 +99,22 @@ export default {
       this.$refs.appEventList.getEvents()
       this.$refs.appNews.getShops()
       this.$refs.appMessages.getMessages(this.mode)
+    }
+  },
+  methods: {
+    actionSelectedTag: function (e) {
+      this.tagid = e
+      this.$refs.appShopList.getShops(this.mode, e)
+      this.$emit('selected-tag', e)
+    },
+    actionSearch: function (e) {
+      console.log(['view:actionSearch', e])
+      this.tagid = ALL_SHOP_TAGID
+      this.$refs.appTagList.changeStatus('c', this.tagid)
+      this.$refs.appShopList.getShops('c', this.tagid, e)
+    },
+    nitiji: function (str) {
+      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
     }
   }
 }

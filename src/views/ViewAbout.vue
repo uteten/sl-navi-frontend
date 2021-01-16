@@ -1,66 +1,80 @@
 <template>
-<div class="view">
-  <img class="sl-navi-kanban" src="/static/sl-navi-kanban.png">
-  <br><br>
+  <div class="view">
+    <img
+      class="sl-navi-kanban"
+      src="/static/sl-navi-kanban.png"
+    >
+    <br><br>
 
-  <h4>■このサイトの目的</h4>
-  <ol>
+    <h4>■このサイトの目的</h4>
+    <ol>
       <li>アダルト、一般施設問わず、<a href="https://www.secondlife.com/?lang=ja">セカンドライフ</a>内の日本人がいる施設や遊び場を見つけやすくします</li>
       <li>施設オーナーはセンサを置くだけで利用できます(申請不要)</li>
-  </ol>
- 
-  <h4>■センサ配布場所</h4>
-  <ul>
-    <li><a @click="$ga.event('about', 'click_mapurl', 'センサ配布場所')" target=_blank href="http://maps.secondlife.com/secondlife/japan%20canvas/102/172/2002">http://maps.secondlife.com/secondlife/japan%20canvas/102/172/2002</a></li>
-    <li style="list-style: none;">設置時のエラーや不明点は<a href="secondlife:///app/agent/7bc5bae0-bf2d-44da-a79f-66cdef64c321/about">uten resident</a> か <a href="https://twitter.com/sl_uten">@sl_uten</a>へ</li>
-</ul>
-  
-  <h4>■FAQ</h4>
-  <table class="table table-striped">
+    </ol>
+
+    <h4>■センサ配布場所</h4>
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          href="http://maps.secondlife.com/secondlife/japan%20canvas/102/172/2002"
+          @click="$ga.event('about', 'click_mapurl', 'センサ配布場所')"
+        >http://maps.secondlife.com/secondlife/japan%20canvas/102/172/2002</a>
+      </li>
+      <li style="list-style: none;">
+        設置時のエラーや不明点は<a href="secondlife:///app/agent/7bc5bae0-bf2d-44da-a79f-66cdef64c321/about">uten resident</a> か <a href="https://twitter.com/sl_uten">@sl_uten</a>へ
+      </li>
+    </ul>
+
+    <h4>■FAQ</h4>
+    <table class="table table-striped">
       <tr>
-          <th>質問</th>
-          <th>回答</th>
+        <th>質問</th>
+        <th>回答</th>
       </tr>
       <tr>
-          <td>登録した施設をWebから撤去したい</td>
-          <td>センサを撤去すると12時間後に消えます</td>
+        <td>登録した施設をWebから撤去したい</td>
+        <td>センサを撤去すると12時間後に消えます</td>
       </tr>
       <tr>
-          <td>土地管理者/所有者じゃないがセンサを置くことは可能か？（土地レンタルなど）</td>
-          <td>Rez権限があれば可能。ただし土地管理者と揉めないように気をつけてください。</td>
+        <td>土地管理者/所有者じゃないがセンサを置くことは可能か？（土地レンタルなど）</td>
+        <td>Rez権限があれば可能。ただし土地管理者と揉めないように気をつけてください。</td>
       </tr>
       <tr>
-          <td>TOP(人がいる施設)に表示される施設の条件は？</td>
-          <td>
-              以下のいずれかを満たす施設(2020/12/13時点）<br>
-              ・開店中で人がいる<br>
-              <s>・開店中でスタッフがいる</s><br>
-              <s>・開店中でSENSOR_RANGE_XY=150以下で誰かいる</s><br>
-          </td>
+        <td>TOP(人がいる施設)に表示される施設の条件は？</td>
+        <td>
+          以下のいずれかを満たす施設(2020/12/13時点）<br>
+          ・開店中で人がいる<br>
+          <s>・開店中でスタッフがいる</s><br>
+          <s>・開店中でSENSOR_RANGE_XY=150以下で誰かいる</s><br>
+        </td>
       </tr>
       <tr>
-          <td>センサをon/offしてもすぐにWebに反映されない？</td>
-          <td>Webに結果が反映されるのに最大30秒時間差があります</td>
+        <td>センサをon/offしてもすぐにWebに反映されない？</td>
+        <td>Webに結果が反映されるのに最大30秒時間差があります</td>
       </tr>
       <tr>
-          <td>センサ更新時などに同じ看板を使い回せるか？</td>
-          <td>センサ設置者が同じであれば使い回せます。<br>
-          設置者が異なる場合は古いセンサを撤去して12時間後(施設情報がWebから消えた後)に、設置してください。</td>
+        <td>センサ更新時などに同じ看板を使い回せるか？</td>
+        <td>
+          センサ設置者が同じであれば使い回せます。<br>
+          設置者が異なる場合は古いセンサを撤去して12時間後(施設情報がWebから消えた後)に、設置してください。
+        </td>
       </tr>
       <tr>
-          <td>1SIMに複数センサを置いているが、人がカウントされないセンサがある</td>
-          <td>複数のセンサがあり、範囲がかぶっている場所に人がいる場合、センサ範囲が小さいセンサにカウントされます</td>
+        <td>1SIMに複数センサを置いているが、人がカウントされないセンサがある</td>
+        <td>複数のセンサがあり、範囲がかぶっている場所に人がいる場合、センサ範囲が小さいセンサにカウントされます</td>
       </tr>
       <tr>
-          <td>男女判定の仕組みは？</td>
-          <td>センサのバージョンによって違うのですが最新版は以下の通り<br>
+        <td>男女判定の仕組みは？</td>
+        <td>
+          センサのバージョンによって違うのですが最新版は以下の通り<br>
           装着物にmale,(m),genitalを含むと男、female,(f),heel,skirt,boobを含むと女、<br>
           両方ある場合は多い方、装着物で判断できない場合はシェイプの♂♀で判定します。
-          </td>
+        </td>
       </tr>
-  </table>
-  <hr/>
-</div>
+    </table>
+    <hr>
+  </div>
 </template>
 <script>
 import Vue from 'vue'
@@ -69,12 +83,12 @@ Vue.use(VueSocialSharing)
 export default {
   data: function () {
     return {
-      sns_url : "https://sl-navi.com",
-      sns_title: "// SL-Navi",
-      sns_description: "セカンドライフ内で日本人がいるお店や遊び場、新施設を見つけよう",
-      sns_hashtags:"secondlife,sljp",
-      sns_twitter_user:"SL_Uten"
-}
+      sns_url: 'https://sl-navi.com',
+      sns_title: '// SL-Navi',
+      sns_description: 'セカンドライフ内で日本人がいるお店や遊び場、新施設を見つけよう',
+      sns_hashtags: 'secondlife,sljp',
+      sns_twitter_user: 'SL_Uten'
+    }
   }
 }
 </script>

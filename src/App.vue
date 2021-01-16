@@ -1,31 +1,101 @@
 <template>
-  <div class="container-fluid" >
-    <div id="app" class="row" >
+  <div class="container-fluid">
+    <div
+      id="app"
+      class="row"
+    >
       <b-nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a id="sitetitle" class="navbar-brand" href="/">SL-Navi</a>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <b-collapse id="nav-collapse" is-nav>
-          <ul id="topmenu" class="navbar-nav mr-auto">
-            <li class="nav-item" ><router-link to="/"      class="nav-link"><b-icon-house scale="0.8"></b-icon-house>一般施設</router-link></li>
-            <li class="nav-item" ><router-link to="/adult" class="nav-link"><b-icon-heart-fill scale="0.8"></b-icon-heart-fill>アダルト施設</router-link></li>
-            <li class="nav-item" ><router-link to="/all"   class="nav-link" :class="this.searchword ? 'router-link-exact-active' : '' "><b-icon-building scale="0.8"></b-icon-building>両方</router-link></li>
-            <li class="nav-item" ><router-link to="/event" class="nav-link"><b-icon-calendar-week scale="0.8"></b-icon-calendar-week>イベント</router-link></li>
-            <li class="nav-item" ><router-link to="/about" class="nav-link"><b-icon-info-circle-fill scale="0.8"></b-icon-info-circle-fill>センサ配布場所</router-link></li>
+        <a
+          id="sitetitle"
+          class="navbar-brand"
+          href="/"
+        >SL-Navi</a>
+        <b-navbar-toggle target="nav-collapse" />
+        <b-collapse
+          id="nav-collapse"
+          is-nav
+        >
+          <ul
+            id="topmenu"
+            class="navbar-nav mr-auto"
+          >
+            <li class="nav-item">
+              <router-link
+                to="/"
+                class="nav-link"
+              >
+                <b-icon-house scale="0.8" />一般施設
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/adult"
+                class="nav-link"
+              >
+                <b-icon-heart-fill scale="0.8" />アダルト施設
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/all"
+                class="nav-link"
+                :class="this.searchword ? 'router-link-exact-active' : '' "
+              >
+                <b-icon-building scale="0.8" />両方
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/event"
+                class="nav-link"
+              >
+                <b-icon-calendar-week scale="0.8" />イベント
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/about"
+                class="nav-link"
+              >
+                <b-icon-info-circle-fill scale="0.8" />センサ配布場所
+              </router-link>
+            </li>
           </ul>
           <form class="search form-inline">
-            <input type="search" v-model="searchword" @keydown.enter="goSearch($event.keyCode)"
-                  name="search" value="" class="form-control mr-sm-2" placeholder="キーワードで探す" aria-label="Search">
-            <input type="text" name="dummy" style="display:none;">
-            <button v-on:click="goSearch(13)" class="btn btn-warning my-2 my-sm-0" type="button">
-              <b-icon-search scale="0.8"></b-icon-search>
+            <input
+              v-model="searchword"
+              type="search"
+              name="search"
+              value=""
+              class="form-control mr-sm-2"
+              placeholder="キーワードで探す"
+              aria-label="Search"
+              @keydown.enter="goSearch($event.keyCode)"
+            >
+            <input
+              type="text"
+              name="dummy"
+              style="display:none;"
+            >
+            <button
+              class="btn btn-warning my-2 my-sm-0"
+              type="button"
+              @click="goSearch(13)"
+            >
+              <b-icon-search scale="0.8" />
             </button>
           </form>
         </b-collapse>
       </b-nav>
-      <router-view ref="view" @selected_tag="searchword=''"/>
+      <router-view
+        ref="view"
+        @selectedTag="searchword=''"
+      />
       <footer class="footer">
         <div class="container">
-          <p class="text-muted">© 2020-2021 sl-navi  | <a href="https://twitter.com/SL_Uten">@uten</a></p>
+          <p class="text-muted">
+            © 2020-2021 sl-navi  | <a href="https://twitter.com/SL_Uten">@uten</a>
+          </p>
         </div>
       </footer>
     </div>
@@ -53,22 +123,29 @@ export default {
       complement: 'セカンドライフ内の遊び場紹介'
     },
     meta: [
-        { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設を見つけることができます。施設オーナーは、すりんくと異なり審査不要、即座に施設紹介ができます。' },
-        { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
-        { charset: 'utf-8' },
-        // ... 
+      { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設を見つけることができます。施設オーナーは、すりんくと異なり審査不要、即座に施設紹介ができます。' },
+      { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
+      { charset: 'utf-8' }
+      // ...
     ],
     link: [
       { rel: 'icon', href: '/static/favicon.ico' }
     ]
   },
+  watch: {
+    '$route.path': function () {
+      this.syncSearchFormFromPath() // 同上(店のタイトルをクリックしてPathが変わったとき)
+    }
+  }, mounted () {
+    this.syncSearchFormFromPath() // 検索フォームをPathにあわせて入力した状態にする（初期状態）
+  },
   methods: {
     goSearch (keyCode) {
-      if (keyCode !== 13) return;
+      if (keyCode !== 13) return
       // 検索ワードが異なるときはPathを変える。同じ時は単に検索する
       if (this.searchword && this.$route.params.searchword !== this.searchword) {
-        this.$router.push('/search/' + this.searchword.replace('/','%2F'))
+        this.$router.push('/search/' + this.searchword.replace('/', '%2F'))
       } else {
         this.$refs.view.actionSearch(this.searchword)
       }
@@ -76,19 +153,12 @@ export default {
     syncSearchFormFromPath () {
       // console.log(['syncTopMenuFromPath', this.$route.path])
       // 検索パスがある場合は/allを選択、それ以外はパスに合わせて選択かつ検索フォームをクリア
-      let word = this.$route.path.match(/^\/search\/(.*)/)
+      const word = this.$route.path.match(/^\/search\/(.*)/)
       if (word && word[1] !== '') {
-        this.searchword = word[1].replace('%2F','/')
+        this.searchword = word[1].replace('%2F', '/')
       } else {
         this.searchword = ''
       }
-    }
-  },mounted () {
-    this.syncSearchFormFromPath() // 検索フォームをPathにあわせて入力した状態にする（初期状態）
-  },
-  watch: {
-    '$route.path': function () {
-      this.syncSearchFormFromPath() // 同上(店のタイトルをクリックしてPathが変わったとき)
     }
   }
 }

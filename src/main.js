@@ -16,8 +16,8 @@ Vue.use(SetInterval)
 
 Vue.config.productionTip = false
 
-Vue.filter('capitalize', function(val) {
-  return val? val.toUpperCase() : ''
+Vue.filter('capitalize', function (val) {
+  return val ? val.toUpperCase() : ''
 })
 
 new Vue({

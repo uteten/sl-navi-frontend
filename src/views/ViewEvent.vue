@@ -1,57 +1,114 @@
 <template>
-<div class="view">
-  <div align="right">
-    <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
-  </div>
-  <FullCalendar ref="fullCalendar" :options="calendarOptions" />
-  <ul>
-      <li v-for="z in legend" :key=z.color class="list-inline-item"><font :color=z.color>■</font>{{ z.name }}</li>
-  </ul>
-  <b-modal ref="my-modal"  v-model="showModal"  :title=ed_title class="modal fade" size="lg" hide-footer>
-      <img class="flag" :src="ed_img">
+  <div class="view">
+    <div align="right">
+      <router-link to="/createEvent">
+        <span class="badge badge-danger">イベント登録はここをクリック</span>
+      </router-link>
+    </div>
+    <FullCalendar
+      ref="fullCalendar"
+      :options="calendarOptions"
+    />
+    <ul>
+      <li
+        v-for="z in legend"
+        :key="z.color"
+        class="list-inline-item"
+      >
+        <font :color="z.color">
+          ■
+        </font>{{ z.name }}
+      </li>
+    </ul>
+    <b-modal
+      ref="my-modal"
+      v-model="showModal"
+      :title="edTitle"
+      class="modal fade"
+      size="lg"
+      hide-footer
+    >
+      <img
+        class="flag"
+        :src="edImg"
+      >
       <dl class="dl-horizontal">
-          <dt>形式</dt><dd>{{ ed_genre }}</dd>
-          <dt>期間</dt><dd>{{ ed_span}}</dd>
-          <dt>場所</dt><dd><a target=_blank :href="ed_map">{{ ed_map }}</a></dd>
-          <dt>詳細</dt><dd v-html="ed_desc"></dd>
-          <dt>SNS共有</dt>
-          <dd>
-            <ShareNetwork network="Twitter" :url="'https://sl-navi.com/event/'+ed_id"
-              :title="ed_title " :description="ed_desc"
-              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
-                <img class="sns_icon" src="https://sl-navi.com/static/twitter.png">
-            </ShareNetwork>
-            <ShareNetwork network="Facebook" :url="'https://sl-navi.com/event/'+ed_id"
-              :title="ed_title " :description="ed_desc"
-              hashtags="secondlife,sljp" sns_twitter_user="SL_uten">
-                <img class="sns_icon" src="https://sl-navi.com/static/facebook.png">
-            </ShareNetwork>
-          </dd>
-          <dt>投稿</dt>
-          <dd>Posted by 
-              <a v-if="ed_by.indexOf('.')==-1" target=_blank :href="'https://twitter.com/'+ed_by">@{{ ed_by }}</a>
-              <span v-else>{{ ed_by }}</span>
-          </dd>
+        <dt>形式</dt><dd>{{ edGenre }}</dd>
+        <dt>期間</dt><dd>{{ edSpan }}</dd>
+        <dt>場所</dt><dd>
+          <a
+            target="_blank"
+            :href="edMap"
+          >{{ edMap }}</a>
+        </dd>
+        <dt>詳細</dt><dd v-html="edDesc" />
+        <dt>SNS共有</dt>
+        <dd>
+          <ShareNetwork
+            network="Twitter"
+            :url="'https://sl-navi.com/event/'+edId"
+            :title="edTitle "
+            :description="edDesc"
+            hashtags="secondlife,sljp"
+            sns_twitter_user="SL_uten"
+          >
+            <img
+              class="sns_icon"
+              src="https://sl-navi.com/static/twitter.png"
+            >
+          </ShareNetwork>
+          <ShareNetwork
+            network="Facebook"
+            :url="'https://sl-navi.com/event/'+edId"
+            :title="edTitle "
+            :description="edDesc"
+            hashtags="secondlife,sljp"
+            sns_twitter_user="SL_uten"
+          >
+            <img
+              class="sns_icon"
+              src="https://sl-navi.com/static/facebook.png"
+            >
+          </ShareNetwork>
+        </dd>
+        <dt>投稿</dt>
+        <dd>
+          Posted by
+          <a
+            v-if="edBy.indexOf('.')==-1"
+            target="_blank"
+            :href="'https://twitter.com/'+edBy"
+          >@{{ edBy }}</a>
+          <span v-else>{{ edBy }}</span>
+        </dd>
       </dl>
-      <template v-if="username==ed_by||username=='SL_Uten'||username=='uten'">変更する
-        <router-link :to="'/updateEvent/'+ed_id"><button class="badge badge-warning">登録内容の更新</button></router-link>
-        <button class="badge badge-danger" @click="deleteEvent(ed_id)" >登録内容の削除</button>
+      <template v-if="username==edBy||username=='SL_Uten'||username=='uten'">
+        変更する
+        <router-link :to="'/updateEvent/'+edId">
+          <button class="badge badge-warning">
+            登録内容の更新
+          </button>
+        </router-link>
+        <button
+          class="badge badge-danger"
+          @click="deleteEvent(edId)"
+        >
+          登録内容の削除
+        </button>
       </template>
-
-  </b-modal>
-  <div align="right">
-    <router-link to="/createEvent"><span class="badge badge-danger">イベント登録はここをクリック</span></router-link>
+    </b-modal>
+    <div align="right">
+      <router-link to="/createEvent">
+        <span class="badge badge-danger">イベント登録はここをクリック</span>
+      </router-link>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid';
-//import listPlugin from '@fullcalendar/list';
-
-//import interactionPlugin from '@fullcalendar/interaction'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -64,7 +121,6 @@ Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 Vue.use(VueSocialSharing)
 
-
 var LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
 var GENRE_SOURCE = '//sl-navi.com/event/api/genre'
 var EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
@@ -74,10 +130,10 @@ export default {
   },
   filters: {
     'twitter_or_sl': function (z) {
-      if(z.indexOf(".")>0){
+      if (z.indexOf('.') > 0) {
         return ''
-      }else{
-        return 'https://twitter.com/'+z
+      } else {
+        return 'https://twitter.com/' + z
       }
     }
   },
@@ -86,163 +142,148 @@ export default {
       calendarOptions: {
         locale: 'en',
         firstDay: 1,
-        plugins: [ dayGridPlugin, timeGridPlugin ],
+        plugins: [dayGridPlugin, timeGridPlugin],
         initialView: 'dayGridMonth',
         eventSources: [EVENT_SOURCE],
         headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         eventTimeFormat: { // like '14:30:00'
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
         },
-        eventClick: function(e) {
-          this.popup(e)
+        eventClick: function (e) {
+          this.popup(e.event)
         }.bind(this)
       },
       legend: [],
-      showModal:false,
+      showModal: false,
       username: '',
       csrftoken: '',
-      ed_id: '',
-      ed_title: '',
-      ed_img: '',
-      ed_genre: '',
-      ed_span: '',
-      ed_map: '',
-      ed_desc: '',
-      ed_by: ''
+      edId: '',
+      edTitle: '',
+      edImg: '',
+      edGenre: '',
+      edSpan: '',
+      edMap: '',
+      edDesc: '',
+      edBy: ''
+    }
+  },
+  async mounted () {
+    // genreの凡例
+    await axios.get(GENRE_SOURCE).then(res => {
+      this.legend = res.data
+    })
+    this.getUsername()
+    this.csrftoken = this.getCookie('csrftoken')
+    // イベントダイレクト表示
+    if (this.$route.params.eid) {
+      var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/'
+      await axios.get(EVENT_SOURCE + this.$route.params.eid).then(res => {
+        this.popup(res.data)
+      })
     }
   },
   methods: {
-    twitterUrl: function(id,title) {
-      var url = encodeURIComponent('https://sl-navi.com/event/'+id)
+    twitterUrl: function (id, title) {
+      var url = encodeURIComponent('https://sl-navi.com/event/' + id)
       var txt = encodeURIComponent(title)
-      return  'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url='+url
+      return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
     },
-    popup: function (e){
-      let ee=e.event;
-      this.ed_id=ee.id
-      this.ed_title=ee.title
-      this.ed_img=ee.extendedProps.img_url
-      this.ed_genre=ee.extendedProps.genre.name
-      this.ed_span=this.nitiji(ee.extendedProps.start_time)+" 〜 "+this.nitiji(ee.extendedProps.end_time)
-      this.ed_map=ee.extendedProps.map_url
-      this.ed_desc=this.escape_html(ee.extendedProps.description)
-      this.ed_by=ee.extendedProps.created_by.name
+    popup: function (e) {
+      this.edId = e.id
+      this.edTitle = e.title
+      if (e.extendedProps) {
+        e = e.extendedProps
+      }
+      this.edImg = e.img_url
+      this.edGenre = e.genre.name
+      this.edSpan = this.nitiji(e.start_time) + ' 〜 ' + this.nitiji(e.end_time)
+      this.edMap = e.map_url
+      this.edDesc = this.escapeHtml(e.description)
+      this.edBy = e.created_by.name
       this.$refs['my-modal'].show()
-      this.$router.push('/event/' + ee.id).catch(err => {console.log(err)})
+      this.showModal = true
+      this.$router.push('/event/' + this.edId).catch(err => { console.log(err) })
     },
-		getCookie: function (name) {
-			let cookieValue = null;
-			if (document.cookie && document.cookie !== '') {
-					const cookies = document.cookie.split(';');
-					for (let i = 0; i < cookies.length; i++) {
-							const cookie = cookies[i].trim();
-							// Does this cookie string begin with the name we want?
-							if (cookie.substring(0, name.length + 1) === (name + '=')) {
-									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-									break;
-							}
-					}
-			}
-			return cookieValue;
+    getCookie: function (name) {
+      let cookieValue = null
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim()
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+            break
+          }
+        }
+      }
+      return cookieValue
     },
-    deleteEvent: function (event_id){
-			const headers ={
-				'X-CSRFTOKEN': this.csrftoken
-			}
-      axios.delete(EVENT_SOURCE+"/"+event_id, {headers: headers}
-			).then(res =>{
-				alert("削除に成功しました")
-        this.$refs['my-modal'].hide()
-        let calendarApi = this.$refs.fullCalendar.getApi()
-        calendarApi.refetchEvents()
-				console.log(res)
-      }).catch(err=>{
-				console.log(["error",err])
-				if(err.response.status==401){
-          alert("削除に失敗しました。認証情報が確認できないのでログインしてから再実行してください")
-				}else if(err.response.status==403){
-          alert("削除に失敗しました。投稿者した記事しか削除できません")
-				}else{
-					alert("削除に失敗しました。すでに削除済みかも？")
+    deleteEvent: function (eventId) {
+      const headers = {
+        'X-CSRFTOKEN': this.csrftoken
+      }
+      axios.delete(EVENT_SOURCE + '/' + eventId, { headers: headers }).then(
+        res => {
+          alert('削除しました')
+          this.$refs['my-modal'].hide()
+          this.$refs.fullCalendar.getApi().refetchEvents()
+          console.log(['ViewEvent.delete', res])
+        }).catch(err => {
+        if (err.response.status === 401) {
+          alert('削除に失敗しました。認証情報が確認できないのでログインしてから再実行してください')
+        } else if (err.response.status === 403) {
+          alert('削除に失敗しました。投稿者した記事しか削除できません')
+        } else {
+          alert('削除に失敗しました。すでに削除済みかも？')
         }
         this.$refs['my-modal'].hide()
-        let calendarApi = this.$refs.fullCalendar.getApi()
-        calendarApi.refetchEvents()
-			})
-},
-    escape_html: function (tmp) {
-      if(typeof tmp !== 'string') {
-        return tmp;
+        this.$refs.fullCalendar.getApi().refetchEvents()
+      })
+    },
+    escapeHtml: function (tmp) {
+      if (typeof tmp !== 'string') {
+        return tmp
       }
-      tmp= tmp.replace(/[&'`"<>]/g, function(match) {
+      tmp = tmp.replace(/[&'`"<>]/g, function (match) {
         return {
           '&': '&amp;',
           "'": '&#x27;',
           '`': '&#x60;',
           '"': '&quot;',
           '<': '&lt;',
-          '>': '&gt;',
+          '>': '&gt;'
         }[match]
-      });
-      //const img_pattern=/\[ *(https?:\/\/[^\]]+) *\]/g
-      const img_pattern=/(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
-      tmp=tmp.replace(img_pattern,'<img width="400" src="$1$2$3">')
-      const url_pattern=/([^"])(https?:\/\/[^ )\r\n]+)/g
-      tmp=tmp.replace(url_pattern,'$1<a target="_blank" href="$2">$2</a>')
+      })
+      const imgPattern = /(https?:\/\/)(.*)(png|gif|jpg|jpeg)([a-zA-Z0-9.\-&=;%$]*)/gi
+      const urlPattern = /([^"])(https?:\/\/[^ )\r\n]+)/g
+      tmp = tmp.replace(imgPattern, '<img width="400" src="$1$2$3">')
+      tmp = tmp.replace(urlPattern, '$1<a target="_blank" href="$2">$2</a>')
       return tmp.replace(/\n/g, '<br>')
-
     },
     nitiji: function (str) {
-      return str.replace(/:00$/, "").replace("T", " ").replace(/202[0-9]-/, "").replace("-", "/").replace(/^0/, "").replace(/\/0/, "/");
+      return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')
     },
     async getUsername () {
-			await axios.get(LOGIN_STATUS_URL).then(res => {
-        if(res.data[0]){
-          this.username=res.data[0].username
-        }else{
-          this.username=""
+      await axios.get(LOGIN_STATUS_URL).then(res => {
+        if (res.data[0]) {
+          this.username = res.data[0].username
+        } else {
+          this.username = ''
         }
-				console.log(["username=",this.username,res.data])
-      }).catch(err=>{
-				console.log(err)
-				this.username=""
+        console.log(['username=', this.username, res.data])
+      }).catch(err => {
+        console.log(err)
+        this.username = ''
       })
     }
-  },
-  async mounted(){
-    // genreの凡例
-    await axios.get(GENRE_SOURCE).then(res => {
-      this.legend=res.data
-    })
-    this.getUsername()
-    this.csrftoken = this.getCookie('csrftoken')
-   // イベントダイレクト表示
-    if(this.$route.params.eid){
-      console.log("nya")
-      var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/'
-      await axios.get(EVENT_SOURCE+this.$route.params.eid).then(res => {
-        let ee=res.data;
-        this.ed_id=ee.id
-        this.ed_title=ee.title
-        this.ed_img=ee.img_url
-        this.ed_genre=ee.genre.name
-        this.ed_span=this.nitiji(ee.start_time)+" 〜 "+this.nitiji(ee.end_time)
-        this.ed_map=ee.map_url
-        this.ed_desc=this.escape_html(ee.description)
-        this.ed_by=ee.created_by.name
-        this.$refs['my-modal'].show()
-        this.showModal=true
-      })
-    }
-
-
-}
+  }
 }
 </script>
 <style scorped>
