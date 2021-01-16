@@ -31,4 +31,4 @@ jobs:
         echo "${SECRET_KEY}" > secret_key
         chmod 600 secret_key
         tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${DIST}"
-      run: ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
