@@ -121,9 +121,9 @@ Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 Vue.use(VueSocialSharing)
 
-var LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
-var GENRE_SOURCE = '//sl-navi.com/event/api/genre'
-var EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
+const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
+const GENRE_SOURCE = '//sl-navi.com/event/api/genre'
+const EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
 export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
@@ -182,18 +182,12 @@ export default {
     this.csrftoken = this.getCookie('csrftoken')
     // イベントダイレクト表示
     if (this.$route.params.eid) {
-      var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/'
-      await axios.get(EVENT_SOURCE + this.$route.params.eid).then(res => {
+      await axios.get(EVENT_SOURCE + '/' + this.$route.params.eid).then(res => {
         this.popup(res.data)
       })
     }
   },
   methods: {
-    twitterUrl: function (id, title) {
-      var url = encodeURIComponent('https://sl-navi.com/event/' + id)
-      var txt = encodeURIComponent(title)
-      return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
-    },
     popup: function (e) {
       this.edId = e.id
       this.edTitle = e.title
@@ -209,21 +203,6 @@ export default {
       this.$refs['my-modal'].show()
       this.showModal = true
       this.$router.push('/event/' + this.edId).catch(err => { console.log(err) })
-    },
-    getCookie: function (name) {
-      let cookieValue = null
-      if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';')
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim()
-          // Does this cookie string begin with the name we want?
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
-            break
-          }
-        }
-      }
-      return cookieValue
     },
     deleteEvent: function (eventId) {
       const headers = {

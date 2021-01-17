@@ -219,9 +219,9 @@ import axios from 'axios'
 
 Vue.prototype.$axios = axios
 
-var INTERVAL_RELOAD_SHOP = 60
-var SHOP_SOURCE = '//sl-navi.com/api/shop'
-var ALOG_SOURCE = '//sl-navi.com/api/alog'
+const INTERVAL_RELOAD_SHOP = 60
+const SHOP_SOURCE = '//sl-navi.com/api/shop'
+const ALOG_SOURCE = '//sl-navi.com/api/alog'
 export default {
   name: 'ShopList',
   filters: {
@@ -258,7 +258,7 @@ export default {
     }
   },
   mounted () {
-    var that = this
+    const that = this
     this.$setInterval(() => {
       that.getShops(that.cacheMode, that.cacheTagid, that.cacheSearch)
     }, 1000 * INTERVAL_RELOAD_SHOP)
@@ -426,11 +426,9 @@ export default {
     cursor: pointer;
     background-color: #ff8070;
   }
-
   .n2{
     font-size: 75%;
     font-weight: 700;
-
   }
   .cn2{
     width: 25px;

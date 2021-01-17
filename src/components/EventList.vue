@@ -122,8 +122,8 @@ Vue.use(VueSocialSharing)
 
 Vue.prototype.$axios = axios
 
-var INTERVAL_RELOAD_EVENT = 600
-var EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/1'
+const INTERVAL_RELOAD_EVENT = 600
+const EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/1'
 export default {
   name: 'EventList',
   props: {
@@ -139,17 +139,12 @@ export default {
     }
   },
   mounted () {
-    var that = this
+    const that = this
     this.$setInterval(() => {
       that.getEvents()
     }, 1000 * INTERVAL_RELOAD_EVENT)
   },
   methods: {
-    twitterUrl: function (event) {
-      var url = encodeURIComponent('https://sl-navi.com/event/' + event.id)
-      var txt = encodeURIComponent(event.title)
-      return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
-    },
     _nowOpen: function (start, end) {
       const now = new Date()
       start = new Date(start)

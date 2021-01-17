@@ -264,10 +264,10 @@ import VueCtkDateTimePicker from 'vue-ctk-date-time-picker'
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css'
 Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker)
 
-var LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
-var LOGOUT_URL = '//sl-navi.com/event/api/user/logout'
-var EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
-var BLANK_IMG = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
+const LOGOUT_URL = '//sl-navi.com/event/api/user/logout'
+const EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
+const BLANK_IMG = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 export default {
   name: 'ViewCreateEvent',
   data: function () {
@@ -401,7 +401,7 @@ export default {
         this.shopFlag = ''
       }).catch(err => {
         console.log(['error', err])
-        for (var key in err.response.data) {
+        for (const key in err.response.data) {
           this.$set(this.errors, key, err.response.data[key].join('<br>'))
         }
         if (err.response.status === 403) {

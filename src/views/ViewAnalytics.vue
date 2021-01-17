@@ -13,8 +13,8 @@ Vue.use(HighchartsVue)
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-var LOG_SOURCE = 'https://sl-navi.com/api/analytics'
-var SHOP_SOURCE = 'https://sl-navi.com/api/shop'
+const LOG_SOURCE = 'https://sl-navi.com/api/analytics'
+const SHOP_SOURCE = 'https://sl-navi.com/api/shop'
 
 export default {
   data: function () {

@@ -54,9 +54,9 @@ import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-var MESSAGE_SOURCE = '//sl-navi.com/api/message'
-var INTERVAL_GET_MESSAGE = 17
-var INTERVAL_RELOAD_MESSAGE = 5
+const MESSAGE_SOURCE = '//sl-navi.com/api/message'
+const INTERVAL_GET_MESSAGE = 17
+const INTERVAL_RELOAD_MESSAGE = 5
 export default {
   name: 'Messages',
   filters: {
@@ -78,7 +78,7 @@ export default {
     setInterval(this.updateTicker, 1000 * INTERVAL_RELOAD_MESSAGE)
   },
   mounted () {
-    var that = this
+    const that = this
     this.$setInterval(() => {
       that.getMessages(that.modeCache)
     }, 1000 * INTERVAL_GET_MESSAGE)
@@ -112,7 +112,7 @@ export default {
       }
       // console.log(MESSAGE_SOURCE+'/newer/'+this.lastMessageId)
       await axios.get(MESSAGE_SOURCE + '/newer/' + this.lastMessageId).then(res => {
-        for (var z of res.data) {
+        for (const z of res.data) {
           if (mode === 'k' && z.shop.h === 1) { // メニュー健全でアダルト施設のメッセージ
             this.messagesAdult.push([false, z])
           } else {

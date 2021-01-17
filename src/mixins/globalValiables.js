@@ -40,6 +40,11 @@ export default {
       tmp = tmp.replace(imgPattern, '<img width="400" src="$1$2$3">')
       tmp = tmp.replace(urlPattern, '$1<a target="_blank" href="$2">$2</a>')
       return tmp.replace(/\n/g, '<br>')
+    },
+    twitterUrl: function (event) {
+      const url = encodeURIComponent('https://sl-navi.com/event/' + event.id)
+      const txt = encodeURIComponent(event.title)
+      return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
     }
   }
 }

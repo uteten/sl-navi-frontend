@@ -48,7 +48,7 @@ import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-var NEW_SHOP_SOURCE = '//sl-navi.com/api/shop?new=5'
+const NEW_SHOP_SOURCE = '//sl-navi.com/api/shop?new=5'
 export default {
   name: 'News',
   data: function () {
@@ -59,7 +59,7 @@ export default {
   methods: {
     async getShops () {
       await axios.get(NEW_SHOP_SOURCE).then(res => {
-        for (var z of res.data) {
+        for (const z of res.data) {
           this.shops.push(z)
         }
       })

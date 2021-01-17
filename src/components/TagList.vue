@@ -100,8 +100,8 @@ export default {
       reverse = (reverse) ? -1 : 1
       // ボイスOK/NGだけ上位に持ってくる
       return function (a, b) {
-        var aa = a[field]
-        var bb = b[field]
+        let aa = a[field]
+        let bb = b[field]
         if (a.n === 'ボイスOK' || a.n === 'ボイスNG') aa = 60
         if (b.n === 'ボイスOK' || b.n === 'ボイスNG') bb = 60
         if (typeof (primer) !== 'undefined') {
@@ -116,7 +116,7 @@ export default {
     async getTags (tagid) {
       await axios.get(TAG_SOURCE).then(res => {
         const m = this.mode // k=健全 e=アダルト c=全部
-        for (var z of res.data) {
+        for (const z of res.data) {
           z.count = z[m]
           if (z.id > 0) {
             this.tags.push(z)
