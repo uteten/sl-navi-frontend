@@ -1,6 +1,6 @@
-# sl-navi
+# sl-navi.com
 
-uten����̃R�[�h�ɁANon Vanilla���f�U�C���ҏW����p�̃��|�W�g���ł�
+https://sl-navi.com のフロントのソースコードです
 
 ## Project setup
 ```
