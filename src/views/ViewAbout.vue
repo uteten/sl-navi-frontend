@@ -89,9 +89,6 @@ export default {
       'sns_hashtags': 'secondlife,sljp',
       'sns_twitter_user': 'SL_Uten'
     }
-  },
-  mounted () {
-    alert(location.origin)
   }
 }
 </script>
