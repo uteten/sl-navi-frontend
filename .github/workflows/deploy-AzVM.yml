@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build (Use Node.js ${{ matrix.node-version }})
+    - name: CI (Use Node.js ${{ matrix.node-version }})
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
@@ -20,7 +20,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: Deploy
+    - name: CD ( github -> Azure VM -> Azure Blob -> Azure CDN )
       env:
         SECRET_KEY: ${{ secrets.ID_RSA }}
         USER: ${{ secrets.USERNAME }}
