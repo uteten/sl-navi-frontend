@@ -26,9 +26,9 @@ jobs:
         USER: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         HOST: ${{ secrets.HOST }}
-        DIST: ${{ secrets.PATH_DIST }}
+        WEBROOT: ${{ secrets.PATH_WEBROOT }}
       run: |
         echo "${SECRET_KEY}" > secret_key
         chmod 600 secret_key
-        tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${DIST}"
-        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${DIST}/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
+        tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${WEBROOT}/static"
+        ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${WEBROOT}/static/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
