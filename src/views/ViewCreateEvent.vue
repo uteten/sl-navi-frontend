@@ -173,7 +173,7 @@
             v-model="endTime"
             format="YYYY-MM-DD HH:mm"
             :first-day-of-week="1"
-            :min-date="startTime"
+            :min-datetime="startTime"
             no-label
             no-header
           />
