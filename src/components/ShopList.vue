@@ -155,18 +155,20 @@
             </span>
           </template>
         </span><br>
-        <span
-          v-if="z.owner_key != z.parcel_owner_key"
-          class="n2"
-        >
-          センサ設置者:
-          <a
-            :href= "&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
-            target="_blank"
+        <!--
+          <span
+            v-if="z.owner_key != z.parcel_owner_key"
+            class="n2"
           >
-            {{ z.owner_name }}
-          </a><br>
-        </span>
+            センサ設置者:
+            <a
+              :href= "&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
+              target="_blank"
+            >
+              {{ z.owner_name }}
+            </a><br>
+          </span>
+        -->
         <a
           target="_blank"
           :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
