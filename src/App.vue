@@ -124,7 +124,7 @@ export default {
       complement: 'セカンドライフ内の遊び場紹介'
     },
     meta: [
-      { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設を見つけることができます。施設オーナーは、すりんくと異なり審査不要、即座に施設紹介ができます。' },
+      { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設が見つかるリンク集です。施設オーナーは審査不要で即座に施設紹介ができます。' },
       { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
       { charset: 'utf-8' }
