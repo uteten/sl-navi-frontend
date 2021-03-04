@@ -9,9 +9,6 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
-        2021/02/09 <span class="badge badge-warning">ルール追加予定</span> SHOP施設が安売りとかで長期イベントを開催するとTOPに赤バッジがついて目立ちすぎなので対策検討中。ご意見あればIMください
-      </li>
-      <li class="news_item">
         2021/01/01 <span class="badge badge-primary">微調整(WebGUI)</span> イベント予定のある施設は緑のバッジを表示
       </li>
       <li class="news_item">
