@@ -9,6 +9,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2021/03/06 <span class="badge badge-primary">バグ修正 v4.11</span> お店の紹介文に特定の文字があるとWebに反映されないバグの修正
+      </li>
+      <li class="news_item">
         2021/01/01 <span class="badge badge-primary">微調整(WebGUI)</span> イベント予定のある施設は緑のバッジを表示
       </li>
       <li class="news_item">
