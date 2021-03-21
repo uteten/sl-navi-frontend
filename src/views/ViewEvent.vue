@@ -1,5 +1,13 @@
 <template>
   <div class="view">
+    カレンダーは日本時間(JST)です。SLT⇨JST変換機(
+    SLT<input
+      v-model="sltCalculate"
+      type="text"
+      @change="doSltCalculate()"
+    >
+    ⇨
+    JST {{ sltCalculateJST }})
     <div align="right">
       <router-link to="/createEvent">
         <span class="badge badge-danger">イベント登録はここをクリック</span>
@@ -159,6 +167,8 @@ export default {
           this.popup(e.event)
         }.bind(this)
       },
+      sltCalculate: '2020/01/01 00:00',
+      sltCalculateJST: '2020/01/01 00:00',
       legend: [],
       showModal: false,
       username: '',
@@ -174,6 +184,8 @@ export default {
     }
   },
   async mounted () {
+    this.sltCalculate = this.epoch2str(new Date() - this.zisa(new Date()))
+    this.doSltCalculate()
     // genreの凡例
     await axios.get(GENRE_SOURCE).then(res => {
       this.legend = res.data
@@ -188,6 +200,55 @@ export default {
     }
   },
   methods: {
+    getDstStart (argYear) {
+      var dstStart = new Date(argYear, 3, 1, 2, 0, 0) // 第2引数の3は、4月を表す。
+      for (var i = 1; i <= 7; i++) {
+        dstStart.setDate(i)
+        if (dstStart.getDay() === 0) {
+          break
+        }
+      }
+      return dstStart.getTime()
+    },
+    getDstEnd (argYear) {
+      var dstEnd = new Date(argYear, 9, 31, 1, 0, 0)
+      for (var i = 31; i > 24; i--) {
+        dstEnd.setDate(i)
+        if (dstEnd.getDay() === 0) {
+          break
+        }
+      }
+      return dstEnd.getTime()
+    },
+    niketa (number) {
+      return ('0' + number).slice(-2)
+    },
+    str2epoch (str) {
+      return Date.parse(str)
+    },
+    epoch2str (num) {
+      const currentdate = new Date(num)
+      return currentdate.getFullYear() + '/' +
+      this.niketa(1 + currentdate.getMonth()) + '/' +
+      this.niketa(currentdate.getDate()) + ' ' +
+      this.niketa(currentdate.getHours()) + ':' +
+      this.niketa(currentdate.getMinutes())
+    },
+    zisa (num) {
+      const start = new Date(2021, 3 - 1, 21, 2) // 3月の第2日曜日
+      const end = new Date(2021, 11 - 1, 7, 2) // 11月の第1日曜日
+
+      if (start < num && num < end) {
+        return 16 * 60 * 60 * 1000 // 夏
+      } else {
+        return 17 * 60 * 60 * 1000 // 冬
+      }
+    },
+    doSltCalculate: function (e) {
+      let tmp = Date.parse(this.sltCalculate)
+      tmp = tmp + this.zisa(tmp)
+      this.sltCalculateJST = this.epoch2str(tmp)
+    },
     popup: function (e) {
       this.edId = e.id
       this.edTitle = e.title
