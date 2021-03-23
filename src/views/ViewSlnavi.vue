@@ -12,6 +12,7 @@
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k'"
         class="col ad"
       >
+      <!--
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
           data-ad-slot="4854478492"
@@ -19,6 +20,7 @@
           data-ad-format=""
           data-full-width-responsive=""
         />
+        -->
       </div>
       <event-list ref="appEventList" />
       <news ref="appNews" />
