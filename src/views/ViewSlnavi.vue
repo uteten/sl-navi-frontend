@@ -12,6 +12,7 @@
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k'"
         class="col ad"
       >
+      <!--
         <iframe
           src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=48&l=ez&f=ifr&linkID=7812a2505e2f08c70dd747e21fc60c59&t=niwatorin-22&tracking_id=niwatorin-22"
           width="728"
@@ -22,6 +23,7 @@
           style="border:none;"
           frameborder="0"
         />
+        -->
       <!--
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
