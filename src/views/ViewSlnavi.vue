@@ -8,6 +8,7 @@
     <div class="view col">
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
+      <slt-2-jst />
       <div
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k'"
         class="col ad"
@@ -46,6 +47,7 @@ import Messages from '@/components/Messages'
 import News from '@/components/News'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
+import Slt2Jst from '@/components/Slt2Jst'
 
 // import '@/css/slnavi-vue.css'
 const ACTIVE_SHOP_TAGID = -3
@@ -59,7 +61,8 @@ export default {
     News,
     Messages,
     ShopList,
-    EventList
+    EventList,
+    Slt2Jst
   },
   props: {
     'mode': {
