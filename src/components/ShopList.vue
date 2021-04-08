@@ -122,11 +122,18 @@
           v-if="z.h===2"
           class="badge badge-primary"
         >一般施設</span>
-        <span
+        <template
           v-for="tag in z.tags"
-          :key="tag.id"
-          class="badge badge-light"
-        >{{ tag }}</span><br>
+        >
+          <span
+            v-if="tag!='チップ任意'"
+            :key="tag.id"
+            class="badge badge-light"
+          >
+            {{ tag }}<br>
+          </span>
+        </template>
+        <br>
         <span class="n2">
           スタッフ<span class="sn2">{{ z.sn }}</span>人
           <span v-if="z.staffs.length!=0">

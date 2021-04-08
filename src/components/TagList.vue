@@ -119,7 +119,9 @@ export default {
         for (const z of res.data) {
           z.count = z[m]
           if (z.id > 0) {
-            this.tags.push(z)
+            if (z.n !== 'チップ任意') {
+              this.tags.push(z)
+            }
           } else {
             this.specialTags.push(z)
           }
