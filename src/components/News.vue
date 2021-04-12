@@ -9,6 +9,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2021/04/12 <span class="badge badge-primary">仕様修正 v4.3</span> 男女判定の仕組み見直し（着てる服は無視して、シェイプの♂♀でのみ判断）
+      </li>
+      <li class="news_item">
         2021/04/08 <span class="badge badge-primary">仕様修正(WebGUI)</span> 'チップ任意'のタグを非表示にしました（そもそもチップは任意なので）
       </li>
       <li class="news_item">
