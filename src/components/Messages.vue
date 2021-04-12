@@ -105,15 +105,15 @@ export default {
     async getMessages (mode) {
       // console.log("call getMessages:"+mode)
       this.modeCache = mode
-      if (mode !== 'k' && this.messagesAdult[0]) {
-        // メニュー一般(mode=k)以外でアダルト施設のメッセージキューがあるならマージ
+      // メニューアダルト(mode=e)はアダルト施設のメッセージキューがあるならマージ
+      if (mode === 'e' && this.messagesAdult[0]) {
         this.messages = this.messages.concat(this.messagesAdult)
         this.messagesAdult = []
       }
       // console.log(MESSAGE_SOURCE+'/newer/'+this.lastMessageId)
       await axios.get(MESSAGE_SOURCE + '/newer/' + this.lastMessageId).then(res => {
         for (const z of res.data) {
-          if (mode === 'k' && z.shop.h === 1) { // メニュー一般(mode=k)でアダルト施設のメッセージ
+          if (mode !== 'e' && z.shop.h === 1) { // メニューエロ(mode=e)以外でアダルト施設のメッセージ
             this.messagesAdult.push([false, z])
           } else {
             this.messages.push([false, z])
