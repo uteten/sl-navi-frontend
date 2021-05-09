@@ -9,6 +9,8 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2021/05/08~05/09 <span class="badge badge-primary">バグ修正(WebGUI)</span>たまに一般施設の画面が表示されないバグが発生しており、修正しました</li>
+      <li class="news_item">
         2021/04/12 <span class="badge badge-primary">仕様修正 v4.3</span> 男女判定の仕組み見直し（着てる服は無視して、シェイプの♂♀でのみ判断）
       </li>
       <li class="news_item">
@@ -16,24 +18,6 @@
       </li>
       <li class="news_item">
         2021/03/27 <span class="badge badge-primary">機能追加(WebGUI)</span> SLT⇨JST変換機をメインページに追加
-      </li>
-      <li class="news_item">
-        2021/03/06 <span class="badge badge-primary">バグ修正 v4.11</span> お店の紹介文に特定の文字があるとWebに反映されないバグの修正
-      </li>
-      <li class="news_item">
-        2021/01/01 <span class="badge badge-primary">微調整(WebGUI)</span> イベント予定のある施設は緑のバッジを表示
-      </li>
-      <li class="news_item">
-        2020/12/27 <span class="badge badge-primary">微調整(WebGUI)</span> 登録したイベントを修正する機能の追加
-      </li>
-      <li class="news_item">
-        2020/12/13 <span class="badge badge-primary">微調整(WebGUI)</span> TOPに表示する施設条件を緩和(詳細はメニューのセンサ配布場所⇒FAQ)
-      </li>
-      <li class="news_item">
-        2020/12/12 <span class="badge badge-primary">機能追加 v4.1</span> 土地音楽をブラウザで再生できるようにしました(センサ設置者＝土地所有者のときのみ可能)
-      </li>
-      <li class="news_item">
-        2020/10/09 <span class="badge badge-primary">微調整 v4.07</span> 開店/閉店/Auto状況を看板の下に表示するようにしました(フローティングテキストは廃止)
       </li>
     </ul>
     <h6>新店舗情報</h6>
