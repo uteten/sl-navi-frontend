@@ -13,6 +13,16 @@
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k'"
         class="col ad"
       >
+        <iframe
+          src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=94ace7178294397e48076353a17e59be&t=niwatorin-22&tracking_id=niwatorin-22"
+          width="468"
+          height="60"
+          scrolling="no"
+          border="0"
+          marginwidth="0"
+          style="border:none;"
+          frameborder="0"
+        />
       <!--
         <iframe
           src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=48&l=ez&f=ifr&linkID=7812a2505e2f08c70dd747e21fc60c59&t=niwatorin-22&tracking_id=niwatorin-22"
