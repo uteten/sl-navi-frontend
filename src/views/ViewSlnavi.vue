@@ -8,7 +8,6 @@
     <div class="view col">
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
-      <slt-2-jst />
       <div
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k'"
         class="col ad"
@@ -45,6 +44,7 @@
         />
         -->
       </div>
+      <slt-2-jst />
       <event-list ref="appEventList" />
       <news ref="appNews" />
     </div>
