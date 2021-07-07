@@ -9,21 +9,21 @@
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k'"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k' && nowT == lastT"
         class="col ad"
       >
-      <!--
-        <iframe
-          src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=94ace7178294397e48076353a17e59be&t=niwatorin-22&tracking_id=niwatorin-22"
-          width="468"
-          height="60"
-          scrolling="no"
-          border="0"
-          marginwidth="0"
-          style="border:none;"
-          frameborder="0"
-        />
-      -->
+        <!--
+          <iframe
+            src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=94ace7178294397e48076353a17e59be&t=niwatorin-22&tracking_id=niwatorin-22"
+            width="468"
+            height="60"
+            scrolling="no"
+            border="0"
+            marginwidth="0"
+            style="border:none;"
+            frameborder="0"
+          />
+        -->
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
           data-ad-slot="4854478492"
@@ -71,7 +71,9 @@ export default {
   data: function () {
     return {
       tagid: ACTIVE_SHOP_TAGID,
-      searchword: this.$route.params.searchword
+      searchword: this.$route.params.searchword,
+      nowT: 1,
+      lastT: 1
     }
   },
   watch: {
@@ -96,6 +98,14 @@ export default {
     }
   },
   mounted () {
+    const date = new Date()
+    this.nowT = date.getTime()
+    this.lastT = this.$cookies.get('t')
+    // 30分に１回だけ広告表示
+    if (this.nowT - this.lastT > 30 * 60 * 1000) {
+      this.$cookies.set('t', this.nowT)
+      this.lastT = this.nowT
+    }
     // console.log(['viewSlnavi:mounted!!', this])
     if (this.searchword) {
       // console.log(['viewSlnavi:mounted-search', this.searchword])
