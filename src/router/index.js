@@ -72,6 +72,12 @@ const routes = [
     // component: viewCreateEvent
   },
   {
+    path: '/job',
+    name: 'viewJob',
+    component: () => import(/* webpackChunkName: "viewJob" */ '@/views/ViewJob.vue')
+    // component: viewJob
+  },
+  {
     path: '/about',
     name: 'viewAbout',
     component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue')
