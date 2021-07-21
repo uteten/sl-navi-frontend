@@ -101,8 +101,8 @@ export default {
     const date = new Date()
     this.nowT = date.getTime()
     this.lastT = this.$cookies.get('t')
-    // 30分に１回だけ広告表示
-    if (this.nowT - this.lastT > 30 * 60 * 1000) {
+    // 10分に１回だけ広告表示
+    if (this.nowT - this.lastT > 10 * 60 * 1000) {
       this.$cookies.set('t', this.nowT)
       this.lastT = this.nowT
     }
