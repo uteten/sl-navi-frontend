@@ -9,7 +9,7 @@
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && mode=='k' && nowT == lastT"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
         class="col ad"
       >
         <!--
