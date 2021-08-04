@@ -8,28 +8,43 @@
     <div class="view col">
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
+      <!-- 基本GoogleAD -->
       <div
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
         class="col ad"
       >
-        <!--
-          <iframe
-            src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=94ace7178294397e48076353a17e59be&t=niwatorin-22&tracking_id=niwatorin-22"
-            width="468"
-            height="60"
-            scrolling="no"
-            border="0"
-            marginwidth="0"
-            style="border:none;"
-            frameborder="0"
-          />
-        -->
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
           data-ad-slot="4854478492"
           ins-style="display:inline-block;width:80%;height:120px;"
           data-ad-format=""
           data-full-width-responsive=""
+        />
+      </div>
+      <!-- リロードかつ健全以外 -->
+      <div
+        v-if="nowT != lastT && mode!='k' "
+        class="col ad"
+      >
+        <iframe
+          src="https://sl-navi.com/static/dmm-ad1.html?4"
+          width="300"
+          height="250"
+          scrolling="no"
+          border="0"
+          marginwidth="0"
+          style="border:none;"
+          frameborder="0"
+        />
+        <iframe
+          src="https://sl-navi.com/static/dmm-ad2.html?4"
+          width="300"
+          height="250"
+          scrolling="no"
+          border="0"
+          marginwidth="0"
+          style="border:none;"
+          frameborder="0"
         />
       </div>
       <slt-2-jst />

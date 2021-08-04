@@ -36,7 +36,6 @@
             class="alert alert-danger"
             v-html="errors.username"
           />
-
           <label for="id_title">イベント名（必須）:</label>
           <input
             id="id_title"
