@@ -29,7 +29,7 @@
         <iframe
           src="https://sl-navi.com/static/dmm-ad1.html?4"
           width="300"
-          height="250"
+          height="252"
           scrolling="no"
           border="0"
           marginwidth="0"
@@ -39,7 +39,7 @@
         <iframe
           src="https://sl-navi.com/static/dmm-ad2.html?4"
           width="300"
-          height="250"
+          height="252"
           scrolling="no"
           border="0"
           marginwidth="0"
