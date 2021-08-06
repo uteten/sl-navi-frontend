@@ -23,11 +23,11 @@
       </div>
       <!-- リロードかつ健全以外 -->
       <div
-        v-if="nowT != lastT && mode!='k' "
+        v-if="nowT != lastT && mode=='e' "
         class="col ad"
       >
         <iframe
-          src="https://sl-navi.com/static/dmm-ad1.html?4"
+          src="https://sl-navi.com/static/dmm-ad1.html"
           width="300"
           height="252"
           scrolling="no"
@@ -37,7 +37,7 @@
           frameborder="0"
         />
         <iframe
-          src="https://sl-navi.com/static/dmm-ad2.html?4"
+          src="https://sl-navi.com/static/dmm-ad2.html"
           width="300"
           height="252"
           scrolling="no"
