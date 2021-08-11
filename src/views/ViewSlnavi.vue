@@ -27,7 +27,7 @@
         class="col ad"
       >
         <iframe
-          src="https://sl-navi.com/static/dmm-ad1.html"
+          :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
           width="300"
           height="252"
           scrolling="no"
@@ -37,7 +37,7 @@
           frameborder="0"
         />
         <iframe
-          src="https://sl-navi.com/static/dmm-ad2.html"
+          :src="'https://sl-navi.com/static/dmm-ad2.html?'+lastT"
           width="300"
           height="252"
           scrolling="no"
