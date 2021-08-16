@@ -9,16 +9,10 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
-        2021/05/08~05/09 <span class="badge badge-primary">バグ修正(WebGUI)</span>たまに一般施設の画面が表示されないバグが発生しており、修正しました
+        2021/08/16 <span class="badge badge-primary">微修正(WebGUI)</span>イベントもアダルトと一般を分けました
       </li>
       <li class="news_item">
         2021/04/12 <span class="badge badge-primary">仕様修正 v4.3</span> 男女判定の仕組み見直し（着てる服は無視して、シェイプの♂♀でのみ判断）
-      </li>
-      <li class="news_item">
-        2021/04/08 <span class="badge badge-primary">仕様修正(WebGUI)</span> 'チップ任意'のタグを非表示にしました（そもそもチップは任意なので）
-      </li>
-      <li class="news_item">
-        2021/03/27 <span class="badge badge-primary">機能追加(WebGUI)</span> SLT⇨JST変換機をメインページに追加
       </li>
     </ul>
     <h6>新店舗情報</h6>

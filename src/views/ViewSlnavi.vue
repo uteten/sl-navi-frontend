@@ -22,6 +22,7 @@
         />
       </div>
       <!-- リロードかつ健全以外 -->
+      <!--
       <div
         v-if="nowT != lastT && mode=='e' "
         class="col ad"
@@ -47,6 +48,7 @@
           frameborder="0"
         />
       </div>
+      -->
       <slt-2-jst />
       <event-list ref="appEventList" />
       <news ref="appNews" />
@@ -102,6 +104,7 @@ export default {
         this.$refs.appTagList.changeStatus(this.mode, this.tagid)
         this.$refs.appShopList.getShops(this.mode, this.tagid)
         this.$refs.appMessages.getMessages(this.mode)
+        this.$refs.appEventList.getEvents(this.mode)
       }
     },
     '$route.params.searchword': function () {
@@ -136,7 +139,7 @@ export default {
       // this.tagid = OPEN_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
       this.$refs.appShopList.getShops(this.mode, this.tagid)
-      this.$refs.appEventList.getEvents()
+      this.$refs.appEventList.getEvents(this.mode)
       this.$refs.appNews.getShops()
       this.$refs.appMessages.getMessages(this.mode)
     }

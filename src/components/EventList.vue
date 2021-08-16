@@ -15,7 +15,7 @@
     >
       {{ messageNoEvent }}
       <li
-        v-for="event in events"
+      v-for="event in events"
         :id="event.id"
         :key="event.id"
         :value="event.id"
@@ -126,12 +126,6 @@ const INTERVAL_RELOAD_EVENT = 600
 const EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/1'
 export default {
   name: 'EventList',
-  props: {
-    'mode': {
-      type: String,
-      default: 'k'
-    }
-  },
   data: function () {
     return {
       events: [],
@@ -175,21 +169,23 @@ export default {
         return ''
       }
     },
-    async getEvents () {
+    async getEvents (mode) {
       await axios.get(EVENT_SOURCE).then(res => {
         this.events = []
         for (const z of res.data) {
-          if (!z['long_duration']) {
+          if (!z['long_duration'] && (mode === z['mode'] || mode === 'c')) {
             this.events.push(z)
           }
         }
         for (const z of res.data) {
-          if (z['long_duration']) {
+          if (z['long_duration'] && (mode === z['mode'] || mode === 'c')) {
             this.events.push(z)
           }
         }
         if (!this.events[0]) {
           this.messageNoEvent = '直近のイベント情報はありません（みんな登録してねっ）'
+        } else {
+          this.messageNoEvent = ''
         }
       })
     }
