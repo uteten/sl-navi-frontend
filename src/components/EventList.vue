@@ -7,7 +7,7 @@
     class="col events"
   >
     <div class="events_top">
-      ２４時間以内のイベント
+      一週間以内のイベント
     </div>
     <ul
       id="events"
@@ -15,7 +15,7 @@
     >
       {{ messageNoEvent }}
       <li
-      v-for="event in events"
+        v-for="event in events"
         :id="event.id"
         :key="event.id"
         :value="event.id"
@@ -123,7 +123,8 @@ Vue.use(VueSocialSharing)
 Vue.prototype.$axios = axios
 
 const INTERVAL_RELOAD_EVENT = 600
-const EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/1'
+// 7日いないのイベント
+const EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/7'
 export default {
   name: 'EventList',
   data: function () {

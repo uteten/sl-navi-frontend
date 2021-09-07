@@ -9,6 +9,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2021/09/07 <span class="badge badge-primary">微修正(WebGUI)</span>ログイン人数の表示＆イベント情報は直近一週間表示に
+      </li>
+      <li class="news_item">
         2021/08/16 <span class="badge badge-primary">微修正(WebGUI)</span>イベントもアダルトと一般を分けました
       </li>
       <li class="news_item">
