@@ -24,7 +24,7 @@
                 to="/"
                 class="nav-link"
               >
-                <b-icon-house scale="0.8" />一般施設
+                <b-icon-house scale="0.8" />一般
               </router-link>
             </li>
             <li class="nav-item">
@@ -32,7 +32,7 @@
                 to="/adult"
                 class="nav-link"
               >
-                <b-icon-heart-fill scale="0.8" />アダルト施設
+                <b-icon-heart-fill scale="0.8" />アダルト
               </router-link>
             </li>
             <li class="nav-item">
@@ -57,7 +57,7 @@
                 to="/about"
                 class="nav-link"
               >
-                <b-icon-info-circle-fill scale="0.8" />センサ配布場所
+                <b-icon-info-circle-fill scale="0.8" />説明
               </router-link>
             </li>
           </ul>
@@ -150,7 +150,7 @@ export default {
     this.getInworld()
     this.$setInterval(() => {
       that.getInworld()
-    }, 1000 * 300)
+    }, 1000 * 60)
   },
   methods: {
     goSearch (keyCode) {
