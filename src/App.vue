@@ -61,6 +61,7 @@
               </router-link>
             </li>
           </ul>
+          {{ inworld }}
           <form class="search form-inline">
             <input
               v-model="searchword"
@@ -106,16 +107,21 @@ import Vue from 'vue'
 import VueHead from 'vue-head'
 import VueCookies from 'vue-cookies'
 import gv from './mixins/globalValiables'
+import axios from 'axios'
+
+Vue.prototype.$axios = axios
 
 Vue.mixin(gv)
 Vue.use(VueCookies)
 Vue.use(VueHead)
+
 export default {
   name: 'App',
   data: function () {
     return {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
-      searchword: ''
+      searchword: '',
+      inworld: 0
     }
   },
   head: {
@@ -140,6 +146,11 @@ export default {
     }
   }, mounted () {
     this.syncSearchFormFromPath() // 検索フォームをPathにあわせて入力した状態にする（初期状態）
+    const that = this
+    this.getInworld()
+    this.$setInterval(() => {
+      that.getInworld()
+    }, 1000 * 300)
   },
   methods: {
     goSearch (keyCode) {
@@ -160,6 +171,11 @@ export default {
       } else {
         this.searchword = ''
       }
+    },
+    async getInworld () {
+      await axios.get('https://sl-navi.com/static/inworld.txt').then(res => {
+        this.inworld = res.data
+      })
     }
   }
 }
