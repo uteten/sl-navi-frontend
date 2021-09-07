@@ -235,7 +235,7 @@ export default {
   name: 'ShopList',
   filters: {
     'staff_url': function (value) {
-      return '/d2p/' + value[0].replace(' ', '%20')
+      return '/d2p/' + value[0].replace(' ', '%20') + '?'
     },
     'staff_name': function (value) {
       return value[0]
