@@ -10,13 +10,12 @@
       <shop-list ref="appShopList" />
       <!-- 基本GoogleAD -->
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
         class="col ad"
       >
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
           data-ad-slot="4854478492"
-          ins-style="display:inline-block;width:80%;height:120px;"
+          ins-style="display:inline-block;width:80%;height:160px;"
           data-ad-format=""
           data-full-width-responsive=""
         />
