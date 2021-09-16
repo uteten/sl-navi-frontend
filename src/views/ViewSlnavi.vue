@@ -10,6 +10,7 @@
       <shop-list ref="appShopList" />
       <!-- 基本GoogleAD -->
       <div
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
         class="col ad"
       >
         <Adsense
