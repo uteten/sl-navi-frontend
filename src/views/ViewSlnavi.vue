@@ -53,18 +53,6 @@
       <event-list ref="appEventList" />
       <news ref="appNews" />
     </div>
-    <div
-      v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
-      class="col ad"
-    >
-      <Adsense
-        data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="5007145132"
-        ins-style="display:block"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-    </div>
   </div>
 </template>
 
