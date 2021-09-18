@@ -206,31 +206,22 @@
         >
       </b-popover>
     </div>
-    <div v-if="!shops[0]">
-      なし
-    </div>
-
     <!--
-    <br>
-    <div v-if="shops"
-      id="xx"
-      key="xx2"
-      tabindex="0"
-      class="f"
-      height="300"
-    >
-      <span style="bottom: 500px">
-        <iframe
-          :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
-          width="800"
-          height="150"
-          scrolling="no"
-          border="0"
-          marginwidth="0"
-          style="position; static;bottom: 100px"
-          frameborder="0"
-        />
-      </span>
+    <div class="f">
+      <a href="/">
+      <img
+        class="flag"
+        src="https://sl-navi.azureedge.net/static/flag/"
+      >
+      </a>
+      <iframe
+        :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
+        scrolling="no"
+        marginwidth="0"
+        frameborder="0"
+        class="f"
+      />
+    </div>
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
@@ -239,6 +230,9 @@
         data-full-width-responsive="no">
       </Adsense>
       -->
+    <div v-if="!shops[0]">
+      なし
+    </div>
   </div>
 </template>
 <script>

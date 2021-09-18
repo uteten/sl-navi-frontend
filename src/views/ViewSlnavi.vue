@@ -52,6 +52,18 @@
       <slt-2-jst />
       <event-list ref="appEventList" />
       <news ref="appNews" />
+      <div
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
+        class="col ad"
+      >
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="4854478492"
+          ins-style="display:inline-block;width:80%;height:200px;"
+          data-ad-format=""
+          data-full-width-responsive=""
+        />
+      </div>
     </div>
   </div>
 </template>
