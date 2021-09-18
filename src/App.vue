@@ -61,7 +61,7 @@
               </router-link>
             </li>
           </ul>
-          [ 現在のSecondLife ログイン人数 {{ inworld.toLocaleString() }}人 ]
+          [ SLログイン人数 {{ inworld.toLocaleString() }}人 ]
           <form class="search form-inline">
             <input
               v-model="searchword"
