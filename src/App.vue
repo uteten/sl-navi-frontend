@@ -127,7 +127,7 @@ export default {
   head: {
     title: {
       inner: 'SL-Navi',
-      complement: 'セカンドライフ内の遊び場紹介'
+      complement: 'セカンドライフの日本人向けリンク集'
     },
     meta: [
       { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設が見つかるリンク集です。施設オーナーは審査不要で即座に施設紹介ができます。' },
