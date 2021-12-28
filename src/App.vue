@@ -61,7 +61,7 @@
               </router-link>
             </li>
           </ul>
-          [ SLログイン人数 {{ inworld.toLocaleString() }}人 ]
+          <span class="slcount">[ SLログイン人数 {{ inworld.toLocaleString() }}人 ]</span>
           <form class="search form-inline">
             <input
               v-model="searchword"
@@ -189,6 +189,9 @@ export default {
   body{
     padding-top: 4.5rem;
     background-color: #ffffff;
+  }
+  .slcount{
+    margin-right: 5px;
   }
   #app {
     text-align: left;

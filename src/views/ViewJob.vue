@@ -22,9 +22,7 @@
           name="genre"
           class="form-control"
           required
-        >
-        </select>
-
+        />
       </form>
     </div>
   </div>
