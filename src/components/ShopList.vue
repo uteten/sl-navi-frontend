@@ -434,7 +434,7 @@ export default {
   }
   .male{
     height: fit-content;
-    font-size: 60%;
+    font-size: 100%;
     color: #ffffff;
     border-radius: 25%;
     cursor: pointer;
@@ -442,14 +442,14 @@ export default {
   }
   .female{
     height: fit-content;
-    font-size: 60%;
+    font-size: 100%;
     color: #ffffff;
     border-radius: 25%;
     cursor: pointer;
     background-color: #ff8070;
   }
   .n2{
-    font-size: 75%;
+    font-size: 85%;
     font-weight: 700;
   }
   .cn2{
