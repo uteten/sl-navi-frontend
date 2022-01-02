@@ -122,7 +122,7 @@ Vue.use(VueSocialSharing)
 
 Vue.prototype.$axios = axios
 
-const INTERVAL_RELOAD_EVENT = 600
+const INTERVAL_RELOAD_EVENT = 300
 // 7日いないのイベント
 const EVENT_SOURCE = '//sl-navi.com/event/api/slevent/open_within/7'
 export default {
@@ -130,13 +130,14 @@ export default {
   data: function () {
     return {
       events: [],
-      messageNoEvent: ''
+      messageNoEvent: '',
+      mode: 'c'
     }
   },
   mounted () {
     const that = this
     this.$setInterval(() => {
-      that.getEvents()
+      that.getEvents(that.mode)
     }, 1000 * INTERVAL_RELOAD_EVENT)
   },
   methods: {
@@ -171,6 +172,7 @@ export default {
       }
     },
     async getEvents (mode) {
+      this.mode = mode
       await axios.get(EVENT_SOURCE).then(res => {
         this.events = []
         for (const z of res.data) {

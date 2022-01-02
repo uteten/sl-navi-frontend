@@ -9,6 +9,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2022/01/02 <span class="badge badge-danger">障害対応(WebGUI)</span>画面を10分以上放置するとイベント情報が消える問題の対処と自動更新
+      </li>
+      <li class="news_item">
         2021/10/17 <span class="badge badge-danger">障害対応(WebGUI)</span>10/10から断続的にGUIが正常に表示されない問題の対処
       </li>
       <li class="news_item">
