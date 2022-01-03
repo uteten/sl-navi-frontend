@@ -90,7 +90,8 @@ export default {
       tagid: ACTIVE_SHOP_TAGID,
       searchword: this.$route.params.searchword,
       nowT: 1,
-      lastT: 1
+      lastT: 1,
+      reloadCount: 0
     }
   },
   watch: {
@@ -119,9 +120,11 @@ export default {
     const date = new Date()
     this.nowT = date.getTime()
     this.lastT = this.$cookies.get('t')
-    // 10分に１回だけ広告表示
-    if (this.nowT - this.lastT > 10 * 60 * 1000) {
+    this.reloadCount = this.$cookies.get('c')
+    // 10分に3回だけ広告表示
+    if (this.reloadCount < 3 || this.nowT - this.lastT > 10 * 60 * 1000) {
       this.$cookies.set('t', this.nowT)
+      this.$cookies.set('c', this.reloadCount + 1)
       this.lastT = this.nowT
     }
     // console.log(['viewSlnavi:mounted!!', this])
