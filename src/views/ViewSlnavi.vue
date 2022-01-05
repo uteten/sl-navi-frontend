@@ -127,7 +127,7 @@ export default {
       this.$cookies.set('t', this.nowT)
       this.$cookies.set('c', 0)
       this.lastT = this.nowT
-    } else if (this.reloadCount < 3) {
+    } else if (this.reloadCount < 2) {
       this.$cookies.set('t', this.nowT)
       this.$cookies.set('c', this.reloadCount + 1)
       this.lastT = this.nowT
