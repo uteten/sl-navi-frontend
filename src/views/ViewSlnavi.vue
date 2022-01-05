@@ -119,10 +119,15 @@ export default {
   mounted () {
     const date = new Date()
     this.nowT = date.getTime()
-    this.lastT = this.$cookies.get('t')
-    this.reloadCount = this.$cookies.get('c')
+    this.lastT = Number(this.$cookies.get('t'))
+    this.reloadCount = Number(this.$cookies.get('c'))
     // 10分に3回だけ広告表示
-    if (this.reloadCount < 3 || this.nowT - this.lastT > 10 * 60 * 1000) {
+    if (this.nowT - this.lastT > 10 * 60 * 1000) {
+      // 10分以上経ってるときはカウントリセット
+      this.$cookies.set('t', this.nowT)
+      this.$cookies.set('c', 0)
+      this.lastT = this.nowT
+    } else if (this.reloadCount < 3) {
       this.$cookies.set('t', this.nowT)
       this.$cookies.set('c', this.reloadCount + 1)
       this.lastT = this.nowT
