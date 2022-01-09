@@ -36,6 +36,12 @@
             class="alert alert-danger"
             v-html="errors.username"
           />
+          <p v-if="username">
+            <a
+              href="javascript:void(0)"
+              @click="$refs['my-modal'].show()"
+            ><b-icon-camera />いべんさからイベントを自動入力<span class="badge badge-danger">新機能</span></a>
+          </p>
           <label for="id_title">イベント名（必須）:</label>
           <input
             id="id_title"
@@ -254,6 +260,37 @@
         </div>
       </form>
     </div>
+    <b-modal
+      ref="my-modal"
+      v-model="showModal"
+      title="いべんさデータ自動入力"
+      class="modal fade"
+      hide-footer
+    >
+      http://sl-event.info/?id=xxx
+      <div class="form-row">
+        <div class="form-group col-sm-7">
+          <input
+            v-model="idEvensa"
+            name="idEvensa"
+            type="text"
+            placeholder="xxx部分(数字)を入力してください"
+            maxlength="200"
+            class="form-control"
+            required
+          >
+        </div>
+        <div class="col-sm-5">
+          <button
+            type="button"
+            class="form-control"
+            @click="evensa"
+          >
+            読み込み
+          </button>
+        </div>
+      </div>
+    </b-modal>
   </div>
 </template>
 <script>
@@ -266,6 +303,8 @@ Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker)
 const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
 const LOGOUT_URL = '//sl-navi.com/event/api/user/logout'
 const EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
+const EVENSA_SOURCE = '//sl-navi.com/event/api/slevent/evensa'
+
 const BLANK_IMG = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 export default {
   name: 'ViewCreateEvent',
@@ -284,7 +323,8 @@ export default {
       description: '',
       mapUrl: '',
       shopFlag: '',
-      eid: 0
+      eid: 0,
+      idEvensa: ''
     }
   }, watch: {
     startTime: function (val) {
@@ -409,6 +449,23 @@ export default {
           alert('投稿に失敗しました。投稿内容を確認してください。')
         }
       })
+    },
+    async evensa () {
+      if (this.idEvensa) {
+        await axios.get(EVENSA_SOURCE + '/' + this.idEvensa).then(res => {
+          const ee = res.data
+          this.title = ee.title
+          this.imgUrl = ee.img_url
+          this.loadImgUrl = ee.img_url
+          this.mode = ee.mode
+          this.mapUrl = ee.map_url
+          this.startTime = ee.start_time
+          this.endTime = ee.end_time
+          this.description = ee.description
+          this.shopFlag = ee.shop_flag
+          this.genre = ee.genre
+        })
+      }
     },
     async logout () {
       await axios.get(LOGOUT_URL).then(res => {
