@@ -51,6 +51,7 @@
       -->
       <slt-2-jst />
       <event-list ref="appEventList" />
+      <links ref="appLinks" />
       <news ref="appNews" />
     </div>
   </div>
@@ -60,6 +61,7 @@
 import TagList from '@/components/TagList'
 import Messages from '@/components/Messages'
 import News from '@/components/News'
+import Links from '@/components/Links'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
 import Slt2Jst from '@/components/Slt2Jst'
@@ -74,6 +76,7 @@ export default {
   components: {
     TagList,
     News,
+    Links,
     Messages,
     ShopList,
     EventList,
