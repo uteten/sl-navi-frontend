@@ -6,24 +6,6 @@
     <div class="news_top">
       最近のおしらせ
     </div>
-    <h6>メンテナンス情報</h6>
-    <ul class="news_menu">
-      <li class="news_item">
-        2022/01/02 <span class="badge badge-danger">障害対応(WebGUI)</span>画面を10分以上放置するとイベント情報が消える問題の対処と自動更新
-      </li>
-      <li class="news_item">
-        2021/10/17 <span class="badge badge-danger">障害対応(WebGUI)</span>10/10から断続的にGUIが正常に表示されない問題の対処
-      </li>
-      <li class="news_item">
-        2021/09/07 <span class="badge badge-primary">微修正(WebGUI)</span>ログイン人数の表示＆イベント情報は直近一週間表示に
-      </li>
-      <li class="news_item">
-        2021/08/16 <span class="badge badge-primary">微修正(WebGUI)</span>イベントもアダルトと一般を分けました
-      </li>
-      <li class="news_item">
-        2021/04/12 <span class="badge badge-primary">仕様修正 v4.3</span> 男女判定の仕組み見直し（着てる服は無視して、シェイプの♂♀でのみ判断）
-      </li>
-    </ul>
     <h6>新店舗情報</h6>
     <ul class="news_menu">
       <li
@@ -38,6 +20,18 @@
           :href="'/search/'+z.flag"
           v-html="z.name"
         />]を追加
+      </li>
+    </ul>
+    <h6>メンテナンス情報</h6>
+    <ul class="news_menu">
+      <li class="news_item">
+        2022/01/11 <span class="badge badge-primary">微修正(WebGUI)</span>リンク集追加
+      </li>
+      <li class="news_item">
+        2021/08/16 <span class="badge badge-primary">微修正(WebGUI)</span>イベントもアダルトと一般を分けました
+      </li>
+      <li class="news_item">
+        2021/04/12 <span class="badge badge-primary">仕様修正 v4.3</span> 男女判定の仕組み見直し（着てる服は無視して、シェイプの♂♀でのみ判断）
       </li>
     </ul>
   </div>
@@ -71,7 +65,7 @@ export default {
 <style scorped>
   /* ====  News.vue ==== */
   .news_menu {
-    padding: 0.2em 0 0.2em 0;
+    padding: 0.1em 0 0.1em 0;
     margin: 0;
   }
 
@@ -79,7 +73,7 @@ export default {
     color:black;
     font-size: small;
     line-height: 1.0;
-    padding: 0.5em 0 0.5em 0.7em;
+    padding: 0.2em 0 0.2em 0.7em;
     list-style: none;
   }
   .news{

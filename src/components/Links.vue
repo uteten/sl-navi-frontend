@@ -3,25 +3,61 @@
     id="links"
     class="col news"
   >
-    <div class="news_top">
+    <div class="links_top">
       リンク集
     </div>
-    <h6>初心者向けサイト</h6>
-    <dl class="news_menu">
-      <dt class="news_item">
+    <h6>初心者向け/総合</h6>
+    <dl class="links_menu">
+      <dt class="links_item">
         <a
           target="_blank"
           href="https://aniava.net/"
         >
-          美少女アニメアバターを作ろう！ [Second Life 美少女アバター wiki]
+          Second Life 美少女アバター wiki
         </a>
       </dt>
-      <dd class="news_item">
-        :アニアバとか色々
+      <dd class="links_item">
+        :アニメのアバターなど
+      </dd>
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://seesaawiki.jp/furrys_habitat/"
+        >
+          SecondLife Furry's Habitat Wiki
+        </a>
+      </dt>
+      <dd class="links_item">
+        :けもののアバターなど
       </dd>
     </dl>
-    <div class="news_item">
-      ※おすすめサイトを教えてください（<a href="https://twitter.com/sl_uten">@SL_uten</a>へDMで）
+    <h6>買い物/イベント</h6>
+    <dl class="links_menu">
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://www.seraphimsl.com/"
+        >
+          Seraphimsl
+        </a>
+      </dt>
+      <dd class="links_item">
+        :イベント/セール情報(英語)
+      </dd>
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://hypeeventssl.wixsite.com/hypeeventssl/"
+        >
+          MIIX SL
+        </a>
+      </dt>
+      <dd class="links_item">
+        :セール情報(英語)
+      </dd>
+    </dl>
+    <div class="links_item">
+      ※便利なサイトを教えてくださいいい！（<a href="https://twitter.com/sl_uten">@SL_uten</a>へDM）
     </div>
   </div>
 </template>
@@ -45,20 +81,19 @@ export default {
   dt{
     float: left;
   }
-
   dd{
     margin-left: 80px;
   }
-  .news_menu {
-    padding: 0.2em 0 0.2em 0;
+  .links_menu {
+    padding: 0.1em 0 0.1em 0;
     margin: 0;
   }
 
-  .news_item {
+  .links_item {
     color:black;
     font-size: small;
     line-height: 1.0;
-    padding: 0.5em 0 0.5em 0.7em;
+    padding: 0.1em 0 0.1em 0.7em;
     list-style: none;
   }
   .news{
@@ -69,7 +104,7 @@ export default {
     margin-left: 15px;
     margin-bottom: 15px;
   }
-  .news_top{
+  .links_top{
     font-size: medium;
     background: #ffc107;
     color:#666666;
@@ -77,7 +112,7 @@ export default {
     padding: 0 0 0.2em 0.7em;
     list-style-type: none!important;
   }
-  .news_item .badge{
+  .links_item .badge{
     margin-right: 0.8em;
   }
   h6{
