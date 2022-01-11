@@ -17,22 +17,11 @@
         </a>
       </dt>
       <dd class="news_item">
-        :アニアバ作成、ものづくり、SL探検
-      </dd>
-      <dt class="news_item">
-        <a
-          target="_blank"
-          href="https://seesaawiki.jp/furrys_habitat"
-        >
-          SecondLife Furry's Habitat Wiki
-        </a>
-      </dt>
-      <dd class="news_item">
-        :ケモノ系アバターの紹介等
+        :アニアバとか色々
       </dd>
     </dl>
     <div class="news_item">
-      ※おすすめサイトを教えてください（<a href="https://twitter.com/sl_uten">@SL_uten</a>へDMでお願いします）
+      ※おすすめサイトを教えてください（<a href="https://twitter.com/sl_uten">@SL_uten</a>へDMで）
     </div>
   </div>
 </template>
