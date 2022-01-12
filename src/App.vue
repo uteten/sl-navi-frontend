@@ -95,7 +95,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2021 sl-navi  | <a href="https://twitter.com/SL_Uten">@uten</a>
+            © 2020-2022 sl-navi  | <a href="https://twitter.com/SL_Uten">@uten</a>
           </p>
         </div>
       </footer>

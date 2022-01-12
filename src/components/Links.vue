@@ -11,6 +11,17 @@
       <dt class="links_item">
         <a
           target="_blank"
+          href="https://sljpstartguide.wordpress.com/"
+        >
+          Secondlife スタートガイド(Lokia)
+        </a>
+      </dt>
+      <dd class="links_item">
+        :Lokiaさんまとめのスタートガイド
+      </dd>
+      <dt class="links_item">
+        <a
+          target="_blank"
           href="https://aniava.net/"
         >
           Second Life 美少女アバター wiki
