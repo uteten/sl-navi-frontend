@@ -25,6 +25,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2022/02/10 <span class="badge badge-primary">微修正(WebGUI)</span>フッターに統計情報追加
+      </li>
+      <li class="news_item">
         2022/01/11 <span class="badge badge-primary">微修正(WebGUI)</span>リンク集追加
       </li>
       <li class="news_item">
