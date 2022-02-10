@@ -95,7 +95,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2022 sl-navi  | 昨日 {{ countYesterday }}人 / 今日 {{ countToday }}人 / センサ検知アバター人数{{ countSensor }}人
+            © 2020-2022 sl-navi  | サイト閲覧者 昨日{{ countYesterday }}人 / 今日{{ countToday }}人 / 24時間以内の全センサのアバター検知数{{ countSensor }}人
           </p>
         </div>
       </footer>
