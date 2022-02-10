@@ -95,7 +95,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2022 sl-navi  | <a href="https://twitter.com/SL_Uten">@uten</a>
+            © 2020-2022 sl-navi  | 昨日 {{ countYesterday }}人 / 今日 {{ countToday }}人
           </p>
         </div>
       </footer>
@@ -121,7 +121,9 @@ export default {
     return {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
       searchword: '',
-      inworld: 0
+      inworld: 0,
+      countYesterday: '-',
+      countToday: '-'
     }
   },
   head: {
@@ -148,8 +150,10 @@ export default {
     this.syncSearchFormFromPath() // 検索フォームをPathにあわせて入力した状態にする（初期状態）
     const that = this
     this.getInworld()
+    this.getCounter()
     this.$setInterval(() => {
       that.getInworld()
+      that.getCounter()
     }, 1000 * 60)
   },
   methods: {
@@ -175,6 +179,11 @@ export default {
     async getInworld () {
       await axios.get('https://sl-navi.com/static/inworld.txt').then(res => {
         this.inworld = res.data
+      })
+    },
+    async getCounter () {
+      await axios.get('https://sl-navi.com/static/counter.txt').then(res => {
+        [this.countYesterday, this.countToday] = res.data.split('\n')
       })
     }
   }
