@@ -95,7 +95,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2022 sl-navi  | サイト閲覧者 昨日{{ countYesterday }}人 / 今日{{ countToday }}人 / 24時間以内の全センサのアバター検知数{{ countSensor }}人
+            © 2020-2022 sl-navi | サイト閲覧者 昨日{{ countYesterday }}人 / 今日{{ countToday }}人 | 全センサのアバター検知数 １時間以内{{ countSensor1h }}人 / 1日以内{{ countSensor24h }}人
           </p>
         </div>
       </footer>
@@ -122,7 +122,8 @@ export default {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
       searchword: '',
       inworld: 0,
-      countSensor: '-',
+      countSensor1h: '-',
+      countSensor24h: '-',
       countYesterday: '-',
       countToday: '-'
     }
@@ -183,8 +184,12 @@ export default {
       })
     },
     async getCounter () {
-      await axios.get('https://sl-navi.com/static/counter.txt').then(res => {
-        [this.countSensor, this.countYesterday, this.countToday] = res.data.split('\n')
+      await axios.get('https://sl-navi.com/static/counter.json').then(res => {
+        var j = JSON.parse(res.data)
+        this.countSensor1h = j.sensor1h
+        this.countSensor24h = j.sensor24h
+        this.countToday = j.countToday
+        this.countYesterday = j.countYesterday
       })
     }
   }
