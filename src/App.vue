@@ -95,7 +95,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2022 sl-navi  | 昨日 {{ countYesterday }}人 / 今日 {{ countToday }}人
+            © 2020-2022 sl-navi  | 昨日 {{ countYesterday }}人 / 今日 {{ countToday }}人 / センサ検知アバター人数{{ countSensor }}人
           </p>
         </div>
       </footer>
@@ -122,6 +122,7 @@ export default {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
       searchword: '',
       inworld: 0,
+      countSensor: '-',
       countYesterday: '-',
       countToday: '-'
     }
@@ -183,7 +184,7 @@ export default {
     },
     async getCounter () {
       await axios.get('https://sl-navi.com/static/counter.txt').then(res => {
-        [this.countYesterday, this.countToday] = res.data.split('\n')
+        [this.countSensor, this.countYesterday, this.countToday] = res.data.split('\n')
       })
     }
   }
