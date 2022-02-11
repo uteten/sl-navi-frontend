@@ -44,6 +44,7 @@
           v-if="z.cn > 0"
           class="cn"
         >{{ z.cn }}</span>
+        <!--
         <span
           v-if="z.female>0"
           class="female"
@@ -52,6 +53,7 @@
           v-if="z.male>0"
           class="male"
         >♂×{{ z.male }}</span>
+        -->
         <span
           v-if="z.status===0"
           class="badge badge-secondary"
