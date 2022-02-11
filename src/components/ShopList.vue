@@ -233,6 +233,9 @@
     <div v-if="!shops[0]">
       なし
     </div>
+    <div class="counter text-muted">
+      全センサのアバター検知数 1時間以内{{ countSensor1h }}人 / 1日以内{{ countSensor24h }}人
+    </div>
   </div>
 </template>
 <script>
@@ -276,7 +279,11 @@ export default {
       cacheMode: '',
       cacheSearch: '',
       playFlag: 0,
-      playUrl: ''
+      playUrl: '',
+      countSensor1h: '-',
+      countSensor24h: '-',
+      countYesterday: '-',
+      countToday: '-'
     }
   },
   mounted () {
@@ -284,6 +291,10 @@ export default {
     this.$setInterval(() => {
       that.getShops(that.cacheMode, that.cacheTagid, that.cacheSearch)
     }, 1000 * INTERVAL_RELOAD_SHOP)
+    this.getCounter()
+    this.$setInterval(() => {
+      that.getCounter()
+    }, 1000 * 60)
   },
   methods: {
     async alog (flag, event) {
@@ -366,7 +377,17 @@ export default {
         this.shops = res.data
         // console.log(['shoplist:getShop:then', this.shops])
       })
+    },
+    async getCounter () {
+      await axios.get('https://sl-navi.com/static/counter.json').then(res => {
+        var j = res.data
+        this.countSensor1h = j.countSensor1h
+        this.countSensor24h = j.countSensor24h
+        this.countToday = j.countToday
+        this.countYesterday = j.countYesterday
+      })
     }
+
   }
 }
 </script>
@@ -533,5 +554,7 @@ export default {
     color: #ffaa00;
     border-bottom: dashed 2px #ffb03f;
   }
-
+  .counter{
+    text-align: right;
+  }
 </style>
