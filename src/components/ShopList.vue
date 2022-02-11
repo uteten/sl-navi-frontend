@@ -206,6 +206,13 @@
           class="heatmap"
           :src="'/static/heatmap/' + z.flag + '.png?'"
         >
+        <span
+          v-if="z.residentlog>9"
+          class="shop_residentlog"
+        >
+          今日の訪問者数<br>
+          <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
+        </span>
       </b-popover>
     </div>
     <!--
@@ -509,6 +516,7 @@ export default {
   .popover {
     border: outset 1px #ffb03f;
     border-radius: 9px;
+    min-width: 530px;
   }
   .flag {
     width: 150px;
@@ -521,6 +529,16 @@ export default {
   .heatmap {
     height: 120px;
     width: 320px;
+    float: left;
+    margin-bottom: 5px;
+  }
+  .shop_residentlog_count {
+    margin-left: 5px;
+    font-size: 90px;
+    line-height: 1;
+  }
+  .shop_residentlog {
+    margin-left: 5px;
   }
   .shops{
     background: #fdfcec;
