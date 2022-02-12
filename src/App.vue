@@ -148,13 +148,13 @@ export default {
     }
   }, mounted () {
     this.syncSearchFormFromPath() // 検索フォームをPathにあわせて入力した状態にする（初期状態）
+    /*
     const that = this
-    this.getInworld()
     this.getCounter()
     this.$setInterval(() => {
-      that.getInworld()
       that.getCounter()
     }, 1000 * 60)
+    */
   },
   methods: {
     goSearch (keyCode) {
@@ -178,7 +178,7 @@ export default {
     }
     /*
     async getCounter () {
-      await axios.get('https://sl-navi.com/static/counter.json').then(res => {
+      await axios.get('https://sl-navi.com/static/counter2.json').then(res => {
         var j = res.data
         this.countSensor1h = j.countSensor1h
         this.countSensor24h = j.countSensor24h
