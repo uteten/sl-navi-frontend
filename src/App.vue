@@ -61,7 +61,6 @@
               </router-link>
             </li>
           </ul>
-          <span class="slcount">[ SLログイン人数 {{ inworld.toLocaleString() }}人 ]</span>
           <form class="search form-inline">
             <input
               v-model="searchword"
@@ -95,7 +94,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2022 sl-navi | サイト閲覧者 昨日{{ countYesterday }}人 / 今日{{ countToday }}人
+            © 2020-2022 sl-navi
           </p>
         </div>
       </footer>
@@ -121,7 +120,6 @@ export default {
     return {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
       searchword: '',
-      inworld: 0,
       countSensor1h: '-',
       countSensor24h: '-',
       countYesterday: '-',
@@ -177,12 +175,8 @@ export default {
       } else {
         this.searchword = ''
       }
-    },
-    async getInworld () {
-      await axios.get('https://sl-navi.com/static/inworld.txt').then(res => {
-        this.inworld = res.data
-      })
-    },
+    }
+    /*
     async getCounter () {
       await axios.get('https://sl-navi.com/static/counter.json').then(res => {
         var j = res.data
@@ -192,6 +186,7 @@ export default {
         this.countYesterday = j.countYesterday
       })
     }
+    */
   }
 }
 </script>

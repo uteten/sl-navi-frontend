@@ -243,7 +243,7 @@
       なし
     </div>
     <div class="counter text-muted">
-      全センサのアバター検知数 1時間以内{{ countSensor1h }}人 / 1日以内{{ countSensor24h }}人
+      サイト閲覧者 昨日{{ countYesterday }}人 / 今日{{ countToday }}人 | 全センサのアバター検知数 1時間以内{{ countSensor1h }}人 / 1日以内{{ countSensor24h }}人 | SLログイン人数 {{ countLogin }}
     </div>
   </div>
 </template>
@@ -292,7 +292,8 @@ export default {
       countSensor1h: '-',
       countSensor24h: '-',
       countYesterday: '-',
-      countToday: '-'
+      countToday: '-',
+      countLogin: '-'
     }
   },
   mounted () {
@@ -388,12 +389,13 @@ export default {
       })
     },
     async getCounter () {
-      await axios.get('https://sl-navi.com/static/counter.json').then(res => {
+      await axios.get('https://sl-navi.com/static/counter2.json').then(res => {
         var j = res.data
         this.countSensor1h = j.countSensor1h
         this.countSensor24h = j.countSensor24h
         this.countToday = j.countToday
         this.countYesterday = j.countYesterday
+        this.countLogin = j.countLogin
       })
     }
 
@@ -576,5 +578,6 @@ export default {
   }
   .counter{
     text-align: right;
+    font-size: 85%;
   }
 </style>
