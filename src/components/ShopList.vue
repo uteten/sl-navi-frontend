@@ -243,7 +243,7 @@
       なし
     </div>
     <div class="counter text-muted">
-      閲覧数:今日{{ countToday }}  アバター検知数:1時間 {{ countSensor1h }} / 1日 {{ countSensor24h }} 現在のログイン数:{{ countLogin }}
+      閲覧数:今日{{ countToday }}人 アバター検知数:1時間{{ countSensor1h }}人 / 1日{{ countSensor24h }}人 現在のログイン数:{{ countLogin }}人
     </div>
   </div>
 </template>
