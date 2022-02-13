@@ -180,8 +180,8 @@ export default {
 </script>
 <style>
 .row{
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 4px;
+  padding-left: 4px;
 }
 .ad{
   text-align: center;
