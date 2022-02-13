@@ -25,7 +25,7 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
-        2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>ヒートマップを人数対応
+        2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>詳細情報のヒートマップに人数で濃淡をつけました
       </li>
       <li class="news_item">
         2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>スマホでも見やすくしました
