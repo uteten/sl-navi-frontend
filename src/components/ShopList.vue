@@ -211,7 +211,7 @@
             :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
           >
           <span class="shop_residentlog">
-            今日の訪問者数<br>
+            今日の訪問者<br>
             <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
           </span>
         </div>
