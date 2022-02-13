@@ -408,7 +408,7 @@ export default {
 <style scoped>
   /* 看板 */
   .f{
-    margin:2px;
+    margin:1px;
     position: relative;
     display: inline-block;
     width: 150px;
