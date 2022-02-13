@@ -12,7 +12,7 @@
       <!-- 基本GoogleAD -->
       <div
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
-        class="col ad"
+        class="ad"
       >
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
