@@ -179,6 +179,10 @@ export default {
 }
 </script>
 <style>
+.row{
+  padding-right: 5px;
+  padding-left: 5px;
+}
 .ad{
   text-align: center;
   padding: 0;
