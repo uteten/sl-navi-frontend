@@ -270,7 +270,7 @@ export default {
   }
   .event_data li{
     padding: 0;
-    margin: 0 1px 0 1px;
+    margin: 0;
     color:#666666;
     font-size:x-small;
     list-style: none;
