@@ -558,7 +558,7 @@ export default {
     margin-left: 5px;
   }
   .popoverCountSize{
-    width: 540px;
+    width: 640px;
   }
 .shops{
     background: #fdfcec;
