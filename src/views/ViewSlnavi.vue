@@ -2,10 +2,11 @@
   <div class="view row">
     <tag-list
       ref="appTagList"
+      class="view col order-2"
       :mode="mode"
       @selected-tag="actionSelectedTag"
     />
-    <div class="view col">
+    <div class="view col order-1">
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
       <!-- 基本GoogleAD -->
