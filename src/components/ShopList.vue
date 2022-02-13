@@ -202,17 +202,27 @@
         >
           <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
         </a>
-        <img
-          class="heatmap"
-          :src="'/static/heatmap/' + z.flag + '.png?'"
-        >
-        <span
+        <div
           v-if="z.residentlog>9"
-          class="shop_residentlog"
+          class="popoverCountSize"
         >
-          今日の訪問者数<br>
-          <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
-        </span>
+          <img
+            class="heatmap"
+            :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
+          >
+          <span class="shop_residentlog">
+            今日の訪問者数<br>
+            <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
+          </span>
+        </div>
+        <div
+          v-else
+        >
+          <img
+            class="heatmap"
+            :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
+          >
+        </div>
       </b-popover>
     </div>
     <!--
@@ -506,10 +516,6 @@ export default {
     align-items: center;
     border-radius: 50%;
   }
-  /* ポップオーバー系 */
-  .popover {
-    max-width: 700px;
-  }
 
   .popover-header{
     background: #fdf0e0;
@@ -518,9 +524,11 @@ export default {
   }
 
   .popover {
+    max-width: 700px;
+/*    min-width: 600px;*/
+/*    min-width: 530px;*/
     border: outset 1px #ffb03f;
     border-radius: 9px;
-    min-width: 530px;
   }
   .flag {
     width: 150px;
@@ -529,22 +537,30 @@ export default {
   .now_event{
     border: solid 3px #ff0000;
   }
-
   .heatmap {
-    height: 120px;
-    width: 320px;
+    /* 360: 140 */
+    /* 18 :  7  */
+    width: 360px;
+    height: 140px;
+    width: 400px;
+    height: 155px;
     float: left;
     margin-bottom: 5px;
   }
   .shop_residentlog_count {
+    font-family: 'tatenga';
+    font-size: 120px;
     margin-left: 5px;
-    font-size: 90px;
     line-height: 1;
+    white-space: nowrap;
   }
   .shop_residentlog {
     margin-left: 5px;
   }
-  .shops{
+  .popoverCountSize{
+    width: 540px;
+  }
+.shops{
     background: #fdfcec;
     border: 1px solid #ffb03f;
     border-radius: 5px;
