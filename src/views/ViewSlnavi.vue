@@ -1,12 +1,12 @@
 <template>
-  <div class="view row">
+  <div class="view col col-12 row">
     <tag-list
       ref="appTagList"
-      class="view col order-2"
+      class="col-lg-2 order-lg-1 order-2"
       :mode="mode"
       @selected-tag="actionSelectedTag"
     />
-    <div class="view col order-1">
+    <div class="col-lg-10 order-lg-2 order-1">
       <messages ref="appMessages" />
       <shop-list ref="appShopList" />
       <!-- 基本GoogleAD -->

@@ -1,7 +1,7 @@
 <template>
   <div
     id="tag_menu_group"
-    class="col col-lg-2 leftmenu"
+    class="leftmenu"
   >
     <div
       id="tag_special_group"
