@@ -243,7 +243,11 @@ export default {
 }
 </script>
 <style scorped>
-    .textarea{
+.view{
+  width: 100%
+}
+
+.textarea{
 	grid-row:20;
 }
 .fc-day-sat {

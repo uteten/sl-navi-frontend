@@ -1,5 +1,5 @@
 <template>
-  <div class="view">
+  <div>
     <img
       class="sl-navi-kanban"
       src="/static/sl-navi-kanban.png"

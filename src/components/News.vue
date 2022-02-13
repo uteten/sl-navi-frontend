@@ -25,6 +25,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>スマホで見やすくした
+      </li>
+      <li class="news_item">
         2022/02/11 <span class="badge badge-primary">微修正(WebGUI)</span>1日に10人以上訪問がある施設は、詳細情報に訪問者数を表示(v2.9以降)
       </li>
       <li class="news_item">

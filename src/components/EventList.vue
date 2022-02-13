@@ -236,7 +236,7 @@ export default {
     margin: 0;
   }
   .event_item{
-    margin:4px;
+    margin:1px;
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -270,7 +270,7 @@ export default {
   }
   .event_data li{
     padding: 0;
-    margin: 0 5px 0 5px;
+    margin: 0 1px 0 1px;
     color:#666666;
     font-size:x-small;
     list-style: none;

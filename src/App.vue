@@ -192,26 +192,16 @@ export default {
 </script>
 
 <style>
-.nav-item{
-  font-size: 90%;
-}
-  /* -- 全体的な設定 -- */
+  .nav-item{
+    font-size: 90%;
+  }
   body{
     padding-top: 4.5rem;
     background-color: #ffffff;
   }
-  .slcount{
-    margin-right: 5px;
-  }
-  #app {
-    text-align: left;
-  }
   #sitetitle {
     color: #ffaa00;
     font-family: 'arial black';
-  }
-  .view{
-    width: 100%
   }
   .bi-heart-fill{
     color: crimson;

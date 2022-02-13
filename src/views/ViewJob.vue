@@ -1,5 +1,5 @@
 <template>
-  <div class="view row">
+  <div class="row">
     <job-genre ref="appJobGenre" />
     <div class="view col">
       <job-list ref="appJobList" />

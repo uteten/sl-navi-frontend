@@ -1,5 +1,5 @@
 <template>
-  <div class="view">
+  <div>
     <h4 v-if="eid==0">
       イベント登録画面
     </h4>
