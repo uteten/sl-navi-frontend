@@ -11,7 +11,7 @@
       <shop-list ref="appShopList" />
       <!-- 基本GoogleAD -->
       <div
-        v-if="1==1 || $cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
         class="ad"
       >
         <Adsense
