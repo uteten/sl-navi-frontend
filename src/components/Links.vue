@@ -67,9 +67,6 @@
         :セール情報(英語)
       </dd>
     </dl>
-    <div class="links_item">
-      ※便利なサイトを教えてくださいいい！（<a href="https://twitter.com/sl_uten">@SL_uten</a>へDM）
-    </div>
   </div>
 </template>
 
