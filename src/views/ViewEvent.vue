@@ -97,6 +97,7 @@
         </button>
       </template>
     </b-modal>
+    <slt-2-jst />
     <div align="right">
       <router-link to="/createEvent">
         <span class="badge badge-danger">イベント登録はここをクリック</span>
@@ -106,6 +107,8 @@
 </template>
 
 <script>
+import Slt2Jst from '@/components/Slt2Jst'
+
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -126,6 +129,7 @@ const GENRE_SOURCE = '//sl-navi.com/event/api/genre'
 const EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
 export default {
   components: {
+    Slt2Jst,
     FullCalendar // make the <FullCalendar> tag available
   },
   filters: {

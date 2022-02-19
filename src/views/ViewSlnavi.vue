@@ -51,7 +51,6 @@
       </div>
       -->
       <event-list ref="appEventList" />
-      <slt-2-jst />
       <links ref="appLinks" />
       <news ref="appNews" />
     </div>
@@ -65,7 +64,6 @@ import News from '@/components/News'
 import Links from '@/components/Links'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
-import Slt2Jst from '@/components/Slt2Jst'
 
 // import '@/css/slnavi-vue.css'
 const ACTIVE_SHOP_TAGID = -3
@@ -80,8 +78,7 @@ export default {
     Links,
     Messages,
     ShopList,
-    EventList,
-    Slt2Jst
+    EventList
   },
   props: {
     'mode': {
