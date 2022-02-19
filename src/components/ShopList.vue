@@ -559,9 +559,11 @@ export default {
   .shop_residentlog {
     margin-left: 5px;
   }
+  /*
   .popoverCountSize{
-    min-width: 530px;
+    min-width: 500px;
   }
+  */
 .shops{
     background: #fdfcec;
     border: 1px solid #ffb03f;
