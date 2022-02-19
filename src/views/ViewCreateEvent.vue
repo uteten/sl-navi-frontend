@@ -40,7 +40,7 @@
             <a
               href="javascript:void(0)"
               @click="$refs['my-modal'].show()"
-            ><b-icon-camera />いべんさからイベントを自動入力<span class="badge badge-danger">新機能</span></a>
+            ><b-icon-camera />いべんさからイベント情報を取得<span class="badge badge-danger">新機能</span></a>
           </p>
           <label for="id_title">イベント名（必須）:</label>
           <input
@@ -263,7 +263,7 @@
     <b-modal
       ref="my-modal"
       v-model="showModal"
-      title="いべんさデータ自動入力"
+      title="いべんさデータ取得"
       class="modal fade"
       hide-footer
     >

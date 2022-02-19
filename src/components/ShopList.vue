@@ -38,11 +38,11 @@
       <div class="memo">
         <span
           v-if="z.sn > 0"
-          class="sn"
+          class="staff_num_circle"
         >{{ z.sn }}</span>
         <span
           v-if="z.cn > 0"
-          class="cn"
+          class="guest_num_circle"
         >{{ z.cn }}</span>
         <!--
         <span
@@ -136,8 +136,8 @@
           </span>
         </template>
         <br>
-        <span class="n2">
-          スタッフ<span class="sn2">{{ z.sn }}</span>人
+        <span class="staff_and_guest_title">
+          スタッフ<span class="staff_num_circle_in_popover">{{ z.sn }}</span>人
           <span v-if="z.staffs.length!=0">
             (<span
               v-for="staff in z.staffs"
@@ -153,7 +153,7 @@
               <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
             </span>)
           </span>
-          / 訪問者<span class="cn2">{{ z.cn }}</span>人
+          / 訪問者<span class="guest_num_circle_in_popover">{{ z.cn }}</span>人
           <template v-if="z.female+z.male>0">
             / 男女内訳
             <span v-if="z.female>0">
@@ -397,6 +397,11 @@ export default {
         }
       }).then(res => {
         this.shops = res.data
+        /*
+        this.shops.forEach(dog => {
+          console.log(dog)
+        })
+        */
         // console.log(['shoplist:getShop:then', this.shops])
       })
     },
@@ -416,17 +421,18 @@ export default {
 </script>
 
 <style scoped>
-  /* 看板 */
+  .flag {
+    width: 150px;
+    height: 150px;
+  }
   .f{
-    margin: 2px;
+    margin: 4px;
     position: relative;
     display: inline-block;
     width: 150px;
     height: 150px;
     cursor: pointer;
-
   }
-  /* 看板の上にcn snを並べて乗せるdiv */
   .memo{
     align-items: flex-end;
     position: absolute;
@@ -454,7 +460,7 @@ export default {
     right: 0px;
     top: 3px;
   }
-  .cn {
+  .guest_num_circle {
     width: 25px;
     height: 25px;
     color: #ffffff;
@@ -465,7 +471,7 @@ export default {
     border-radius: 50%;
     cursor: pointer;
   }
-  .sn{
+  .staff_num_circle{
     width: 25px;
     height: 25px;
     color: #ffffff;
@@ -492,11 +498,11 @@ export default {
     cursor: pointer;
     background-color: #ff8070;
   }
-  .n2{
+  .staff_and_guest_title{
     font-size: 85%;
     font-weight: 700;
   }
-  .cn2{
+  .guest_num_circle_in_popover{
     width: 25px;
     height: 25px;
     padding: 0px 4px;
@@ -506,7 +512,7 @@ export default {
     align-items: center;
     border-radius: 50%;
   }
-  .sn2{
+  .staff_num_circle_in_popover{
     width: 25px;
     height: 25px;
     padding: 0px 4px;
@@ -525,14 +531,8 @@ export default {
 
   .popover {
     max-width: 700px;
-/*    min-width: 600px;*/
-/*    min-width: 530px;*/
     border: outset 1px #ffb03f;
     border-radius: 9px;
-  }
-  .flag {
-    width: 150px;
-    height: 150px;
   }
   .now_event{
     border: solid 3px #ff0000;
@@ -542,8 +542,10 @@ export default {
     /* 18 :  7  */
     width: 360px;
     height: 140px;
+    /*
     width: 400px;
     height: 155px;
+    */
     float: left;
     margin-bottom: 5px;
   }

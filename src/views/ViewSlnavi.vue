@@ -50,8 +50,8 @@
         />
       </div>
       -->
-      <slt-2-jst />
       <event-list ref="appEventList" />
+      <slt-2-jst />
       <links ref="appLinks" />
       <news ref="appNews" />
     </div>
