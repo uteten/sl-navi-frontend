@@ -551,7 +551,7 @@ export default {
   }
   .shop_residentlog_count {
     font-family: 'tatenaga';
-    font-size: 120px;
+    font-size: 105px;
     margin-left: 10px;
     line-height: 1;
     white-space: nowrap;
