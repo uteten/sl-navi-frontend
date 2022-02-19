@@ -426,7 +426,7 @@ export default {
     height: 150px;
   }
   .f{
-    margin: 4px;
+    margin: 3px;
     position: relative;
     display: inline-block;
     width: 150px;
