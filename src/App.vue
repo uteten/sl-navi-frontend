@@ -210,6 +210,9 @@ export default {
   .nav-item{
     font-size: 100%;
   }
+  .navbar-brand{
+    padding: 10px 5px 0px 0px !important;
+  }
   body{
     padding-top: 3.5rem;
     background-color: #ffffff;
