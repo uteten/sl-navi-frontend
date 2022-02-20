@@ -208,7 +208,7 @@ export default {
     vertical-align: 0;
   }
   .nav-item{
-    font-size: 90%;
+    font-size: 100%;
   }
   body{
     padding-top: 3.0rem;
