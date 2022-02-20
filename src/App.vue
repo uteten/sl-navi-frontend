@@ -9,7 +9,12 @@
           id="sitetitle"
           class="navbar-brand"
           href="/"
-        >SL-Navi</a>
+        >
+          <img
+            class="logo-img"
+            src="https://slnaviblobstrage.blob.core.windows.net/static/dist/sl-navi-logo.png"
+          >
+        </a>
         <b-navbar-toggle target="nav-collapse" />
         <b-collapse
           id="nav-collapse"
@@ -192,11 +197,21 @@ export default {
 </script>
 
 <style>
+  .navbar {
+    padding: 0 10px !important;
+  }
+  .logo-img{
+    height: 26px;
+    padding: 0;
+    border:0;
+    margin: 0px 0px 0px 0px;
+    vertical-align: 0;
+  }
   .nav-item{
     font-size: 90%;
   }
   body{
-    padding-top: 4.5rem;
+    padding-top: 3.0rem;
     background-color: #ffffff;
   }
   #sitetitle {
