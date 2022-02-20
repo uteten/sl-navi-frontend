@@ -211,7 +211,7 @@ export default {
     font-size: 100%;
   }
   body{
-    padding-top: 3.0rem;
+    padding-top: 3.5rem;
     background-color: #ffffff;
   }
   #sitetitle {
