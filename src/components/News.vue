@@ -25,7 +25,10 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
-        2022/02/17 <span class="badge badge-primary">微修正(WebGUI)</span>施設の表示順を、最近開店(Open)した時刻順にしました(開きっぱなしの施設は後ろの方に表示)
+        2022/02/27 <span class="badge badge-warning">バグ修正v4.4</span>人数多くなると(35人〜)を超えるとセンサが固まることがある問題の対応
+      </li>
+      <li class="news_item">
+        2022/02/17 <span class="badge badge-primary">微修正(WebGUI)</span>施設の表示順を、最近開店(Open)した時刻順にしました
       </li>
       <li class="news_item">
         2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>詳細情報のヒートマップに人数で濃淡をつけました
