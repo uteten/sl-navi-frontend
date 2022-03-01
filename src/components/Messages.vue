@@ -3,7 +3,7 @@
 
 <template>
   <div
-    v-if="messages"
+    v-if="messages[0]"
     id="messages"
     class="col messages ticker box"
   >
