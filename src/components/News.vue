@@ -25,6 +25,9 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
+        2022/02/17 <span class="badge badge-info">機能追加(WebGUI)</span>ギフト探しのページ追加（役に立たないかもしれない）
+      </li>
+      <li class="news_item">
         2022/02/27 <span class="badge badge-warning">バグ修正v4.4</span>人数多くなると(35人〜)を超えるとセンサが固まることがある問題の対応
       </li>
       <li class="news_item">

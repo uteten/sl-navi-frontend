@@ -1,5 +1,9 @@
 export default {
   methods: {
+    text2html (z) {
+      const urlPattern = /(https?:\/\/[^ \r\n]+)/g
+      return z.replace(urlPattern, '<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
+    },
     getCookie: function (name) {
       let cookieValue = null
       if (document.cookie && document.cookie !== '') {
@@ -14,6 +18,9 @@ export default {
         }
       }
       return cookieValue
+    },
+    nitiji2: function (str) {
+      return str.replace(/:00$/, '').replace('T', ' ')
     },
     nitiji: function (str) {
       return str.replace(/:00$/, '').replace('T', ' ').replace(/202[0-9]-/, '').replace('-', '/').replace(/^0/, '').replace(/\/0/, '/')

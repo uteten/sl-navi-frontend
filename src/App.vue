@@ -29,7 +29,7 @@
                 to="/"
                 class="nav-link"
               >
-                <b-icon-house scale="0.8" />一般
+                <b-icon-house-fill scale="0.8" />一般
               </router-link>
             </li>
             <li class="nav-item">
@@ -55,6 +55,14 @@
                 class="nav-link"
               >
                 <b-icon-calendar-week scale="0.8" />イベント
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/gift"
+                class="nav-link"
+              >
+                <b-icon-gift-fill scale="0.8" />ギフト
               </router-link>
             </li>
             <li class="nav-item">
@@ -221,11 +229,16 @@ export default {
     color: #ffaa00;
     font-family: 'arial black';
   }
+  /*
   .bi-heart-fill{
     color: crimson;
   }
+  */
   .bi-calendar-week{
     color: blue;
+  }
+  .bi-gift-fill{
+    color: #32a014;
   }
   a.router-link-exact-active {
     background-color: #ffffff;

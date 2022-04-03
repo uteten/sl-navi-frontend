@@ -78,6 +78,12 @@ const routes = [
     // component: viewJob
   },
   {
+    path: '/gift',
+    name: 'viewGift',
+    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewGift.vue')
+    // component: viewAbout
+  },
+  {
     path: '/about',
     name: 'viewAbout',
     component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue')
