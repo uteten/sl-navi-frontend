@@ -105,6 +105,8 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 const GIFT_SOURCE = '//sl-navi.com/event/api/gift'
+const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
+
 export default {
   name: 'GiftsList',
   data: function () {
@@ -154,6 +156,19 @@ export default {
         } else {
           alert(err.response.status)
         }
+      })
+    },
+    async getUsername () {
+      await axios.get(LOGIN_STATUS_URL).then(res => {
+        if (res.data[0]) {
+          this.username = res.data[0].username
+        } else {
+          this.username = ''
+        }
+        console.log(['username=', this.username, res.data])
+      }).catch(err => {
+        console.log(err)
+        this.username = ''
       })
     }
   }
