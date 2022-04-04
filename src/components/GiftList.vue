@@ -92,6 +92,9 @@
           :src="z.img_url3"
           class="gift_img"
         >
+        <div @click="deleteGift(z.tid)">
+          .
+        </div>
       </b-popover>
     </div>
   </div>
@@ -134,8 +137,24 @@ export default {
           console.log(['mi', dog])
         })
       })
+    },
+    deleteGift: function (tid) {
+      const headers = {
+        'X-CSRFTOKEN': this.csrftoken
+      }
+      axios.delete(GIFT_SOURCE + '/' + tid, { headers: headers }).then(
+        res => {
+          alert('削除しました')
+        }).catch(err => {
+        if (err.response.status === 401) {
+          alert('削除に失敗しました。認証情報が確認できないのでログインしてから再実行してください')
+        } else if (err.response.status === 403) {
+          alert('削除に失敗しました。投稿者した記事しか削除できません')
+        } else {
+          alert(err.response.status)
+        }
+      })
     }
-
   }
 }
 </script>
