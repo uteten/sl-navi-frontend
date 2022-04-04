@@ -34,6 +34,9 @@
             </a>
             -->
             {{ nitiji2(z.created_at) }}
+            <span @click="deleteGift(z.tid)">
+              .
+            </span>
           </dd>
           <dt>Created By</dt>
           <dd>
@@ -44,7 +47,6 @@
               @{{ z.username }}
             </a>
           </dd>
-
           <dt>
             Map URL
           </dt>
@@ -92,9 +94,6 @@
           :src="z.img_url3"
           class="gift_img"
         >
-        <div @click="deleteGift(z.tid)">
-          .
-        </div>
       </b-popover>
     </div>
   </div>
@@ -114,6 +113,8 @@ export default {
     }
   },
   mounted () {
+    this.getUsername()
+    this.csrftoken = this.getCookie('csrftoken')
     this.getGifts()
   },
   methods: {
