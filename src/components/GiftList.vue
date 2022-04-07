@@ -136,9 +136,6 @@ export default {
     async getGifts () {
       await axios.get(GIFT_SOURCE).then(res => {
         this.gifts = res.data
-        this.gifts.forEach(dog => {
-          console.log(['mi', dog])
-        })
       })
     },
     deleteGift: function (tid) {
