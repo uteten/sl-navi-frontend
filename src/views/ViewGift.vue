@@ -2,6 +2,7 @@
   <div class="col col-12 row">
     <gift-list ref="appGiftList" />
     <div
+      v-if="$cookies.get('dev')!=1"
       class="ad"
     >
       <Adsense
