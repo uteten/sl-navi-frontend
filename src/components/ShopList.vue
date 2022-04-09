@@ -69,7 +69,7 @@
         <!-- :show="shops.length===1" -->
         <template #title>
           <a
-            :href="'/search/'+z.flag"
+            :href="'/search/'+z.flag.substring(0, z.flag.indexOf('-'))"
             v-html="z.name"
           />
           <b-badge
