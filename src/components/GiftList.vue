@@ -19,7 +19,7 @@
       >
       <b-popover
         triggers="click blur"
-        placement="bottom"
+        placement="right"
         style="display:none"
         :target="String(z.tid)"
       >
@@ -192,89 +192,12 @@ export default {
     bottom: 0px;
     display: flex;
   }
-  .new_shop{
-    align-items: flex-start;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    display: flex;
-  }
-  .event_shop{
-    align-items: flex-start;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    display: flex;
-  }
   .popover_title_right{
     align-items: flex-start;
     position: absolute;
     right: 0px;
     top: 3px;
   }
-  .guest_num_circle {
-    width: 25px;
-    height: 25px;
-    color: #ffffff;
-    background-color: #2779bd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  .staff_num_circle{
-    width: 25px;
-    height: 25px;
-    color: #ffffff;
-    background-color: #ffaa00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  .male{
-    height: fit-content;
-    font-size: 100%;
-    color: #ffffff;
-    border-radius: 25%;
-    cursor: pointer;
-    background-color: #00aaaa;
-  }
-  .female{
-    height: fit-content;
-    font-size: 100%;
-    color: #ffffff;
-    border-radius: 25%;
-    cursor: pointer;
-    background-color: #ff8070;
-  }
-  .staff_and_guest_title{
-    font-size: 85%;
-    font-weight: 700;
-  }
-  .guest_num_circle_in_popover{
-    width: 25px;
-    height: 25px;
-    padding: 0px 4px;
-    color: #ffffff;
-    background-color: #2779bd;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-  .staff_num_circle_in_popover{
-    width: 25px;
-    height: 25px;
-    padding: 0px 4px;
-    color: #ffffff;
-    background-color: #ffaa00;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-
   .popover-header{
     background: #fdf0e0;
     border-bottom: dashed 2px #ffb03f;
@@ -286,36 +209,6 @@ export default {
     border: outset 1px #ffb03f;
     border-radius: 9px;
   }
-  .now_event{
-    border: solid 3px #ff0000;
-  }
-  .heatmap {
-    /* 360: 140 */
-    /* 18 :  7  */
-    width: 360px;
-    height: 140px;
-    /*
-    width: 400px;
-    height: 155px;
-    */
-    float: left;
-    margin-bottom: 5px;
-  }
-  .shop_residentlog_count {
-    font-family: 'tatenaga';
-    font-size: 105px;
-    margin-left: 10px;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .shop_residentlog {
-    margin-left: 5px;
-  }
-  /*
-  .popoverCountSize{
-    min-width: 500px;
-  }
-  */
 .gifts{
     background: #fdfcec;
     border: 1px solid #ffb03f;
