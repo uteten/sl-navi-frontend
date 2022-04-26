@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import VueAnalytics from 'vue-analytics'
-import VueGtm from 'vue-gtm'
+// import VueGtm from 'vue-gtm'
 
 import viewSlnavi from '@/views/ViewSlnavi'
 // import viewAbout from '@/views/ViewAbout'
@@ -107,9 +107,10 @@ Vue.use(VueAnalytics, {
   id: 'UA-177594854-1',
   router
 })
-
+/*
 Vue.use(VueGtm, {
   id: 'G-RV9WMZV704'
 })
+*/
 export default router
 
