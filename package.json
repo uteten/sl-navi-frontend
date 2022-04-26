@@ -27,6 +27,7 @@
     "vue-cookies": "^1.7.4",
     "vue-ctk-date-time-picker": "^2.5.0",
     "vue-google-adsense": "^1.9.1",
+    "vue-gtm": "^3.5.0-vue2",
     "vue-head": "^2.2.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0",
