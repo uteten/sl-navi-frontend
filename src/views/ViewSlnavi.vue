@@ -53,6 +53,18 @@
       <event-list ref="appEventList" />
       <links ref="appLinks" />
       <news ref="appNews" />
+      <div
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
+        class="ad"
+      >
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="5067544569"
+          ins-style="display:inline-block;width:100%;height:320px;"
+          data-ad-format=""
+          data-full-width-responsive=""
+        />
+      </div>
     </div>
   </div>
 </template>
