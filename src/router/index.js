@@ -4,10 +4,8 @@ import VueRouter from 'vue-router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-/*
 import VueAnalytics from 'vue-analytics'
-*/
-import VueGtm from 'vue-gtm'
+// import VueGtm from 'vue-gtm'
 import viewSlnavi from '@/views/ViewSlnavi'
 // import viewAbout from '@/views/ViewAbout'
 // import viewCreateEvent from '@/views/ViewCreateEvent'
@@ -102,16 +100,16 @@ const router = new VueRouter({
   // base: process.env.BASE_URL,
   routes
 })
-/*
 Vue.use(VueAnalytics, {
   id: 'UA-177594854-1',
   router
 })
-*/
 
+/*
 Vue.use(VueGtm, {
   id: 'G-RV9WMZV704'
 })
+*/
 
 export default router
 
