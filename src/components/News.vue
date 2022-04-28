@@ -30,30 +30,6 @@
       <li class="news_item">
         2022/02/27 <span class="badge badge-warning">バグ修正v4.4</span>人数多くなると(35人〜)を超えるとセンサが固まることがある問題の対応
       </li>
-      <li class="news_item">
-        2022/02/17 <span class="badge badge-primary">微修正(WebGUI)</span>施設の表示順を、最近開店(Open)した時刻順にしました
-      </li>
-      <li class="news_item">
-        2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>詳細情報のヒートマップに人数で濃淡をつけました
-      </li>
-      <li class="news_item">
-        2022/02/13 <span class="badge badge-primary">微修正(WebGUI)</span>スマホでも見やすくしました
-      </li>
-      <li class="news_item">
-        2022/02/11 <span class="badge badge-primary">微修正(WebGUI)</span>1日に10人以上訪問がある施設は、詳細情報に訪問者数を表示(v2.9以降)
-      </li>
-      <li class="news_item">
-        2022/02/10 <span class="badge badge-primary">微修正(WebGUI)</span>フッターに統計情報追加
-      </li>
-      <li class="news_item">
-        2022/01/11 <span class="badge badge-primary">微修正(WebGUI)</span>リンク集追加
-      </li>
-      <li class="news_item">
-        2021/08/16 <span class="badge badge-primary">微修正(WebGUI)</span>イベントもアダルトと一般を分けました
-      </li>
-      <li class="news_item">
-        2021/04/12 <span class="badge badge-primary">仕様修正 v4.3</span> 男女判定の仕組み見直し（着てる服は無視して、シェイプの♂♀でのみ判断）
-      </li>
     </ul>
   </div>
 </template>
