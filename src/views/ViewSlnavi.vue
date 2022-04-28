@@ -60,7 +60,7 @@
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
           data-ad-slot="5067544569"
-          ins-style="display:inline-block;width:100%;height:320px;"
+          ins-style="display:inline-block;width:100%"
           data-ad-format=""
           data-full-width-responsive=""
         />
