@@ -52,6 +52,7 @@
       -->
       <event-list ref="appEventList" />
       <links ref="appLinks" />
+      <news ref="appNews" />
       <div
         v-if="$cookies.get('dev')!=1 && nowT == lastT"
         class="ad"
@@ -71,7 +72,6 @@
           data-full-width-responsive=""
         />
       </div>
-      <news ref="appNews" />
     </div>
   </div>
 </template>
