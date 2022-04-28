@@ -85,9 +85,9 @@ import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
 
 // import '@/css/slnavi-vue.css'
-const ACTIVE_SHOP_TAGID = -3
+const ACTIVE_SHOP_TAGID = -100
 // const OPEN_SHOP_TAGID = -2
-const ALL_SHOP_TAGID = -1
+const ALL_SHOP_TAGID = -100
 
 export default {
   name: 'ViewSlnavi',
