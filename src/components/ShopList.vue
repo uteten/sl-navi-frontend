@@ -226,33 +226,25 @@
       </b-popover>
     </div>
     <!--
-    <div class="f">
-      <a href="/">
-      <img
-        class="flag"
-        src="https://sl-navi.azureedge.net/static/flag/"
-      >
-      </a>
-      <iframe
-        :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
-        scrolling="no"
-        marginwidth="0"
-        frameborder="0"
-        class="f"
-      />
-    </div>
-      <Adsense
-        data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="3986041962"
-        ins-style="margin:4px;position:fixed"
-        data-ad-format=""
-        data-full-width-responsive="no">
-      </Adsense>
-      -->
+    <iframe
+      :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
+      scrolling="no"
+      marginwidth="0"
+      frameborder="0"
+      class="f"
+    />
+    -->
+    <Adsense
+      data-ad-client="ca-pub-7267369281211974"
+      data-ad-slot="3986041962"
+      ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
+      data-ad-format=""
+      data-full-width-responsive="no"
+    />
     <div v-if="!shops[0]">
       なし
     </div>
-    <div class="counter text-muted">
+    <div class="counter text-muted" style='clear:both'>
       <span class="counter_ele">閲覧数：今日{{ countToday }}人</span>
       <span class="counter_ele">アバター検知数：1時間{{ countSensor1h }}人 / 1日{{ countSensor24h }}人</span>
       <span class="counter_ele">現在のログイン数：{{ countLogin }}人</span>
@@ -432,6 +424,7 @@ export default {
     width: 150px;
     height: 150px;
     cursor: pointer;
+    float: left;
   }
   .memo{
     align-items: flex-end;
