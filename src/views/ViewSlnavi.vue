@@ -52,7 +52,9 @@
       -->
       <event-list ref="appEventList" />
       <links ref="appLinks" />
+      <!--
       <news ref="appNews" />
+      -->
     </div>
   </div>
 </template>
@@ -60,7 +62,7 @@
 <script>
 import TagList from '@/components/TagList'
 import Messages from '@/components/Messages'
-import News from '@/components/News'
+// import News from '@/components/News'
 import Links from '@/components/Links'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
@@ -74,7 +76,7 @@ export default {
   name: 'ViewSlnavi',
   components: {
     TagList,
-    News,
+    // News,
     Links,
     Messages,
     ShopList,
