@@ -108,6 +108,8 @@ Vue.use(VueAnalytics, {
 Vue.use(VueGtm, {
   id: 'GTM-WMCN78F',
   enabled: true,
+  debug: false,
+  loadScript: true,
   vueRouter: router
 })
 

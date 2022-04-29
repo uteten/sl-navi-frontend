@@ -21,7 +21,7 @@
         class="flag"
         :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
         :class="z.event ? 'ow_event':''"
-        @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')"
+        @click="$ga.event('shop', 'click_shopflag', z.name);"
       >
       <span
         v-if="isNewShop(z)"
