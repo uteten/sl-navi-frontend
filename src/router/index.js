@@ -14,6 +14,8 @@ import viewSlnavi from '@/views/ViewSlnavi'
 Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
+const BASE_TITLE = 'SL-Navi | '
+const DEFAULT_ADD_TITLE = 'セカンドライフの日本人向けリンク集'
 
 const routes = [
   {
@@ -26,7 +28,8 @@ const routes = [
     path: '/adult',
     name: 'viewSlnavi-adult',
     component: viewSlnavi,
-    props: { mode: 'e' }
+    props: { mode: 'e' },
+    meta: { title: 'セカンドライフの日本人向けアダルト施設' }
   },
   {
     path: '/all',
@@ -49,7 +52,8 @@ const routes = [
   {
     path: '/event',
     name: 'viewEvent',
-    component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue')
+    component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue'),
+    meta: { title: 'セカンドライフの日本人向けイベント情報' }
     // component: viewEvent,
   },
   {
@@ -79,13 +83,15 @@ const routes = [
   {
     path: '/gift',
     name: 'viewGift',
-    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewGift.vue')
+    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewGift.vue'),
+    meta: { title: 'セカンドライフのギフト情報' }
     // component: viewAbout
   },
   {
     path: '/about',
     name: 'viewAbout',
-    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue')
+    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue'),
+    meta: { title: 'このサイトの説明' }
     // component: viewAbout
   },
   {
@@ -100,6 +106,14 @@ const router = new VueRouter({
   // base: process.env.BASE_URL,
   routes
 })
+router.afterEach((to, from) => {
+  if (to.meta.title) {
+    document.title = BASE_TITLE + to.meta.title
+  } else {
+    document.title = BASE_TITLE + DEFAULT_ADD_TITLE
+  }
+})
+
 Vue.use(VueAnalytics, {
   id: 'UA-177594854-1',
   router
