@@ -246,7 +246,7 @@
     <div v-if="!shops[0]">
       なし
     </div>
-    <div class="counter text-muted" style='clear:both'>
+    <div class="counter text-muted">
       <span class="counter_ele">閲覧数：今日{{ countToday }}人</span>
       <span class="counter_ele">アバター検知数：1時間{{ countSensor1h }}人 / 1日{{ countSensor24h }}人</span>
       <span class="counter_ele">現在のログイン数：{{ countLogin }}人</span>
@@ -600,6 +600,7 @@ export default {
   .counter{
     text-align: right;
     font-size: 85%;
+    clear:both;
   }
   .counter_ele{
     margin-right:10px;

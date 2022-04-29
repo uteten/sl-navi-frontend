@@ -1,107 +1,110 @@
 <template>
-  <div class="view">
+  <div class="viewclass col col-12 row">
     <div align="right">
       <router-link to="/createEvent">
         <span class="badge badge-danger">イベント登録はここをクリック</span>
       </router-link>
     </div>
-    <FullCalendar
-      ref="fullCalendar"
-      :options="calendarOptions"
-    />
-    <ul>
-      <li
-        v-for="z in legend"
-        :key="z.color"
-        class="list-inline-item"
-      >
-        <font :color="z.color">
-          ■
-        </font>{{ z.name }}
-      </li>
-    </ul>
-    <b-modal
-      ref="my-modal"
-      v-model="showModal"
-      :title="edTitle"
-      class="modal fade"
-      size="lg"
-      hide-footer
-    >
-      <img
-        class="flag"
-        :src="edImg"
-      >
-      <dl class="dl-horizontal">
-        <dt>形式</dt><dd>{{ edGenre }}</dd>
-        <dt>期間</dt><dd>{{ edSpan }}</dd>
-        <dt>場所</dt><dd>
-          <a
-            target="_blank"
-            :href="edMap"
-          >{{ edMap }}</a>
-        </dd>
-        <dt>詳細</dt><dd v-html="edDesc" />
-        <dt>SNS共有</dt>
-        <dd>
-          <ShareNetwork
-            network="Twitter"
-            :url="'https://sl-navi.com/event/'+edId"
-            :title="edTitle "
-            :description="edDesc"
-            hashtags="secondlife,sljp"
-            sns_twitter_user="SL_uten"
-          >
-            <img
-              class="sns_icon"
-              src="https://sl-navi.com/static/twitter.png"
-            >
-          </ShareNetwork>
-          <ShareNetwork
-            network="Facebook"
-            :url="'https://sl-navi.com/event/'+edId"
-            :title="edTitle "
-            :description="edDesc"
-            hashtags="secondlife,sljp"
-            sns_twitter_user="SL_uten"
-          >
-            <img
-              class="sns_icon"
-              src="https://sl-navi.com/static/facebook.png"
-            >
-          </ShareNetwork>
-        </dd>
-        <dt>投稿</dt>
-        <dd>
-          Posted by
-          <a
-            v-if="edBy.indexOf('.')==-1"
-            target="_blank"
-            :href="'https://twitter.com/'+edBy"
-          >@{{ edBy }}</a>
-          <span v-else>{{ edBy }}</span>
-        </dd>
-      </dl>
-      <template v-if="username==edBy||username=='SL_Uten'||username=='uten'">
-        変更する
-        <router-link :to="'/updateEvent/'+edId">
-          <button class="badge badge-warning">
-            登録内容の更新
-          </button>
-        </router-link>
-        <button
-          class="badge badge-danger"
-          @click="deleteEvent(edId)"
+    <slt-2-jst class="col-lg-12 order-lg-1 order-2" />
+
+    <div class="col-lg-12 order-lg-2 order-1">
+      <FullCalendar
+        ref="fullCalendar"
+        :options="calendarOptions"
+      />
+      <ul>
+        <li
+          v-for="z in legend"
+          :key="z.color"
+          class="list-inline-item"
         >
-          登録内容の削除
-        </button>
-      </template>
-    </b-modal>
-    <slt-2-jst />
-    <div align="right">
-      <router-link to="/createEvent">
-        <span class="badge badge-danger">イベント登録はここをクリック</span>
-      </router-link>
+          <font :color="z.color">
+            ■
+          </font>{{ z.name }}
+        </li>
+      </ul>
+      <b-modal
+        ref="my-modal"
+        v-model="showModal"
+        :title="edTitle"
+        class="modal fade"
+        size="lg"
+        hide-footer
+      >
+        <img
+          class="flag"
+          :src="edImg"
+        >
+        <dl class="dl-horizontal">
+          <dt>形式</dt><dd>{{ edGenre }}</dd>
+          <dt>期間</dt><dd>{{ edSpan }}</dd>
+          <dt>場所</dt><dd>
+            <a
+              target="_blank"
+              :href="edMap"
+            >{{ edMap }}</a>
+          </dd>
+          <dt>詳細</dt><dd v-html="edDesc" />
+          <dt>SNS共有</dt>
+          <dd>
+            <ShareNetwork
+              network="Twitter"
+              :url="'https://sl-navi.com/event/'+edId"
+              :title="edTitle "
+              :description="edDesc"
+              hashtags="secondlife,sljp"
+              sns_twitter_user="SL_uten"
+            >
+              <img
+                class="sns_icon"
+                src="https://sl-navi.com/static/twitter.png"
+              >
+            </ShareNetwork>
+            <ShareNetwork
+              network="Facebook"
+              :url="'https://sl-navi.com/event/'+edId"
+              :title="edTitle "
+              :description="edDesc"
+              hashtags="secondlife,sljp"
+              sns_twitter_user="SL_uten"
+            >
+              <img
+                class="sns_icon"
+                src="https://sl-navi.com/static/facebook.png"
+              >
+            </ShareNetwork>
+          </dd>
+          <dt>投稿</dt>
+          <dd>
+            Posted by
+            <a
+              v-if="edBy.indexOf('.')==-1"
+              target="_blank"
+              :href="'https://twitter.com/'+edBy"
+            >@{{ edBy }}</a>
+            <span v-else>{{ edBy }}</span>
+          </dd>
+        </dl>
+        <template v-if="username==edBy||username=='SL_Uten'||username=='uten'">
+          変更する
+          <router-link :to="'/updateEvent/'+edId">
+            <button class="badge badge-warning">
+              登録内容の更新
+            </button>
+          </router-link>
+          <button
+            class="badge badge-danger"
+            @click="deleteEvent(edId)"
+          >
+            登録内容の削除
+          </button>
+        </template>
+      </b-modal>
+      <div align="right">
+        <router-link to="/createEvent">
+          <span class="badge badge-danger">イベント登録はここをクリック</span>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

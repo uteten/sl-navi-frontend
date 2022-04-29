@@ -10,7 +10,7 @@
     <ol>
       <li>アダルト・一般問わず、<a href="https://www.secondlife.com/?lang=ja">セカンドライフ</a>内の日本人施設やイベント紹介(施設オーナーはセンサを置くだけでOK。申請不要)</li>
       <li>ギフト配布場所情報も試験追加中</li>
-      <li>イベントのSLT⇨JST日本時間変換/計算は<a href="/event">この画面の下</a></li>
+      <li>イベントのSLT⇨JST日本時間変換/計算は<a href="/event">こちら</a></li>
     </ol>
 
     <h4>■センサ配布場所</h4>
