@@ -11,6 +11,7 @@
     "@fullcalendar/daygrid": "^5.2.0",
     "@fullcalendar/timegrid": "^5.2.0",
     "@fullcalendar/vue": "^5.2.0",
+    "@gtm-support/vue2-gtm": "^1.2.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.16.0",
@@ -21,7 +22,7 @@
     "json-bigint": "^1.0.0",
     "npm": "^6.14.11",
     "simplebar-vue": "^1.6.0",
-    "vue": "^2.6.11",
+    "vue": "^2.6.14",
     "vue-analytics": "^5.22.1",
     "vue-axios": "^2.1.5",
     "vue-cookies": "^1.7.4",
@@ -43,7 +44,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^7.0.0-beta.4",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
