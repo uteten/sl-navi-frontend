@@ -107,7 +107,8 @@ Vue.use(VueAnalytics, {
 
 Vue.use(VueGtm, {
   id: 'GTM-WMCN78F',
-  router
+  enabled: true,
+  vueRouter: router
 })
 
 export default router
