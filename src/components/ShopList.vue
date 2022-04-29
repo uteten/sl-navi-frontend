@@ -234,7 +234,7 @@
       class="f"
     />
     -->
-    <template v-if="ad">
+    <template v-if="ad && shops[1]">
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
