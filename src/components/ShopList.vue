@@ -234,14 +234,25 @@
       class="f"
     />
     -->
-    <template v-if="ad && shops[1]">
-      <Adsense
-        data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="3986041962"
-        ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
-        data-ad-format=""
-        data-full-width-responsive="no"
-      />
+    <template v-if="ad && shops.length>=2">
+      <template v-if="shops.length%4==0">
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="4609213719"
+          ins-style="display:inline-block;margin:3px;position:relative;width:306px;height:150px;cursor: pointer;float:left"
+          data-ad-format=""
+          data-full-width-responsive="no"
+        />
+      </template>
+      <template v-else>
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="3986041962"
+          ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
+          data-ad-format=""
+          data-full-width-responsive="no"
+        />
+      </template>
     </template>
     <div v-if="!shops[0]">
       なし
