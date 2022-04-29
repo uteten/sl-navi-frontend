@@ -8,7 +8,11 @@
     />
     <div class="col-lg-10 order-lg-2 order-1">
       <messages ref="appMessages" />
-      <shop-list ref="appShopList" />
+      <shop-list
+        ref="appShopList"
+        :ad="nowT == lastT"
+
+      />
       <!-- 基本GoogleAD -->
       <!--
       <div

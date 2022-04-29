@@ -234,13 +234,15 @@
       class="f"
     />
     -->
-    <Adsense
-      data-ad-client="ca-pub-7267369281211974"
-      data-ad-slot="3986041962"
-      ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
-      data-ad-format=""
-      data-full-width-responsive="no"
-    />
+    <template v-if="ad">
+      <Adsense
+        data-ad-client="ca-pub-7267369281211974"
+        data-ad-slot="3986041962"
+        ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
+        data-ad-format=""
+        data-full-width-responsive="no"
+      />
+    </template>
     <div v-if="!shops[0]">
       なし
     </div>
@@ -283,6 +285,10 @@ export default {
     'mode': {
       type: String,
       default: 'k'
+    },
+    'ad': {
+      type: String,
+      default: '0'
     }
   },
   data: function () {
