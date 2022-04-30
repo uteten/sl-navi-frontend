@@ -13,9 +13,8 @@
         :ad="nowT == lastT"
       />
       <!-- 基本GoogleAD -->
-      <!--
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
+        v-if="$cookies.get('dev')!=1 && nowT == lastT && nowT % 5==0"
         class="ad"
       >
         <Adsense
@@ -26,7 +25,6 @@
           data-full-width-responsive=""
         />
       </div>
-      -->
       <!--
       <div
         v-if="$cookies.get('dev')!=1 && nowT == lastT"

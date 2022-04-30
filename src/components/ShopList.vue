@@ -236,15 +236,6 @@
     -->
     <template v-if="ad && shops.length>=2">
       <Adsense
-        v-if="shops.length % 4 == 0"
-        data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="4854478492"
-        ins-style="display:inline-block;margin:3px;position:relative;width:100%;height:150px;cursor: pointer;float:left"
-        data-ad-format=""
-        data-full-width-responsive="no"
-      />
-      <Adsense
-        v-else
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
         ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
