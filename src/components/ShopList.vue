@@ -238,8 +238,8 @@
       <Adsense
         v-if="shops.length % 4 == 0"
         data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="4609213719"
-        ins-style="display:inline-block;margin:3px;position:relative;width:306px;height:150px;cursor: pointer;float:left"
+        data-ad-slot="4854478492"
+        ins-style="display:inline-block;margin:3px;position:relative;width:100%;height:150px;cursor: pointer;float:left"
         data-ad-format=""
         data-full-width-responsive="no"
       />
