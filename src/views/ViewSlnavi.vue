@@ -14,7 +14,7 @@
       />
       <!-- 基本GoogleAD -->
       <div
-        v-if="$cookies.get('dev')!=1 && nowT == lastT && nowT % 5==0"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 5==0"
         class="ad"
       >
         <Adsense

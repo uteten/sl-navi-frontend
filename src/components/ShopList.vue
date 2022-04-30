@@ -420,15 +420,15 @@ export default {
 
 <style scoped>
   .flag {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
   }
   .f{
     margin: 3px;
     position: relative;
     display: inline-block;
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     cursor: pointer;
     float: left;
   }
