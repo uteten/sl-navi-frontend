@@ -206,6 +206,10 @@ export default {
   padding-right: 0px;
   padding-left: 0px;
 }
+.col-lg-10{
+  padding-left: 5px;
+  padding-right: 5px;
+}
 .col{
   margin-left: 0px;
   margin-left: 0px;
@@ -214,7 +218,7 @@ export default {
 .ad{
   text-align: center;
   padding: 0;
-  margin-left: 15px;
+  margin-left: 5px;
   margin-bottom: 15px;
 
 }
