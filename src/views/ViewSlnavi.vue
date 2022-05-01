@@ -218,7 +218,8 @@ export default {
 .ad{
   text-align: center;
   padding: 0;
-  margin-left: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
   margin-bottom: 15px;
 
 }
