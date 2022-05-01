@@ -203,8 +203,13 @@ export default {
 </script>
 <style>
 .row{
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.col{
+  margin-left: 0px;
+  margin-left: 0px;
+  margin-bottom: 15px;
 }
 .ad{
   text-align: center;

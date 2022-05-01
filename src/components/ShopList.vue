@@ -238,7 +238,7 @@
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
-        ins-style="display:inline-block;margin:3px;position:relative;width:150px;height:150px;cursor: pointer;float:left"
+        ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
         data-ad-format=""
         data-full-width-responsive="no"
       />
@@ -568,8 +568,6 @@ export default {
     border: 1px solid #ffb03f;
     border-radius: 5px;
     padding: 0;
-    margin-left: 15px;
-    margin-bottom: 15px;
   }
   .shop_top{
     font-size: medium;

@@ -207,8 +207,6 @@ export default {
   background: #fdfcec;
   border: 1px solid #ffb03f;
   border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
   margin-bottom: 15px;
 }
 

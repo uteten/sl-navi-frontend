@@ -219,8 +219,6 @@ export default {
     border: 1px solid #ffb03f;
     border-radius: 5px;
     padding: 0;
-    margin-left: 15px;
-    margin-bottom: 15px;
   }
   .events_top{
     font-size: medium;

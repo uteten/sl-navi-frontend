@@ -1,5 +1,5 @@
 <template>
-  <div class="viewclass col col-12 row">
+  <div class="viewclass col col-12">
     <div align="right">
       <router-link to="/createEvent">
         <span class="badge badge-danger">イベント登録はここをクリック</span>
