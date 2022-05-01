@@ -210,7 +210,7 @@
             class="heatmap"
             :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
           >
-          <span class="shop_residentlog">
+          <span class="shop_residentlog d-none d-lg-block">
             今日の訪問者<br>
             <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
           </span>
@@ -539,8 +539,8 @@ export default {
   .heatmap {
     /* 360: 140 */
     /* 18 :  7  */
-    width: 360px;
-    height: 140px;
+    width: 320px;
+    height: 124px;
     /*
     width: 400px;
     height: 155px;
