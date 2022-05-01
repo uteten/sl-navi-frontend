@@ -11,24 +11,13 @@
       <dt class="links_item">
         <a
           target="_blank"
-          href="https://sljpstartguide.wordpress.com/"
-        >
-          Secondlife スタートガイド(Lokia)
-        </a>
-      </dt>
-      <dd class="links_item">
-        :Lokiaさんまとめのスタートガイド
-      </dd>
-      <dt class="links_item">
-        <a
-          target="_blank"
           href="https://aniava.net/"
         >
           Second Life 美少女アバター wiki
         </a>
       </dt>
       <dd class="links_item">
-        :アニメのアバターなど
+        :アニメやH、総合
       </dd>
       <dt class="links_item">
         <a
@@ -39,7 +28,18 @@
         </a>
       </dt>
       <dd class="links_item">
-        :けもののアバターなど
+        :ケモノアバターのレビューなど
+      </dd>
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://sljpstartguide.wordpress.com/"
+        >
+          Secondlife スタートガイド(Lokia)
+        </a>
+      </dt>
+      <dd class="links_item">
+        :メッシュヘッドやボディ情報など
       </dd>
     </dl>
     <h6>買い物/イベント</h6>
