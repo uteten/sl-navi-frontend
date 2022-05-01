@@ -28,7 +28,7 @@
         </a>
       </dt>
       <dd class="links_item">
-        :ケモノアバターのレビューなど
+        :ケモアバのレビュなど
       </dd>
       <dt class="links_item">
         <a
@@ -39,7 +39,7 @@
         </a>
       </dt>
       <dd class="links_item">
-        :メッシュヘッドやボディ情報など
+        :初心者総合
       </dd>
     </dl>
     <h6>買い物/イベント</h6>

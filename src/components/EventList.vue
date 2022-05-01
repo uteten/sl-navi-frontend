@@ -48,7 +48,7 @@
           :target="String(event.id)"
         >
           <img
-            class="event_info_image"
+            class="event_info_image d-none d-lg-block"
             :src="event.img_url"
           >
           <dl class="dl-horizontal">
