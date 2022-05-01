@@ -241,8 +241,8 @@ export default {
   }
   .event_image{
     padding: 0;
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
   }
 
   .event_data_top{
