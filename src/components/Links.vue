@@ -55,17 +55,6 @@
       <dd class="links_item">
         :イベント/セール情報(英語)
       </dd>
-      <dt class="links_item">
-        <a
-          target="_blank"
-          href="https://hypeeventssl.wixsite.com/hypeeventssl/"
-        >
-          MIIX SL
-        </a>
-      </dt>
-      <dd class="links_item">
-        :セール情報(英語)
-      </dd>
     </dl>
   </div>
 </template>
