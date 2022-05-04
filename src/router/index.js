@@ -130,7 +130,7 @@ const router = new VueRouter({
   routes
 })
 router.afterEach((to, from) => {
-  if (to.name.match(/tag/)) {
+  if (to.path.match(/\/[0-9]/)) {
     return
   } else if (to.meta.title) {
     document.title = BASE_TITLE + to.meta.title
