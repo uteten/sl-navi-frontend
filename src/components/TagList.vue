@@ -147,7 +147,7 @@ export default {
         scrollTo(0, 0)
         for (const z of this.tags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
-          if (z.id === tagid) { document.title = 'SL-Navi | ' + z.n }
+          if (z.id === tagid) { document.title = 'SL-Navi | セカンドライフの' + z.n }
         }
         for (const z of this.specialTags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
