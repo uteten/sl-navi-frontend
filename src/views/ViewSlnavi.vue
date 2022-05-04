@@ -114,7 +114,7 @@ export default {
   },
   data: function () {
     return {
-      tagid: ACTIVE_SHOP_TAGID,
+      tagid: Number(this.$route.params.tagid) || ACTIVE_SHOP_TAGID,
       searchword: this.$route.params.searchword,
       nowT: 1,
       lastT: 1,
@@ -125,7 +125,7 @@ export default {
     mode: function () {
       // 検索モードは$route.params.searchwordの監視でハンドリングするので無視する
       if (!this.$route.params.searchword) {
-        // console.log(['viewSlnavi:watch:mode', to, from])
+        // console.log(['viewSlnavi:watch:mode'])
         // mode変更時の初期値
         this.tagid = ACTIVE_SHOP_TAGID
         // this.tagid = OPEN_SHOP_TAGID
@@ -136,10 +136,17 @@ export default {
       }
     },
     '$route.params.searchword': function () {
+      // console.log('search')
       // onsole.log(['viewSlnavi:watch:searchword', to, from])
       this.searchword = this.$route.params.searchword
       if (this.searchword) {
         this.actionSearch(this.searchword)
+      }
+    },
+    '$route.params.tagid': function () {
+      this.tagid = this.$route.params.tagid
+      if (this.tagid) {
+        this.actionSelectedTag(this.tagid)
       }
     }
   },
@@ -164,10 +171,16 @@ export default {
       // console.log(['viewSlnavi:mounted-search', this.searchword])
       this.tagid = ALL_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
-      this.actionSearch(this.searchword)
       this.$refs.appEventList.getEvents()
       this.$refs.appNews.getShops()
       this.$refs.appMessages.getMessages(this.mode)
+      this.actionSearch(this.searchword)
+    } else if (this.tagid) {
+      // console.log(['viewSlnavi:mounted-tagid', this.tagid])
+      this.$refs.appTagList.getTags(this.tagid)
+      this.$refs.appEventList.getEvents(this.mode)
+      this.$refs.appMessages.getMessages(this.mode)
+      this.actionSelectedTag(this.tagid)
     } else {
       // 初期値
       this.tagid = ACTIVE_SHOP_TAGID
@@ -186,7 +199,7 @@ export default {
       this.$emit('selected-tag', e)
     },
     actionSearch: function (e) {
-      console.log(['view:actionSearch', e])
+      // console.log(['view:actionSearch', e])
       this.tagid = ALL_SHOP_TAGID
       this.$refs.appTagList.changeStatus('c', this.tagid)
       this.$refs.appShopList.getShops('c', this.tagid, e)

@@ -147,6 +147,7 @@ export default {
         scrollTo(0, 0)
         for (const z of this.tags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
+          if (z.id === tagid) { document.title = 'SL-Navi | ' + z.n }
         }
         for (const z of this.specialTags) {
           this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
@@ -154,7 +155,15 @@ export default {
       }
       if (active) {
         // コンポーネント内のタグをクリックしたステータス変化は親に伝えて、親で何か処理(shopの再読込など)をする
-        this.$emit('selected-tag', tagid)
+        console.log('hoge')
+        if (this.mode === 'k') {
+          this.$router.push('/kenzen/' + tagid)
+        } else if (this.mode === 'e') {
+          this.$router.push('/adult/' + tagid)
+        } else {
+          this.$router.push('/all/' + tagid)
+        }
+        // this.$emit('selected-tag', tagid)
       }
     }
   }

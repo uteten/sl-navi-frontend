@@ -28,6 +28,7 @@
               <router-link
                 to="/"
                 class="nav-link"
+                :class="$route.path.match('/kenzen/') ? 'router-link-exact-active' : '' "
               >
                 <b-icon-house-fill scale="0.8" />一般
               </router-link>
@@ -36,6 +37,7 @@
               <router-link
                 to="/adult"
                 class="nav-link"
+                :class="$route.path.match('/adult/') ? 'router-link-exact-active' : '' "
               >
                 <b-icon-heart-fill scale="0.8" />アダルト
               </router-link>
@@ -44,7 +46,7 @@
               <router-link
                 to="/all"
                 class="nav-link"
-                :class="searchword ? 'router-link-exact-active' : '' "
+                :class="$route.path.match(/\/all\/|\/search\//) ? 'router-link-exact-active' : '' "
               >
                 <b-icon-building scale="0.8" />両方
               </router-link>

@@ -25,6 +25,12 @@ const routes = [
     props: { mode: 'k' }
   },
   {
+    path: '/kenzen/:tagid',
+    name: 'viewSlnavi-kenzen-tag',
+    component: viewSlnavi,
+    props: { mode: 'k' }
+  },
+  {
     path: '/adult',
     name: 'viewSlnavi-adult',
     component: viewSlnavi,
@@ -32,8 +38,20 @@ const routes = [
     meta: { title: 'セカンドライフの日本人向けアダルト施設' }
   },
   {
+    path: '/adult/:tagid',
+    name: 'viewSlnavi-adult-tag',
+    component: viewSlnavi,
+    props: { mode: 'e' }
+  },
+  {
     path: '/all',
     name: 'viewSlnavi-all',
+    component: viewSlnavi,
+    props: { mode: 'c' }
+  },
+  {
+    path: '/all/:tagid',
+    name: 'viewSlnavi-all-tag',
     component: viewSlnavi,
     props: { mode: 'c' }
   },
@@ -75,6 +93,11 @@ const routes = [
     // component: viewCreateEvent
   },
   {
+    path: '/editShop',
+    name: 'viewEditShop',
+    component: () => import(/* webpackChunkName: "viewEditShop" */ '@/views/ViewEditShop.vue')
+  },
+  {
     path: '/job',
     name: 'viewJob',
     component: () => import(/* webpackChunkName: "viewJob" */ '@/views/ViewJob.vue')
@@ -107,7 +130,9 @@ const router = new VueRouter({
   routes
 })
 router.afterEach((to, from) => {
-  if (to.meta.title) {
+  if (to.name.match(/tag/)) {
+    return
+  } else if (to.meta.title) {
     document.title = BASE_TITLE + to.meta.title
   } else {
     document.title = BASE_TITLE + DEFAULT_ADD_TITLE
