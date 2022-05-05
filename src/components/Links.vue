@@ -49,11 +49,38 @@
           target="_blank"
           href="https://www.seraphimsl.com/"
         >
-          Seraphimsl
+          Seraphimsl(英語)
         </a>
       </dt>
       <dd class="links_item">
-        :イベント/セール情報(英語)
+        :イベント/セール情報
+      </dd>
+
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://slbloodlines.com/haunts/browse/clubs"
+        >
+          Bloodline-Clubs(英語)
+        </a>
+      </dt>
+      <dd class="links_item">
+        :今人がいるクラブの一覧
+      </dd>
+    </dl>
+
+    <h6>ブログ</h6>
+    <dl class="links_menu">
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://community.secondlife.com/blogs/"
+        >
+          Secondlife Blog(英語)
+        </a>
+      </dt>
+      <dd class="links_item">
+        :公式ブログ,良い景観など
       </dd>
     </dl>
   </div>
