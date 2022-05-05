@@ -172,7 +172,6 @@ export default {
       this.tagid = ALL_SHOP_TAGID
       this.$refs.appTagList.getTags(this.tagid)
       this.$refs.appEventList.getEvents()
-      this.$refs.appNews.getShops()
       this.$refs.appMessages.getMessages(this.mode)
       this.actionSearch(this.searchword)
     } else if (this.tagid) {
