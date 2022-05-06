@@ -6,9 +6,9 @@
     <div class="links_top">
       リンク集
     </div>
-    <h6>ブログ</h6>
+    <h6>■ブログ</h6>
     <dl class="links_menu">
-      <dt class="links_item">
+      <dt class="links_item none">
         <a
           target="_blank"
           href="https://community.secondlife.com/blogs/blog/4-featured-news/"
@@ -35,16 +35,16 @@
       <dt class="links_item left">
         <a
           target="_blank"
-          href="https://danielvoyager.wordpress.com/2022/05/05/old-linden-homes-continents-will-mostly-go-away/"
+          href="https://danielvoyager.wordpress.com/"
         >
           DANIEL VOYAGER(英語)
         </a>
       </dt>
       <dd class="links_item">
-        :SL最新情報
+        :最新情報
       </dd>
     </dl>
-    <h6>初心者向け/総合</h6>
+    <h6>■初心者向け/総合</h6>
     <dl class="links_menu">
       <dt class="links_item left">
         <a
@@ -80,7 +80,7 @@
         :初心者総合
       </dd>
     </dl>
-    <h6>買い物/イベント</h6>
+    <h6>■買い物/イベント</h6>
     <dl class="links_menu">
       <dt class="links_item left">
         <a
@@ -136,15 +136,16 @@ export default {
 </script>
 
 <style scorped>
+  .none{
+    float: none;
+  }
   dt.left{
     float: left;
   }
   dt.right{
     margin-left: 20px;
+    float: none;
     font-weight: normal;
-  }
-  dd{
-    margin-left: 20px;
   }
   .links_menu {
     padding: 0.1em 0 0.1em 0;
@@ -181,8 +182,8 @@ export default {
     margin-top: 10px;
     margin-left: 5px;
     margin-right: 20px;
-    color: #444444;
-    border-bottom: solid 1px #ffb03f;
+    color: #906000;
+    border-bottom: dashed 2px #ffb03f;
   }
 
 </style>
