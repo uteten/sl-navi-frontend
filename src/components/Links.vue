@@ -32,7 +32,7 @@
           </a>
         </dt>
       </template>
-      <dt class="links_item left">
+      <dt class="links_item none">
         <a
           target="_blank"
           href="https://danielvoyager.wordpress.com/"
@@ -40,9 +40,22 @@
           DANIEL VOYAGER(英語)
         </a>
       </dt>
-      <dd class="links_item">
-        :最新情報
-      </dd>
+      <template
+        v-for="z in SLBlogArticles2"
+      >
+        <dt
+          :key="z.link"
+          class="links_item right"
+        >
+          <a
+            :key="z.link"
+            target="_blank"
+            :href="z.link"
+          >
+            {{ z.title }}
+          </a>
+        </dt>
+      </template>
     </dl>
     <h6>■初心者向け/総合</h6>
     <dl class="links_menu">
@@ -118,17 +131,25 @@ export default {
   name: 'Links',
   data: function () {
     return {
-      SLBlogArticles: []
+      SLBlogArticles: [],
+      SLBlogArticles2: []
     }
   },
   mounted () {
     this.getBloglines()
+    this.getBloglines2()
   },
   methods: {
     async getBloglines () {
       await axios.get('//sl-navi.com/static/slblog.json').then(res => {
       // await axios.get('memo.txt').then(res => {
         this.SLBlogArticles = res.data
+      })
+    },
+    async getBloglines2 () {
+      await axios.get('//sl-navi.com/static/slblog2.json').then(res => {
+      // await axios.get('memo2.txt').then(res => {
+        this.SLBlogArticles2 = res.data
       })
     }
   }
