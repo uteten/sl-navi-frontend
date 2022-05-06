@@ -11,9 +11,9 @@
       <dt class="links_item">
         <a
           target="_blank"
-          href="https://community.secondlife.com/blogs/"
+          href="https://community.secondlife.com/blogs/blog/4-featured-news/"
         >
-          Secondlife 公式Blog(英語)
+          Secondlife Featured News(英語)
         </a>
       </dt>
       <template
@@ -126,8 +126,8 @@ export default {
   },
   methods: {
     async getBloglines () {
-      await axios.get('//sl-navi.com/static/slblog.json').then(res => {
-      // await axios.get('memo.txt').then(res => {
+      // await axios.get('//sl-navi.com/static/slblog.json').then(res => {
+      await axios.get('memo.txt').then(res => {
         this.SLBlogArticles = res.data
       })
     }
