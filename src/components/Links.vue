@@ -76,11 +76,22 @@
           target="_blank"
           href="https://community.secondlife.com/blogs/"
         >
-          Secondlife Blog(英語)
+          Secondlife 公式Blog(英語)
         </a>
       </dt>
       <dd class="links_item">
-        :公式ブログ,良い景観など
+        :良い景観など
+      </dd>
+      <dt class="links_item">
+        <a
+          target="_blank"
+          href="https://danielvoyager.wordpress.com/2022/05/05/old-linden-homes-continents-will-mostly-go-away/"
+        >
+          DANIEL VOYAGER(英語)
+        </a>
+      </dt>
+      <dd class="links_item">
+        :SL最新情報
       </dd>
     </dl>
   </div>
