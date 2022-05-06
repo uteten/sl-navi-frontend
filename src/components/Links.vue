@@ -126,8 +126,8 @@ export default {
   },
   methods: {
     async getBloglines () {
-      // await axios.get('//sl-navi.com/static/slblog.json').then(res => {
-      await axios.get('memo.txt').then(res => {
+      await axios.get('//sl-navi.com/static/slblog.json').then(res => {
+      // await axios.get('memo.txt').then(res => {
         this.SLBlogArticles = res.data
       })
     }
