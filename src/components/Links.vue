@@ -6,7 +6,7 @@
     <div class="links_top">
       リンク集
     </div>
-    <h6>■ブログ</h6>
+    <h6>■ニュース</h6>
     <dl class="links_menu">
       <dt class="links_item none">
         <a
