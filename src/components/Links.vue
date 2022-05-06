@@ -13,7 +13,7 @@
           target="_blank"
           href="https://community.secondlife.com/blogs/blog/4-featured-news/"
         >
-          Secondlife Featured News(英語)
+          Secondlife公式 特別ニュース(英語)
         </a>
       </dt>
       <template
