@@ -132,22 +132,24 @@ export default {
   data: function () {
     return {
       SLBlogArticles: [],
-      SLBlogArticles2: []
+      SLBlogArticles2: [],
+      nowTime: 0
     }
   },
   mounted () {
+    this.nowTime = (new Date()).getTime()
     this.getBloglines()
     this.getBloglines2()
   },
   methods: {
     async getBloglines () {
-      await axios.get('//sl-navi.com/static/slblog.json').then(res => {
+      await axios.get('//sl-navi.com/static/slblog.json?' + this.nowTime).then(res => {
       // await axios.get('memo.txt').then(res => {
         this.SLBlogArticles = res.data
       })
     },
     async getBloglines2 () {
-      await axios.get('//sl-navi.com/static/slblog2.json').then(res => {
+      await axios.get('//sl-navi.com/static/slblog2.json?' + this.nowTime).then(res => {
       // await axios.get('memo2.txt').then(res => {
         this.SLBlogArticles2 = res.data
       })

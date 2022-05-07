@@ -530,7 +530,7 @@ export default {
 
   .popover {
     max-width: 700px;
-    min-width: 420px;
+    min-width: 430px;
     border: outset 1px #ffb03f;
     border-radius: 9px;
   }
