@@ -530,6 +530,7 @@ export default {
 
   .popover {
     max-width: 700px;
+    min-width: 420px;
     border: outset 1px #ffb03f;
     border-radius: 9px;
   }
@@ -557,7 +558,8 @@ export default {
   }
   .shop_residentlog {
     margin-left: 5px;
-  }
+    white-space: nowrap;
+}
   /*
   .popoverCountSize{
     min-width: 500px;
