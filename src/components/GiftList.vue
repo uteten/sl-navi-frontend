@@ -4,7 +4,7 @@
     class="col gifts"
   >
     <div class="gift_top">
-      ギフト探し(Twitter抽出)・・てすとちゅう
+      ギフト探し(Twitter抽出)
     </div>
     <div
       v-for="z in gifts"
