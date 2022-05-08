@@ -68,15 +68,15 @@
         v-for="z in BlogModemworld"
       >
         <dt
-          :key="z.url"
+          :key="z.link"
           class="links_item right"
         >
           <a
-            :key="z.url"
+            :key="z.link"
             target="_blank"
-            :href="z.url"
+            :href="z.link"
           >
-            {{ z.text }}
+            {{ z.title }}
           </a>
         </dt>
       </template>
@@ -92,15 +92,15 @@
         v-for="z in BlogNwn"
       >
         <dt
-          :key="z.url"
+          :key="z.link"
           class="links_item right"
         >
           <a
-            :key="z.url"
+            :key="z.link"
             target="_blank"
-            :href="z.url"
+            :href="z.link"
           >
-            {{ z.text }}
+            {{ z.title }}
           </a>
         </dt>
       </template>
