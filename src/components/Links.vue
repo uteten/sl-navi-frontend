@@ -6,7 +6,7 @@
     <div class="links_top">
       リンク集
     </div>
-    <h6>■ニュース</h6>
+    <h6>■ニュース/ブログ</h6>
     <dl class="links_menu">
       <dt class="links_item none">
         <a
@@ -53,6 +53,54 @@
             :href="z.link"
           >
             {{ z.title }}
+          </a>
+        </dt>
+      </template>
+      <dt class="links_item none">
+        <a
+          target="_blank"
+          href="https://modemworld.me/"
+        >
+          INARA PEY: LIVING IN A MODEMWORLD(英語)
+        </a>
+      </dt>
+      <template
+        v-for="z in BlogModemworld"
+      >
+        <dt
+          :key="z.url"
+          class="links_item right"
+        >
+          <a
+            :key="z.url"
+            target="_blank"
+            :href="z.url"
+          >
+            {{ z.text }}
+          </a>
+        </dt>
+      </template>
+      <dt class="links_item none">
+        <a
+          target="_blank"
+          href="https://nwn.blogs.com/nwn/"
+        >
+          New World Notes(英語)
+        </a>
+      </dt>
+      <template
+        v-for="z in BlogNwn"
+      >
+        <dt
+          :key="z.url"
+          class="links_item right"
+        >
+          <a
+            :key="z.url"
+            target="_blank"
+            :href="z.url"
+          >
+            {{ z.text }}
           </a>
         </dt>
       </template>
@@ -133,6 +181,8 @@ export default {
     return {
       SLBlogArticles: [],
       SLBlogArticles2: [],
+      BlogModemworld: [],
+      BlogNwn: [],
       nowTime: 0
     }
   },
@@ -140,8 +190,22 @@ export default {
     this.nowTime = (new Date()).getTime()
     this.getBloglines()
     this.getBloglines2()
+    this.getModemworld()
+    this.getNwn()
   },
   methods: {
+    async getNwn () {
+      await axios.get('//sl-navi.com/static/blog-nwn.json?' + this.nowTime).then(res => {
+      // await axios.get('memo.txt').then(res => {
+        this.BlogNwn = res.data
+      })
+    },
+    async getModemworld () {
+      await axios.get('//sl-navi.com/static/blog-modemworld.json?' + this.nowTime).then(res => {
+      // await axios.get('memo.txt').then(res => {
+        this.BlogModemworld = res.data
+      })
+    },
     async getBloglines () {
       await axios.get('//sl-navi.com/static/slblog.json?' + this.nowTime).then(res => {
       // await axios.get('memo.txt').then(res => {
