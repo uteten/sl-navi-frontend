@@ -11,7 +11,7 @@
       <blog-articles
         title="Secondlife公式 特別ニュース(英語)"
         url="https://community.secondlife.com/blogs/blog/4-featured-news/"
-        json="blog-secondlife=featured"
+        json="blog-secondlife"
       />
       <blog-articles
         title="DANIEL VOYAGER(英語)"
