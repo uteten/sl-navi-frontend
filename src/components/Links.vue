@@ -8,102 +8,26 @@
     </div>
     <h6>■ニュース/ブログ</h6>
     <dl class="links_menu">
-      <dt class="links_item none">
-        <a
-          target="_blank"
-          href="https://community.secondlife.com/blogs/blog/4-featured-news/"
-        >
-          Secondlife公式 特別ニュース(英語)
-        </a>
-      </dt>
-      <template
-        v-for="z in SLBlogArticles"
-      >
-        <dt
-          :key="z.url"
-          class="links_item right"
-        >
-          <a
-            :key="z.url"
-            target="_blank"
-            :href="z.url"
-          >
-            {{ z.text }}
-          </a>
-        </dt>
-      </template>
-      <dt class="links_item none">
-        <a
-          target="_blank"
-          href="https://danielvoyager.wordpress.com/"
-        >
-          DANIEL VOYAGER(英語)
-        </a>
-      </dt>
-      <template
-        v-for="z in SLBlogArticles2"
-      >
-        <dt
-          :key="z.link"
-          class="links_item right"
-        >
-          <a
-            :key="z.link"
-            target="_blank"
-            :href="z.link"
-          >
-            {{ z.title }}
-          </a>
-        </dt>
-      </template>
-      <dt class="links_item none">
-        <a
-          target="_blank"
-          href="https://modemworld.me/"
-        >
-          INARA PEY: LIVING IN A MODEMWORLD(英語)
-        </a>
-      </dt>
-      <template
-        v-for="z in BlogModemworld"
-      >
-        <dt
-          :key="z.link"
-          class="links_item right"
-        >
-          <a
-            :key="z.link"
-            target="_blank"
-            :href="z.link"
-          >
-            {{ z.title }}
-          </a>
-        </dt>
-      </template>
-      <dt class="links_item none">
-        <a
-          target="_blank"
-          href="https://nwn.blogs.com/nwn/"
-        >
-          New World Notes(英語)
-        </a>
-      </dt>
-      <template
-        v-for="z in BlogNwn"
-      >
-        <dt
-          :key="z.link"
-          class="links_item right"
-        >
-          <a
-            :key="z.link"
-            target="_blank"
-            :href="z.link"
-          >
-            {{ z.title }}
-          </a>
-        </dt>
-      </template>
+      <blog-articles
+        title="Secondlife公式 特別ニュース(英語)"
+        url="https://community.secondlife.com/blogs/blog/4-featured-news/"
+        json="blog-secondlife=featured"
+      />
+      <blog-articles
+        title="DANIEL VOYAGER(英語)"
+        url="https://danielvoyager.wordpress.com/"
+        json="blog-danielvoyager"
+      />
+      <blog-articles
+        title="INARA PEY: LIVING IN A MODEMWORLD(英語)"
+        url="https://modemworld.me/"
+        json="blog-modemworld"
+      />
+      <blog-articles
+        title="New World Notes(英語)"
+        url="https://nwn.blogs.com/nwn/"
+        json="blog-nwn"
+      />
     </dl>
     <h6>■初心者向け/総合</h6>
     <dl class="links_menu">
@@ -173,10 +97,15 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
+import BlogArticles from './BlogArticles.vue'
+
 Vue.prototype.$axios = axios
 
 export default {
   name: 'Links',
+  components: {
+    BlogArticles
+  },
   data: function () {
     return {
       SLBlogArticles: [],
