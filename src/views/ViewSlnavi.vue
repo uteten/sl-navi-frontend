@@ -14,7 +14,7 @@
       />
       <!-- 基本GoogleAD -->
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 5==0"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==0"
         class="ad"
       >
         <Adsense
@@ -79,6 +79,25 @@
       <!--
       <news ref="appNews" />
       -->
+      <div
+        v-if="$cookies.get('dev')!=1 && nowT == lastT"
+        class="ad"
+      >
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="5067544569"
+          ins-style="display:inline-block;float:left;width:50%;height:320px;"
+          data-ad-format=""
+          data-full-width-responsive=""
+        />
+        <Adsense
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="5067544569"
+          ins-style="display:inline-block;width:50%;height:320px;"
+          data-ad-format=""
+          data-full-width-responsive=""
+        />
+      </div>
     </div>
   </div>
 </template>
