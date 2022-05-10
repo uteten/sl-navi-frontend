@@ -243,7 +243,7 @@
         data-full-width-responsive="no"
       />
     </template>
-    <template v-if="ad && shops.length>=15">
+    <template v-if="ad && shops.length>=2">
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
