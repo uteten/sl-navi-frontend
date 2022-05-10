@@ -80,20 +80,13 @@
       <news ref="appNews" />
       -->
       <div
-        v-if="$cookies.get('dev')!=1 && nowT == lastT"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==1"
         class="ad"
       >
         <Adsense
           data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="5067544569"
-          ins-style="display:inline-block;float:left;width:50%;height:320px;"
-          data-ad-format=""
-          data-full-width-responsive=""
-        />
-        <Adsense
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="5067544569"
-          ins-style="display:inline-block;width:50%;height:320px;"
+          data-ad-slot="4854478492"
+          ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
           data-full-width-responsive=""
         />
