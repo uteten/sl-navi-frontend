@@ -14,7 +14,7 @@
       />
       <!-- 基本GoogleAD -->
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 2==0"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==0"
         class="ad"
       >
         <Adsense
@@ -76,7 +76,7 @@
       -->
       <event-list ref="appEventList" />
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 2==1"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==1"
         class="ad"
       >
         <Adsense
