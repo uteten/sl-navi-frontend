@@ -50,7 +50,7 @@
       >
         <template v-for="tag in tags">
           <li
-            v-if="tag.count>=2"
+            v-if="tag.count>=3"
             :key="tag.id"
             :value="tag.id"
             :class="tag.selected"
