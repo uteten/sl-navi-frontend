@@ -110,6 +110,20 @@
             class="alert alert-danger"
             v-html="errors.map_url"
           />
+          <label for="id_map_url">スタッフ名</label>
+          <input
+            id="id_staff1"
+            name="staff1"
+            type="text"
+            maxlength="200"
+            class="form-control"
+            required
+          >
+          <p
+            v-if="errors.map_url"
+            class="alert alert-danger"
+            v-html="errors.map_url"
+          />
 
           <label for="id_map_url">センサ範囲 水平距離(m):</label>
           <input
