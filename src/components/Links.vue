@@ -105,48 +105,6 @@ export default {
   name: 'Links',
   components: {
     BlogArticles
-  },
-  data: function () {
-    return {
-      SLBlogArticles: [],
-      SLBlogArticles2: [],
-      BlogModemworld: [],
-      BlogNwn: [],
-      nowTime: 0
-    }
-  },
-  mounted () {
-    this.nowTime = (new Date()).getTime()
-    this.getBloglines()
-    this.getBloglines2()
-    this.getModemworld()
-    this.getNwn()
-  },
-  methods: {
-    async getNwn () {
-      await axios.get('//sl-navi.com/static/blog-nwn.json?' + this.nowTime).then(res => {
-      // await axios.get('memo.txt').then(res => {
-        this.BlogNwn = res.data
-      })
-    },
-    async getModemworld () {
-      await axios.get('//sl-navi.com/static/blog-modemworld.json?' + this.nowTime).then(res => {
-      // await axios.get('memo.txt').then(res => {
-        this.BlogModemworld = res.data
-      })
-    },
-    async getBloglines () {
-      await axios.get('//sl-navi.com/static/slblog.json?' + this.nowTime).then(res => {
-      // await axios.get('memo.txt').then(res => {
-        this.SLBlogArticles = res.data
-      })
-    },
-    async getBloglines2 () {
-      await axios.get('//sl-navi.com/static/slblog2.json?' + this.nowTime).then(res => {
-      // await axios.get('memo2.txt').then(res => {
-        this.SLBlogArticles2 = res.data
-      })
-    }
   }
 }
 </script>

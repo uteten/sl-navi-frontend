@@ -381,7 +381,11 @@ export default {
         tmpUrl = ''
       }
       this.imgUrl = tmpUrl
+      this.parseImg(tmpUrl)
       this.loadImgUrl = this.imgUrl
+    },
+    parseImg: function (url) {
+      console.log('hoge')
     },
     loadImgUrlError: function () {
       this.loadImgUrl = BLANK_IMG
