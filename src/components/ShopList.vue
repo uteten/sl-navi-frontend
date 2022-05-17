@@ -259,7 +259,7 @@ import axios from 'axios'
 
 Vue.prototype.$axios = axios
 
-const INTERVAL_RELOAD_SHOP = 60
+const INTERVAL_RELOAD_SHOP = 180
 const SHOP_SOURCE = '//sl-navi.com/api/shop'
 const ALOG_SOURCE = '//sl-navi.com/api/alog'
 export default {
