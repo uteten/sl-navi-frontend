@@ -106,6 +106,8 @@
           </dl>
         </b-popover>
       </li>
+      <!--
+
       <li
         class="event_item"
         tabindex="0"
@@ -132,6 +134,7 @@
           <li>-</li>
         </ul>
       </li>
+      -->
     </ul>
     <div align="right">
       <router-link to="/createEvent">
