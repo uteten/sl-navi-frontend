@@ -106,6 +106,32 @@
           </dl>
         </b-popover>
       </li>
+      <li
+        class="event_item"
+        tabindex="0"
+      >
+        <div
+          class="event_data_top"
+          style="background: #ffaa00"
+        >
+          広告
+        </div>
+        <ul
+          class="event_data"
+          style="border: 2px solid ;"
+        >
+          <li>
+            <Adsense
+              data-ad-client="ca-pub-7267369281211974"
+              data-ad-slot="3986041962"
+              ins-style="display:inline-block;margin:0px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
+              data-ad-format=""
+              data-full-width-responsive="no"
+            />
+          </li>
+          <li>-</li>
+        </ul>
+      </li>
     </ul>
     <div align="right">
       <router-link to="/createEvent">

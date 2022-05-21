@@ -25,55 +25,6 @@
           data-full-width-responsive=""
         />
       </div>
-      <!--
-      <div
-        v-if="$cookies.get('dev')!=1 && nowT == lastT"
-        class="ad"
-      >
-        <Adsense
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="5067544569"
-          ins-style="display:inline-block;float:left;width:50%;height:320px;"
-          data-ad-format=""
-          data-full-width-responsive=""
-        />
-        <Adsense
-          data-ad-client="ca-pub-7267369281211974"
-          data-ad-slot="5067544569"
-          ins-style="display:inline-block;width:50%;height:320px;"
-          data-ad-format=""
-          data-full-width-responsive=""
-        />
-      </div>
-      -->
-      <!-- リロードかつ健全以外 -->
-      <!--
-      <div
-        v-if="nowT != lastT && mode=='e' "
-        class="col ad"
-      >
-        <iframe
-          :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
-          width="300"
-          height="252"
-          scrolling="no"
-          border="0"
-          marginwidth="0"
-          style="border:none;"
-          frameborder="0"
-        />
-        <iframe
-          :src="'https://sl-navi.com/static/dmm-ad2.html?'+lastT"
-          width="300"
-          height="252"
-          scrolling="no"
-          border="0"
-          marginwidth="0"
-          style="border:none;"
-          frameborder="0"
-        />
-      </div>
-      -->
       <event-list ref="appEventList" />
       <div
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==4"
@@ -92,7 +43,7 @@
       <news ref="appNews" />
       -->
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==4"
         class="ad"
       >
         <Adsense
