@@ -118,7 +118,7 @@
         </div>
         <ul
           class="event_data"
-          style="border: 2px solid ;"
+          style="border: 2px solid ;border-color:#ffaa00"
         >
           <li>
             <Adsense
