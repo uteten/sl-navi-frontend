@@ -1,14 +1,15 @@
 <template>
   <div class="col col-12 row">
-    <gift-list ref="appGiftList" />
+    <div class="col-lg-10 order-lg-2 order-1">
+      <gift-list ref="appGiftList" />
+    </div>
     <div
-      v-if="$cookies.get('dev')!=1"
-      class="ad"
+      class="col-lg- order-lg-1 order-2"
     >
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="4854478492"
-        ins-style="display:inline-block;width:100%;height:160px;"
+        data-ad-slot="3044016459"
+        ins-style="display:inline-block;width:160px;height:800px;"
         data-ad-format=""
         data-full-width-responsive=""
       />
@@ -28,8 +29,17 @@ export default {
 </script>
 <style>
 .row{
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.col-lg-10{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.col{
+  margin-left: 0px;
+  margin-left: 0px;
+  margin-bottom: 15px;
 }
 .ad{
   text-align: center;
