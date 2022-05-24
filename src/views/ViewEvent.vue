@@ -5,7 +5,7 @@
         <span class="badge badge-danger">イベント登録はここをクリック</span>
       </router-link>
     </div>
-    <slt-2-jst class="col-lg-12 order-lg-1 order-2" />
+    <slt-2-jst class="col-lg-12 order-lg-1 order-2 d-none d-lg-block" />
 
     <div class="col-lg-12 order-lg-2 order-1">
       <FullCalendar

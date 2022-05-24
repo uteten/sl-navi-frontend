@@ -4,7 +4,7 @@
       <gift-list ref="appGiftList" />
     </div>
     <div
-      class="ad col-lg- order-lg-1 order-2"
+      class="ad col-lg- order-lg-2 order-2"
     >
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
@@ -32,5 +32,18 @@ export default {
   text-align: center;
   padding: 0;
   margin-left: 15px;
+}
+.row{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.col-lg-10{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.col{
+  margin-left: 0px;
+  margin-left: 0px;
+  margin-bottom: 15px;
 }
 </style>

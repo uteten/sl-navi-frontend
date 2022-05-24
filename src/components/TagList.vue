@@ -26,11 +26,14 @@
       </ul>
     </div>
     <!--
-    <div class="ad_tag">
+    <div
+      v-if="nowT % 3==1"
+      class="ad_tag"
+    >
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="3806078567"
-        ins-style="display:inline-block;width:150px;height:200px"
+        data-ad-slot="3044016459"
+        ins-style="display:inline-block;width:160px;height:400px;"
         data-ad-format=""
         data-full-width-responsive="no">
       </Adsense>
@@ -92,8 +95,13 @@ export default {
   data: function () {
     return {
       tags: [],
-      specialTags: []
+      specialTags: [],
+      nowT: 0
     }
+  },
+  mounted () {
+    const date = new Date()
+    this.nowT = date.getTime()
   },
   methods: {
     _sortBy: function (field, reverse, primer) {
