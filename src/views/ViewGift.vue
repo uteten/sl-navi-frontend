@@ -1,8 +1,10 @@
 <template>
   <div class="col col-12 row">
-    <div class="col-lg-10 order-lg-1 order-1">
+    <div class="col-lg-12 order-lg-1 order-1">
       <gift-list ref="appGiftList" />
     </div>
+    <!--
+
     <div
       class="ad col-lg- order-lg-2 order-2"
     >
@@ -14,6 +16,7 @@
         data-full-width-responsive=""
       />
     </div>
+    -->
   </div>
 </template>
 
@@ -34,7 +37,7 @@ export default {
   margin-left: 15px;
 }
 .row{
-  padding-right: 0px;
+  padding-right: 4px;
   padding-left: 0px;
 }
 .col-lg-10{
