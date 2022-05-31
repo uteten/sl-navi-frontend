@@ -28,13 +28,17 @@
         class="new_shop badge badge-primary"
       >新施設</span>
       <span
-        v-if="nowOpen(z)==1"
+        v-if="nowOpen(z)=='short'"
         class="event_shop badge badge-danger"
       >イベント中</span>
       <span
-        v-if="nowOpen(z)==2"
-        class="event_shop badge badge-info"
+        v-if="nowOpen(z)=='before'"
+        class="event_shop badge badge-success"
       >イベント予定</span>
+      <span
+        v-if="nowOpen(z)=='long'"
+        class="event_shop badge badge-info"
+      >長期イベント</span>
       <div class="memo">
         <span
           v-if="z.sn > 0"
@@ -73,10 +77,16 @@
             v-html="z.name"
           />
           <b-badge
-            v-if="nowOpen(z)==1"
+            v-if="nowOpen(z)=='short'"
             variant="danger"
           >
             イベント中
+          </b-badge>
+          <b-badge
+            v-if="nowOpen(z)=='long'"
+            variant="info"
+          >
+            長期イベント中
           </b-badge>
           <span class="popover_title_right">
             <ShareNetwork
@@ -334,11 +344,16 @@ export default {
       start = new Date(start)
       end = new Date(end)
       if (start < now && now < end) {
-        return 1
+        if (end - start < 60 * 60 * 24 * 1000) {
+          console.log(end - start)
+          return 'short'
+        } else {
+          return 'long'
+        }
       } else if (now < start) {
-        return 2
+        return 'before'
       } else {
-        return 0
+        return ''
       }
     },
     playRadio (url) {
