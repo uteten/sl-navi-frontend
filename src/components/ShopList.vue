@@ -244,7 +244,7 @@
       class="f"
     />
     -->
-    <template v-if="ad && shops.length>=20">
+    <template v-if="ad && shops.length>=50">
       <Adsense
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
