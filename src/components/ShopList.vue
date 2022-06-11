@@ -239,7 +239,6 @@
       <Adsense
         id="ad2"
         key="ad2"
-        class="f"
         tabindex="0"
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
