@@ -144,6 +144,7 @@ export default {
       }
       axios.delete(GIFT_SOURCE + '/' + tid, { headers: headers }).then(
         res => {
+          console.log(res)
           alert('削除しました')
         }).catch(err => {
         if (err.response.status === 401) {

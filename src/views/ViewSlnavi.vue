@@ -7,7 +7,7 @@
       @selected-tag="actionSelectedTag"
     />
     <div class="col-lg-10 order-lg-2 order-1">
-      <messages ref="appMessages" />
+      <shop-messages ref="appMessages" />
       <shop-list
         ref="appShopList"
         :ad="nowT == lastT"
@@ -38,7 +38,7 @@
           data-full-width-responsive=""
         />
       </div>
-      <links ref="appLinks" />
+      <site-links ref="appLinks" />
       <!--
       <news ref="appNews" />
       -->
@@ -60,9 +60,9 @@
 
 <script>
 import TagList from '@/components/TagList'
-import Messages from '@/components/Messages'
+import ShopMessages from '@/components/ShopMessages'
 // import News from '@/components/News'
-import Links from '@/components/Links'
+import SiteLinks from '@/components/SiteLinks'
 import ShopList from '@/components/ShopList'
 import EventList from '@/components/EventList'
 
@@ -76,8 +76,8 @@ export default {
   components: {
     TagList,
     // News,
-    Links,
-    Messages,
+    SiteLinks,
+    ShopMessages,
     ShopList,
     EventList
   },
@@ -179,6 +179,7 @@ export default {
       this.$refs.appShopList.getShops('c', this.tagid, e)
     },
     isLocalhost: function (e) {
+      console.log(e)
       if (location.origin === 'http://localhost:8080') {
         return 1
       } else {

@@ -1,49 +1,39 @@
 {
-  "name": "sl-navi",
+  "name": "sl-navi2",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "VUE_CLI_SERVICE_CONFIG_PATH=$PWD/vue.config-serve.js vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fullcalendar/daygrid": "^5.2.0",
-    "@fullcalendar/timegrid": "^5.2.0",
-    "@fullcalendar/vue": "^5.2.0",
-    "@gtm-support/vue2-gtm": "^1.2.1",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.5.2",
-    "bootstrap-vue": "^2.16.0",
-    "core-js": "^3.6.5",
-    "eslint-config-vue": "^2.0.2",
-    "highcharts": "^10.1.0",
-    "highcharts-vue": "^1.3.5",
-    "json-bigint": "^1.0.0",
-    "npm": "^6.14.11",
-    "simplebar-vue": "^1.6.0",
+    "@fullcalendar/daygrid": "^5.11.0",
+    "@fullcalendar/timegrid": "^5.11.0",
+    "@fullcalendar/vue": "^5.11.0",
+    "@gtm-support/vue2-gtm": "^1.3.0",
+    "axios": "^0.27.2",
+    "bootstrap-vue": "^2.22.0",
+    "core-js": "^3.8.3",
+    "highcharts-vue": "^1.4.0",
     "vue": "^2.6.14",
     "vue-analytics": "^5.22.1",
-    "vue-axios": "^2.1.5",
-    "vue-cookies": "^1.7.4",
-    "vue-ctk-date-time-picker": "^2.5.0",
-    "vue-google-adsense": "^1.9.1",
-    "vue-gtm": "^3.5.0-vue2",
+    "vue-cookies": "^1.8.1",
+    "vue-ctk-date-time-picker": "^3.0.0-alpha.0",
+    "vue-google-adsense": "^1.10.1",
     "vue-head": "^2.2.0",
-    "vue-meta": "^2.4.0",
-    "vue-router": "^3.2.0",
-    "vue-script2": "^2.1.0",
-    "vue-social-sharing": "^3.0.0-beta.11",
-    "vuex": "^3.6.0"
+    "vue-router": "^2.8.1",
+    "vue-social-sharing": "^3.0.9",
+    "vuex2": "^1.0.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.4",
-    "@vue/cli-plugin-eslint": "^5.0.4",
-    "@vue/cli-plugin-router": "^5.0.4",
-    "@vue/cli-service": "^5.0.4",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^7.0.0-beta.4",
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
@@ -56,7 +46,7 @@
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     },
     "rules": {}
   },

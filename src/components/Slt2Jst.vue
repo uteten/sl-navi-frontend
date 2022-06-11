@@ -87,6 +87,7 @@ export default {
       this.jisa = this.calculateJisa(tmp)
       tmp = tmp + this.jisa
       this.sltCalculateJST = this.epoch2str(tmp)
+      console.log(e)
     }
   }
 

@@ -24,7 +24,7 @@
 import GiftList from '@/components/GiftList'
 
 export default {
-  name: 'Gift',
+  name: 'ViewGift',
   components: {
     GiftList
   }

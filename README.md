@@ -1,6 +1,4 @@
-# sl-navi.com
-
-https://sl-navi.com のフロントのソースコードです
+# sl-navi2
 
 ## Project setup
 ```

@@ -129,7 +129,9 @@ const router = new VueRouter({
   // base: process.env.BASE_URL,
   routes
 })
-router.afterEach((to, from) => {
+
+//router.afterEach((to, from) => {
+router.afterEach((to) => {
   if (to.path.match(/\/[0-9]/)) {
     return
   } else if (to.meta.title) {

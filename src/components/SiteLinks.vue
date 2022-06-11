@@ -102,7 +102,7 @@ import BlogArticles from './BlogArticles.vue'
 Vue.prototype.$axios = axios
 
 export default {
-  name: 'Links',
+  name: 'SiteLinks',
   components: {
     BlogArticles
   }
