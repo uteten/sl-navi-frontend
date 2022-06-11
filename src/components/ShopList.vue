@@ -8,233 +8,249 @@
     <div class="shop_top">
       施設
     </div>
-    <div
-      v-for="z in shops"
-      :id="z.flag"
-      :key="z.flag"
-      class="f"
-      tabindex="0"
+    <template
+      v-for="(z,z_num) in shops"
     >
-      <!-- 看板と人数 -->
-      <!--img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''"-->
-      <img
-        class="flag"
-        :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
-        :class="z.event ? 'ow_event':''"
-        @click="$ga.event('shop', 'click_shopflag', z.name);"
+      <div
+        :id="z.flag"
+        :key="z.flag"
+        class="f"
+        tabindex="0"
       >
-      <span
-        v-if="isNewShop(z)"
-        class="new_shop badge badge-primary"
-      >新施設</span>
-      <span
-        v-if="nowOpen(z)=='short'"
-        class="event_shop badge badge-danger"
-      >イベント中</span>
-      <span
-        v-if="nowOpen(z)=='before'"
-        class="event_shop badge badge-success"
-      >イベント予定</span>
-      <span
-        v-if="nowOpen(z)=='long'"
-        class="event_shop badge badge-info"
-      >長期イベント</span>
-      <div class="memo">
-        <span
-          v-if="z.sn > 0"
-          class="staff_num_circle"
-        >{{ z.sn }}</span>
-        <span
-          v-if="z.cn > 0"
-          class="guest_num_circle"
-        >{{ z.cn }}</span>
-        <!--
-        <span
-          v-if="z.female>0"
-          class="female"
-        >♀×{{ z.female }}</span>
-        <span
-          v-if="z.male>0"
-          class="male"
-        >♂×{{ z.male }}</span>
-        -->
-        <span
-          v-if="z.status===0"
-          class="badge badge-secondary"
-        >閉店中</span>
-      </div>
-      <!-- ポップアップの中身 -->
-      <b-popover
-        triggers="click blur"
-        placement="bottom"
-        style="display:none"
-        :target="z.flag"
-      >
-        <!-- :show="shops.length===1" -->
-        <template #title>
-          <a
-            :href="'/search/'+z.flag.substring(0, z.flag.indexOf('-'))"
-            v-html="z.name"
-          />
-          <b-badge
-            v-if="nowOpen(z)=='short'"
-            variant="danger"
-          >
-            イベント中
-          </b-badge>
-          <b-badge
-            v-if="nowOpen(z)=='long'"
-            variant="info"
-          >
-            長期イベント中
-          </b-badge>
-          <span class="popover_title_right">
-            <ShareNetwork
-              network="Twitter"
-              :url="'https://sl-navi.com/search/'+z.flag"
-              :title="z.name "
-              :description="z.description"
-              hashtags="secondlife,sljp"
-              sns_twitter_user="SL_uten"
-            >
-              <img
-                class="sns_icon"
-                src="https://sl-navi.com/static/twitter.png"
-              >
-            </ShareNetwork>
-            <ShareNetwork
-              network="Facebook"
-              :url="'https://sl-navi.com/search/'+z.flag"
-              :title="z.name "
-              :description="z.description"
-              hashtags="secondlife,sljp"
-              sns_twitter_user="SL_uten"
-            >
-              <img
-                class="sns_icon"
-                src="https://sl-navi.com/static/facebook.png"
-              >
-            </ShareNetwork>
-
-          </span>
-        </template>
-        <span v-html="shopDescription(z)" /><br>
-        <span
-          v-if="z.event"
-          class="event_info"
+        <!-- 看板と人数 -->
+        <!--img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''"-->
+        <img
+          class="flag"
+          :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
+          :class="z.event ? 'ow_event':''"
+          @click="$ga.event('shop', 'click_shopflag', z.name);"
         >
-          <span class="badge badge-success">直近のイベント</span>
-          <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
-        </span>
         <span
-          v-if="z.h===1"
-          class="badge badge-danger"
-        >アダルト施設</span>
+          v-if="isNewShop(z)"
+          class="new_shop badge badge-primary"
+        >新施設</span>
         <span
-          v-if="z.h===2"
-          class="badge badge-primary"
-        >一般施設</span>
-        <template
-          v-for="tag in z.tags"
-        >
+          v-if="nowOpen(z)=='short'"
+          class="event_shop badge badge-danger"
+        >イベント中</span>
+        <span
+          v-if="nowOpen(z)=='before'"
+          class="event_shop badge badge-success"
+        >イベント予定</span>
+        <span
+          v-if="nowOpen(z)=='long'"
+          class="event_shop badge badge-info"
+        >長期イベント</span>
+        <div class="memo">
           <span
-            v-if="tag!='チップ任意'"
-            :key="tag.id"
-            class="badge badge-light"
-          >
-            {{ tag }}<br>
-          </span>
-        </template>
-        <br>
-        <span class="staff_and_guest_title">
-          スタッフ<span class="staff_num_circle_in_popover">{{ z.sn }}</span>人
-          <span v-if="z.staffs.length!=0">
-            (<span
-              v-for="staff in z.staffs"
-              :key="staff[0]"
+            v-if="z.sn > 0"
+            class="staff_num_circle"
+          >{{ z.sn }}</span>
+          <span
+            v-if="z.cn > 0"
+            class="guest_num_circle"
+          >{{ z.cn }}</span>
+          <!--
+          <span
+            v-if="z.female>0"
+            class="female"
+          >♀×{{ z.female }}</span>
+          <span
+            v-if="z.male>0"
+            class="male"
+          >♂×{{ z.male }}</span>
+          -->
+          <span
+            v-if="z.status===0"
+            class="badge badge-secondary"
+          >閉店中</span>
+        </div>
+        <!-- ポップアップの中身 -->
+        <b-popover
+          triggers="click blur"
+          placement="bottom"
+          style="display:none"
+          :target="z.flag"
+        >
+          <!-- :show="shops.length===1" -->
+          <template #title>
+            <a
+              :href="'/search/'+z.flag.substring(0, z.flag.indexOf('-'))"
+              v-html="z.name"
+            />
+            <b-badge
+              v-if="nowOpen(z)=='short'"
+              variant="danger"
             >
-              <a
-                :href="staff|staff_url"
-                target="_blank"
-                :class="staff|staff_sex"
+              イベント中
+            </b-badge>
+            <b-badge
+              v-if="nowOpen(z)=='long'"
+              variant="info"
+            >
+              長期イベント中
+            </b-badge>
+            <span class="popover_title_right">
+              <ShareNetwork
+                network="Twitter"
+                :url="'https://sl-navi.com/search/'+z.flag"
+                :title="z.name "
+                :description="z.description"
+                hashtags="secondlife,sljp"
+                sns_twitter_user="SL_uten"
               >
-                <template v-if="staff!=''">{{ staff|staff_name }}</template>
-              </a>
-              <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
-            </span>)
-          </span>
-          / 訪問者<span class="guest_num_circle_in_popover">{{ z.cn }}</span>人
-          <template v-if="z.female+z.male>0">
-            / 男女内訳
-            <span v-if="z.female>0">
-              ♀{{ z.female }}人
-            </span>
-            <span v-if="z.male>0">
-              ♂{{ z.male }}人
+                <img
+                  class="sns_icon"
+                  src="https://sl-navi.com/static/twitter.png"
+                >
+              </ShareNetwork>
+              <ShareNetwork
+                network="Facebook"
+                :url="'https://sl-navi.com/search/'+z.flag"
+                :title="z.name "
+                :description="z.description"
+                hashtags="secondlife,sljp"
+                sns_twitter_user="SL_uten"
+              >
+                <img
+                  class="sns_icon"
+                  src="https://sl-navi.com/static/facebook.png"
+                >
+              </ShareNetwork>
+
             </span>
           </template>
-        </span><br>
-        <!--
+          <span v-html="shopDescription(z)" /><br>
           <span
-            v-if="z.owner_key != z.parcel_owner_key"
-            class="n2"
+            v-if="z.event"
+            class="event_info"
           >
-            センサ設置者:
-            <a
-              :href= "&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
-              target="_blank"
+            <span class="badge badge-success">直近のイベント</span>
+            <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
+          </span>
+          <span
+            v-if="z.h===1"
+            class="badge badge-danger"
+          >アダルト施設</span>
+          <span
+            v-if="z.h===2"
+            class="badge badge-primary"
+          >一般施設</span>
+          <template
+            v-for="tag in z.tags"
+          >
+            <span
+              v-if="tag!='チップ任意'"
+              :key="tag.id"
+              class="badge badge-light"
             >
-              {{ z.owner_name }}
-            </a><br>
-          </span>
-        -->
-        <a
-          target="_blank"
-          :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
-          @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')"
-        >
-          <b-icon-map scale="0.8" />ここに移動({{ z.sim }})
-        </a>
-        <span v-if="existBlog(z)">
-          / <a
+              {{ tag }}<br>
+            </span>
+          </template>
+          <br>
+          <span class="staff_and_guest_title">
+            スタッフ<span class="staff_num_circle_in_popover">{{ z.sn }}</span>人
+            <span v-if="z.staffs.length!=0">
+              (<span
+                v-for="staff in z.staffs"
+                :key="staff[0]"
+              >
+                <a
+                  :href="staff|staff_url"
+                  target="_blank"
+                  :class="staff|staff_sex"
+                >
+                  <template v-if="staff!=''">{{ staff|staff_name }}</template>
+                </a>
+                <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
+              </span>)
+            </span>
+            / 訪問者<span class="guest_num_circle_in_popover">{{ z.cn }}</span>人
+            <template v-if="z.female+z.male>0">
+              / 男女内訳
+              <span v-if="z.female>0">
+                ♀{{ z.female }}人
+              </span>
+              <span v-if="z.male>0">
+                ♂{{ z.male }}人
+              </span>
+            </template>
+          </span><br>
+          <!--
+            <span
+              v-if="z.owner_key != z.parcel_owner_key"
+              class="n2"
+            >
+              センサ設置者:
+              <a
+                :href= "&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
+                target="_blank"
+              >
+                {{ z.owner_name }}
+              </a><br>
+            </span>
+          -->
+          <a
             target="_blank"
-            :href="z.blog"
+            :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
+            @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')"
           >
-            <b-icon-link scale="0.8" />Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
+            <b-icon-map scale="0.8" />ここに移動({{ z.sim }})
           </a>
-        </span>
-        <br>
-        <a
-          v-if="z.radio!=''"
-          target="_blank"
-          :href="'http://uten.jp/radio.cgi?'+z.radio"
-          @click="playRadio(z.radio)"
-        >
-          <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
-        </a>
-        <div
-          v-if="z.residentlog>9"
-          class="popoverCountSize"
-        >
-          <img
-            class="heatmap"
-            :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
-          >
-          <span class="shop_residentlog d-none d-lg-block">
-            今日の訪問者<br>
-            <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
+          <span v-if="existBlog(z)">
+            / <a
+              target="_blank"
+              :href="z.blog"
+            >
+              <b-icon-link scale="0.8" />Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
+            </a>
           </span>
-        </div>
-        <div
-          v-else
-        >
-          <img
-            class="heatmap"
-            :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
+          <br>
+          <a
+            v-if="z.radio!=''"
+            target="_blank"
+            :href="'http://uten.jp/radio.cgi?'+z.radio"
+            @click="playRadio(z.radio)"
           >
-        </div>
-      </b-popover>
-    </div>
+            <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
+          </a>
+          <div
+            v-if="z.residentlog>9"
+            class="popoverCountSize"
+          >
+            <img
+              class="heatmap"
+              :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
+            >
+            <span class="shop_residentlog d-none d-lg-block">
+              今日の訪問者<br>
+              <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
+            </span>
+          </div>
+          <div
+            v-else
+          >
+            <img
+              class="heatmap"
+              :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
+            >
+          </div>
+        </b-popover>
+      </div>
+      <template v-if="ad && shops.length>1 && z_num==adindex">
+        <Adsense
+          :id="z.flag"
+          :key="z.flag"
+          class="f"
+          tabindex="0"
+          data-ad-client="ca-pub-7267369281211974"
+          data-ad-slot="3986041962"
+          ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
+          data-ad-format=""
+          data-full-width-responsive="no"
+        />
+      </template>
+    </template>
     <!--
     <iframe
       :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
@@ -244,15 +260,6 @@
       class="f"
     />
     -->
-    <template v-if="ad && shops.length>=50">
-      <Adsense
-        data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="3986041962"
-        ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
-        data-ad-format=""
-        data-full-width-responsive="no"
-      />
-    </template>
     <div v-if="!shops[0]">
       なし
     </div>
@@ -313,7 +320,8 @@ export default {
       countSensor24h: '-',
       countYesterday: '-',
       countToday: '-',
-      countLogin: '-'
+      countLogin: '-',
+      adindex: 0
     }
   },
   mounted () {
@@ -410,11 +418,12 @@ export default {
         }
       }).then(res => {
         this.shops = res.data
-        /*
-        this.shops.forEach(dog => {
-          console.log(dog)
+        this.shops.forEach((dog, count) => {
+          if (dog.sn > 0) {
+            this.adindex = count
+          }
         })
-        */
+        // console.log(this.adindex)
         // console.log(['shoplist:getShop:then', this.shops])
       })
     },
