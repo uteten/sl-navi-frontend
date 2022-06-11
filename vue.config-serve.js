@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  publicPath: 'https://sl-navi.azureedge.net/static/dist/',
+  publicPath: 'http://localhost:8080/',
   transpileDependencies: true
 })
