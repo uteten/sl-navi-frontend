@@ -423,6 +423,7 @@ export default {
             this.adindex = count
           }
         })
+        // test
         // console.log(this.adindex)
         // console.log(['shoplist:getShop:then', this.shops])
       })
