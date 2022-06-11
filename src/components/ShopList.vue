@@ -237,10 +237,10 @@
           </div>
         </b-popover>
       </div>
-      <template v-if="ad && shops.length>1 && z_num==adindex">
+      <template v-if="1==2 && shops.length>1 && z_num==adindex">
         <Adsense
-          :id="z.flag"
-          :key="z.flag"
+          :id="z.flag+'ad'"
+          :key="z.flag+'ad'"
           class="f"
           tabindex="0"
           data-ad-client="ca-pub-7267369281211974"
@@ -250,6 +250,19 @@
           data-full-width-responsive="no"
         />
       </template>
+    </template>
+    <template v-if="shops.length>1">
+      <Adsense
+        id="ad2"
+        key="ad2"
+        class="f"
+        tabindex="0"
+        data-ad-client="ca-pub-7267369281211974"
+        data-ad-slot="3986041962"
+        ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
+        data-ad-format=""
+        data-full-width-responsive="no"
+      />
     </template>
     <!--
     <iframe
@@ -423,8 +436,7 @@ export default {
             this.adindex = count
           }
         })
-        // test
-        // console.log(this.adindex)
+        console.log(this.adindex)
         // console.log(['shoplist:getShop:then', this.shops])
       })
     },
