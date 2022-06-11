@@ -11,6 +11,7 @@ import viewSlnavi from '@/views/ViewSlnavi'
 // import viewCreateEvent from '@/views/ViewCreateEvent'
 // viewEventは負荷軽減のためクリック時に呼び出す
 
+
 Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
@@ -77,7 +78,8 @@ const routes = [
   {
     path: '/createEvent',
     name: 'viewCreateEvent',
-    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
+    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue'),
+    meta: { title: 'イベント登録' }
     // component: viewCreateEvent
   },
   {

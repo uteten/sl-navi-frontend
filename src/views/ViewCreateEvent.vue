@@ -160,12 +160,11 @@
           />
 
           <label for="id_start_time">開始日時（必須）:</label>
-          <VueCtkDateTimePicker
+          <input type="datetime-local"
             v-model="startTime"
             format="YYYY-MM-DD HH:mm"
-            :first-day-of-week="1"
-            no-label
-            no-header
+            class="form-control"
+            required
           />
           <p
             v-if="errors.start_time"
@@ -174,13 +173,12 @@
           />
 
           <label for="id_end_time">終了日時（必須）:</label>
-          <VueCtkDateTimePicker
+          <input type="datetime-local"
             v-model="endTime"
             format="YYYY-MM-DD HH:mm"
-            :first-day-of-week="1"
+            class="form-control"
             :min-datetime="startTime"
-            no-label
-            no-header
+            required
           />
           <p
             v-if="errors.end_time"
@@ -294,11 +292,12 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
+
 import axios from 'axios'
-import VueCtkDateTimePicker from 'vue-ctk-date-time-picker'
-import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css'
-Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker)
+// import Vue from 'vue'
+//import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+//import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+//Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 
 const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
 const LOGOUT_URL = '//sl-navi.com/event/api/user/logout'
