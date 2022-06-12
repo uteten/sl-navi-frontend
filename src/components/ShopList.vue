@@ -20,7 +20,7 @@
         :z="z"
       />
     </div>
-    <template v-if="ad && shops_g.length>1 && nowT % 3==0">
+    <template v-if="ad && shops_g.length>1 && nowT % 5==0">
       <Adsense
         id="ad2"
         key="ad2"
@@ -44,7 +44,7 @@
         :z="z"
       />
     </div>
-    <template v-if="ad && shops_g.length>1 && nowT % 3>0">
+    <template v-if="ad && shops_g.length>1 && nowT % 5>0">
       <Adsense
         id="ad2"
         key="ad2"
