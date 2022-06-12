@@ -33,7 +33,6 @@
     <dl class="links_menu">
       <blog-articles
         title="Second Life 美少女アバター wiki"
-        description="総合"
         url="https://aniava.net/"
         json="blog-aniava"
       />

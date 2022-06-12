@@ -46,7 +46,7 @@
         data-full-width-responsive="no"
       />
     </template>
-    <template v-if="shop_count>=30">
+    <template v-if="shop_count>=25">
       <div
         v-for="z in shops_g"
         :id="z.flag"
