@@ -41,7 +41,7 @@
         tabindex="0"
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3986041962"
-        ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
+        ins-style="display:inline-block;padding:3px 0 0 3px;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
         data-ad-format=""
         data-full-width-responsive="no"
       />
