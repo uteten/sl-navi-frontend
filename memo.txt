@@ -1,0 +1,73 @@
+
+nodebrew ls
+nodebrew ls-remote
+nodebrew install-binary v18.3.0(新しいのを入れる)
+nodebrew use  v18.3.0
+
+
+# sl-navi開発環境作成手順めも
+
+## npmのバージョンアップ
+npm --version
+npm install -g npm
+npm update -g
+
+## vue-cliインストール
+cd pj-folder
+npm uninstall -g @vue/cli
+npm   install -g @vue/cli
+
+## sl-naviのテンプレ作成
+vue create sl-navi
+cd sl-navi
+vue add router
+npm install vue bootstrap-vue bootstrap
+npm install  axios vue-axios
+npm install vue-head --save
+いったん確認
+npm run serve
+
+## gitのファイルをここへ持ってくる(必要なファイルは以下のみ)
+cp save/src/* sl-navi/src
+
+## distが相対パスで動くように
+# 相対パスのbuild作成(PJフォルダで)
+cat > sl-navi/vue.config.js
+module.exports = {
+  publicPath: './'
+}
+
+## build
+npm run build
+distを好きなところへ持って行く
+
+
+## fullcalendar
+npm install --save @fullcalendar/vue @fullcalendar/daygrid
+npm install --save @fullcalendar/timegrid
+
+## イベント登録
+npm install --save vue-ctk-date-time-picker
+
+
+
+
+vue-headではogpは機能しないが、
+数年後に機能するかもしれないのでメモ
+  /*　機能しない
+  head: {
+    meta: [
+        { property:"og:url", content:"http://www.google.com" },
+        { property:"og:type", content:"article" },
+        { property:"og:title", content:"ページの タイトル"},
+        { property:"og:description", content:"ページのディスクリプション"},
+        { property:"og:site_name", content:"サイト名"},
+        { property:"og:image", content:"https://sl-navi.com/static/sl-navi-kanban.png" },
+        { name:    "twitter:card", content:"summary" },
+        { name:    "twitter:site", content:"@uten"},
+        { name:    "twitter:description", content:"nya"},
+        { name:    "twitter:image", content:"https://sl-navi.com/static/sl-navi-kanban.png"}
+    ],
+  },
+  */
+
