@@ -20,7 +20,21 @@
         :z="z"
       />
     </div>
-    <template v-if="ad && shops_g.length>1 && nowT % 5==0">
+    <template v-if="shop_count<30">
+      <div
+        v-for="z in shops_g"
+        :id="z.flag"
+        :key="z.flag"
+        class="f"
+        tabindex="0"
+      >
+        <shop-element
+          ref="appShopList"
+          :z="z"
+        />
+      </div>
+    </template>
+    <template v-if="ad && shops_g.length>1">
       <Adsense
         id="ad2"
         key="ad2"
@@ -32,30 +46,21 @@
         data-full-width-responsive="no"
       />
     </template>
-    <div
-      v-for="z in shops_g"
-      :id="z.flag"
-      :key="z.flag"
-      class="f"
-      tabindex="0"
-    >
-      <shop-element
-        ref="appShopList"
-        :z="z"
-      />
-    </div>
-    <template v-if="ad && shops_g.length>1 && nowT % 5>0">
-      <Adsense
-        id="ad2"
-        key="ad2"
+    <template v-if="shop_count>=30">
+      <div
+        v-for="z in shops_g"
+        :id="z.flag"
+        :key="z.flag"
+        class="f"
         tabindex="0"
-        data-ad-client="ca-pub-7267369281211974"
-        data-ad-slot="3986041962"
-        ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
-        data-ad-format=""
-        data-full-width-responsive="no"
-      />
+      >
+        <shop-element
+          ref="appShopList"
+          :z="z"
+        />
+      </div>
     </template>
+
 
 
     <!--
@@ -137,7 +142,7 @@ export default {
       countYesterday: '-',
       countToday: '-',
       countLogin: '-',
-      adindex: 0
+      shop_count: 0
     }
   },
   mounted () {
@@ -235,6 +240,7 @@ export default {
       }).then(res => {
         this.shops_s=[]
         this.shops_g=[]
+        this.shop_count=res.data.length
         res.data.forEach((one) => {
           if( one.sn >0 ){
             this.shops_s.push(one)
