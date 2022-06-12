@@ -9,233 +9,18 @@
       施設
     </div>
     <div
-      v-for="z in shops"
+      v-for="z in shops_s"
       :id="z.flag"
       :key="z.flag"
       class="f"
       tabindex="0"
     >
-      <!-- 看板と人数 -->
-      <!--img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''"-->
-      <img
-        class="flag"
-        :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
-        :class="z.event ? 'ow_event':''"
-        @click="$ga.event('shop', 'click_shopflag', z.name);"
-      >
-      <span
-        v-if="isNewShop(z)"
-        class="new_shop badge badge-primary"
-      >新施設</span>
-      <span
-        v-if="nowOpen(z)=='short'"
-        class="event_shop badge badge-danger"
-      >イベント中</span>
-      <span
-        v-if="nowOpen(z)=='before'"
-        class="event_shop badge badge-success"
-      >イベント予定</span>
-      <span
-        v-if="nowOpen(z)=='long'"
-        class="event_shop badge badge-info"
-      >長期イベント</span>
-      <div class="memo">
-        <span
-          v-if="z.sn > 0"
-          class="staff_num_circle"
-        >{{ z.sn }}</span>
-        <span
-          v-if="z.cn > 0"
-          class="guest_num_circle"
-        >{{ z.cn }}</span>
-        <!--
-        <span
-          v-if="z.female>0"
-          class="female"
-        >♀×{{ z.female }}</span>
-        <span
-          v-if="z.male>0"
-          class="male"
-        >♂×{{ z.male }}</span>
-        -->
-        <span
-          v-if="z.status===0"
-          class="badge badge-secondary"
-        >閉店中</span>
-      </div>
-      <!-- ポップアップの中身 -->
-      <b-popover
-        triggers="click blur"
-        placement="bottom"
-        style="display:none"
-        :target="z.flag"
-      >
-        <!-- :show="shops.length===1" -->
-        <template #title>
-          <a
-            :href="'/search/'+z.flag.substring(0, z.flag.indexOf('-'))"
-            v-html="z.name"
-          />
-          <b-badge
-            v-if="nowOpen(z)=='short'"
-            variant="danger"
-          >
-            イベント中
-          </b-badge>
-          <b-badge
-            v-if="nowOpen(z)=='long'"
-            variant="info"
-          >
-            長期イベント中
-          </b-badge>
-          <span class="popover_title_right">
-            <ShareNetwork
-              network="Twitter"
-              :url="'https://sl-navi.com/search/'+z.flag"
-              :title="z.name "
-              :description="z.description"
-              hashtags="secondlife,sljp"
-              sns_twitter_user="SL_uten"
-            >
-              <img
-                class="sns_icon"
-                src="https://sl-navi.com/static/twitter.png"
-              >
-            </ShareNetwork>
-            <ShareNetwork
-              network="Facebook"
-              :url="'https://sl-navi.com/search/'+z.flag"
-              :title="z.name "
-              :description="z.description"
-              hashtags="secondlife,sljp"
-              sns_twitter_user="SL_uten"
-            >
-              <img
-                class="sns_icon"
-                src="https://sl-navi.com/static/facebook.png"
-              >
-            </ShareNetwork>
-
-          </span>
-        </template>
-        <span v-html="shopDescription(z)" /><br>
-        <span
-          v-if="z.event"
-          class="event_info"
-        >
-          <span class="badge badge-success">直近のイベント</span>
-          <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
-        </span>
-        <span
-          v-if="z.h===1"
-          class="badge badge-danger"
-        >アダルト施設</span>
-        <span
-          v-if="z.h===2"
-          class="badge badge-primary"
-        >一般施設</span>
-        <template
-          v-for="tag in z.tags"
-        >
-          <span
-            v-if="tag!='チップ任意'"
-            :key="tag.id"
-            class="badge badge-light"
-          >
-            {{ tag }}<br>
-          </span>
-        </template>
-        <br>
-        <span class="staff_and_guest_title">
-          スタッフ<span class="staff_num_circle_in_popover">{{ z.sn }}</span>人
-          <span v-if="z.staffs.length!=0">
-            (<span
-              v-for="staff in z.staffs"
-              :key="staff[0]"
-            >
-              <a
-                :href="staff|staff_url"
-                target="_blank"
-                :class="staff|staff_sex"
-              >
-                <template v-if="staff!=''">{{ staff|staff_name }}</template>
-              </a>
-              <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
-            </span>)
-          </span>
-          / 訪問者<span class="guest_num_circle_in_popover">{{ z.cn }}</span>人
-          <template v-if="z.female+z.male>0">
-            / 男女内訳
-            <span v-if="z.female>0">
-              ♀{{ z.female }}人
-            </span>
-            <span v-if="z.male>0">
-              ♂{{ z.male }}人
-            </span>
-          </template>
-        </span><br>
-        <!--
-          <span
-            v-if="z.owner_key != z.parcel_owner_key"
-            class="n2"
-          >
-            センサ設置者:
-            <a
-              :href= "&quot;http://world.secondlife.com/resident/&quot;+z.owner_key"
-              target="_blank"
-            >
-              {{ z.owner_name }}
-            </a><br>
-          </span>
-        -->
-        <a
-          target="_blank"
-          :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
-          @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')"
-        >
-          <b-icon-map scale="0.8" />ここに移動({{ z.sim }})
-        </a>
-        <span v-if="existBlog(z)">
-          / <a
-            target="_blank"
-            :href="z.blog"
-          >
-            <b-icon-link scale="0.8" />Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
-          </a>
-        </span>
-        <br>
-        <a
-          v-if="z.radio!=''"
-          target="_blank"
-          :href="'http://uten.jp/radio.cgi?'+z.radio"
-          @click="playRadio(z.radio)"
-        >
-          <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
-        </a>
-        <div
-          v-if="z.residentlog>9"
-          class="popoverCountSize"
-        >
-          <img
-            class="heatmap"
-            :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
-          >
-          <span class="shop_residentlog d-none d-lg-block">
-            今日の訪問者<br>
-            <span class="shop_residentlog_count">{{ z.residentlog }}</span>人
-          </span>
-        </div>
-        <div
-          v-else
-        >
-          <img
-            class="heatmap"
-            :src="'https://sl-navi.com/static/heatmap2/' + z.flag + '.png?'+Math.random()"
-          >
-        </div>
-      </b-popover>
+      <shop-element
+        ref="appShopList"
+        :z="z"
+      />
     </div>
-    <template v-if="shops.length>1">
+    <template v-if="shops_g.length>1">
       <Adsense
         id="ad2"
         key="ad2"
@@ -247,6 +32,19 @@
         data-full-width-responsive="no"
       />
     </template>
+    <div
+      v-for="z in shops_g"
+      :id="z.flag"
+      :key="z.flag"
+      class="f"
+      tabindex="0"
+    >
+      <shop-element
+        ref="appShopList"
+        :z="z"
+      />
+    </div>
+
     <!--
     <iframe
       :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
@@ -269,6 +67,7 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
+import ShopElement from '@/components/ShopElement'
 
 Vue.prototype.$axios = axios
 
@@ -277,6 +76,9 @@ const SHOP_SOURCE = '//sl-navi.com/api/shop'
 const ALOG_SOURCE = '//sl-navi.com/api/alog'
 export default {
   name: 'ShopList',
+  components: {
+    ShopElement
+  },
   filters: {
     'staff_url': function (value) {
       return '/d2p/' + value[0].replace(' ', '%20') + '?'
@@ -307,6 +109,8 @@ export default {
   data: function () {
     return {
       shops: [],
+      shops_s: [],
+      shops_g: [],
       cacheTagid: '',
       cacheMode: '',
       cacheSearch: '',
@@ -413,15 +217,15 @@ export default {
           search: search
         }
       }).then(res => {
-        this.shops = res.data
-          /*
-          this.shops.forEach((dog, count) => {
-            if (dog.sn > 0) {
-              this.adindex = count
-            }
-          })
-            */
-        console.log(this.adindex)
+        this.shops_s=[]
+        this.shops_g=[]
+        res.data.forEach((one) => {
+          if( one.sn >0 ){
+            this.shops_s.push(one)
+          }else{
+            this.shops_g.push(one)
+          }
+        })
         // console.log(['shoplist:getShop:then', this.shops])
       })
     },
@@ -441,10 +245,6 @@ export default {
 </script>
 
 <style scoped>
-  .flag {
-    width: 160px;
-    height: 160px;
-  }
   .f{
     margin: 3px;
     position: relative;
@@ -454,140 +254,7 @@ export default {
     cursor: pointer;
     float: left;
   }
-  .memo{
-    align-items: flex-end;
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    display: flex;
-  }
-  .new_shop{
-    align-items: flex-start;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    display: flex;
-  }
-  .event_shop{
-    align-items: flex-start;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    display: flex;
-  }
-  .popover_title_right{
-    align-items: flex-start;
-    position: absolute;
-    right: 0px;
-    top: 3px;
-  }
-  .guest_num_circle {
-    width: 25px;
-    height: 25px;
-    color: #ffffff;
-    background-color: #2779bd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  .staff_num_circle{
-    width: 25px;
-    height: 25px;
-    color: #ffffff;
-    background-color: #ffaa00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  .male{
-    height: fit-content;
-    font-size: 100%;
-    color: #ffffff;
-    border-radius: 25%;
-    cursor: pointer;
-    background-color: #00aaaa;
-  }
-  .female{
-    height: fit-content;
-    font-size: 100%;
-    color: #ffffff;
-    border-radius: 25%;
-    cursor: pointer;
-    background-color: #ff8070;
-  }
-  .staff_and_guest_title{
-    font-size: 85%;
-    font-weight: 700;
-  }
-  .guest_num_circle_in_popover{
-    width: 25px;
-    height: 25px;
-    padding: 0px 4px;
-    color: #ffffff;
-    background-color: #2779bd;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-  .staff_num_circle_in_popover{
-    width: 25px;
-    height: 25px;
-    padding: 0px 4px;
-    color: #ffffff;
-    background-color: #ffaa00;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-
-  .popover-header{
-    background: #fdf0e0;
-    border-bottom: dashed 2px #ffb03f;
-    padding: 0.3em 0.5em 0.3em 0.5em;
-  }
-
-  .popover {
-    max-width: 700px;
-    min-width: 430px;
-    border: outset 1px #ffb03f;
-    border-radius: 9px;
-  }
-  .now_event{
-    border: solid 3px #ff0000;
-  }
-  .heatmap {
-    /* 360: 140 */
-    /* 18 :  7  */
-    width: 320px;
-    height: 124px;
-    /*
-    width: 400px;
-    height: 155px;
-    */
-    float: left;
-    margin-bottom: 5px;
-  }
-  .shop_residentlog_count {
-    font-family: 'tatenaga';
-    font-size: 105px;
-    margin-left: 10px;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .shop_residentlog {
-    margin-left: 5px;
-    white-space: nowrap;
-}
-  /*
-  .popoverCountSize{
-    min-width: 500px;
-  }
-  */
-.shops{
+  .shops{
     background: #fdfcec;
     border: 1px solid #ffb03f;
     border-radius: 5px;
@@ -601,16 +268,6 @@ export default {
     padding: 0 0 0.2em 0.7em;
     list-style-type: none!important;
   }
-  .sns_icon{
-    width:20px;
-    height:20px;
-    margin: 5px;
-  }
-  .event_info{
-    font-size: 75%;
-    font-weight: 700;
-  }
-
   hr{
     border:none;
     border-bottom: dashed 2px #ffb03f;
