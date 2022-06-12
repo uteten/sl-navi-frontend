@@ -54,7 +54,7 @@
       class="f"
     />
     -->
-    <div v-if="!shops[0]">
+    <div v-if="!shops_s[0] && !shops_g[0]">
       なし
     </div>
     <div class="counter text-muted">
