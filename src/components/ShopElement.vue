@@ -257,17 +257,8 @@ export default {
   },
   data: function () {
     return {
-      shops: [],
-      cacheTagid: '',
-      cacheMode: '',
-      cacheSearch: '',
       playFlag: 0,
       playUrl: '',
-      countSensor1h: '-',
-      countSensor24h: '-',
-      countYesterday: '-',
-      countToday: '-',
-      countLogin: '-',
       adindex: 0
     }
   },

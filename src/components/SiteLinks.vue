@@ -32,7 +32,8 @@
     <h6>■初心者向け/総合</h6>
     <dl class="links_menu">
       <blog-articles
-        title="Second Life 美少女アバター wiki:(最近の更新)"
+        title="Second Life 美少女アバター wiki"
+        description="総合"
         url="https://aniava.net/"
         json="blog-aniava"
       />

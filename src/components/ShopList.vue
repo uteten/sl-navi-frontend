@@ -91,28 +91,10 @@ Vue.prototype.$axios = axios
 
 const INTERVAL_RELOAD_SHOP = 180
 const SHOP_SOURCE = '//sl-navi.com/api/shop'
-const ALOG_SOURCE = '//sl-navi.com/api/alog'
 export default {
   name: 'ShopList',
   components: {
     ShopElement
-  },
-  filters: {
-    'staff_url': function (value) {
-      return '/d2p/' + value[0].replace(' ', '%20') + '?'
-    },
-    'staff_name': function (value) {
-      return value[0]
-    },
-    'staff_sex': function (value) {
-      if (value[1] === 0) {
-        return 'female'
-      } else if (value[1] === 1) {
-        return 'male'
-      } else {
-        return
-      }
-    }
   },
   props: {
     'mode': {
@@ -129,14 +111,11 @@ export default {
   },
   data: function () {
     return {
-      shops: [],
       shops_s: [],
       shops_g: [],
       cacheTagid: '',
       cacheMode: '',
       cacheSearch: '',
-      playFlag: 0,
-      playUrl: '',
       countSensor1h: '-',
       countSensor24h: '-',
       countYesterday: '-',
@@ -156,76 +135,6 @@ export default {
     }, 1000 * 60)
   },
   methods: {
-    async alog (flag, event) {
-      await axios.post(ALOG_SOURCE, {
-        flag: flag,
-        event: event
-      })
-    },
-    nowOpen: function (z) {
-      if (!z.event) {
-        return 0
-      }
-      let start = z.event.start
-      let end = z.event.end
-      // let now=this._formatDate(new Date(),'YYYY-MM-DDThh:mm:ss')
-      const now = new Date()
-      start = new Date(start)
-      end = new Date(end)
-      if (start < now && now < end) {
-        if (end - start < 60 * 60 * 24 * 1000) {
-          console.log(end - start)
-          return 'short'
-        } else {
-          return 'long'
-        }
-      } else if (now < start) {
-        return 'before'
-      } else {
-        return ''
-      }
-    },
-    playRadio (url) {
-      if (url === this.playUrl && this.playFlag === 1) {
-        // 同じurlをクリックすると止まる
-        this.playFlag = 0
-        this.playUrl = ''
-      } else {
-        // 異なるurlは再生
-        this.playFlag = 1
-        this.playUrl = url
-      }
-      this.$emit('radio', this.playUrl)
-    },
-    _formatDate: function (date, format) {
-      format = format.replace(/YYYY/g, date.getFullYear())
-      format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2))
-      format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2))
-      format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2))
-      format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2))
-      format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2))
-      format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3))
-      return format
-    },
-    isNewShop (z) {
-      const now = new Date()
-      now.setDate(now.getDate() - 7)
-      const oneWeek = this._formatDate(now, 'YYYY-MM-DDThh:mm:ss')
-      // console.log([z.created_at,one_week])
-      if (z.created_at > oneWeek) {
-        return 1
-      } else {
-        return 0
-      }
-    },
-    shopDescription (z) {
-      const text = z.info
-      const urlPattern = /(https?:\/\/[^ \r\n]+)/g
-      return text.replace(urlPattern, '<a target="_blank" href="$1">$1</a>').replace(/\n/g, '<br>')
-    },
-    existBlog (z) {
-      return (z.blog !== 'http://www.google.com' && z.blog.indexOf('http') === 0)
-    },
     async getShops (m, tagid, search) {
       // console.log(['shoplist:getShop:axios', tagid, m, search])
       this.cacheMode = m

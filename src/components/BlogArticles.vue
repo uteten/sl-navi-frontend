@@ -1,6 +1,6 @@
 <template>
   <span>
-    <dt class="links_item none">
+    <dt class="links_item left">
       <a
         target="_blank"
         :href="url"
@@ -8,6 +8,11 @@
         {{ title }}
       </a>
     </dt>
+    <dd
+      class="links_item"
+    >
+      : {{ description }}
+    </dd>
     <template
       v-for="z in articles"
     >
@@ -36,6 +41,10 @@ export default {
   name: 'BlogArticles',
   props: {
     'title': {
+      type: String,
+      default: ''
+    },
+    'description': {
       type: String,
       default: ''
     },
