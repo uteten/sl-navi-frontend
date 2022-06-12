@@ -14,11 +14,6 @@
         json="blog-secondlife"
       />
       <blog-articles
-        title="DANIEL VOYAGER(英語)"
-        url="https://danielvoyager.wordpress.com/"
-        json="blog-danielvoyager"
-      />
-      <blog-articles
         title="INARA PEY: LIVING IN A MODEMWORLD(英語)"
         url="https://modemworld.me/"
         json="blog-modemworld"
@@ -28,20 +23,19 @@
         url="https://nwn.blogs.com/nwn/"
         json="blog-nwn"
       />
+      <blog-articles
+        title="DANIEL VOYAGER(英語)"
+        url="https://danielvoyager.wordpress.com/"
+        json="blog-danielvoyager"
+      />
     </dl>
     <h6>■初心者向け/総合</h6>
     <dl class="links_menu">
-      <dt class="links_item left">
-        <a
-          target="_blank"
-          href="https://aniava.net/"
-        >
-          Second Life 美少女アバター wiki
-        </a>
-      </dt>
-      <dd class="links_item">
-        :アニメやH、総合
-      </dd>
+      <blog-articles
+        title="Second Life 美少女アバター wiki"
+        url="https://aniava.net/"
+        json="blog-aniava"
+      />
       <dt class="links_item left">
         <a
           target="_blank"
