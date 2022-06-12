@@ -11,6 +11,7 @@
       <shop-list
         ref="appShopList"
         :ad="nowT == lastT"
+        :nowT="nowT"
       />
       <!-- 基本GoogleAD -->
       <div

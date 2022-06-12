@@ -20,7 +20,7 @@
         :z="z"
       />
     </div>
-    <template v-if="ad && shops_g.length>1">
+    <template v-if="ad && shops_g.length>1 && nowT % 3==0">
       <Adsense
         id="ad2"
         key="ad2"
@@ -44,6 +44,19 @@
         :z="z"
       />
     </div>
+    <template v-if="ad && shops_g.length>1 && nowT % 3>0">
+      <Adsense
+        id="ad2"
+        key="ad2"
+        tabindex="0"
+        data-ad-client="ca-pub-7267369281211974"
+        data-ad-slot="3986041962"
+        ins-style="display:inline-block;margin:3px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
+        data-ad-format=""
+        data-full-width-responsive="no"
+      />
+    </template>
+
 
     <!--
     <iframe
@@ -103,6 +116,9 @@ export default {
     },
     'ad': {
       type: String,
+      default: '0'
+    },
+    'nowT': {
       default: '0'
     }
   },
