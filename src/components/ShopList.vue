@@ -20,7 +20,7 @@
         :z="z"
       />
     </div>
-    <template v-if="shops_g.length>1">
+    <template v-if="ad && shops_g.length>1">
       <Adsense
         id="ad2"
         key="ad2"
