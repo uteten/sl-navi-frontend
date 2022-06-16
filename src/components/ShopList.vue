@@ -150,8 +150,9 @@ export default {
         this.shops_s=[]
         this.shops_g=[]
         this.shop_count=res.data.length
+        // tagid=-150 新着は全部shops_sに表示
         res.data.forEach((one) => {
-          if( one.sn >0 ){
+          if( one.sn > 0 || tagid == -150 ){
             this.shops_s.push(one)
           }else{
             this.shops_g.push(one)
