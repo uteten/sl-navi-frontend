@@ -357,6 +357,7 @@ export default {
     top: 0px;
     display: flex;
   }
+
   .popover_title_right{
     align-items: flex-start;
     position: absolute;
@@ -425,18 +426,11 @@ export default {
     align-items: center;
     border-radius: 50%;
   }
-
-  .popover-header{
-    background: #fdf0e0;
-    border-bottom: dashed 2px #ffb03f;
-    padding: 0.3em 0.5em 0.3em 0.5em;
-  }
-
   .popover {
     max-width: 700px;
     min-width: 430px;
-    border: outset 1px #ffb03f;
-    border-radius: 9px;
+    border: 1px solid #ffb03f;
+    border-radius: 5px;
   }
   .now_event{
     border: solid 3px #ff0000;

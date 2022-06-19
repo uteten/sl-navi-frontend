@@ -5,7 +5,7 @@
     id="shops"
     class="col shops"
   >
-    <div class="shop_top">
+    <div class="shop_header">
       施設
     </div>
     <div
@@ -192,21 +192,13 @@ export default {
     border-radius: 5px;
     padding: 0;
   }
-  .shop_top{
+  .shop_header{
     font-size: medium;
     background: #ffc107;
     color:#666666;
     font-weight: bold;
     padding: 0 0 0.2em 0.7em;
     list-style-type: none!important;
-  }
-  hr{
-    border:none;
-    border-bottom: dashed 2px #ffb03f;
-  }
-  h4{
-    color: #ffaa00;
-    border-bottom: dashed 2px #ffb03f;
   }
   .counter{
     text-align: right;
