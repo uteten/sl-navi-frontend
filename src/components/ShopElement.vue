@@ -8,12 +8,10 @@
     tabindex="0"
   >
     <!-- 看板と人数 -->
-    <!--img @click="$ga.event('shop', 'click_shopflag', z.name);alog(z.flag,'info')" class="flag" :src="'https://secondlife.com/app/image/' + z.flag + '/1'"  :class="z.event ? 'ow_event':''"-->
     <img
       class="flag"
       :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
       :class="z.event ? 'ow_event':''"
-      @click="$ga.event('shop', 'click_shopflag', z.name);"
     >
     <span
       v-if="isNewShop(z)"
@@ -183,7 +181,6 @@
       <a
         target="_blank"
         :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
-        @click="$ga.event('shop', 'click_mapurl', z.name);alog(z.flag,'map')"
       >
         <b-icon-map scale="0.8" />ここに移動({{ z.sim }})
       </a>
@@ -425,12 +422,6 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-  }
-  .popover {
-    max-width: 700px;
-    min-width: 430px;
-    border: 1px solid #ffb03f;
-    border-radius: 5px;
   }
   .now_event{
     border: solid 3px #ff0000;

@@ -191,7 +191,26 @@ export default {
 }
 </script>
 <style>
-.row{
+/* popoverのヘッダはShopElement.vueに書いても反映されないのでここに書く*/
+.bs-popover-bottom > .arrow::after{
+  border-bottom-color: #fdf0e0;
+}
+.bs-popover-bottom > .arrow::before{
+  border-bottom-color: #ffb03f;
+}
+.popover-header{
+    font-size: large;
+    background: #fdf0e0;
+    border-bottom: dashed 1px #ffb03f;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+}
+.popover {
+    max-width: 700px;
+    min-width: 430px;
+    border: 1px solid #ffb03f;
+    border-radius: 5px;
+}
+  .row{
   padding-right: 0px;
   padding-left: 0px;
 }
