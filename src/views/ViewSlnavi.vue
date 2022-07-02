@@ -13,7 +13,6 @@
         :ad="nowT == lastT"
         :nowT="nowT"
       />
-      <!-- 基本GoogleAD -->
       <div
         v-if="nowT % 3==4"
         class="ad"
@@ -28,7 +27,7 @@
       </div>
       <event-list ref="appEventList" />
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==4"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT"
         class="ad"
       >
         <Adsense
