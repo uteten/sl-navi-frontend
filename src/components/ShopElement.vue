@@ -79,6 +79,7 @@
           長期イベント中
         </b-badge>
         <span class="popover_title_right">
+          <b-icon-x-octagon-fill scale="0.8" @click="$emit('addBadShop',z)"/>
           <ShareNetwork
             network="Twitter"
             :url="'https://sl-navi.com/search/'+z.flag"
@@ -457,6 +458,9 @@ export default {
   .event_info{
     font-size: 75%;
     font-weight: 700;
+  }
+  .bi-x-octagon-fill{
+    color: crimson;
   }
 
 </style>

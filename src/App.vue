@@ -128,7 +128,6 @@ Vue.prototype.$axios = axios
 Vue.mixin(gv)
 Vue.use(VueCookies)
 Vue.use(VueHead)
-
 export default {
   name: 'App',
   data: function () {

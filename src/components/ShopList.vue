@@ -17,6 +17,7 @@
     >
       <shop-element
         ref="appShopList"
+          v-on:addBadShop="addBadShop"
         :z="z"
       />
     </div>
@@ -30,6 +31,7 @@
       >
         <shop-element
           ref="appShopList"
+          v-on:addBadShop="addBadShop"
           :z="z"
         />
       </div>
@@ -56,6 +58,7 @@
       >
         <shop-element
           ref="appShopList"
+          v-on:addBadShop="addBadShop"
           :z="z"
         />
       </div>
@@ -76,6 +79,10 @@
       なし
     </div>
     <div class="counter text-muted">
+      <span class="clear_bad_shops" @click="clearBadShops">
+        [<b-icon-trash scale="0.8" />
+        非表示にした店舗の再表示]
+      </span>
       <span class="counter_ele">閲覧数：今日{{ countToday }}人</span>
       <span class="counter_ele">アバター検知数：1時間{{ countSensor1h }}人 / 1日{{ countSensor24h }}人</span>
       <span class="counter_ele">現在のログイン数：{{ countLogin }}人</span>
@@ -121,7 +128,8 @@ export default {
       countYesterday: '-',
       countToday: '-',
       countLogin: '-',
-      shop_count: 0
+      shop_count: 0,
+      badShops: []
     }
   },
   mounted () {
@@ -133,8 +141,23 @@ export default {
     this.$setInterval(() => {
       that.getCounter()
     }, 1000 * 60)
+    const badShopsLine = String(this.$cookies.get('badShops'))
+    this.badShops = badShopsLine.split(".")
+    console.log(["badshop",this.badShops])
+    this.$cookies.set('badShops', this.badShops.join("."),60*60*24*180)
+
   },
   methods: {
+    clearBadShops () {
+      this.badShops=[]
+      this.$cookies.set('badShops', "",60*60*24*180)
+      this.getShops(this.cacheMode, this.cacheTagid, this.cacheSearch)
+    },
+    addBadShop: function(one) {
+      this.badShops.push(one.flag.substring(0, one.flag.indexOf('-')))
+      this.getShops(this.cacheMode, this.cacheTagid, this.cacheSearch)
+      this.$cookies.set('badShops', this.badShops.join("."),60*60*24*180)
+},
     async getShops (m, tagid, search) {
       // console.log(['shoplist:getShop:axios', tagid, m, search])
       this.cacheMode = m
@@ -152,10 +175,12 @@ export default {
         this.shop_count=res.data.length
         // tagid=-150 新着は全部shops_sに表示
         res.data.forEach((one) => {
-          if( one.sn > 0 || tagid == -150 ){
-            this.shops_s.push(one)
-          }else{
-            this.shops_g.push(one)
+          if( ! this.badShops.includes(one.flag.substring(0, one.flag.indexOf('-'))) ){
+            if( one.sn > 0 || tagid == -150 ){
+              this.shops_s.push(one)
+            }else{
+              this.shops_g.push(one)
+            }
           }
         })
         // console.log(['shoplist:getShop:then', this.shops])
@@ -207,5 +232,8 @@ export default {
   }
   .counter_ele{
     margin-right:10px;
+  }
+  .clear_bad_shops{
+    color: #5689d7;
   }
 </style>
