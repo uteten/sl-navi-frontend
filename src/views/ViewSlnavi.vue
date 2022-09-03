@@ -10,7 +10,7 @@
       <shop-messages ref="appMessages" />
       <shop-list
         ref="appShopList"
-        :ad="nowT == lastT"
+        :ad="nowT == lastT && mode=='k'"
         :nowT="nowT"
       />
       <div
@@ -27,7 +27,7 @@
       </div>
       <event-list ref="appEventList" />
       <div
-        v-if="nowT == lastT"
+        v-if="nowT == lastT && mode=='k'"
         class="ad"
       >
         <Adsense
