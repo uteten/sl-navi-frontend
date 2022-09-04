@@ -143,10 +143,10 @@ export default {
   head: {
     title: {
       inner: 'SL-Navi',
-      complement: 'セカンドライフの日本人向けリンク集'
+      complement: 'セカンドライフの日本人向けポータルサイト'
     },
     meta: [
-      { name: 'description', content: 'SL-Naviはセカンドライフ内で日本人がいるお店や遊び場、新施設が見つかるリンク集です。施設オーナーは審査不要で即座に施設紹介ができます。' },
+      { name: 'description', content: 'セカンドライフ内で日本人がいるお店や遊び場、新施設紹介。審査不要で即座に登録OK' },
       { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
       { charset: 'utf-8' }
