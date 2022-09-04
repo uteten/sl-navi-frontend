@@ -16,7 +16,7 @@ Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
 const BASE_TITLE = 'SL-Navi | '
-const DEFAULT_ADD_TITLE = 'セカンドライフの日本人向けリンク集'
+const DEFAULT_ADD_TITLE = 'セカンドライフの日本人向けポータルサイト'
 
 const routes = [
   {
