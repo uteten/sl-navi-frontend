@@ -8,11 +8,13 @@
     tabindex="0"
   >
     <!-- 看板と人数 -->
+    <!-- :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag" -->
     <img
       class="flag"
-      :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
       :class="z.event ? 'ow_event':''"
-    >
+      :src="'https://secondlife.com/app/image/' + z.flag + '/1'"
+
+>
     <span
       v-if="isNewShop(z)"
       class="new_shop badge badge-primary"
