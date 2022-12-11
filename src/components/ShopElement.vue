@@ -8,11 +8,14 @@
     tabindex="0"
   >
     <!-- 看板と人数 -->
-    <!-- :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag" -->
+    <!-- 
+      :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
+      :src="'https://secondlife.com/app/image/' + z.flag + '/1'"
+    -->
     <img
       class="flag"
       :class="z.event ? 'ow_event':''"
-      :src="'https://secondlife.com/app/image/' + z.flag + '/1'"
+      :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
 
 >
     <span
