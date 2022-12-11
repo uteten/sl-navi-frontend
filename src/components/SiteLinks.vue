@@ -50,6 +50,17 @@
       <dt class="links_item left">
         <a
           target="_blank"
+          href="https://secondlife.yuuwrite.net/"
+        >
+          SecondLifeガイド(Yuu)
+        </a>
+      </dt>
+      <dd class="links_item">
+        :初心者総合
+      </dd>
+      <dt class="links_item left">
+        <a
+          target="_blank"
           href="https://sljpstartguide.wordpress.com/"
         >
           Secondlife スタートガイド(Lokia)
