@@ -27,7 +27,7 @@
       </div>
       <event-list ref="appEventList" />
       <div
-        v-if="nowT == lastT && mode=='k'"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==4"
         class="ad"
       >
         <Adsense
@@ -43,7 +43,7 @@
       <news ref="appNews" />
       -->
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==4"
+        v-if="nowT == lastT && mode=='k'"
         class="ad"
       >
         <Adsense
