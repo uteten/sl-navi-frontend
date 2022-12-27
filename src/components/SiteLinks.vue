@@ -6,30 +6,7 @@
     <div class="links_top">
       リンク集
     </div>
-    <h6>■ニュース/ブログ</h6>
-    <dl class="links_menu">
-      <blog-articles
-        title="Secondlife公式 特別ニュース(英語)"
-        url="https://community.secondlife.com/blogs/blog/4-featured-news/"
-        json="blog-secondlife"
-      />
-      <blog-articles
-        title="INARA PEY: LIVING IN A MODEMWORLD(英語)"
-        url="https://modemworld.me/"
-        json="blog-modemworld"
-      />
-      <blog-articles
-        title="New World Notes(英語)"
-        url="https://nwn.blogs.com/nwn/"
-        json="blog-nwn"
-      />
-      <blog-articles
-        title="DANIEL VOYAGER(英語)"
-        url="https://danielvoyager.wordpress.com/"
-        json="blog-danielvoyager"
-      />
-    </dl>
-    <h6>■初心者向け/総合</h6>
+    <h6>■初心者向け/総合(日本語)</h6>
     <dl class="links_menu">
       <blog-articles
         title="Second Life 美少女アバター wiki"
@@ -57,6 +34,29 @@
       <dd class="links_item">
         :初心者総合
       </dd>
+    </dl>
+    <h6>■ニュース/ブログ(英語)</h6>
+    <dl class="links_menu">
+      <blog-articles
+        title="Secondlife公式 特別ニュース(英語)"
+        url="https://community.secondlife.com/blogs/blog/4-featured-news/"
+        json="blog-secondlife"
+      />
+      <blog-articles
+        title="INARA PEY: LIVING IN A MODEMWORLD(英語)"
+        url="https://modemworld.me/"
+        json="blog-modemworld"
+      />
+      <blog-articles
+        title="New World Notes(英語)"
+        url="https://nwn.blogs.com/nwn/"
+        json="blog-nwn"
+      />
+      <blog-articles
+        title="DANIEL VOYAGER(英語)"
+        url="https://danielvoyager.wordpress.com/"
+        json="blog-danielvoyager"
+      />
     </dl>
     <h6>■買い物/イベント</h6>
     <dl class="links_menu">
