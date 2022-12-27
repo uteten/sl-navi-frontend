@@ -36,6 +36,11 @@
         url="https://aniava.net/"
         json="blog-aniava"
       />
+      <blog-articles
+        title="Second Lifeメタバースガイド"
+        url="https://www.sl-guide.com/"
+        json="blog-sl-guide.json"
+      />
       <dt class="links_item left">
         <a
           target="_blank"
