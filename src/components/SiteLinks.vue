@@ -39,7 +39,7 @@
       <blog-articles
         title="Second Lifeメタバースガイド"
         url="https://www.sl-guide.com/"
-        json="blog-sl-guide.json"
+        json="blog-sl-guide"
       />
       <dt class="links_item left">
         <a
