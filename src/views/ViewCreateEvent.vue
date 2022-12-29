@@ -293,6 +293,7 @@
 </template>
 <script>
 
+
 import axios from 'axios'
 // import Vue from 'vue'
 //import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
@@ -398,12 +399,26 @@ export default {
         this.$set(this.errors, 'map_url', '正しいマップのURLを入力してください')
       }
       // 必須項目チェック
-      const keys = ['title', 'genre', 'startTime', 'endTime', 'description']
+      const keys = ['title', 'genre', 'description']
       for (const z in keys) {
         if (!this[keys[z]]) {
           this.$set(this.errors, keys[z], 'この項目は必須です')
         }
       }
+      const st = Date.parse(this.startTime)
+      const et = Date.parse(this.endTime)
+      const nt=new Date()
+      if ( isNaN(st)) {
+        this.$set(this.errors,'start_time' , 'この項目は必須です')
+      }else if (st>nt) {
+        this.$set(this.errors,'start_time' , '終了日時より前の日時を入れてください')
+      }
+      if ( isNaN(et)) {
+        this.$set(this.errors,'end_time' , 'この項目は必須です')
+      }else if (et<nt) {
+        this.$set(this.errors, 'end_time', '未来の値をいれてください')
+      }
+
       if (Object.keys(this.errors).length > 0) {
         alert('投稿に失敗しました。投稿内容を確認してください。')
         return

@@ -52,6 +52,9 @@ export default {
       const url = encodeURIComponent('https://sl-navi.com/event/' + event.id)
       const txt = encodeURIComponent(event.title)
       return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
+    },
+    testa (num) {
+      return "a"+num
     }
   }
 }
