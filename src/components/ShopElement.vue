@@ -271,6 +271,7 @@ export default {
       if (!z.event) {
         return 0
       }
+      // test
       let start = z.event.start
       let end = z.event.end
       // let now=this._formatDate(new Date(),'YYYY-MM-DDThh:mm:ss')
