@@ -175,9 +175,9 @@ export default {
       start = new Date(start)
       end = new Date(end)
       if (start < now && now < end) {
-        now.setHours(now.getHours() + 24)
+        now.setHours(now.getHours() + 24*3)
         if (now > end) {
-          return 2 // 24時間以内に終了
+          return 2 // 24*3時間以内に終了
         } else {
           return 1 // 長期開催
         }
