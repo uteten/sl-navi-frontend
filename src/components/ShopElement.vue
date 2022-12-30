@@ -278,7 +278,7 @@ export default {
       start = new Date(start)
       end = new Date(end)
       if (start < now && now < end) {
-        if (end - start < 60 * 60 * 24 * 1000) {
+        if (end - start < 60 * 60 * 24 * 3 * 1000) { // ３日以上をlong
           console.log(end - start)
           return 'short'
         } else {
