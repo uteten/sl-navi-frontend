@@ -410,7 +410,7 @@ export default {
       const nt=new Date()
       if ( isNaN(st)) {
         this.$set(this.errors,'start_time' , 'この項目は必須です')
-      }else if (st>nt) {
+      }else if (st>et) {
         this.$set(this.errors,'start_time' , '終了日時より前の日時を入れてください')
       }
       if ( isNaN(et)) {
