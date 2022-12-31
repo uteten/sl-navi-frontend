@@ -109,7 +109,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2022 sl-navi
+            © 2020-2023 sl-navi
           </p>
         </div>
       </footer>
@@ -146,7 +146,7 @@ export default {
       complement: 'セカンドライフの日本人向けポータルサイト'
     },
     meta: [
-      { name: 'description', content: 'セカンドライフ内で日本人がいるお店や遊び場、新施設紹介。審査不要で即座に登録OK' },
+      { name: 'description', content: 'セカンドライフ内で日本人がいるお店や遊び場、新施設紹介' },
       { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
       { charset: 'utf-8' }
