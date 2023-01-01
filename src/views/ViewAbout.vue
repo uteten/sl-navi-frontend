@@ -8,7 +8,7 @@
 
     <h4>■このサイトの目的</h4>
     <ol>
-      <li>2022年 現在の<a href="https://www.secondlife.com/?lang=ja">セカンドライフ</a>内の日本人カフェやイベントを紹介(施設オーナーはセンサを置くだけでOK。申請不要)</li>
+      <li><a href="https://www.secondlife.com/?lang=ja">セカンドライフ</a>内の日本人カフェやイベントを紹介(施設オーナーはセンサを置くだけでOK。申請不要)</li>
       <li>ギフト配布場所情報も試験追加中</li>
       <li>イベントのSLT⇨JST日本時間変換/計算は<a href="/event">こちら</a></li>
     </ol>
