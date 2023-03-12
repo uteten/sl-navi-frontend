@@ -63,9 +63,6 @@
         />
       </div>
     </template>
-
-
-
     <!--
     <iframe
       :src="'https://sl-navi.com/static/dmm-ad1.html?'+lastT"
@@ -81,12 +78,24 @@
     <div class="counter text-muted">
       <span class="clear_bad_shops" @click="clearBadShops">
         [<b-icon-trash scale="0.8" />
-        非表示にした店舗の再表示]
+        非表示にした施設の再表示]
       </span>
       <span class="counter_ele">閲覧数：今日{{ countToday }}人</span>
       <span class="counter_ele">アバター検知数：1時間{{ countSensor1h }}人 / 1日{{ countSensor24h }}人</span>
       <span class="counter_ele">現在のログイン数：{{ countLogin }}人</span>
     </div>
+
+    <b-modal
+      ref="my-modal"
+      v-model="showModal"
+      class="modal fade"
+      size="lg"
+      hide-header
+      hide-footer
+    >
+      {{ trash_shop }} を非表示にしました。<br>再表示したい場合は、リストの下の
+      「<b-icon-trash scale="1" class="trash_icon"/>非表示にした施設の再表示」を選択してください
+    </b-modal>
   </div>
 </template>
 <script>
@@ -129,6 +138,7 @@ export default {
       countToday: '-',
       countLogin: '-',
       shop_count: 0,
+      trash_shop: '-',
       badShops: []
     }
   },
@@ -157,6 +167,9 @@ export default {
       this.badShops.push(one.flag.substring(0, one.flag.indexOf('-')))
       this.getShops(this.cacheMode, this.cacheTagid, this.cacheSearch)
       this.$cookies.set('badShops', this.badShops.join("."),60*60*24*180)
+
+      this.trash_shop = one.name
+      this.$refs['my-modal'].show()
 },
     async getShops (m, tagid, search) {
       // console.log(['shoplist:getShop:axios', tagid, m, search])

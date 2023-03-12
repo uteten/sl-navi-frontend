@@ -84,7 +84,7 @@
           長期イベント中
         </b-badge>
         <span class="popover_title_right">
-          <b-icon-x-octagon-fill scale="1" @click="$emit('addBadShop',z)"/>
+          <b-icon-trash scale="1" class="trash_icon" @click="$emit('addBadShop',z)"/>
 
           <ShareNetwork
             network="Twitter"
@@ -456,7 +456,12 @@ export default {
   .shop_residentlog {
     margin-left: 5px;
     white-space: nowrap;
-}
+  }
+  .trash_icon {
+    color: crimson;
+    vertical-align: -4px;
+    padding-right: 3px;
+  }
   .sns_icon{
     width:20px;
     height:20px;

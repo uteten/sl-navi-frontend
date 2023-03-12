@@ -163,7 +163,6 @@ export default {
       }
       if (active) {
         // コンポーネント内のタグをクリックしたステータス変化は親に伝えて、親で何か処理(shopの再読込など)をする
-        console.log('hoge')
         if (this.mode === 'k') {
           this.$router.push('/kenzen/' + tagid)
         } else if (this.mode === 'e') {
