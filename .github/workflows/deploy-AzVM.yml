@@ -27,7 +27,10 @@ jobs:
         HOST: ${{ secrets.HOST }}
         WEBROOT: ${{ secrets.PATH_WEBROOT }}
       run: |
+        echo "make scp's key"
         echo "${SECRET_KEY}" > secret_key
+        echo "chmod 600 scp's key"
         chmod 600 secret_key
+        echo "do scp"
         tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${WEBROOT}/static"
         ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "/usr/local/bin/azcopy login --identity && /usr/local/bin/azcopy 'sync' --recursive '${WEBROOT}/static/dist/' 'https://slnaviblobstrage.blob.core.windows.net/static/dist/' && sudo service gunicorn restart"
