@@ -10,7 +10,7 @@
       <shop-messages ref="appMessages" />
       <shop-list
         ref="appShopList"
-        :ad="nowT == lastT && mode=='k'"
+        :ad="nowT == lastT"
         :nowT="nowT"
       />
       <div
@@ -41,7 +41,6 @@
       <site-links ref="appLinks" />
       <!--
       <news ref="appNews" />
-      -->
       <div
         v-if="nowT == lastT && mode=='k'"
         class="ad"
@@ -54,6 +53,7 @@
           data-full-width-responsive=""
         />
       </div>
+      -->
     </div>
   </div>
 </template>
