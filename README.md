@@ -1,4 +1,6 @@
-# sl-navi2
+# sl-navi
+
+https://sl-navi.com のフロントエンドのコード
 
 ## Project setup
 ```
