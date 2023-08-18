@@ -36,6 +36,7 @@
         />
       </div>
     </template>
+    <!--
     <template v-if="ad && shops_g.length>1">
       <Adsense
         id="ad2"
@@ -48,6 +49,7 @@
         data-full-width-responsive="no"
       />
     </template>
+    -->
     <template v-if="shop_count>=25">
       <div
         v-for="z in shops_g"
