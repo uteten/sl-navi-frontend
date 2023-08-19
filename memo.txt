@@ -1,3 +1,8 @@
+git push origin
+vi .git/config
+ここでgithubのtoken作成
+https://github.com/settings/tokens?type=beta
+
 
 nodebrew ls
 nodebrew ls-remote
