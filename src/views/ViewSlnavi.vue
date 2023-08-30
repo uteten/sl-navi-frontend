@@ -14,7 +14,7 @@
         :nowT="nowT"
       />
       <div
-        v-if="nowT % 3==2"
+        v-if="nowT % 1==0"
         class="ad"
       >
         <Adsense
@@ -27,7 +27,7 @@
       </div>
       <event-list ref="appEventList" />
       <div
-        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==1"
+        v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==99"
         class="ad"
       >
         <Adsense
