@@ -14,11 +14,11 @@
         :nowT="nowT"
       />
       <div
-        v-if="nowT % 1==99  && mode=='k'"
+        v-if="nowT % 1==0  && mode=='k'"
         class="ad"
       >
         <Adsense
-          data-ad-client="ca-pub-7267369281211974"
+          data-ad-client="ca-pub-1991732635123294"
           data-ad-slot="4854478492"
           ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
@@ -31,7 +31,7 @@
         class="ad"
       >
         <Adsense
-          data-ad-client="ca-pub-7267369281211974"
+          data-ad-client="ca-pub-1991732635123294"
           data-ad-slot="4854478492"
           ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
@@ -46,7 +46,7 @@
         class="ad"
       >
         <Adsense
-          data-ad-client="ca-pub-7267369281211974"
+          data-ad-client="ca-pub-1991732635123294"
           data-ad-slot="4854478492"
           ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
