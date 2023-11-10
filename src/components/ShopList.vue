@@ -82,7 +82,9 @@
         [<b-icon-trash scale="0.8" />
         非表示にした施設の再表示]
       </span>
+      <!--
       <span class="counter_ele">閲覧数：今日{{ countToday }}人</span>
+      -->
       <span class="counter_ele">アバター検知数：1時間{{ countSensor1h }}人 / 1日{{ countSensor24h }}人</span>
       <span class="counter_ele">現在のログイン数：{{ countLogin }}人</span>
     </div>

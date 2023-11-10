@@ -142,14 +142,14 @@ router.afterEach((to) => {
     document.title = BASE_TITLE + DEFAULT_ADD_TITLE
   }
 })
-
+/*
 Vue.use(VueAnalytics, {
   id: 'UA-177594854-1',
   router
 })
-
+*/
 Vue.use(VueGtm, {
-  id: 'GTM-WMCN78F',
+  id: 'GTM-TGJQ98FP',
   enabled: true,
   debug: false,
   loadScript: true,
