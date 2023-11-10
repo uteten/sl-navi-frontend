@@ -19,7 +19,7 @@
       >
         <Adsense
           data-ad-client="ca-pub-1991732635123294"
-          data-ad-slot="4854478492"
+          data-ad-slot="6715425501"
           ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
           data-full-width-responsive=""
@@ -32,7 +32,7 @@
       >
         <Adsense
           data-ad-client="ca-pub-1991732635123294"
-          data-ad-slot="4854478492"
+          data-ad-slot="6715425501"
           ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
           data-full-width-responsive=""
@@ -47,7 +47,7 @@
       >
         <Adsense
           data-ad-client="ca-pub-1991732635123294"
-          data-ad-slot="4854478492"
+          data-ad-slot="6715425501"
           ins-style="display:inline-block;width:100%;height:160px;"
           data-ad-format=""
           data-full-width-responsive=""
