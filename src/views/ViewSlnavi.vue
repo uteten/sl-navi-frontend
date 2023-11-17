@@ -14,7 +14,7 @@
         :nowT="nowT"
       />
       <div
-        v-if="nowT % 1==0  && mode=='k'"
+        v-if="nowT == lastT  && mode=='k'"
         class="ad"
       >
         <Adsense
