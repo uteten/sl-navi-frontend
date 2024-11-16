@@ -45,7 +45,7 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
-      - name: CD (github -> Azure VM -> Azure Blob -> Azure CDN)
+      - name: Copy to AzVM
         env:
           SECRET_KEY: ${{ secrets.ID_RSA }}
           USER: ${{ secrets.USERNAME }}
@@ -58,6 +58,7 @@ jobs:
           echo "chmod 600 scp's key"
           chmod 600 "${RUNNER_TEMP}/secret_key"
           echo "do scp"
+          run: echo "WEBROOT is: ${WEBROOT}"
           tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "tar xfz - -C ${WEBROOT}/static2"
           
 
