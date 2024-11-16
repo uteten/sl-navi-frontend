@@ -15,7 +15,7 @@
     <img
       class="flag"
       :class="z.event ? 'ow_event':''"
-      :src="'https://sl-navi.azureedge.net/static/flag/' + z.flag"
+      :src="'/static/flag/' + z.flag"
 
 >
     <span
