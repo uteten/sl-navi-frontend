@@ -58,7 +58,7 @@ jobs:
           echo "chmod 600 scp's key"
           chmod 600 "${RUNNER_TEMP}/secret_key"
           echo "do scp"
-          run: echo "WEBROOT is: ${WEBROOT}"
+          echo "WEBROOT is: ${WEBROOT}"
           tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "tar xfz - -C ${WEBROOT}/static2"
           
 
