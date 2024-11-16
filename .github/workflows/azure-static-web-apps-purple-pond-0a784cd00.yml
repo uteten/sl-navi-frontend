@@ -60,7 +60,7 @@ jobs:
           echo "do scp"
           tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "tar xfz - -C ${WEBROOT}/static"
           echo "do restart gunicron"
-          ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "sudo service gunicorn restart"
+          ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "sudo service gunicorn restart"
           
 
 
