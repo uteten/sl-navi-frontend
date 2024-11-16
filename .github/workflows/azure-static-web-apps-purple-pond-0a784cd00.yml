@@ -58,8 +58,9 @@ jobs:
           echo "chmod 600 scp's key"
           chmod 600 "${RUNNER_TEMP}/secret_key"
           echo "do scp"
-          echo "WEBROOT is: ${WEBROOT}"
-          tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "tar xfz - -C ${WEBROOT}/static2"
+          tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "tar xfz - -C ${WEBROOT}/static"
+          echo "do restart gunicron"
+          ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "sudo service gunicorn restart"
           
 
 
