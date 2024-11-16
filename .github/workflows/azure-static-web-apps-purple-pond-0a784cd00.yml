@@ -45,6 +45,22 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
+      - name: CD (github -> Azure VM -> Azure Blob -> Azure CDN)
+        env:
+          SECRET_KEY: ${{ secrets.ID_RSA }}
+          USER: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          HOST: ${{ secrets.HOST }}
+          WEBROOT: ${{ secrets.PATH_WEBROOT }}
+        run: |
+          echo "make scp's key"
+          echo "${SECRET_KEY}" > secret_key
+          echo "chmod 600 scp's key"
+          chmod 600 secret_key
+          echo "do scp"
+          tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${WEBROOT}/static2"
+  
+
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
