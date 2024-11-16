@@ -54,12 +54,12 @@ jobs:
           WEBROOT: ${{ secrets.PATH_WEBROOT }}
         run: |
           echo "make scp's key"
-          echo "${SECRET_KEY}" > secret_key
+          echo "${SECRET_KEY}" > "${RUNNER_TEMP}/secret_key"
           echo "chmod 600 scp's key"
-          chmod 600 secret_key
+          chmod 600 "${RUNNER_TEMP}/secret_key"
           echo "do scp"
-          tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i secret_key "tar xfz - -C ${WEBROOT}/static2"
-  
+          tar zcf - dist | ssh -p ${PORT} -oStrictHostKeyChecking=no ${USER}@${HOST} -i "${RUNNER_TEMP}/secret_key" "tar xfz - -C ${WEBROOT}/static2"
+          
 
 
   close_pull_request_job:
