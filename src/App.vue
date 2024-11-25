@@ -12,7 +12,7 @@
         >
           <img
             class="logo-img"
-            src="https://slnaviblobstrage.blob.core.windows.net/static/dist/sl-navi-logo.png"
+            src="https://static.sl-navi.com/sl-navi-logo.png"
           >
         </a>
         <b-navbar-toggle target="nav-collapse" />
