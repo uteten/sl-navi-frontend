@@ -14,8 +14,8 @@
         json="blog-aniava"
       />
       <blog-articles
-        title="Second Lifeメタバースガイド(Yuu)"
-        url="https://www.sl-guide.com/"
+        title="Second Lifeプレイガイド"
+        url="https://sl-playguide.blogspot.com/"
         json="blog-sl-guide"
       />
       <blog-articles
@@ -23,6 +23,7 @@
         url="https://seesaawiki.jp/furrys_habitat/"
         json="blog-furrys_habitat"
       />
+      <!--
       <dt class="links_item left">
         <a
           target="_blank"
@@ -31,6 +32,7 @@
           Secondlife スタートガイド(Lokia)
         </a>
       </dt>
+      -->
       <dd class="links_item">
         :初心者総合
       </dd>
@@ -47,11 +49,13 @@
         url="https://modemworld.me/"
         json="blog-modemworld"
       />
+      <!--
       <blog-articles
         title="New World Notes(英語)"
         url="https://nwn.blogs.com/nwn/"
         json="blog-nwn"
       />
+      -->
       <blog-articles
         title="DANIEL VOYAGER(英語)"
         url="https://danielvoyager.wordpress.com/"
