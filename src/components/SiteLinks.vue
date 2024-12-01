@@ -32,10 +32,10 @@
           Secondlife スタートガイド(Lokia)
         </a>
       </dt>
-      -->
       <dd class="links_item">
         :初心者総合
       </dd>
+      -->
     </dl>
     <h6>■ニュース/ブログ(英語)</h6>
     <dl class="links_menu">
