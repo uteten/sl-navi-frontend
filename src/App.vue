@@ -109,7 +109,7 @@
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
-            © 2020-2023 sl-navi
+            © 2020-2025 sl-navi
           </p>
         </div>
       </footer>
