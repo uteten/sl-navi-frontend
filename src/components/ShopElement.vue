@@ -15,7 +15,7 @@
     <img
       class="flag"
       :class="z.event ? 'ow_event':''"
-      :src="'/static/flag/' + z.flag"
+      :src="'https://sl-navi.com/static/flag/' + z.flag"
 
 >
     <span

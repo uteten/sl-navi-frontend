@@ -9,20 +9,22 @@
     <h6>■初心者向け/総合(日本語)</h6>
     <dl class="links_menu">
       <blog-articles
-        title="Second Life 美少女アバター wiki"
-        url="https://aniava.net/"
-        json="blog-aniava"
+        title="Kawaii SL Avatar Lab"
+        url="https://sl.aniava.net/"
+        json="blog-kawaii-sl-av"
       />
       <blog-articles
         title="Second Lifeプレイガイド"
-        url="https://sl-playguide.blogspot.com/"
+        url="https://www.sl-guide.com/"
         json="blog-sl-guide"
       />
+      <!--
       <blog-articles
         title="SecondLife Furry's Habitat Wiki(ケモアバのレビュなど)"
         url="https://seesaawiki.jp/furrys_habitat/"
         json="blog-furrys_habitat"
       />
+      -->
       <!--
       <dt class="links_item left">
         <a
@@ -39,11 +41,13 @@
     </dl>
     <h6>■ニュース/ブログ(英語)</h6>
     <dl class="links_menu">
+      <!--
       <blog-articles
         title="Secondlife公式 特別ニュース(英語)"
         url="https://community.secondlife.com/blogs/blog/4-featured-news/"
         json="blog-secondlife"
       />
+      -->
       <blog-articles
         title="INARA PEY: LIVING IN A MODEMWORLD(英語)"
         url="https://modemworld.me/"
