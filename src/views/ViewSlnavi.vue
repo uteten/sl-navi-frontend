@@ -95,7 +95,7 @@ export default {
       searchword: this.$route.params.searchword,
       nowT: 1,
       lastT: 1,
-      reloadCount: 0,
+      adClickCount: 0,
       ad_flag: true,
     }
   },
@@ -169,7 +169,10 @@ export default {
   methods: {
     disableAD: function () {
       console.log('ad clicked')
-      this.ad_flag = 0
+      this.adClickCount++
+      if (this.adClickCount >= 2) {
+        this.ad_flag = false // 2回以上クリックされたら非表示にする
+      }
     },
     actionSelectedTag: function (e) {
       this.tagid = e
