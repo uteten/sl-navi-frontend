@@ -122,8 +122,8 @@ export default {
       default: 'k'
     },
     'ad': {
-      type: String,
-      default: '0'
+      type: Boolean,
+      default: false
     },
     'nowT': {
       default: '0'
@@ -143,7 +143,8 @@ export default {
       countLogin: '-',
       shop_count: 0,
       trash_shop: '-',
-      badShops: []
+      badShops: [],
+      showModal: false
     }
   },
   mounted () {

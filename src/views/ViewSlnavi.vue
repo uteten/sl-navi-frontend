@@ -10,11 +10,11 @@
       <shop-messages ref="appMessages" />
       <shop-list
         ref="appShopList"
-        :ad="nowT == lastT"
+        :ad=ad_flag
         :nowT="nowT"
       />
-      <div
-        v-if="nowT == lastT  && mode=='k'"
+      <div @click="disableAD()"
+        v-if=ad_flag
         class="ad"
       >
         <Adsense
@@ -26,6 +26,7 @@
         />
       </div>
       <event-list ref="appEventList" />
+      <!-- イベントの下の広告
       <div
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==99"
         class="ad"
@@ -38,8 +39,9 @@
           data-full-width-responsive=""
         />
       </div>
+      -->
       <site-links ref="appLinks" />
-      <!--
+      <!-- リンク集の下の広告
       <news ref="appNews" />
       <div
         v-if="nowT == lastT && mode=='k'"
@@ -93,7 +95,8 @@ export default {
       searchword: this.$route.params.searchword,
       nowT: 1,
       lastT: 1,
-      reloadCount: 0
+      reloadCount: 0,
+      ad_flag: true,
     }
   },
   watch: {
@@ -128,18 +131,15 @@ export default {
   mounted () {
     const date = new Date()
     this.nowT = date.getTime()
-    this.lastT = Number(this.$cookies.get('t'))
-    this.reloadCount = Number(this.$cookies.get('c'))
-    // 10分に4回だけ広告表示
+    this.lastT = Number(this.$cookies.get('t')) // 最後に広告を表示した時間
     if (this.nowT - this.lastT > 10 * 60 * 1000) {
-      // 10分以上経ってるときはカウントリセット
+      // 初めてか10分以上経ってるときに表示
       this.$cookies.set('t', this.nowT)
-      this.$cookies.set('c', 0)
       this.lastT = this.nowT
-    } else if (this.reloadCount < 3) {
-      this.$cookies.set('t', this.nowT)
-      this.$cookies.set('c', this.reloadCount + 1)
-      this.lastT = this.nowT
+      this.ad_flag=true
+    }else{
+      // 基本的に広告を表示しない
+      this.ad_flag=false
     }
     // console.log(['viewSlnavi:mounted!!', this])
     if (this.searchword) {
@@ -167,6 +167,10 @@ export default {
     }
   },
   methods: {
+    disableAD: function () {
+      console.log('ad clicked')
+      this.ad_flag = 0
+    },
     actionSelectedTag: function (e) {
       this.tagid = e
       this.$refs.appShopList.getShops(this.mode, e)
