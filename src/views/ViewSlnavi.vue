@@ -14,7 +14,7 @@
         :nowT="nowT"
       />
       <div @click="disableAD()"
-        v-if=ad_flag
+        v-if="ad_flag == true && mode =='k'"
         class="ad"
       >
         <Adsense
