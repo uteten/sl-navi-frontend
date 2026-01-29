@@ -13,11 +13,13 @@
         url="https://sl.aniava.net/"
         json="blog-kawaii-sl-av"
       />
+      <!--
       <blog-articles
         title="Second Lifeプレイガイド"
         url="https://www.sl-guide.com/"
         json="blog-sl-guide"
       />
+      -->
       <!--
       <blog-articles
         title="SecondLife Furry's Habitat Wiki(ケモアバのレビュなど)"
