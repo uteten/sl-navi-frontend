@@ -423,8 +423,11 @@ export default {
         alert('投稿に失敗しました。投稿内容を確認してください。')
         return
       }
-      const headers = {
-        'X-CSRFTOKEN': this.csrftoken
+      const headers = {};
+      if (this.csrftoken && this.csrftoken !== 'null') {
+        const headers = {
+          'X-CSRFTOKEN': this.csrftoken
+        }
       }
       axios.post(EVENT_SOURCE, {
         'eid': this.eid,
