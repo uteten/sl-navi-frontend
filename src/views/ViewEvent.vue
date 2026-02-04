@@ -214,10 +214,9 @@ export default {
     deleteEvent: function (eventId) {
       const headers = {};
       if (this.csrftoken && this.csrftoken !== 'null') {
-        const headers = {
-          'X-CSRFTOKEN': this.csrftoken
-        }
+        headers['X-CSRFTOKEN'] = this.csrftoken;
       }
+
       axios.delete(EVENT_SOURCE + '/' + eventId, { headers: headers }).then(
         res => {
           alert('削除しました')

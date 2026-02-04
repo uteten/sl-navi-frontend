@@ -425,10 +425,9 @@ export default {
       }
       const headers = {};
       if (this.csrftoken && this.csrftoken !== 'null') {
-        const headers = {
-          'X-CSRFTOKEN': this.csrftoken
-        }
+        headers['X-CSRFTOKEN'] = this.csrftoken;
       }
+
       axios.post(EVENT_SOURCE, {
         'eid': this.eid,
         'title': this.title,

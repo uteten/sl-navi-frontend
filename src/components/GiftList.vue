@@ -141,10 +141,9 @@ export default {
     deleteGift: function (tid) {
       const headers = {};
       if (this.csrftoken && this.csrftoken !== 'null') {
-        const headers = {
-          'X-CSRFTOKEN': this.csrftoken
-        }
+        headers['X-CSRFTOKEN'] = this.csrftoken;
       }
+
       axios.delete(GIFT_SOURCE + '/' + tid, { headers: headers }).then(
         res => {
           console.log(res)
