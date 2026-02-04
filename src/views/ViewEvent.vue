@@ -212,9 +212,12 @@ export default {
       this.$router.push('/event/' + this.edId).catch(err => { console.log(err) })
     },
     deleteEvent: function (eventId) {
-      const headers = {
-        'X-CSRFTOKEN': this.csrftoken
+      if (this.csrftoken && this.csrftoken !== 'null') {
+        const headers = {
+          'X-CSRFTOKEN': this.csrftoken
+        }
       }
+
       axios.delete(EVENT_SOURCE + '/' + eventId, { headers: headers }).then(
         res => {
           alert('削除しました')
