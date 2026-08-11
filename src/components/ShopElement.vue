@@ -203,7 +203,7 @@
       <a
         v-if="z.radio!=''"
         target="_blank"
-        :href="'http://uten.jp/radio.cgi?'+z.radio"
+        :href="'https://radio.sl-navi.com/radio.cgi?'+z.radio"
         @click="playRadio(z.radio)"
       >
         <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
