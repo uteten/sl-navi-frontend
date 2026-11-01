@@ -38,7 +38,7 @@
     </template>
     <!--
     <template v-if="ad && shops_g.length>1">
-      <Adsense
+      <AdsenseUnit
         id="ad2"
         key="ad2"
         tabindex="0"
@@ -79,7 +79,7 @@
     </div>
     <div class="counter text-muted">
       <span class="clear_bad_shops" @click="clearBadShops">
-        [<b-icon-trash scale="0.8" />
+        [<i class="bi bi-trash" />
         非表示にした施設の再表示]
       </span>
       <!--
@@ -92,22 +92,19 @@
     <b-modal
       ref="my-modal"
       v-model="showModal"
-      class="modal fade"
       size="lg"
-      hide-header
-      hide-footer
+      no-header
+      no-footer
     >
       {{ trash_shop }} を非表示にしました。<br>再表示したい場合は、リストの下の
-      「<b-icon-trash scale="1" class="trash_icon"/>非表示にした施設の再表示」を選択してください
+      「<i class="bi bi-trash trash_icon" />非表示にした施設の再表示」を選択してください
     </b-modal>
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import axios from 'axios'
-import ShopElement from '@/components/ShopElement'
+import ShopElement from '@/components/ShopElement.vue'
 
-Vue.prototype.$axios = axios
 
 const INTERVAL_RELOAD_SHOP = 180
 const SHOP_SOURCE = '/api/shop'

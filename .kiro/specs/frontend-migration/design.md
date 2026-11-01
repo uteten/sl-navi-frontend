@@ -72,6 +72,10 @@ bootstrap-vue-next は Bootstrap 5 前提。Bootstrap 4 のクラス名で 5 で
 - `<b-*>` 部品は bootstrap-vue-next の `<BModal>` などに書き換える。props の名前が変わったもの
   (`v-model` で開閉する modal、popover の `target` など) は移行時に一つずつ合わせる。
 - アイコン (`<b-icon-*>`) は `bootstrap-icons` の `<i class="bi bi-*">` にする。
+- popover は `lazy` と `unmount-lazy` を付ける。bootstrap-vue は開いたときだけ中身を描いていたが、
+  bootstrap-vue-next は既定で全件を描くため、ヒートマップ画像を一覧の件数ぶん先に読んでしまう。
+- bootstrap-vue-next は popover を施設の枠の中に置くので、`.popover { width: max-content }` で幅を中身に合わせる。
+- Bootstrap 5 はリンクに常に下線を引くので、Bootstrap 4 と同じくホバー時だけにする。
 - 見た目の差 (余白、フォント、色) は D6 の確認で比べ、気になるものだけ CSS で戻す。
 
 ## D5 ビルドと配信
@@ -130,8 +134,8 @@ PR ごとに、次の段階を順に通す。
 - [ ] `/updateEvent/:eid` 既存イベントの読み込みと更新
 - [ ] `/gift` 一覧、削除
 - [ ] `/about`
-- [ ] 広告枠が出る (段階 4 のみ。AdSense はローカルでは出ない)
-- [ ] GTM の page_view (段階 4。GTM のプレビューモードで)
+- [ ] 広告枠が出る (段階 4 のみ。AdSense はローカルでは出ない。広告ドメインを DNS で遮断していない回線で見る)
+- [ ] GTM の page_view (段階 4。GTM のプレビューモードで。GA も DNS で遮断していない回線で見る)
 - [ ] タイトル (`document.title`) と meta が今と同じ
 - [ ] スマホ幅でナビゲーションの開閉 (collapse)
 

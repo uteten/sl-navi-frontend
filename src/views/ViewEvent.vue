@@ -2,7 +2,7 @@
   <div class="viewclass col col-12">
     <div align="right">
       <router-link to="/createEvent">
-        <span class="badge badge-danger">イベント登録はここをクリック</span>
+        <span class="badge text-bg-danger">イベント登録はここをクリック</span>
       </router-link>
     </div>
     <slt-2-jst class="col-lg-12 order-lg-1 order-2 d-none d-lg-block" />
@@ -18,18 +18,17 @@
           :key="z.color"
           class="list-inline-item"
         >
-          <font :color="z.color">
+          <span :style="{ color: z.color }">
             ■
-          </font>{{ z.name }}
+          </span>{{ z.name }}
         </li>
       </ul>
       <b-modal
         ref="my-modal"
         v-model="showModal"
         :title="edTitle"
-        class="modal fade"
         size="lg"
-        hide-footer
+        no-footer
       >
         <img
           class="flag"
@@ -47,32 +46,26 @@
           <dt>詳細</dt><dd v-html="edDesc" />
           <dt>SNS共有</dt>
           <dd>
-            <ShareNetwork
-              network="Twitter"
-              :url="'https://sl-navi.com/event/'+edId"
-              :title="edTitle "
-              :description="edDesc"
-              hashtags="secondlife,sljp"
-              sns_twitter_user="SL_uten"
+            <a
+              :href="shareUrl('twitter', 'https://sl-navi.com/event/'+edId, edTitle)"
+              target="_blank"
+              rel="noopener"
             >
               <img
                 class="sns_icon"
                 src="https://sl-navi.com/static/twitter.png"
               >
-            </ShareNetwork>
-            <ShareNetwork
-              network="Facebook"
-              :url="'https://sl-navi.com/event/'+edId"
-              :title="edTitle "
-              :description="edDesc"
-              hashtags="secondlife,sljp"
-              sns_twitter_user="SL_uten"
+            </a>
+            <a
+              :href="shareUrl('facebook', 'https://sl-navi.com/event/'+edId, edTitle)"
+              target="_blank"
+              rel="noopener"
             >
               <img
                 class="sns_icon"
                 src="https://sl-navi.com/static/facebook.png"
               >
-            </ShareNetwork>
+            </a>
           </dd>
           <dt>投稿</dt>
           <dd>
@@ -85,15 +78,15 @@
             <span v-else>{{ edBy }}</span>
           </dd>
         </dl>
-        <template v-if="username==edBy||username=='SL_Uten'||username=='uten'">
+        <template v-if="edId && (username==edBy||username=='SL_Uten'||username=='uten')">
           変更する
           <router-link :to="'/updateEvent/'+edId">
-            <button class="badge badge-warning">
+            <button class="badge text-bg-warning">
               登録内容の更新
             </button>
           </router-link>
           <button
-            class="badge badge-danger"
+            class="badge text-bg-danger"
             @click="deleteEvent(edId)"
           >
             登録内容の削除
@@ -102,7 +95,7 @@
       </b-modal>
       <div align="right">
         <router-link to="/createEvent">
-          <span class="badge badge-danger">イベント登録はここをクリック</span>
+          <span class="badge text-bg-danger">イベント登録はここをクリック</span>
         </router-link>
       </div>
     </div>
@@ -110,22 +103,13 @@
 </template>
 
 <script>
-import Slt2Jst from '@/components/Slt2Jst'
+import Slt2Jst from '@/components/Slt2Jst.vue'
 
-import FullCalendar from '@fullcalendar/vue'
+import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Vue from 'vue'
 import axios from 'axios'
-import VueSocialSharing from 'vue-social-sharing'
 
-Vue.prototype.$axios = axios
-Vue.use(BootstrapVue) // added
-Vue.use(IconsPlugin)
-Vue.use(VueSocialSharing)
 
 const LOGIN_STATUS_URL = '/event/api/user'
 const GENRE_SOURCE = '/event/api/genre'
@@ -134,15 +118,6 @@ export default {
   components: {
     Slt2Jst,
     FullCalendar // make the <FullCalendar> tag available
-  },
-  filters: {
-    'twitter_or_sl': function (z) {
-      if (z.indexOf('.') > 0) {
-        return ''
-      } else {
-        return 'https://twitter.com/' + z
-      }
-    }
   },
   data () {
     return {

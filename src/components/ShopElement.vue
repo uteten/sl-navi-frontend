@@ -20,19 +20,19 @@
 >
     <span
       v-if="isNewShop(z)"
-      class="new_shop badge badge-primary"
+      class="new_shop badge text-bg-primary"
     >新施設</span>
     <span
       v-if="nowOpen(z)=='short'"
-      class="event_shop badge badge-danger"
+      class="event_shop badge text-bg-danger"
     >イベント中</span>
     <span
       v-if="nowOpen(z)=='before'"
-      class="event_shop badge badge-success"
+      class="event_shop badge text-bg-success"
     >イベント予定</span>
     <span
       v-if="nowOpen(z)=='long'"
-      class="event_shop badge badge-info"
+      class="event_shop badge text-bg-info"
     >長期イベント</span>
     <div class="memo">
       <span
@@ -55,14 +55,15 @@
       -->
       <span
         v-if="z.status===0"
-        class="badge badge-secondary"
+        class="badge text-bg-secondary"
       >閉店中</span>
     </div>
     <!-- ポップアップの中身 -->
     <b-popover
-      triggers="click blur"
+      click
+      lazy
+      unmount-lazy
       placement="bottom"
-      style="display:none"
       :target="z.flag"
     >
       <!-- :show="shops.length===1" -->
@@ -84,34 +85,28 @@
           長期イベント中
         </b-badge>
         <span class="popover_title_right">
-          <b-icon-trash scale="1" class="trash_icon" @click="$emit('addBadShop',z)"/>
+          <i class="bi bi-trash trash_icon" @click="$emit('addBadShop',z)" />
 
-          <ShareNetwork
-            network="Twitter"
-            :url="'https://sl-navi.com/search/'+z.flag"
-            :title="z.name "
-            :description="z.description"
-            hashtags="secondlife,sljp"
-            sns_twitter_user="SL_uten"
+          <a
+            :href="shareUrl('twitter', 'https://sl-navi.com/search/'+z.flag, z.name)"
+            target="_blank"
+            rel="noopener"
           >
             <img
               class="sns_icon"
               src="https://sl-navi.com/static/twitter.png"
             >
-          </ShareNetwork>
-          <ShareNetwork
-            network="Facebook"
-            :url="'https://sl-navi.com/search/'+z.flag"
-            :title="z.name "
-            :description="z.description"
-            hashtags="secondlife,sljp"
-            sns_twitter_user="SL_uten"
+          </a>
+          <a
+            :href="shareUrl('facebook', 'https://sl-navi.com/search/'+z.flag, z.name)"
+            target="_blank"
+            rel="noopener"
           >
             <img
               class="sns_icon"
               src="https://sl-navi.com/static/facebook.png"
             >
-          </ShareNetwork>
+          </a>
 
         </span>
       </template>
@@ -120,24 +115,24 @@
         v-if="z.event"
         class="event_info"
       >
-        <span class="badge badge-success">直近のイベント</span>
-        <a :href="'/event/'+z.event.id"><b-icon-calendar2-week scale="0.8" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
+        <span class="badge text-bg-success">直近のイベント</span>
+        <a :href="'/event/'+z.event.id"><i class="bi bi-calendar2-week" />{{ nitiji(z.event.start)+" 〜 "+nitiji(z.event.end) }}  {{ z.event.title }}</a><br>
       </span>
       <span
         v-if="z.h===1"
-        class="badge badge-danger"
+        class="badge text-bg-danger"
       >アダルト施設</span>
       <span
         v-if="z.h===2"
-        class="badge badge-primary"
+        class="badge text-bg-primary"
       >一般施設</span>
       <template
         v-for="tag in z.tags"
+        :key="tag"
       >
         <span
           v-if="tag!='チップ任意'"
-          :key="tag.id"
-          class="badge badge-light"
+          class="badge text-bg-light"
         >
           {{ tag }}<br>
         </span>
@@ -151,11 +146,11 @@
             :key="staff[0]"
           >
             <a
-              :href="staff|staff_url"
+              :href="staffUrl(staff)"
               target="_blank"
-              :class="staff|staff_sex"
+              :class="staffSex(staff)"
             >
-              <template v-if="staff!=''">{{ staff|staff_name }}</template>
+              <template v-if="staff!=''">{{ staff[0] }}</template>
             </a>
             <span v-if="staff[0] != z.staffs[z.staffs.length-1][0]">,</span>
           </span>)
@@ -189,14 +184,14 @@
         target="_blank"
         :href="'https://maps.secondlife.com/secondlife/' + z.sim + '/' + z.x + '/' + z.y + '/' + z.z"
       >
-        <b-icon-map scale="0.8" />ここに移動({{ z.sim }})
+        <i class="bi bi-map" />ここに移動({{ z.sim }})
       </a>
       <span v-if="existBlog(z)">
         / <a
           target="_blank"
           :href="z.blog"
         >
-          <b-icon-link scale="0.8" />Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
+          <i class="bi bi-link" />Web( {{ z.blog.replace(/^http(|s):\/\//, '') }} )
         </a>
       </span>
       <br>
@@ -229,23 +224,6 @@
 
 export default {
   name: 'ShopElement',
-  filters: {
-    'staff_url': function (value) {
-      return '/d2p/' + value[0].replace(' ', '%20') + '?'
-    },
-    'staff_name': function (value) {
-      return value[0]
-    },
-    'staff_sex': function (value) {
-      if (value[1] === 0) {
-        return 'female'
-      } else if (value[1] === 1) {
-        return 'male'
-      } else {
-        return
-      }
-    }
-  },
   props: {
     'z': {
       default: ''
@@ -256,7 +234,19 @@ export default {
       adindex: 0
     }
   },
+  emits: ['addBadShop'],
   methods: {
+    staffUrl (value) {
+      return '/d2p/' + value[0].replace(' ', '%20') + '?'
+    },
+    staffSex (value) {
+      if (value[1] === 0) {
+        return 'female'
+      } else if (value[1] === 1) {
+        return 'male'
+      }
+      return ''
+    },
     nowOpen: function (z) {
       if (!z.event) {
         return 0

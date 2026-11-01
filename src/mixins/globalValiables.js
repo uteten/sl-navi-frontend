@@ -38,6 +38,15 @@ export default {
       const txt = encodeURIComponent(event.title)
       return 'https://twitter.com/intent/tweet?text=' + txt + '&hashtags=slnavi&url=' + url
     },
+    // 共有ボタンのリンク先。vue-social-sharing (Vue 2 専用) と同じ共有 URL を作る (design D3)
+    shareUrl (network, url, title) {
+      const u = encodeURIComponent(url)
+      const t = encodeURIComponent(title || '')
+      if (network === 'twitter') {
+        return 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u + '&hashtags=secondlife,sljp'
+      }
+      return 'https://www.facebook.com/sharer/sharer.php?u=' + u + '&title=' + t + '&hashtag=%23secondlife'
+    },
     testa (num) {
       return "a"+num
     }

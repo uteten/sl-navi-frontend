@@ -30,13 +30,13 @@
       v-if="nowT % 3==1"
       class="ad_tag"
     >
-      <Adsense
+      <AdsenseUnit
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3044016459"
         ins-style="display:inline-block;width:160px;height:400px;"
         data-ad-format=""
         data-full-width-responsive="no">
-      </Adsense>
+      </AdsenseUnit>
     </div>
     -->
 
@@ -51,10 +51,12 @@
         id="normal_tags"
         class="tag_menu"
       >
-        <template v-for="tag in tags">
+        <template
+          v-for="tag in tags"
+          :key="tag.id"
+        >
           <li
             v-if="tag.count>=2"
-            :key="tag.id"
             :value="tag.id"
             :class="tag.selected"
             @click="changeStatus('', tag.id, 'active')"
@@ -66,22 +68,20 @@
     </div>
     <!--
     <div class="ad_tag">
-      <Adsense
+      <AdsenseUnit
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3044016459"
             ins-style="display:inline-block;width:150px;height:600px"
             data-ad-format=""
             data-full-width-responsive="">
-      </Adsense>
+      </AdsenseUnit>
     </div>
     -->
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from 'axios'
-Vue.prototype.$axios = axios
 
 const TAG_SOURCE = '/api/tag'
 export default {
@@ -144,21 +144,21 @@ export default {
       if (m) {
         // console.log(['TagList:changeStatus', m, tagid])
         for (const z of this.tags) {
-          this.$set(z, 'count', z[m])
+          z['count'] = z[m]
         }
         for (const z of this.specialTags) {
-          this.$set(z, 'count', z[m])
+          z['count'] = z[m]
         }
         this.tags.sort(this._sortBy(m, true, parseInt))
       }
       if (tagid) {
         scrollTo(0, 0)
         for (const z of this.tags) {
-          this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
+          z['selected'] = (z.id === tagid) ? 'selected' : ''
           if (z.id === tagid) { document.title = 'SL-Navi | セカンドライフの' + z.n }
         }
         for (const z of this.specialTags) {
-          this.$set(z, 'selected', (z.id === tagid) ? 'selected' : '')
+          z['selected'] = (z.id === tagid) ? 'selected' : ''
         }
       }
       if (active) {

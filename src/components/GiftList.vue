@@ -18,9 +18,10 @@
         :src="z.img_url"
       >
       <b-popover
-        triggers="click blur"
+        click
+        lazy
+        unmount-lazy
         placement="right"
-        style="display:none"
         :target="String(z.tid)"
       >
         <dl>
@@ -99,10 +100,8 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import axios from 'axios'
 
-Vue.prototype.$axios = axios
 
 const GIFT_SOURCE = '/event/api/gift'
 const LOGIN_STATUS_URL = '/event/api/user'
@@ -202,6 +201,7 @@ export default {
   }
 
   .popover {
+    --bs-popover-max-width: 700px;
     max-width: 700px;
     border: outset 1px #ffb03f;
     border-radius: 9px;

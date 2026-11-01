@@ -8,7 +8,7 @@
     <div
       class="ad col-lg- order-lg-2 order-2"
     >
-      <Adsense
+      <AdsenseUnit
         data-ad-client="ca-pub-7267369281211974"
         data-ad-slot="3044016459"
         ins-style="display:inline-block;width:160px;height:800px;"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import GiftList from '@/components/GiftList'
+import GiftList from '@/components/GiftList.vue'
 
 export default {
   name: 'ViewGift',
