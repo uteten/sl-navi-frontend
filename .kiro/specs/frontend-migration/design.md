@@ -1,6 +1,6 @@
 # 設計: sl-navi フロントエンド移行
 
-状態: ドラフト (2026-11-01)。レビュー待ち。要件は [requirements.md](requirements.md)。
+状態: 確定 (2026-11-01、ユーザー了承)。要件は [requirements.md](requirements.md)。
 
 ## D1 進め方: PR を 2 つに分ける
 
