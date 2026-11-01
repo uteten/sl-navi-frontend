@@ -104,8 +104,8 @@ import axios from 'axios'
 
 Vue.prototype.$axios = axios
 
-const GIFT_SOURCE = '//sl-navi.com/event/api/gift'
-const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
+const GIFT_SOURCE = '/event/api/gift'
+const LOGIN_STATUS_URL = '/event/api/user'
 
 export default {
   name: 'GiftsList',
@@ -116,7 +116,6 @@ export default {
   },
   mounted () {
     this.getUsername()
-    this.csrftoken = this.getCookie('csrftoken')
     this.getGifts()
   },
   methods: {
@@ -139,12 +138,7 @@ export default {
       })
     },
     deleteGift: function (tid) {
-      const headers = {};
-      if (this.csrftoken && this.csrftoken !== 'null') {
-        headers['X-CSRFTOKEN'] = this.csrftoken;
-      }
-
-      axios.delete(GIFT_SOURCE + '/' + tid, { headers: headers }).then(
+      axios.delete(GIFT_SOURCE + '/' + tid).then(
         res => {
           console.log(res)
           alert('削除しました')

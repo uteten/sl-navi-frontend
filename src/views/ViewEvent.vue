@@ -127,9 +127,9 @@ Vue.use(BootstrapVue) // added
 Vue.use(IconsPlugin)
 Vue.use(VueSocialSharing)
 
-const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
-const GENRE_SOURCE = '//sl-navi.com/event/api/genre'
-const EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
+const LOGIN_STATUS_URL = '/event/api/user'
+const GENRE_SOURCE = '/event/api/genre'
+const EVENT_SOURCE = '/event/api/slevent'
 export default {
   components: {
     Slt2Jst,
@@ -169,7 +169,6 @@ export default {
       legend: [],
       showModal: false,
       username: '',
-      csrftoken: '',
       edId: '',
       edTitle: '',
       edImg: '',
@@ -186,7 +185,6 @@ export default {
       this.legend = res.data
     })
     this.getUsername()
-    this.csrftoken = this.getCookie('csrftoken')
     // イベントダイレクト表示
     if (this.$route.params.eid) {
       await axios.get(EVENT_SOURCE + '/' + this.$route.params.eid).then(res => {
@@ -212,12 +210,7 @@ export default {
       this.$router.push('/event/' + this.edId).catch(err => { console.log(err) })
     },
     deleteEvent: function (eventId) {
-      const headers = {};
-      if (this.csrftoken && this.csrftoken !== 'null') {
-        headers['X-CSRFTOKEN'] = this.csrftoken;
-      }
-
-      axios.delete(EVENT_SOURCE + '/' + eventId, { headers: headers }).then(
+      axios.delete(EVENT_SOURCE + '/' + eventId).then(
         res => {
           alert('削除しました')
           this.$refs['my-modal'].hide()

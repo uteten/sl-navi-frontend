@@ -110,7 +110,7 @@ import ShopElement from '@/components/ShopElement'
 Vue.prototype.$axios = axios
 
 const INTERVAL_RELOAD_SHOP = 180
-const SHOP_SOURCE = '//sl-navi.com/api/shop'
+const SHOP_SOURCE = '/api/shop'
 export default {
   name: 'ShopList',
   components: {
@@ -205,7 +205,7 @@ export default {
       })
     },
     async getCounter () {
-      await axios.get('https://sl-navi.com/static/counter2.json').then(res => {
+      await axios.get('/static/counter2.json').then(res => {
         var j = res.data
         this.countSensor1h = j.countSensor1h
         this.countSensor24h = j.countSensor24h

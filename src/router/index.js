@@ -95,17 +95,6 @@ const routes = [
     // component: viewCreateEvent
   },
   {
-    path: '/editShop',
-    name: 'viewEditShop',
-    component: () => import(/* webpackChunkName: "viewEditShop" */ '@/views/ViewEditShop.vue')
-  },
-  {
-    path: '/job',
-    name: 'viewJob',
-    component: () => import(/* webpackChunkName: "viewJob" */ '@/views/ViewJob.vue')
-    // component: viewJob
-  },
-  {
     path: '/gift',
     name: 'viewGift',
     component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewGift.vue'),
@@ -118,11 +107,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue'),
     meta: { title: 'このサイトの説明' }
     // component: viewAbout
-  },
-  {
-    path: '/analytics/:flag',
-    name: 'viewAnalytics',
-    component: () => import(/* webpackChunkName: "viewAnalytics" */ '@/views/ViewAnalytics.vue')
   }
 ]
 

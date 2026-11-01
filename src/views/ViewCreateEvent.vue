@@ -296,14 +296,11 @@
 
 import axios from 'axios'
 // import Vue from 'vue'
-//import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
-//import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
-//Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 
-const LOGIN_STATUS_URL = '//sl-navi.com/event/api/user'
-const LOGOUT_URL = '//sl-navi.com/event/api/user/logout'
-const EVENT_SOURCE = '//sl-navi.com/event/api/slevent'
-const EVENSA_SOURCE = '//sl-navi.com/event/api/slevent/evensa'
+const LOGIN_STATUS_URL = '/event/api/user'
+const LOGOUT_URL = '/event/api/user/logout'
+const EVENT_SOURCE = '/event/api/slevent'
+const EVENSA_SOURCE = '/event/api/slevent/evensa'
 
 const BLANK_IMG = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 export default {
@@ -312,7 +309,6 @@ export default {
     return {
       loadImgUrl: BLANK_IMG,
       errors: {},
-      csrftoken: 'dmy',
       username: '',
       title: '',
       imgUrl: '',
@@ -335,10 +331,6 @@ export default {
   },
   async mounted () {
     this.getUsername()
-    this.csrftoken = this.getCookie('csrftoken')
-    // this.csrftoken="testabc"
-    console.log(['csrftoken=', this.csrftoken])
-
     if (this.$route.params.eid) {
       await axios.get(EVENT_SOURCE + '/' + this.$route.params.eid).then(res => {
         const ee = res.data
@@ -423,11 +415,6 @@ export default {
         alert('投稿に失敗しました。投稿内容を確認してください。')
         return
       }
-      const headers = {};
-      if (this.csrftoken && this.csrftoken !== 'null') {
-        headers['X-CSRFTOKEN'] = this.csrftoken;
-      }
-
       axios.post(EVENT_SOURCE, {
         'eid': this.eid,
         'title': this.title,
@@ -439,8 +426,6 @@ export default {
         'description': this.description,
         'map_url': this.mapUrl,
         'shop_flag': this.shopFlag
-      }, {
-        headers: headers
       }).then(res => {
         alert('投稿に成功しました(投稿がWeb反映されるのに1分程度かかります)')
         console.log(res)
@@ -497,8 +482,6 @@ export default {
       await axios.get(LOGIN_STATUS_URL + logincode).then(res => {
         if (res.data[0]) {
           this.username = res.data[0].username
-          this.csrftoken = this.getCookie('csrftoken')
-          console.log(['csrftoken=', this.csrftoken])
         } else {
           this.username = ''
         }

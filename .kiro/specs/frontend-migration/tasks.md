@@ -1,25 +1,29 @@
 # タスク: sl-navi フロントエンド移行
 
-状態: ドラフト (2026-11-01)。レビュー待ち。要件は [requirements.md](requirements.md)、設計は [design.md](design.md)。
+状態: 確定 (2026-11-01、ユーザー了承)。PR 1 を実装中。要件は [requirements.md](requirements.md)、設計は [design.md](design.md)。
 
 - 作業は PR ごとに `origin/master` から切ったブランチで行う。spec (この 3 ファイル) は PR 1 に含める。
 - 確かめるときは design D6 のチェックリストを使う。書き込みはテスト用のイベントで行い、すぐ消す。
 
 ## PR 1: 削除と workflow の整理 (Vue 2 のまま、design D7)
 
-- [ ] 1.1 radio を消す: `src/store/`、`main.js` の store、`ShopElement.vue` の radio リンクと
+- [x] 1.1 radio を消す: `src/store/`、`main.js` の store、`ShopElement.vue` の radio リンクと
       `playRadio` / `playUrl` / `playFlag`、`vuex2` (R4.2)
-- [ ] 1.2 `ViewAnalytics.vue` とルート `/analytics/:flag`、`highcharts-vue` を消す (R4.1)
-- [ ] 1.3 Job 系を消す: `ViewJob.vue`、`JobList.vue`、`JobGenre.vue`、ルート `/job` (R4.3)
-- [ ] 1.4 `ViewEditShop.vue` とルート `/editShop`、`vue-ctk-date-time-picker` を消す (R4.4)
-- [ ] 1.5 `csrftoken` の読み取りと `X-CSRFTOKEN` ヘッダを消す
+- [x] 1.2 `ViewAnalytics.vue` とルート `/analytics/:flag`、`highcharts-vue` を消す (R4.1)
+- [x] 1.3 Job 系を消す: `ViewJob.vue`、`JobList.vue`、`JobGenre.vue`、ルート `/job` (R4.3)
+- [x] 1.4 `ViewEditShop.vue` とルート `/editShop`、`vue-ctk-date-time-picker` を消す (R4.4)
+- [x] 1.5 `csrftoken` の読み取りと `X-CSRFTOKEN` ヘッダを消す
       (`GiftList.vue`、`ViewEvent.vue`、`ViewCreateEvent.vue`、`mixins/globalValiables.js` の `getCookie` は
       ほかで使っていなければ消す) (R3.5)
-- [ ] 1.6 `src/router/index.js.org`、`memo.txt`、`serve.log` を消す (R4.5)
-- [ ] 1.7 workflow の「Copy to AzVM」ステップと `deploy-AzVM.yml.disabled` を消す (R5.1)
-- [ ] 1.8 `npm install` で lock を更新し、`npm run build` と `npm run lint` を通す
+- [x] 1.6 `src/router/index.js.org`、`memo.txt`、`serve.log` を消す (R4.5)
+- [x] 1.7 workflow の「Copy to AzVM」ステップと `deploy-AzVM.yml.disabled` を消す (R5.1)
+- [x] 1.7b API と JSON の取得 (`//sl-navi.com/api/...`、`/static/counter2.json` など) を相対パスにする
+      (R3.1、design D5。絶対 URL のままだと localhost から CORS で止まり、1.9 の proxy が使えないため、
+      PR 2 から前倒し。共有用の URL、画像、X ログインの入口は絶対 URL のまま)
+- [x] 1.8 `npm install` で lock を更新し、`npm run build` を通す。`npm run lint` (`--no-fix`) は
+      `News.vue` のコンポーネント名の 1 件だけ (以前からあるもの。PR 2 の ESLint 9 で扱う)
 - [ ] 1.9 段階 1: `npm run serve` で本番の API につないで、チェックリストを一通り
-      (Vue CLI の dev server の proxy を `vue.config-serve.js` に書く。PR 2 で消す)
+      (Vue CLI の dev server の proxy を `vue.config-serve.js` に書いた。PR 2 で消す)
 - [ ] 1.10 PR を出す。SWA のプレビューでビルドが通ることを見る。マージは確認できる時間帯に行う
 - [ ] 1.11 段階 4: 本番でチェックリストを一通り。おかしければ revert
 - [ ] 1.12 ユーザーに GitHub の secret (`ID_RSA` `USERNAME` `PORT` `HOST` `PATH_WEBROOT`) の削除を案内する (R5.3)
@@ -36,7 +40,7 @@
       (Vue 2 の書き方の検出に使う。design D2)
 - [ ] 2.3 `vue` 3、`vue-router` 4 (`createWebHistory`、ルートは `SPA_PATHS` の範囲のまま)、
       `main.js` を `createApp` に。`$setInterval` を `globalProperties` に、`Vue.filter` を関数に (R2.1、R2.2)
-- [ ] 2.4 `axios` 1 系へ。`//sl-navi.com/...` の絶対 URL を相対パスにそろえる (R3.1、R3.4)
+- [ ] 2.4 `axios` 1 系へ (相対パスへの書き換えは 1.7b で済み)
 
 ### ライブラリ (design D3、D4)
 

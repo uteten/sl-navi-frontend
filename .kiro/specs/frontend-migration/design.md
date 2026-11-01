@@ -86,7 +86,7 @@ bootstrap-vue-next は Bootstrap 5 前提。Bootstrap 4 のクラス名で 5 で
 - `staticwebapp.config.json` は今のまま。R1.4 は D6 の段階 3 で確かめ、足りなければ
   `Access-Control-Allow-Origin` の扱いを直す。
 - コード中の `//sl-navi.com/api/...` などの絶対 URL は、相対パス (`/api/...`) にそろえる
-  (同一オリジンなので本番の動きは同じ。ローカルでは proxy を通る)。
+  (同一オリジンなので本番の動きは同じ。ローカルでは proxy を通る)。ローカルの確認に要るので PR 1 で行う。
 
 ## D6 確かめ方 (本番に出す前にローカルで)
 
