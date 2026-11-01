@@ -22,8 +22,10 @@
       PR 2 から前倒し。共有用の URL、画像、X ログインの入口は絶対 URL のまま)
 - [x] 1.8 `npm install` で lock を更新し、`npm run build` を通す。`npm run lint` (`--no-fix`) は
       `News.vue` のコンポーネント名の 1 件だけ (以前からあるもの。PR 2 の ESLint 9 で扱う)
-- [ ] 1.9 段階 1: `npm run serve` で本番の API につないで、チェックリストを一通り
-      (Vue CLI の dev server の proxy を `vue.config-serve.js` に書いた。PR 2 で消す)
+- [x] 1.9 段階 1: `npm run serve` で本番の API につないで、チェックリストを一通り
+      (Vue CLI の dev server の proxy を `vue.config-serve.js` に書いた。PR 2 で消す)。
+      表示は headless Chromium、SL 認証・登録・更新・削除・ログアウトはユーザーがブラウザで確認 (2026-11-01)。
+      途中で見つかった `ViewEvent.vue` の `router.push(...).catch` の TypeError (以前からあるもの) を直した
 - [ ] 1.10 PR を出す。SWA のプレビューでビルドが通ることを見る。マージは確認できる時間帯に行う
 - [ ] 1.11 段階 4: 本番でチェックリストを一通り。おかしければ revert
 - [ ] 1.12 ユーザーに GitHub の secret (`ID_RSA` `USERNAME` `PORT` `HOST` `PATH_WEBROOT`) の削除を案内する (R5.3)
