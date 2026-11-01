@@ -7,12 +7,10 @@
 - フロントは Vue 2.6 + Vue CLI 5 (webpack) の SPA で、約 5,300 行。
   Azure Static Web Apps (SWA、`static.sl-navi.com`) にデプロイしている。
 - Vue 2 は 2023-12-31 に EOL。Vue CLI はメンテナンスモード。
-- バックエンドは 2026-11-01 に Django から FastAPI (GCP の VM) へ切り替え済み
-  (`../sl-navi-backend/.kiro/specs/backend-migration/`)。
-  API のパス・クエリ・JSON の形は旧環境と同じ (backend R1.1)。
-- radio.sl-navi.com は廃止済み (backend design、ユーザー判断 2026-10-31)。
-- 根拠: バックエンド担当の Claude Code からの伝言 (2026-11-01)、
-  `../sl-navi-backend/app/routers/pages.py`、`deploy/Caddyfile`。
+- バックエンドは 2026-11-01 に新しい実装へ切り替え済み (別 repo、非公開)。
+  API のパス・クエリ・JSON の形は旧環境と同じ。
+- radio.sl-navi.com は廃止済み (ユーザー判断 2026-10-31)。
+- 根拠: バックエンド担当からの申し送り (2026-11-01)。
 
 ## 決定済み
 
@@ -22,20 +20,18 @@
 | ビルド | Vite (Vue CLI をやめる) | ユーザー判断 2026-11-01 |
 | デプロイ先 | Azure Static Web Apps のまま | ユーザー判断 2026-11-01 |
 | radio 再生 | やめる | ユーザー判断 |
-| API の呼び先 | `sl-navi.com` (同一オリジン) のまま。`api.sl-navi.com` には移さない | バックエンドからの伝言、ユーザー了承 2026-11-01 |
+| API の呼び先 | `sl-navi.com` (同一オリジン) のまま。`api.sl-navi.com` には移さない | バックエンド担当からの申し送り、ユーザー了承 2026-11-01 |
 
-API の呼び先を変えない理由: `sl-navi.com` は in-world センサーのため新しい VM に残り
-(backend design D11)、同じ VM が API も返す。`api.sl-navi.com` に移すと CORS と
+API の呼び先を変えない理由: `sl-navi.com` は引き続きバックエンドが受け、API も返す。`api.sl-navi.com` に移すと CORS と
 Cookie の考慮が増えるだけで得が無い。
 
 ## 配信のしくみ (前提、変えない)
 
 ```
-ブラウザ ─ https://sl-navi.com/<SPA のパス> ─▶ VM (Caddy → FastAPI)
-              │ index.html は static.sl-navi.com/index.html を取って 60 秒キャッシュ
-              │ (取れないときは VM のディスクの最後のコピー)
-              ├─ /api/*, /event/api/*, /user/*  ─▶ FastAPI
-              └─ /static/*                       ─▶ VM のディスク (counter2.json、flag、heatmap2 など)
+ブラウザ ─ https://sl-navi.com/<SPA のパス> ─▶ バックエンド
+              │ index.html は static.sl-navi.com/index.html を取ってキャッシュして返す
+              ├─ /api/*, /event/api/*, /user/*  ─▶ API
+              └─ /static/*                       ─▶ 静的ファイル (counter2.json、flag、heatmap2 など)
 ブラウザ ─ https://static.sl-navi.com/<JS / CSS / フォント> ─▶ SWA
 ```
 
@@ -105,14 +101,14 @@ Cookie の考慮が増えるだけで得が無い。
 ### R3 API と静的ファイル
 
 - R3.1 API は今と同じパスを `sl-navi.com` (同一オリジン) で呼ぶこと。
-  使える API はバックエンドの伝言 4 節の一覧のもの (これ以外は無い)。
+  今使っているもののうち、廃止済みの `/api/analytics` と Job 系 (R4) 以外はそのまま使える。
 - R3.2 応答の解析は変えないこと (応答は旧 DRF と同じ形)。
   未ログイン時の `/event/api/user` は 204 で本文なし。
 - R3.3 X ログインの入口は `sl-navi.com/user/login/twitter/?next=...` のままにすること
   (X の callback 登録がこのドメインのため)。
 - R3.4 静的ファイル (`https://sl-navi.com/static/...`) は今のまま使うこと。
-- R3.5 CSRF の処理 (`csrftoken` Cookie の読み取り、`X-CSRFTOKEN` ヘッダ) を消すこと。
-  新しいバックエンドは `csrftoken` を発行せず、ヘッダは無視する。
+- R3.5 `csrftoken` Cookie の読み取りと `X-CSRFTOKEN` ヘッダの送信を消すこと
+  (新しいバックエンドはこの Cookie を発行しないので、今は常に空になっている)。
 
 ### R4 消すもの
 
