@@ -207,7 +207,7 @@ export default {
       this.edBy = e.created_by.name
       this.$refs['my-modal'].show()
       this.showModal = true
-      this.$router.push('/event/' + this.edId).catch(err => { console.log(err) })
+      this.$router.push('/event/' + this.edId)
     },
     deleteEvent: function (eventId) {
       axios.delete(EVENT_SOURCE + '/' + eventId).then(
