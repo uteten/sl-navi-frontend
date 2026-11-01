@@ -95,9 +95,22 @@ PR ごとに、次の段階を順に通す。
 | 段階 | どこで | 何を | 本番の API |
 |---|---|---|---|
 | 1 | ローカル `npm run dev` | 画面と操作をチェックリストで一通り | proxy で使う |
-| 2 | ローカル `npm run build` + `npm run preview` (base を `/` にしたビルド) | 本番と同じビルドで、1 と同じチェック | proxy で使う |
-| 3 | SWA の PR プレビュー | ビルドが通ること、アセットが `static.sl-navi.com` 形式の URL で配信され CORS で読めること | 使わない |
+| 2 | ローカルで本番の形を再現 (下記、PR 2 のみ) | 別オリジンのアセットで起動すること、1 と同じチェック | proxy で使う |
+| 3 | SWA の PR プレビュー | ビルドが通ること。アセットに `Origin: https://sl-navi.com` を付けて取ると `Access-Control-Allow-Origin` が返ること (`curl -I`) | 使わない |
 | 4 | 本番 (マージ後) | チェックリストを一通り。おかしければ revert | |
+
+段階 2 の組み方 (`npm run preview:split`、Vite の preview だけで組む):
+
+```
+ブラウザ ─ http://localhost:4173/<SPA のパス> ─▶ vite preview (ページの口)
+              │ dist/index.html を返す。/api /event/api /user /static は https://sl-navi.com へ proxy
+              └ index.html の <script type="module" crossorigin> は http://localhost:4174/ を指す
+ブラウザ ─ http://localhost:4174/assets/... ─▶ vite preview (アセットの口、CORS で :4173 を許可)
+```
+
+- ビルドは `vite build --base http://localhost:4174/`。本番の `base: https://static.sl-navi.com/` と
+  同じく、ページとアセットのオリジンが分かれる。
+- 本番のバックエンドで検証用の環境を分けることは見送った (ユーザー判断 2026-11-01)。
 
 - 書き込み (イベントの登録・削除、ギフトの削除) は本番の DB に書く。確かめるときは
   テスト用のイベントを作って、確かめたらすぐ消す。
