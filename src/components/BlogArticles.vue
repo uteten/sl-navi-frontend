@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     async getData () {
-      await axios.get('//sl-navi.com/static/' + this.json + '.json?' + this.nowTime).then(res => {
+      await axios.get('/static/' + this.json + '.json?' + this.nowTime).then(res => {
       // await axios.get(this.json + '.json').then(res => {
         this.articles = res.data
       })

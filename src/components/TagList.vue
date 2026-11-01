@@ -83,7 +83,7 @@ import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-const TAG_SOURCE = '//sl-navi.com/api/tag'
+const TAG_SOURCE = '/api/tag'
 export default {
   name: 'TagList',
   props: {

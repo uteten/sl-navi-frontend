@@ -200,14 +200,6 @@
         </a>
       </span>
       <br>
-      <a
-        v-if="z.radio!=''"
-        target="_blank"
-        :href="'https://radio.sl-navi.com/radio.cgi?'+z.radio"
-        @click="playRadio(z.radio)"
-      >
-        <b-icon-music-player-fill scale="0.8" />土地設定のラジオを聞く<br>
-      </a>
       <div
         v-if="z.residentlog>9"
         class="popoverCountSize"
@@ -261,8 +253,6 @@ export default {
   },
   data: function () {
     return {
-      playFlag: 0,
-      playUrl: '',
       adindex: 0
     }
   },
@@ -290,18 +280,6 @@ export default {
       } else {
         return ''
       }
-    },
-    playRadio (url) {
-      if (url === this.playUrl && this.playFlag === 1) {
-        // 同じurlをクリックすると止まる
-        this.playFlag = 0
-        this.playUrl = ''
-      } else {
-        // 異なるurlは再生
-        this.playFlag = 1
-        this.playUrl = url
-      }
-      this.$emit('radio', this.playUrl)
     },
     _formatDate: function (date, format) {
       format = format.replace(/YYYY/g, date.getFullYear())

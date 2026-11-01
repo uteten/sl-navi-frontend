@@ -192,7 +192,7 @@ export default {
     }
     /*
     async getCounter () {
-      await axios.get('https://sl-navi.com/static/counter2.json').then(res => {
+      await axios.get('/static/counter2.json').then(res => {
         var j = res.data
         this.countSensor1h = j.countSensor1h
         this.countSensor24h = j.countSensor24h

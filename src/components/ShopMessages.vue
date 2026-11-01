@@ -55,7 +55,7 @@ import Vue from 'vue'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 
-const MESSAGE_SOURCE = '//sl-navi.com/api/message'
+const MESSAGE_SOURCE = '/api/message'
 const INTERVAL_GET_MESSAGE = 17
 const INTERVAL_RELOAD_MESSAGE = 8
 export default {
