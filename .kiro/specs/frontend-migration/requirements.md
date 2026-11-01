@@ -1,6 +1,6 @@
 # 要件: sl-navi フロントエンド移行 (Vue 2 + Vue CLI → Vue 3 + Vite)
 
-状態: ドラフト (2026-11-01)。レビュー待ち。未確定の点は末尾の「確認したいこと」。
+状態: 確定 (2026-11-01、ユーザー了承)。
 
 ## 背景
 
@@ -120,9 +120,9 @@ Cookie の考慮が増えるだけで得が無い。
 - R4.3 Job 系: `ViewJob`、`JobList`、`JobGenre`、ルート `/job`
   (`/event/api/job`、`/event/api/jobgenre` は廃止済み。`/job` は `SPA_PATHS` にも無い)。
 - R4.4 `ViewEditShop` とルート `/editShop` (どこからもリンクされておらず、`SPA_PATHS` にも無い。
-  `vue-ctk-date-time-picker` はここでしか使っていない)。→ 確認したいこと 1
+  `vue-ctk-date-time-picker` はここでしか使っていない)。ユーザー了承 2026-11-01
 - R4.5 旧ファイル: `src/router/index.js.org`、`vue.config-serve.js`、`babel.config.js`、
-  `jsconfig.json` (Vite で要らなくなるもの)。→ 確認したいこと 2
+  `jsconfig.json` (Vite で要らなくなるもの)、repo 直下の `memo.txt` と `serve.log`。ユーザー了承 2026-11-01
 
 ### R5 デプロイ (GitHub Actions)
 
@@ -142,9 +142,3 @@ Cookie の考慮が増えるだけで得が無い。
   PR プレビューで確かめられるのは、ビルドが通ることと、静的な見た目まで。
 - R6.3 master へのマージがそのまま本番の切り替えになる。切り戻しは revert して再デプロイで行えること。
 - R6.4 確かめる画面と操作の一覧 (チェックリスト) を design で作り、マージの後に本番で一通り確かめること。
-
-## 確認したいこと
-
-1. `ViewEditShop` (`/editShop`、「施設登録/更新画面」) は消してよいか。
-   どこからもリンクされておらず、バックエンドの `SPA_PATHS` にも無いので、本番では直接開けない。
-2. repo 直下の `memo.txt` と `serve.log` (追跡されている) も消してよいか。
