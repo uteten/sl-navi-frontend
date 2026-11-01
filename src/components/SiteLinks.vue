@@ -98,11 +98,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
 import BlogArticles from './BlogArticles.vue'
 
-Vue.prototype.$axios = axios
 
 export default {
   name: 'SiteLinks',

@@ -42,9 +42,10 @@
         </ul>
         <!-- ポップアップの中身 -->
         <b-popover
-          triggers="click blur"
+          click
+          lazy
+          unmount-lazy
           placement="left"
-          style="display:none"
           :target="String(event.id)"
         >
           <img
@@ -76,32 +77,26 @@
 
             <dt>SNS共有</dt>
             <dd>
-              <ShareNetwork
-                network="Twitter"
-                :url="'https://sl-navi.com/event/'+event.id"
-                :title="event.title "
-                :description="event.description"
-                hashtags="secondlife,sljp"
-                sns_twitter_user="SL_uten"
+              <a
+                :href="shareUrl('twitter', 'https://sl-navi.com/event/'+event.id, event.title)"
+                target="_blank"
+                rel="noopener"
               >
                 <img
                   class="sns_icon"
                   src="https://sl-navi.com/static/twitter.png"
                 >
-              </ShareNetwork>
-              <ShareNetwork
-                network="Facebook"
-                :url="'https://sl-navi.com/event/'+event.id"
-                :title="event.title "
-                :description="event.description"
-                hashtags="secondlife,sljp"
-                sns_twitter_user="SL_uten"
+              </a>
+              <a
+                :href="shareUrl('facebook', 'https://sl-navi.com/event/'+event.id, event.title)"
+                target="_blank"
+                rel="noopener"
               >
                 <img
                   class="sns_icon"
                   src="https://sl-navi.com/static/facebook.png"
                 >
-              </ShareNetwork>
+              </a>
             </dd>
           </dl>
         </b-popover>
@@ -123,7 +118,7 @@
           style="border: 2px solid ;border-color:#ffaa00"
         >
           <li>
-            <Adsense
+            <AdsenseUnit
               data-ad-client="ca-pub-7267369281211974"
               data-ad-slot="3986041962"
               ins-style="display:inline-block;margin:0px;position:relative;width:160px;height:160px;cursor: pointer;float:left"
@@ -138,18 +133,14 @@
     </ul>
     <div align="right">
       <router-link to="/createEvent">
-        <span class="badge badge-danger">イベント登録はここをクリック</span>
+        <span class="badge text-bg-danger">イベント登録はここをクリック</span>
       </router-link>
     </div>
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import axios from 'axios'
-import VueSocialSharing from 'vue-social-sharing'
-Vue.use(VueSocialSharing)
 
-Vue.prototype.$axios = axios
 
 const INTERVAL_RELOAD_EVENT = 300
 // 7日いないのイベント
@@ -189,11 +180,11 @@ export default {
       const nowOpen = this._nowOpen(event.start_time, event.end_time)
       if (nowOpen <= 2) {
         if (event.long_duration && nowOpen === 2) {
-          return '<span class=\'badge badge-info\'>長期開催中</span><span class=\'badge badge-danger\'>最終日<span>'
+          return '<span class=\'badge text-bg-info\'>長期開催中</span><span class=\'badge text-bg-danger\'>最終日<span>'
         } else if (event.long_duration) {
-          return '<span class=\'badge badge-info\'>長期開催中<span>'
+          return '<span class=\'badge text-bg-info\'>長期開催中<span>'
         } else {
-          return '<span class=\'badge badge-primary\'>開催中<span>'
+          return '<span class=\'badge text-bg-primary\'>開催中<span>'
         }
       } else {
         // return '('+Math.round(nowOpen/60/60/1000)+'時間後に開催)'
@@ -230,6 +221,7 @@ export default {
 
   /* ポップオーバー系 */
   .popover {
+    --bs-popover-max-width: 650px;
     max-width: 650px;
   }
 

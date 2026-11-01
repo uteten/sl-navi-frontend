@@ -17,7 +17,7 @@
         v-if="ad_flag == true && mode =='k'"
         class="ad"
       >
-        <Adsense
+        <AdsenseUnit
           data-ad-client="ca-pub-1991732635123294"
           data-ad-slot="3551110074"
           ins-style="display:inline-block;width:100%;height:160px;"
@@ -31,7 +31,7 @@
         v-if="$cookies.get('dev')!=1 && !isLocalhost() && nowT == lastT && nowT % 3==99"
         class="ad"
       >
-        <Adsense
+        <AdsenseUnit
           data-ad-client="ca-pub-1991732635123294"
           data-ad-slot="3551110074"
           ins-style="display:inline-block;width:100%;height:160px;"
@@ -47,7 +47,7 @@
         v-if="nowT == lastT && mode=='k'"
         class="ad"
       >
-        <Adsense
+        <AdsenseUnit
           data-ad-client="ca-pub-1991732635123294"
           data-ad-slot="6715425501"
           ins-style="display:inline-block;width:100%;height:160px;"
@@ -61,12 +61,12 @@
 </template>
 
 <script>
-import TagList from '@/components/TagList'
-import ShopMessages from '@/components/ShopMessages'
+import TagList from '@/components/TagList.vue'
+import ShopMessages from '@/components/ShopMessages.vue'
 // import News from '@/components/News'
-import SiteLinks from '@/components/SiteLinks'
-import ShopList from '@/components/ShopList'
-import EventList from '@/components/EventList'
+import SiteLinks from '@/components/SiteLinks.vue'
+import ShopList from '@/components/ShopList.vue'
+import EventList from '@/components/EventList.vue'
 
 // import '@/css/slnavi-vue.css'
 const ACTIVE_SHOP_TAGID = -300
@@ -198,10 +198,10 @@ export default {
 </script>
 <style>
 /* popoverのヘッダはShopElement.vueに書いても反映されないのでここに書く*/
-.bs-popover-bottom > .arrow::after{
+.bs-popover-bottom > .popover-arrow::after{
   border-bottom-color: #fdf0e0;
 }
-.bs-popover-bottom > .arrow::before{
+.bs-popover-bottom > .popover-arrow::before{
   border-bottom-color: #ffb03f;
 }
 .popover-header{
@@ -211,6 +211,7 @@ export default {
     padding: 0.3em 0.5em 0.3em 0.5em;
 }
 .popover {
+    --bs-popover-max-width: 700px;
     max-width: 700px;
     min-width: 430px;
     border: 1px solid #ffb03f;

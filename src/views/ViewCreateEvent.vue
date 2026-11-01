@@ -7,7 +7,7 @@
       イベント更新画面
     </h4>
 
-    <div class="card-body">
+    <div class="card-body p-4">
       <form>
         <div class="col-md-8 order-md-1">
           <label>投稿者：</label>
@@ -19,7 +19,7 @@
           </template>
           <template v-else>
             未ログイン(以下のいずれかで認証してください。)<br>
-            <span class="badge badge-info">いずれの認証もSL-Naviでアカウント情報を管理しないため安全です</span><br>
+            <span class="badge text-bg-info">いずれの認証もSL-Naviでアカウント情報を管理しないため安全です</span><br>
             <ul>
               <li>Twitter認証(<a href="//sl-navi.com/user/login/twitter/?next=/createEvent">ここをクリック</a>)</li>
               <li>
@@ -40,7 +40,7 @@
             <a
               href="javascript:void(0)"
               @click="$refs['my-modal'].show()"
-            ><b-icon-camera />いべんさからイベント情報を取得<span class="badge badge-danger">新機能</span></a>
+            ><i class="bi bi-camera" />いべんさからイベント情報を取得<span class="badge text-bg-danger">新機能</span></a>
           </p>
           <label for="id_title">イベント名（必須）:</label>
           <input
@@ -60,8 +60,8 @@
           />
 
           <label for="id_img_url">画像（必須）（UID or URL）:</label>
-          <div class="form-row">
-            <div class="form-group col-sm-10">
+          <div class="row g-2">
+            <div class="mb-3 col-sm-10">
               <input
                 id="id_img_url"
                 v-model="imgUrl"
@@ -84,6 +84,7 @@
             </div>
             <img
               id="kanban_img"
+              class="col-auto"
               :src="loadImgUrl"
               @error="loadImgUrlError(this)"
             >
@@ -99,7 +100,7 @@
             id="id_mode"
             v-model="mode"
             name="mode"
-            class="form-control"
+            class="form-select"
           >
             <option
               value="k"
@@ -122,7 +123,7 @@
             id="id_genre"
             v-model="genre"
             name="genre"
-            class="form-control"
+            class="form-select"
             required
           >
             <option value="">
@@ -237,7 +238,7 @@
             v-html="errors.shop_flag"
           />
           <br><br>
-          <div class="form-row">
+          <div class="row g-2">
             <div class="col-sm-2">
               <button
                 type="button"
@@ -262,12 +263,11 @@
       ref="my-modal"
       v-model="showModal"
       title="いべんさデータ取得"
-      class="modal fade"
-      hide-footer
+      no-footer
     >
       http://sl-event.info/?id=xxx
-      <div class="form-row">
-        <div class="form-group col-sm-7">
+      <div class="row g-2">
+        <div class="mb-3 col-sm-7">
           <input
             v-model="idEvensa"
             name="idEvensa"
@@ -295,7 +295,6 @@
 
 
 import axios from 'axios'
-// import Vue from 'vue'
 
 const LOGIN_STATUS_URL = '/event/api/user'
 const LOGOUT_URL = '/event/api/user/logout'
@@ -307,6 +306,7 @@ export default {
   name: 'ViewCreateEvent',
   data: function () {
     return {
+      showModal: false,
       loadImgUrl: BLANK_IMG,
       errors: {},
       username: '',
@@ -357,7 +357,7 @@ export default {
       }
     },
     loadImg: function () {
-      this.$delete(this.errors, 'img_url')
+      delete this.errors['img_url']
       // URLチェックしたあと<img>に表示
       let tmpUrl
       const ret = this.imgUrl.match(/^https:\/\/gyazo.com\/(.*)/)
@@ -377,38 +377,38 @@ export default {
     },
     loadImgUrlError: function () {
       this.loadImgUrl = BLANK_IMG
-      this.$set(this.errors, 'img_url', '画像が読み込めません.入力データを確認してください')
+      this.errors['img_url'] = '画像が読み込めません.入力データを確認してください'
     },
     postEvent: function () {
       this.errors = {}
       if (!this.username) {
-        this.$set(this.errors, 'username', '↑まずログインしてください')
+        this.errors['username'] = '↑まずログインしてください'
       }
       if (this.loadImgUrl === BLANK_IMG || this.loadImgUrl !== this.imgUrl) {
-        this.$set(this.errors, 'img_url', 'URLもしくはUIDを入力した後、画像読込ボタンを押してください')
+        this.errors['img_url'] = 'URLもしくはUIDを入力した後、画像読込ボタンを押してください'
       }
       if (!this.mapUrl.match('^(http://|https://)maps.secondlife.com/secondlife/')) {
-        this.$set(this.errors, 'map_url', '正しいマップのURLを入力してください')
+        this.errors['map_url'] = '正しいマップのURLを入力してください'
       }
       // 必須項目チェック
       const keys = ['title', 'genre', 'description']
       for (const z in keys) {
         if (!this[keys[z]]) {
-          this.$set(this.errors, keys[z], 'この項目は必須です')
+          this.errors[keys[z]] = 'この項目は必須です'
         }
       }
       const st = Date.parse(this.startTime)
       const et = Date.parse(this.endTime)
       const nt=new Date()
       if ( isNaN(st)) {
-        this.$set(this.errors,'start_time' , 'この項目は必須です')
+        this.errors['start_time'] = 'この項目は必須です'
       }else if (st>et) {
-        this.$set(this.errors,'start_time' , '終了日時より前の日時を入れてください')
+        this.errors['start_time'] = '終了日時より前の日時を入れてください'
       }
       if ( isNaN(et)) {
-        this.$set(this.errors,'end_time' , 'この項目は必須です')
+        this.errors['end_time'] = 'この項目は必須です'
       }else if (et<nt) {
-        this.$set(this.errors, 'end_time', '未来の値をいれてください')
+        this.errors['end_time'] = '未来の値をいれてください'
       }
 
       if (Object.keys(this.errors).length > 0) {
@@ -442,7 +442,7 @@ export default {
       }).catch(err => {
         console.log(['error', err])
         for (const key in err.response.data) {
-          this.$set(this.errors, key, err.response.data[key].join('<br>'))
+          this.errors[key] = err.response.data[key].join('<br>')
         }
         if (err.response.status === 403) {
           alert('投稿に失敗しました。認証情報が確認できないか画面遷移がおかしい可能性があります。画面を更新してから投稿してください。')

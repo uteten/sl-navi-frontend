@@ -10,13 +10,12 @@
     </dt>
     <template
       v-for="z in articles"
+      :key="z.link"
     >
       <dt
-        :key="z.link"
         class="links_item right"
       >
         <a
-          :key="z.link"
           target="_blank"
           :href="z.link"
         >
@@ -28,9 +27,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from 'axios'
-Vue.prototype.$axios = axios
 
 export default {
   name: 'BlogArticles',

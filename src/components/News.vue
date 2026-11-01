@@ -14,7 +14,7 @@
         :key="z.flag"
         class="news_item"
       >
-        {{ tukihi(z.created_at) }} <span class="badge badge-primary">新規施設</span>
+        {{ tukihi(z.created_at) }} <span class="badge text-bg-primary">新規施設</span>
         {{ (z.h===1 ? "アダルト施設" : "一般施設") }}
         [<a
           :href="'/search/'+z.flag"
@@ -25,23 +25,21 @@
     <h6>メンテナンス情報</h6>
     <ul class="news_menu">
       <li class="news_item">
-        2022/02/17 <span class="badge badge-info">機能追加(WebGUI)</span>ギフト探しのページ追加（役に立たないかもしれない）
+        2022/02/17 <span class="badge text-bg-info">機能追加(WebGUI)</span>ギフト探しのページ追加（役に立たないかもしれない）
       </li>
       <li class="news_item">
-        2022/02/27 <span class="badge badge-warning">バグ修正v4.4</span>人数多くなると(35人〜)を超えるとセンサが固まることがある問題の対応
+        2022/02/27 <span class="badge text-bg-warning">バグ修正v4.4</span>人数多くなると(35人〜)を超えるとセンサが固まることがある問題の対応
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from 'axios'
-Vue.prototype.$axios = axios
 
 const NEW_SHOP_SOURCE = '/api/shop?new=5'
 export default {
-  name: 'News',
+  name: 'NewShops',
   data: function () {
     return {
       shops: []

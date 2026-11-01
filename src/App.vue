@@ -1,10 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div
-      id="app"
-      class="row"
-    >
-      <b-nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="row">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a
           id="sitetitle"
           class="navbar-brand"
@@ -22,7 +19,7 @@
         >
           <ul
             id="topmenu"
-            class="navbar-nav mr-auto"
+            class="navbar-nav me-auto"
           >
             <li class="nav-item">
               <router-link
@@ -30,7 +27,7 @@
                 class="nav-link"
                 :class="$route.path.match('/kenzen/') ? 'router-link-exact-active' : '' "
               >
-                <b-icon-house-fill scale="0.8" />一般
+                <i class="bi bi-house-fill" />一般
               </router-link>
             </li>
             <li class="nav-item">
@@ -39,7 +36,7 @@
                 class="nav-link"
                 :class="$route.path.match('/adult/') ? 'router-link-exact-active' : '' "
               >
-                <b-icon-heart-fill scale="0.8" />アダルト
+                <i class="bi bi-heart-fill" />アダルト
               </router-link>
             </li>
             <li class="nav-item">
@@ -48,7 +45,7 @@
                 class="nav-link"
                 :class="$route.path.match(/\/all\/|\/search\//) ? 'router-link-exact-active' : '' "
               >
-                <b-icon-building scale="0.8" />両方
+                <i class="bi bi-building" />両方
               </router-link>
             </li>
             <li class="nav-item">
@@ -56,7 +53,7 @@
                 to="/event"
                 class="nav-link"
               >
-                <b-icon-calendar-week scale="0.8" />イベント
+                <i class="bi bi-calendar-week" />イベント
               </router-link>
             </li>
             <li class="nav-item">
@@ -64,7 +61,7 @@
                 to="/gift"
                 class="nav-link"
               >
-                <b-icon-gift-fill scale="0.8" />ギフト
+                <i class="bi bi-gift-fill" />ギフト
               </router-link>
             </li>
             <li class="nav-item">
@@ -72,17 +69,17 @@
                 to="/about"
                 class="nav-link"
               >
-                <b-icon-info-circle-fill scale="0.8" />説明
+                <i class="bi bi-info-circle-fill" />説明
               </router-link>
             </li>
           </ul>
-          <form class="search form-inline">
+          <form class="search d-flex">
             <input
               v-model="searchword"
               type="search"
               name="search"
               value=""
-              class="form-control mr-sm-2"
+              class="form-control me-sm-2"
               placeholder="キーワードで探す"
               aria-label="Search"
               @keydown.enter="goSearch($event.keyCode)"
@@ -97,15 +94,18 @@
               type="button"
               @click="goSearch(13)"
             >
-              <b-icon-search scale="0.8" />
+              <i class="bi bi-search" />
             </button>
           </form>
         </b-collapse>
-      </b-nav>
-      <router-view
-        ref="view"
-        @selectedTag="searchword=''"
-      />
+      </nav>
+      <router-view v-slot="{ Component }">
+        <component
+          :is="Component"
+          ref="view"
+          @selected-tag="searchword=''"
+        />
+      </router-view>
       <footer class="footer">
         <div class="container">
           <p class="text-muted">
@@ -117,19 +117,23 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import VueHead from 'vue-head'
-import VueCookies from 'vue-cookies'
-import gv from './mixins/globalValiables'
-import axios from 'axios'
+import { useHead } from '@unhead/vue'
 
-Vue.prototype.$axios = axios
-
-Vue.mixin(gv)
-Vue.use(VueCookies)
-Vue.use(VueHead)
 export default {
   name: 'App',
+  setup () {
+    // title は router の afterEach が決めるので、ここでは meta と link だけ
+    useHead({
+      meta: [
+        { name: 'description', content: 'セカンドライフ内で日本人がいるお店や遊び場、新施設紹介' },
+        { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
+      ],
+      link: [
+        { rel: 'icon', href: '/static/favicon.ico' }
+      ]
+    })
+  },
   data: function () {
     return {
       mode: 'k', // [k=健全(/) e=Ero(/adult) c=全部(/all)]
@@ -139,22 +143,6 @@ export default {
       countYesterday: '-',
       countToday: '-'
     }
-  },
-  head: {
-    title: {
-      inner: 'SL-Navi',
-      complement: 'セカンドライフの日本人向けポータルサイト'
-    },
-    meta: [
-      { name: 'description', content: 'セカンドライフ内で日本人がいるお店や遊び場、新施設紹介' },
-      { name: 'keywords', content: 'セカンドライフ, Secondlife, sl-navi' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
-      { charset: 'utf-8' }
-      // ...
-    ],
-    link: [
-      { rel: 'icon', href: '/static/favicon.ico' }
-    ]
   },
   watch: {
     '$route.path': function () {
@@ -249,6 +237,22 @@ export default {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     cursor: pointer;
+  }
+  /* Bootstrap 4 と同じく、リンクの下線はホバー時だけ (Bootstrap 5 は常に下線) */
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  /* bootstrap-vue-next の popover は施設の枠の中に置かれるので、幅を中身に合わせる
+     (bootstrap-vue は body 直下に置いていた) */
+  .popover {
+    width: max-content;
+  }
+  /* bootstrap-vue のアイコン (SVG) と同じく、文字との間を少し空ける */
+  .bi {
+    margin-right: 0.1em;
   }
   .footer{
     width: 100%;

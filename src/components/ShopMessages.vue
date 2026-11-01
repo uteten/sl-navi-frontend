@@ -7,43 +7,41 @@
     id="messages"
     class="col messages ticker box"
   >
-    <article class="media">
+    <article class="d-flex align-items-start">
       <!--
         <span class="message-header">News</span>
       -->
       <div class="media-content">
+        <!-- 表示中 (messages[n][0] が true) のメッセージを 1 件ずつ切り替える -->
         <transition
           name="fade"
-          tag="div"
           mode="out-in"
         >
-          <template v-for="z in messages">
-            <div
-              v-if="z[0]"
-              :key="z[1].shop.flag+z[1].time"
-              class="msg"
+          <div
+            v-if="current"
+            :key="current[1].shop.flag+current[1].time"
+            class="msg"
+          >
+            <b>{{ timeOnly(current[1].time) }} {{ current[1].shop.h==1 ? "アダルト施設":"一般施設" }}
+              [<a
+                :href="'/search/'+current[1].shop.flag"
+                v-html="current[1].shop.name"
+              />
+            </b>]
+            <img
+              class="miniflag"
+              :src="'https://secondlife.com/app/image/'+current[1].shop.flag+'/1'"
             >
-              <b>{{ z[1].time|time_only }} {{ z[1].shop.h==1 ? "アダルト施設":"一般施設" }}
-                [<a
-                  :href="'/search/'+z[1].shop.flag"
-                  v-html="z[1].shop.name"
-                />
-              </b>]
-              <img
-                class="miniflag"
-                :src="'https://secondlife.com/app/image/'+z[1].shop.flag+'/1'"
+            {{ current[1].message }}
+            <span v-if="current[1].name">
+              (by <a
+                target="_blank"
+                :href="'http://world.secondlife.com/resident/'+current[1].uuid"
               >
-              {{ z[1].message }}
-              <span v-if="z[1].name">
-                (by <a
-                  target="_blank"
-                  :href="'http://world.secondlife.com/resident/'+z[1].uuid"
-                >
-                  {{ z[1].name }}
-                </a>)
-              </span>
-            </div>
-          </template>
+                {{ current[1].name }}
+              </a>)
+            </span>
+          </div>
         </transition>
       </div>
     </article>
@@ -51,20 +49,13 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from 'axios'
-Vue.prototype.$axios = axios
 
 const MESSAGE_SOURCE = '/api/message'
 const INTERVAL_GET_MESSAGE = 17
 const INTERVAL_RELOAD_MESSAGE = 8
 export default {
   name: 'ShopMessages',
-  filters: {
-    'time_only': function (z) {
-      return z.replace(/.+T/g, '').replace(/:..$/, '')
-    }
-  },
   data: function () {
     return {
       lastMessageId: 0,
@@ -72,6 +63,11 @@ export default {
       messages: [],
       messagesAdult: [],
       modeCache: 0
+    }
+  },
+  computed: {
+    current () {
+      return this.messages.find(m => m[0])
     }
   },
   created: function () {
@@ -85,6 +81,9 @@ export default {
     }, 1000 * INTERVAL_GET_MESSAGE)
   },
   methods: {
+    timeOnly (z) {
+      return z.replace(/.+T/g, '').replace(/:..$/, '')
+    },
     updateTicker: function () {
       // messages[z][true|false]のtrueを１つずつ後ろにずらす
       // ただし、messages[最後]がtrueの場合はtrueのままとする
@@ -93,7 +92,7 @@ export default {
       for (z in this.messages) {
         if (next) {
           next = 0
-          this.$set(this.messages[z], 0, true)
+          this.messages[z][0] = true
         } else if (this.messages[z][0]) {
           next = 1
           this.messages[z][0] = false
@@ -171,7 +170,7 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: opacity 1s
   }
-  .fade-enter, .fade-leave-to {
+  .fade-enter-from, .fade-leave-to {
     opacity: 0
   }
 </style>

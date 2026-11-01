@@ -1,9 +1,11 @@
+// 画面が見えているときだけ func を呼ぶ setInterval
 export default {
-  install (vue) {
-    vue.prototype.$intervals = []
-    vue.prototype.$setInterval = (func, intervalMilliSec) => {
-      if (typeof (process.env.VUE_APP_DISABLE_SET_INTERVAL) !== 'undefined') {
-        console.log(`[DISABLE_SET_INTERVAL] Check environment vars`)
+  install (app) {
+    const g = app.config.globalProperties
+    g.$intervals = []
+    g.$setInterval = (func, intervalMilliSec) => {
+      if (typeof import.meta.env.VITE_DISABLE_SET_INTERVAL !== 'undefined') {
+        console.log('[DISABLE_SET_INTERVAL] Check environment vars')
         return null
       }
       const id = setInterval(() => {
@@ -11,16 +13,16 @@ export default {
           func()
         }
       }, intervalMilliSec)
-      vue.prototype.$intervals.push(id)
+      g.$intervals.push(id)
       return id
     }
-    vue.prototype.$clearInterval = (id) => {
+    g.$clearInterval = (id) => {
       clearInterval(id)
-      vue.prototype.$intervals = vue.prototype.$intervals.filter(i => i !== id)
+      g.$intervals = g.$intervals.filter(i => i !== id)
     }
-    vue.prototype.$clearAllIntervals = () => {
-      vue.prototype.$intervals.forEach(clearInterval)
-      vue.prototype.$intervals = []
+    g.$clearAllIntervals = () => {
+      g.$intervals.forEach(clearInterval)
+      g.$intervals = []
     }
   }
 }

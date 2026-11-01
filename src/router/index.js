@@ -1,20 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-//import VueAnalytics from 'vue-analytics'
-import VueGtm from '@gtm-support/vue2-gtm'
-import viewSlnavi from '@/views/ViewSlnavi'
-// import viewAbout from '@/views/ViewAbout'
-// import viewCreateEvent from '@/views/ViewCreateEvent'
+import { createRouter, createWebHistory } from 'vue-router'
+import viewSlnavi from '@/views/ViewSlnavi.vue'
 // viewEventは負荷軽減のためクリック時に呼び出す
 
-
-Vue.use(BootstrapVue) // added
-Vue.use(IconsPlugin)
-Vue.use(VueRouter)
 const BASE_TITLE = 'SL-Navi | '
 const DEFAULT_ADD_TITLE = 'セカンドライフの日本人向けポータルサイト'
 
@@ -65,58 +52,58 @@ const routes = [
   {
     path: '/event/:eid',
     name: 'viewEventDirect',
-    component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue')
+    component: () => import('@/views/ViewEvent.vue')
     // component: viewEvent,
   },
   {
     path: '/event',
     name: 'viewEvent',
-    component: () => import(/* webpackChunkName: "viewEvent" */ '@/views/ViewEvent.vue'),
+    component: () => import('@/views/ViewEvent.vue'),
     meta: { title: 'セカンドライフの日本人向けイベント情報' }
     // component: viewEvent,
   },
   {
     path: '/createEvent',
     name: 'viewCreateEvent',
-    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue'),
+    component: () => import('@/views/ViewCreateEvent.vue'),
     meta: { title: 'イベント登録' }
     // component: viewCreateEvent
   },
   {
     path: '/createEvent/:logincode',
     name: 'viewCreateEventLogin',
-    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
+    component: () => import('@/views/ViewCreateEvent.vue')
     // component: viewCreateEvent
   },
   {
     path: '/updateEvent/:eid',
     name: 'updateEvent',
-    component: () => import(/* webpackChunkName: "viewCreateEvent" */ '@/views/ViewCreateEvent.vue')
+    component: () => import('@/views/ViewCreateEvent.vue')
     // component: viewCreateEvent
   },
   {
     path: '/gift',
     name: 'viewGift',
-    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewGift.vue'),
+    component: () => import('@/views/ViewGift.vue'),
     meta: { title: 'セカンドライフのギフト情報' }
     // component: viewAbout
   },
   {
     path: '/about',
     name: 'viewAbout',
-    component: () => import(/* webpackChunkName: "viewAbout" */ '@/views/ViewAbout.vue'),
+    component: () => import('@/views/ViewAbout.vue'),
     meta: { title: 'このサイトの説明' }
     // component: viewAbout
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  // base: process.env.BASE_URL,
+// ルートはバックエンドが index.html を返すパス (SPA_PATHS) の範囲に限る (R2.2)。
+// base は静的ファイルの配信元 (static.sl-navi.com) なので、履歴の base には使わない。
+const router = createRouter({
+  history: createWebHistory('/'),
   routes
 })
 
-//router.afterEach((to, from) => {
 router.afterEach((to) => {
   if (to.path.match(/\/[0-9]/)) {
     return
@@ -126,19 +113,5 @@ router.afterEach((to) => {
     document.title = BASE_TITLE + DEFAULT_ADD_TITLE
   }
 })
-/*
-Vue.use(VueAnalytics, {
-  id: 'UA-177594854-1',
-  router
-})
-*/
-Vue.use(VueGtm, {
-  id: 'GTM-TGJQ98FP',
-  enabled: true,
-  debug: false,
-  loadScript: true,
-  vueRouter: router
-})
 
 export default router
-
