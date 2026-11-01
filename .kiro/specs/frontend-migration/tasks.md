@@ -1,6 +1,6 @@
 # タスク: sl-navi フロントエンド移行
 
-状態: 確定 (2026-11-01、ユーザー了承)。PR 1 は完了 (#2)。PR 2 を実装中。要件は [requirements.md](requirements.md)、設計は [design.md](design.md)。
+状態: 完了 (2026-11-01)。PR 1 (#2)、PR 2 (#3)。要件は [requirements.md](requirements.md)、設計は [design.md](design.md)。
 
 - 作業は PR ごとに `origin/master` から切ったブランチで行う。spec (この 3 ファイル) は PR 1 に含める。
 - 確かめるときは design D6 のチェックリストを使う。書き込みはテスト用のイベントで行い、すぐ消す。
@@ -68,6 +68,7 @@
       イベント登録画面の select と行組み。ログイン・書き込みはユーザーが段階 2 で確認
 - [x] 2.14 段階 2: `npm run preview:split` (design D6) で、別オリジンのアセットで起動することと、チェックリスト。
       アセットの CORS ヘッダと、表示・操作は headless Chromium で確認済み。SL 認証・登録・更新・削除・ログアウトはユーザーが確認 (2026-11-01)
-- [ ] 2.15 PR を出す。段階 3: プレビューのビルドと、アセットの CORS ヘッダ (`curl -I -H 'Origin: https://sl-navi.com'`)
-- [ ] 2.16 マージは確認できる時間帯に。段階 4: 本番でチェックリストを一通り (広告、GTM、X ログインを含む。広告と GA は DNS で遮断していない回線で見る)。
-      おかしければ revert
+- [x] 2.15 PR を出す (#3)。段階 3: プレビューのビルドと、アセットの CORS ヘッダ (`curl -I -H 'Origin: https://sl-navi.com'`)
+- [x] 2.16 マージは確認できる時間帯に。段階 4: 本番でチェックリストを一通り (広告、GTM、X ログインを含む。広告と GA は DNS で遮断していない回線で見る)。
+      おかしければ revert。
+      本番 (Vue 3.5.44) で表示と操作を headless Chromium で確認。X ログイン、広告、GA はユーザーが確認 (2026-11-01)
